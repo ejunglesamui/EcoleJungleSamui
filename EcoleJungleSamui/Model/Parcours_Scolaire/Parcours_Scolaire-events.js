@@ -1,0 +1,1 @@
+﻿model.Parcours_Scolaire.events.onInit = function() {	this.UID_Creation = currentUser().fullName;	this.Date_Creation = new Date();};model.Parcours_Scolaire.events.onSave = function() {	this.UID_MAJ = currentUser().fullName;	this.Derniere_MAJ = new Date();};

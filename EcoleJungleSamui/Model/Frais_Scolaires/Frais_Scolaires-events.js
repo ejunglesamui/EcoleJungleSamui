@@ -1,0 +1,1 @@
+﻿model.Frais_Scolaires.events.onInit = function() {	this.UID_Creation = currentUser().ID;	this.Date_Creation = new Date();};model.Frais_Scolaires.events.onSave = function() {	this.UID_MAJ = currentUser().ID;	this.Derniere_MAJ = new Date();};model.Frais_Scolaires.events.onLoad = function() {	// Add your code here;};
