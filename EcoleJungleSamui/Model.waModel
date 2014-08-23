@@ -58,8 +58,8 @@
 					"pathVisible" : true,
 					"position" : 
 					{
-						"X" : 1050,
-						"Y" : 827
+						"X" : 1065,
+						"Y" : 806
 					}
 				}
 			},
@@ -128,8 +128,8 @@
 					"pathVisible" : true,
 					"position" : 
 					{
-						"X" : 1025,
-						"Y" : 1429
+						"X" : 1042,
+						"Y" : 1497
 					}
 				}
 			},
@@ -165,7 +165,7 @@
 		"model" : 
 		{
 			"scriptMode" : "manual",
-			"workspaceLeft" : 0,
+			"workspaceLeft" : 518,
 			"workspaceTop" : 0,
 			"relationCurve" : 
 			{
@@ -400,6 +400,20 @@
 					"type" : "string"
 				},
 				{
+					"name" : "Date_Debut",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "date",
+					"simpleDate" : false
+				},
+				{
+					"name" : "Date_fin",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "date",
+					"simpleDate" : false
+				},
+				{
 					"name" : "Frais_Dossier_Maternelle",
 					"kind" : "storage",
 					"scope" : "public",
@@ -571,7 +585,7 @@
 					"path" : "Utilisateurs"
 				},
 				{
-					"name" : "Famille_Appartenance",
+					"name" : "MaFamille",
 					"kind" : "relatedEntity",
 					"scope" : "public",
 					"type" : "Familles",
@@ -581,7 +595,6 @@
 					"name" : "Sexe",
 					"kind" : "storage",
 					"scope" : "public",
-					"not_null" : true,
 					"type" : "string",
 					"autoComplete" : true
 				},
@@ -589,7 +602,6 @@
 					"name" : "Date_Naissance",
 					"kind" : "storage",
 					"scope" : "public",
-					"not_null" : true,
 					"type" : "date",
 					"simpleDate" : true,
 					"defaultFormat" : 
@@ -601,7 +613,7 @@
 					]
 				},
 				{
-					"name" : "parcours_ScolaireCollection",
+					"name" : "Scolarite",
 					"kind" : "relatedEntities",
 					"scope" : "public",
 					"type" : "Parcours_ScolaireCollection",
@@ -681,7 +693,6 @@
 					"name" : "Actif",
 					"kind" : "storage",
 					"scope" : "public",
-					"not_null" : true,
 					"type" : "bool"
 				},
 				{
@@ -822,7 +833,7 @@
 					"scope" : "public",
 					"type" : "ElevesCollection",
 					"reversePath" : true,
-					"path" : "Famille_Appartenance"
+					"path" : "MaFamille"
 				},
 				{
 					"name" : "Date_Creation",
