@@ -13,7 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
-	var ListEleves = {};	// @dataGrid
+	var cbPres = {};	// @checkbox
 	var btSave = {};	// @button
 	var btUndo = {};	// @button
 	var btUpdate = {};	// @button
@@ -21,10 +21,14 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
-	ListEleves.onRowClick = function ListEleves_onRowClick (event)// @startlock
+	cbPres.click = function cbPres_click (event)// @startlock
 	{// @endlock
-		
-		
+		if ($$('component1_cbPres').getValue()) {
+			var now = new Date();
+			sources.component1_eleves.query("Utilisateur.Date_Entree < :1 AND (Utilisateur.Date_Sortie = null OR Utilisateur.Date_Sortie > :1)", now);
+		} else {
+			sources.component1_eleves.query();
+		}
 	};// @lock
 
 	btSave.click = function btSave_click (event)// @startlock
@@ -55,6 +59,7 @@ function constructor (id) {
 		sources.component1_eleves.MaFamille.set(sources.component1_familles);
 		
 		$$('component1_ListEleves').enable();
+		$$('component1_cbPres').enable();
 		$$('component1_ListEleves').setReadOnly(true);
 		$$('component1_cMess').setValue("");
 		
@@ -85,10 +90,18 @@ function constructor (id) {
 		$$('component1_cDatRest').setReadOnly(true);
 		
 		$$('component1_ListEleves').enable();
+		$$('component1_cbPres').enable();
 		$$('component1_ListEleves').setReadOnly(true);
 		$$('component1_cMess').setValue("");
 		
-		$$('component1').loadComponent("/Gest-Eleves.waComponent");
+		if ($$('component1_cbPres').getValue()) {
+			$$('component1').loadComponent("/Gest-Eleves.waComponent");
+			$$('component1_cbPres').setValue(true);
+			var now = new Date();
+			sources.component1_eleves.query("Utilisateur.Date_Entree < :1 AND (Utilisateur.Date_Sortie = null OR Utilisateur.Date_Sortie > :1)", now);
+		} else {
+			$$('component1').loadComponent("/Gest-Eleves.waComponent");
+		}
 		
 	};// @lock
 
@@ -115,6 +128,7 @@ function constructor (id) {
 		$$('component1_cDatRest').setReadOnly(false);
 		
 		$$('component1_ListEleves').disable();
+		$$('component1_cbPres').disable();
 		
 		USexe = $$('component1_cSexe').getValue();
 		$$('component1_rSexe').setValue(USexe);
@@ -129,7 +143,6 @@ function constructor (id) {
 			DNow = new Date();
 			NNow = 10000*DNow.getFullYear() + 100*(DNow.getMonth()+1) + DNow.getDate(); 
 			CNow = NNow.toString();
-			alert (CNow);
 			if ( CFin < CNow) {
 				$$('component1_cFamille').show();
 				$$('component1_cSexe').show();
@@ -149,7 +162,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
-	WAF.addListener(this.id + "_ListEleves", "onRowClick", ListEleves.onRowClick, "WAF");
+	WAF.addListener(this.id + "_cbPres", "click", cbPres.click, "WAF");
 	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
 	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener(this.id + "_btUpdate", "click", btUpdate.click, "WAF");
