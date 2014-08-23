@@ -13,12 +13,19 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var ListEleves = {};	// @dataGrid
 	var btSave = {};	// @button
 	var btUndo = {};	// @button
 	var btUpdate = {};	// @button
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	ListEleves.onRowClick = function ListEleves_onRowClick (event)// @startlock
+	{// @endlock
+		
+		
+	};// @lock
 
 	btSave.click = function btSave_click (event)// @startlock
 	{// @endlock
@@ -48,6 +55,8 @@ function constructor (id) {
 		sources.component1_eleves.MaFamille.set(sources.component1_familles);
 		
 		$$('component1_ListEleves').enable();
+		$$('component1_ListEleves').setReadOnly(true);
+		$$('component1_cMess').setValue("");
 		
 		sources.component1_eleves.save({
                 onSuccess:function(event2) {}
@@ -76,6 +85,8 @@ function constructor (id) {
 		$$('component1_cDatRest').setReadOnly(true);
 		
 		$$('component1_ListEleves').enable();
+		$$('component1_ListEleves').setReadOnly(true);
+		$$('component1_cMess').setValue("");
 		
 		$$('component1').loadComponent("/Gest-Eleves.waComponent");
 		
@@ -83,7 +94,7 @@ function constructor (id) {
 
 	btUpdate.click = function btUpdate_click (event)// @startlock
 	{// @endlock
-		var Usexe, UFamille;
+		var USexe, UFamille, DFin, CFin, DNow, NNow, CNow;
 		
 		$$('component1_cFamille').hide();
 		$$('component1_cSexe').hide();
@@ -110,10 +121,35 @@ function constructor (id) {
 		
 		UFamille = $$('component1_cIDFamille').getValue();
 		$$('component1_cbFamille').setValue(UFamille);
+		$$('component1_cMess').setValue("");
+		
+		DFin = $$('component1_cDatSortie').getValue();
+		CFin = DFin.substring(6,10) + DFin.substring(3,5) + DFin.substring(0,2); 
+		if (CFin !== "") {
+			DNow = new Date();
+			NNow = 10000*DNow.getFullYear() + 100*(DNow.getMonth()+1) + DNow.getDate(); 
+			CNow = NNow.toString();
+			alert (CNow);
+			if ( CFin < CNow) {
+				$$('component1_cFamille').show();
+				$$('component1_cSexe').show();
+				$$('component1_ePere').show();
+				$$('component1_eMere').show();
+				$$('component1_cbFamille').hide();
+				$$('component1_rSexe').hide();
+				$$('component1_fPere').hide();
+				$$('component1_fMere').hide();
+				$$('component1_cDatNaiss').setReadOnly(true);
+				$$('component1_cCaution').setReadOnly(true);
+				$$('component1_cDatRec').setReadOnly(true);
+				$$('component1_cMess').setValue("La fin de période de validité de cet utilisateur est atteinte. Modification fiche élève restreinte à la date de restitution de la caution.");
+			} 
+		}
 		
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListEleves", "onRowClick", ListEleves.onRowClick, "WAF");
 	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
 	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener(this.id + "_btUpdate", "click", btUpdate.click, "WAF");
