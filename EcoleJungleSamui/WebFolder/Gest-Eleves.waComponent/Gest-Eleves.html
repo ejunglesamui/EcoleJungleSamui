@@ -8,6 +8,11 @@
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="scalar" data-source="{id}maFamille" data-scope="local" data-lib="WAF" data-id="{id}maFamille" data-dataType="string" data-autoLoad="true" content="maFamille"/>
     
     
+    
+    
+    
+    
+    
     <input type="text" id="{id}cLogin" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Login : " data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.Utilisateur.Login" class="waf-widget waf-textField"/>
 		<label id="{id}label1" for="{id}cLogin" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">Login : </label>
 		<input type="text" id="{id}cNom" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Nom : " data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.Utilisateur.Nom" class="waf-widget waf-textField"/>
@@ -36,8 +41,8 @@
  		<div id="{id}richText1" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-autoWidth="false" class="waf-widget waf-richText">THB</div>
  	</div>
 		<label id="{id}label13" for="{id}container1" data-valign="top" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-container">Informations caution</label>
-		<input type="text" id="{id}cSit" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Situation familiale : " data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.MaFamille.Relation_Pere_Mere" class="waf-widget waf-textField"/>
-		<label id="{id}label34" for="{id}cSit" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">Situation familiale : </label>
+		<input type="text" id="{id}cSit" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Statut :  " data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.MaFamille.Relation_Pere_Mere" class="waf-widget waf-textField"/>
+		<label id="{id}label34" for="{id}cSit" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">Statut :  </label>
 		<input type="text" id="{id}cAut" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Autorité parentale : " data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.MaFamille.Autorite_Parentale" class="waf-widget waf-textField"/>
 		<label id="{id}label35" for="{id}cAut" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">Autorité parentale : </label>
 		<div id="{id}ePere" data-type="container" data-lib="WAF" data-label-position="top" data-label="Père" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-container waf-container-level-0 waf-level-0">
@@ -146,7 +151,7 @@
 		<label id="{id}label26" for="{id}cIDFamille" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">ID Famille</label>
 				<div id="{id}richText2" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-left="true" data-autoWidth="false" class="waf-widget waf-richText">Liste des élèves</div>
 		<div id="{id}cPhoto" data-type="image" data-target="_blank" data-lib="WAF" data-label-position="left" data-label="" data-fit="4" data-constraint-top="true" data-constraint-left="true" data-binding="{id}eleves.Photo" class="waf-widget waf-image"></div>
-				<div id="{id}cMess" data-type="richText" data-lib="WAF" class="waf-widget waf-richText" data-autoWidth="false" data-label="" data-label-position="left" data-target="_blank" data-overflow="Hidden" data-plainText="true" data-constraint-left="true" data-constraint-top="true"></div>
-		<div id="{id}cbPres" data-type="checkbox" data-lib="WAF" type="checkbox" class="waf-widget waf-checkbox" data-label="Uniquement présents" data-label-position="right" data-constraint-left="true" data-constraint-top="true"></div>
-		<label id="{id}label27" data-type="label" data-lib="WAF" for="{id}cbPres" data-valign="middle" data-margin="5" class="waf-widget waf-label waf-label-checkbox" data-constraint-left="true" data-constraint-top="true">Uniquement présents</label>
+				<div id="{id}cMess" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-constraint-top="true" data-constraint-left="true" data-autoWidth="false" class="waf-widget waf-richText"></div>
+		<div type="checkbox" id="{id}cbPres" data-type="checkbox" data-lib="WAF" data-label-position="right" data-label="Uniquement présents" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-checkbox"></div>
+		<label id="{id}label27" for="{id}cbPres" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-checkbox">Uniquement présents</label>
 	</section>
