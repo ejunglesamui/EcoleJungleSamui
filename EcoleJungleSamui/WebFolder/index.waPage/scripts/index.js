@@ -25,7 +25,26 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		var vUser = WAF.directory.currentUser();
 		if (vUser === null) {
 			$$('main').destroy();
-		 } 
+		 } else {
+		 	
+		 	if (waf.directory.currentUserBelongsTo("Elève")) {
+				$$('M_Ressources').hide();
+				//$$('M_ActivE').hide();
+				$$('M_ActivP').hide();
+				$$('M_Fournitures').hide();
+				$$('M_Facturation').hide();
+				$$('M_Administration').hide();
+			}
+			if (waf.directory.currentUserBelongsTo("Professeur")) {
+				$$('M_Ressources').hide();
+				$$('M_ActivE').hide();
+				//$$('M_ActivP').hide();
+				$$('M_Fournitures').hide();
+				$$('M_Facturation').hide();
+				$$('M_Administration').hide();
+			}
+			
+		 }
 	};// @lock
 
 	W_Login.logout = function W_Login_logout (event)// @startlock
@@ -35,9 +54,15 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	W_Login.login = function W_Login_login (event)// @startlock
 	{// @endlock
-		var vUser = WAF.directory.currentUser();
+		var vUser, vGroups, curSession, theUser; 
+		
+		vUser = WAF.directory.currentUser();
+		// alert(vUser.fullName+" " + vUser.ID + " "+ vUser.userName);
 		if (vUser !== null) {
+			
 			window.location = '/index.html';
+			
+			
 		}
 	};// @lock
 
