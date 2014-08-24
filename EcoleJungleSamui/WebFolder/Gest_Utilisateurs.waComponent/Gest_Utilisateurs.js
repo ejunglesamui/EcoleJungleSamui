@@ -38,7 +38,7 @@ function constructor (id) {
 				if (NbSamlogin > 0) {
 					alert("Ce login (" + logEntry +") est déjà utilisé. Merci de saisir un login différent");	
 					$$('component1_clogin').setValue(null);
-					$$('component1_clogin').focus(true);
+					//$$('component1_clogin').focus(true);
 					$$('component1_bSave').disable();
 					}
 				}, params:[logEntry] 
