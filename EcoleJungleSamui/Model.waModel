@@ -165,8 +165,8 @@
 		"model" : 
 		{
 			"scriptMode" : "manual",
-			"workspaceLeft" : 527,
-			"workspaceTop" : 0,
+			"workspaceLeft" : 793,
+			"workspaceTop" : 604,
 			"relationCurve" : 
 			{
 				"run" : true,
@@ -397,7 +397,11 @@
 					"name" : "Annee_Scolaire",
 					"kind" : "storage",
 					"scope" : "public",
-					"type" : "string"
+					"indexed" : true,
+					"unique" : true,
+					"not_null" : true,
+					"type" : "string",
+					"indexKind" : "auto"
 				},
 				{
 					"name" : "Date_Debut",
@@ -417,7 +421,6 @@
 					"name" : "Frais_Dossier_Maternelle",
 					"kind" : "storage",
 					"scope" : "public",
-					"not_null" : true,
 					"type" : "number"
 				},
 				{
@@ -462,33 +465,13 @@
 					"name" : "Remise_Enfant_2",
 					"kind" : "storage",
 					"scope" : "public",
-					"type" : "number",
-					"minValue" : "0",
-					"maxValue" : "100",
-					"defaultValue" : "5",
-					"defaultFormat" : 
-					[
-						{
-							"format" : "0%",
-							"presentation" : "text"
-						}
-					]
+					"type" : "number"
 				},
 				{
 					"name" : "Remise_Enfant_3",
 					"kind" : "storage",
 					"scope" : "public",
-					"type" : "number",
-					"minValue" : "0",
-					"maxValue" : "100",
-					"defaultValue" : "10",
-					"defaultFormat" : 
-					[
-						{
-							"format" : "0%",
-							"presentation" : "text"
-						}
-					]
+					"type" : "number"
 				},
 				{
 					"name" : "Echeancier_Frais",
@@ -1027,6 +1010,13 @@
 					"kind" : "storage",
 					"scope" : "public",
 					"type" : "string"
+				},
+				{
+					"name" : "Ordre",
+					"kind" : "storage",
+					"scope" : "public",
+					"limiting_length" : 1,
+					"type" : "string"
 				}
 			],
 			"events" : 
@@ -1172,6 +1162,26 @@
 					"kind" : "storage",
 					"scope" : "public",
 					"type" : "string"
+				},
+				{
+					"name" : "Annee_Complete",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "bool"
+				},
+				{
+					"name" : "Date_Deb",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "date",
+					"simpleDate" : false
+				},
+				{
+					"name" : "Dat_Fin",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "date",
+					"simpleDate" : false
 				},
 				{
 					"name" : "Mode_Reglement",
