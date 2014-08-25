@@ -46,6 +46,7 @@ function constructor (id) {
 		$$('component1_rSexe').hide();
 		$$('component1_fPere').hide();
 		$$('component1_fMere').hide();
+		$$('component1_uPhoto').hide();
 		
 		$$('component1_btUpdate').show();
 		$$('component1_btSave').hide();
@@ -79,6 +80,7 @@ function constructor (id) {
 		$$('component1_rSexe').hide();
 		$$('component1_fPere').hide();
 		$$('component1_fMere').hide();
+		$$('component1_uPhoto').hide();
 		
 		$$('component1_btUpdate').show();
 		$$('component1_btSave').hide();
@@ -117,6 +119,7 @@ function constructor (id) {
 		$$('component1_rSexe').show();
 		$$('component1_fPere').show();
 		$$('component1_fMere').show();
+		$$('component1_uPhoto').show();
 		
 		$$('component1_btUpdate').hide();
 		$$('component1_btSave').show();
