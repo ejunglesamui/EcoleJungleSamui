@@ -13,6 +13,15 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var cDDeb = {};	// @textField
+	var cDFin = {};	// @textField
+	var cRegMm = {};	// @textField
+	var cRegM = {};	// @textField
+	var cRegT3 = {};	// @textField
+	var cRegT2 = {};	// @textField
+	var cRegT1 = {};	// @textField
+	var cRegT = {};	// @textField
+	var ListEch = {};	// @dataGrid
 	var cbCopier = {};	// @combobox
 	var bCopier = {};	// @buttonImage
 	var bSaveScol = {};	// @button
@@ -24,6 +33,93 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	cDDeb.change = function cDDeb_change (event)// @startlock
+	{// @endlock
+		var DDebut, DFin, CDebut, CFin;
+		DDebut = $$('component1_cDDeb').getValue();
+		DFin = $$('component1_cDFin').getValue();
+		CDebut = DDebut.substring(6,10) + DDebut.substring(3,5) + DDebut.substring(0,2); 
+		CFin = DFin.substring(6,10) + DFin.substring(3,5) + DFin.substring(0,2); 
+		//alert (CDebut + CFin);
+		if (DFin.length > 0) {
+			//alert('date fin non nulle');
+			if ( CFin < CDebut) {
+				alert("La date de rentrée scolaire doit être inférieure à la date de fin des cours.");
+				$$('component1_cDDeb').setValue(null);
+			}
+		} 
+	};// @lock
+
+	cDFin.change = function cDFin_change (event)// @startlock
+	{// @endlock
+		var DDebut, DFin, CDebut, CFin;
+		DDebut = $$('component1_cDDeb').getValue();
+		DFin = $$('component1_cDFin').getValue();
+		CDebut = DDebut.substring(6,10) + DDebut.substring(3,5) + DDebut.substring(0,2); 
+		CFin = DFin.substring(6,10) + DFin.substring(3,5) + DFin.substring(0,2); 
+		//alert (CDebut + CFin);
+		if (DFin.length > 0) {
+			//alert('date fin non nulle');
+			if ( CFin < CDebut) {
+				alert("La date de fin des cours doit être supérieure à la date de rentrée scolaire.");
+				$$('component1_cDFin').setValue(null);
+			}
+		} 
+	};// @lock
+
+	cRegMm.change = function cRegMm_change (event)// @startlock
+	{// @endlock
+		var vTotM;
+		vTotM = parseInt("0"+$$('component1_cRegM').getValue()) + 9*parseInt("0"+$$('component1_cRegMm').getValue());
+		$$('component1_cTotM').setValue(vTotM);
+	};// @lock
+
+	cRegM.change = function cRegM_change (event)// @startlock
+	{// @endlock
+		var vTotM;
+		vTotM = parseInt("0"+$$('component1_cRegM').getValue()) + 9*parseInt("0"+$$('component1_cRegMm').getValue());
+		$$('component1_cTotM').setValue(vTotM);
+	};// @lock
+
+	cRegT3.change = function cRegT3_change (event)// @startlock
+	{// @endlock
+		var vTotT;
+		vTotT = parseInt("0"+$$('component1_cRegT').getValue()) + parseInt("0"+$$('component1_cRegT1').getValue()) + parseInt("0"+$$('component1_cRegT2').getValue()) + parseInt("0"+$$('component1_cRegT3').getValue());
+		$$('component1_cTotT').setValue(vTotT);
+	};// @lock
+
+	cRegT2.change = function cRegT2_change (event)// @startlock
+	{// @endlock
+		var vTotT;
+		vTotT = parseInt("0"+$$('component1_cRegT').getValue()) + parseInt("0"+$$('component1_cRegT1').getValue()) + parseInt("0"+$$('component1_cRegT2').getValue()) + parseInt("0"+$$('component1_cRegT3').getValue());
+		$$('component1_cTotT').setValue(vTotT);
+	};// @lock
+
+	cRegT1.change = function cRegT1_change (event)// @startlock
+	{// @endlock
+		var vTotT;
+		vTotT = parseInt("0"+$$('component1_cRegT').getValue()) + parseInt("0"+$$('component1_cRegT1').getValue()) + parseInt("0"+$$('component1_cRegT2').getValue()) + parseInt("0"+$$('component1_cRegT3').getValue());
+		$$('component1_cTotT').setValue(vTotT);
+		
+	};// @lock
+
+	cRegT.change = function cRegT_change (event)// @startlock
+	{// @endlock
+		var vTotT;
+		vTotT = parseInt("0"+$$('component1_cRegT').getValue()) + parseInt("0"+$$('component1_cRegT1').getValue()) + parseInt("0"+$$('component1_cRegT2').getValue()) + parseInt("0"+$$('component1_cRegT3').getValue());
+		$$('component1_cTotT').setValue(vTotT);
+		
+	};// @lock
+
+	ListEch.onRowClick = function ListEch_onRowClick (event)// @startlock
+	{// @endlock
+		var vTotT, vTotM;
+		vTotT = parseInt("0"+$$('component1_cRegT').getValue()) + parseInt("0"+$$('component1_cRegT1').getValue()) + parseInt("0"+$$('component1_cRegT2').getValue()) + parseInt("0"+$$('component1_cRegT3').getValue());
+		$$('component1_cTotT').setValue(vTotT);
+		vTotM = parseInt("0"+$$('component1_cRegM').getValue()) + 9*parseInt("0"+$$('component1_cRegMm').getValue());
+		$$('component1_cTotM').setValue(vTotM);
+	};// @lock
 
 	cbCopier.change = function cbCopier_change (event)// @startlock
 	{// @endlock
@@ -105,7 +201,7 @@ function constructor (id) {
 
 	bSaveFrais.click = function bSaveFrais_click (event)// @startlock
 	{// @endlock
-		sources.Echeancier_Frais.save({
+		sources.component1_Echeancier_Frais.save({
                 onSuccess:function(event2) {}
             });
             
@@ -167,6 +263,15 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_cDDeb", "change", cDDeb.change, "WAF");
+	WAF.addListener(this.id + "_cDFin", "change", cDFin.change, "WAF");
+	WAF.addListener(this.id + "_cRegMm", "change", cRegMm.change, "WAF");
+	WAF.addListener(this.id + "_cRegM", "change", cRegM.change, "WAF");
+	WAF.addListener(this.id + "_cRegT3", "change", cRegT3.change, "WAF");
+	WAF.addListener(this.id + "_cRegT2", "change", cRegT2.change, "WAF");
+	WAF.addListener(this.id + "_cRegT1", "change", cRegT1.change, "WAF");
+	WAF.addListener(this.id + "_cRegT", "change", cRegT.change, "WAF");
+	WAF.addListener(this.id + "_ListEch", "onRowClick", ListEch.onRowClick, "WAF");
 	WAF.addListener(this.id + "_cbCopier", "change", cbCopier.change, "WAF");
 	WAF.addListener(this.id + "_bCopier", "click", bCopier.click, "WAF");
 	WAF.addListener(this.id + "_bSaveScol", "click", bSaveScol.click, "WAF");
