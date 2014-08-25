@@ -27,24 +27,32 @@ function constructor (id) {
 
 	cbCopier.change = function cbCopier_change (event)// @startlock
 	{// @endlock
-		var vSelClasse, vClasse;
+		var vSelClasse, vClasse, vAnScol;
 		
 		vClasse = $$('component1_cbCopier').getValue();
 		vSelClasse = $$('component1_cSelClasse').getValue();
+		vAnScol = $$('component1_cAnScol').getValue();
 		if (vClasse === vSelClasse) {
 			$$('component1_bCopier').disable();
 		} else {
 			$$('component1_bCopier').enable();
+			WAF.sources.component1_frais_Scolaires.query("Annee_Scolaire.Annee_Scolaire = :1 and Classe = :2", vAnScol, vClasse);
 		}
 	};// @lock
 
 	bCopier.click = function bCopier_click (event)// @startlock
 	{// @endlock
-		var vSelFrais, vClasse;
+		$$('component1_cRegY').setValue($$('component1_sRegY').getValue());
+		$$('component1_cRegT').setValue($$('component1_sRegT').getValue());
+		$$('component1_cRegT1').setValue($$('component1_sRegT1').getValue());
+		$$('component1_cRegT2').setValue($$('component1_sRegT2').getValue());
+		$$('component1_cRegT3').setValue($$('component1_sRegT3').getValue());
+		$$('component1_cRegM').setValue($$('component1_sRegM').getValue());
+		$$('component1_cRegMm').setValue($$('component1_sRegMm').getValue());
+		$$('component1_cET1').setValue($$('component1_sET1').getValue());
+		$$('component1_cET2').setValue($$('component1_sET2').getValue());
+		$$('component1_cET3').setValue($$('component1_sET3').getValue());
 		
-		vSelFrais = sources.Echeancier_Frais.getCurrentElement();
-		vClasse = vSelFrais.Classe;
-		alert(vClasse);
 	};// @lock
 
 	bSaveScol.click = function bSaveScol_click (event)// @startlock
