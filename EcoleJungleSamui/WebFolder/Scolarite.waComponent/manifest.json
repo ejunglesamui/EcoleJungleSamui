@@ -1,0 +1,6 @@
+{
+    "name"    : "Scolarite",    
+    "html"    : "Scolarite.html",
+    "styles"  : [],
+    "scripts" : ["Scolarite.js"]
+}
