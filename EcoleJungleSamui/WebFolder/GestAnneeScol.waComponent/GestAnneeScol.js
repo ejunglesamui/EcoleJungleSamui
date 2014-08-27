@@ -11,8 +11,27 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	this.load = function (data) {// @lock
+		
+	function convTime (Horaire) {
+		
+		var vInt, vDec, vPart1, vPart2;
+		
+		vInt = parseInt(Horaire/2)+':';
+		if (vInt.length ===2) {
+			vInt = '0'+vInt;
+		}
+		vDec = 30*(Horaire-2*parseInt(Horaire/2)) + ' ';
+		if (vDec.length === 2) {
+			vDec = '0'+vDec;
+		}
+		return (vInt+vDec);
+		
+	}
+		
 
 	// @region namespaceDeclaration// @startlock
+	var ListAsco = {};	// @dataGrid
+	var sPerJ = {};	// @slider
 	var cDDeb = {};	// @textField
 	var cDFin = {};	// @textField
 	var cRegMm = {};	// @textField
@@ -34,6 +53,34 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	ListAsco.onRowDraw = function ListAsco_onRowDraw (event)// @startlock
+	{// @endlock
+		if (sources.component1_annees_Scolaires.ID !== null ) {
+			$$('component1_sPerJ').enable();
+			$$('component1_sPerJ').setValues([sources.component1_annees_Scolaires.hjDeb,sources.component1_annees_Scolaires.hjFin]);
+			$$('component1_sPerJ').disable();
+		}
+	};// @lock
+	
+	$$('component1_cLun').disable();
+	$$('component1_cMar').disable();
+	$$('component1_cMer').disable();
+	$$('component1_cJeu').disable();
+	$$('component1_cVen').disable();
+	$$('component1_cSam').disable();
+	$$('component1_cDim').disable();
+	$$('component1_sPerJ').addHandle(34);
+	$$('component1_sPerJ').disable();
+
+	sPerJ.slidechange = function sPerJ_slidechange (event)// @startlock
+	{// @endlock
+		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
+		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
+		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
+		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
+	};// @lock
+	
+	
 	cDDeb.change = function cDDeb_change (event)// @startlock
 	{// @endlock
 		var DDebut, DFin, CDebut, CFin;
@@ -176,6 +223,16 @@ function constructor (id) {
 		$$('component1_cThai').setReadOnly(true);
 		$$('component1_cRem2').setReadOnly(true);
 		$$('component1_cRem3').setReadOnly(true);
+		
+		$$('component1_cLun').disable();
+		$$('component1_cMar').disable();
+		$$('component1_cMer').disable();
+		$$('component1_cJeu').disable();
+		$$('component1_cVen').disable();
+		$$('component1_cSam').disable();
+		$$('component1_cDim').disable();
+		$$('component1_sPerJ').disable();
+		
 	};// @lock
 
 	bUpdScol.click = function bUpdScol_click (event)// @startlock
@@ -186,6 +243,16 @@ function constructor (id) {
 		$$('component1_bUpdFrais').hide();
 		$$('component1_bSaveScol').show();
 		$$('component1_bUndoScol').show();
+		
+		$$('component1_cLun').enable();
+		$$('component1_cMar').enable();
+		$$('component1_cMer').enable();
+		$$('component1_cJeu').enable();
+		$$('component1_cVen').enable();
+		$$('component1_cSam').enable();
+		$$('component1_cDim').enable();
+		$$('component1_sPerJ').enable();
+		$$('component1_sPerJ').setValues([$$('component1_cHjDeb').getValue(),$$('component1_cHjFin').getValue()]);
 		
 		$$('component1_cDDeb').setReadOnly(false);
 		$$('component1_cDFin').setReadOnly(false);
@@ -263,6 +330,8 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListAsco", "onRowDraw", ListAsco.onRowDraw, "WAF");
+	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_cDDeb", "change", cDDeb.change, "WAF");
 	WAF.addListener(this.id + "_cDFin", "change", cDFin.change, "WAF");
 	WAF.addListener(this.id + "_cRegMm", "change", cRegMm.change, "WAF");
@@ -281,6 +350,7 @@ function constructor (id) {
 	WAF.addListener(this.id + "_bUndoFrais", "click", bUndoFrais.click, "WAF");
 	WAF.addListener(this.id + "_bUpdFrais", "click", bUpdFrais.click, "WAF");
 	// @endregion// @endlock
+
 
 	};// @lock
 
