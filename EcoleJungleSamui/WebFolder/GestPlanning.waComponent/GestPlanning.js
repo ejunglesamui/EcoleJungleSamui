@@ -31,8 +31,8 @@ function constructor (id) {
 		
 		v = "component1_vT2";
 		$$(v).setBackgroundColor("green");
-		$$(v).resize(142,52);
-		$$(v).move(310,169);
+		$$(v).resize(142,44);
+		$$(v).move(310,209);
 		$$(v).setValue("GEOGRAPHIE\nL.TESSIER\nSALLE 7A");
 		$$(v).show();
 	};// @lock
