@@ -16,11 +16,11 @@ function constructor (id) {
 		
 		var vInt, vDec, vPart1, vPart2;
 		
-		vInt = parseInt(Horaire/2)+':';
+		vInt = parseInt(Horaire/4)+':';
 		if (vInt.length ===2) {
 			vInt = '0'+vInt;
 		}
-		vDec = 30*(Horaire-2*parseInt(Horaire/2)) + ' ';
+		vDec = 15*(Horaire-4*parseInt(Horaire/4)) + ' ';
 		if (vDec.length === 2) {
 			vDec = '0'+vDec;
 		}
@@ -71,6 +71,14 @@ function constructor (id) {
 	$$('component1_cDim').disable();
 	$$('component1_sPerJ').addHandle(34);
 	$$('component1_sPerJ').disable();
+
+	sPerJ.slide = function sPerJ_slide (event)// @startlock
+	{// @endlock
+		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
+		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
+		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
+		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
+	};// @lock
 
 	sPerJ.slidechange = function sPerJ_slidechange (event)// @startlock
 	{// @endlock
@@ -330,6 +338,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_sPerJ", "slide", sPerJ.slide, "WAF");
 	WAF.addListener(this.id + "_ListAsco", "onRowDraw", ListAsco.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_cDDeb", "change", cDDeb.change, "WAF");
