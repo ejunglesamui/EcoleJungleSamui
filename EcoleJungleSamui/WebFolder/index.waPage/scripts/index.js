@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem13 = {};	// @menuItem
 	var menuItem9 = {};	// @menuItem
 	var menuItem5 = {};	// @menuItem
 	var menuItem19 = {};	// @menuItem
@@ -13,6 +14,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem13.click = function menuItem13_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/PlanningTheorique.waComponent");
+	};// @lock
 
 	menuItem9.click = function menuItem9_click (event)// @startlock
 	{// @endlock
@@ -91,6 +97,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem13", "click", menuItem13.click, "WAF");
 	WAF.addListener("menuItem9", "click", menuItem9.click, "WAF");
 	WAF.addListener("menuItem5", "click", menuItem5.click, "WAF");
 	WAF.addListener("menuItem19", "click", menuItem19.click, "WAF");
