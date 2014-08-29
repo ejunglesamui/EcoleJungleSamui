@@ -30,6 +30,9 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var sallesEvent = {};	// @dataSource
+	var btSave = {};	// @button
+	var ListClass = {};	// @dataGrid
 	var btCreer = {};	// @button
 	var btUndo = {};	// @button
 	var btUpd = {};	// @button
@@ -42,8 +45,58 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	sallesEvent.onCurrentElementChange = function sallesEvent_onCurrentElementChange (event)// @startlock
+	{// @endlock
+		var  SalleID = sources.component1_Taches1.getAttributeValue("Salle.ID");
+		//alert(SalleID);
+		//alert(sources.component1_salles.ID);
+		if (sources.component1_salles.ID !== SalleID) {
+			sources.component1_Taches1.Salle.set(sources.component1_salles);
+			sources.component1_Taches1.serverRefresh();
+		}
+	};// @lock
+
+	btSave.click = function btSave_click (event)// @startlock
+	{// @endlock
+		//$$('component1_ccMat').setValue($$('component1_cbMat').getValue());
+		//$$('component1_ccProf').setValue($$('component1_cbProf').getValue());
+		//$$('component1_ccSalle').setValue($$('component1_cbSalle').getValue());
+		$$('component1_cTypS').setValue($$('component1_cbTypS').getValue());
+		sources.component1_Taches1.save();
+		
+		$$("component1_btCreer").show();
+		$$("component1_btUpd").show();
+		$$("component1_btSave").hide();
+		$$("component1_btUndo").hide();
+		$$("component1_ListTaches").enable();
+		$$("component1_ListTaches").setReadOnly(true);
+		$$("component1_btDraw").show();
+		$$("component1_cMat").show();
+		$$("component1_cTypS").show();
+		$$("component1_cProf").show();
+		$$("component1_cSalle").show();
+		$$("component1_cbMat").hide();
+		$$("component1_cbTypS").hide();
+		$$("component1_cbProf").hide();
+		$$("component1_cbSalle").hide();
+		$$('component1_sPerJ').disable();
+		
+		$$("component1_cbAnScol").enable();
+		$$("component1_cbJour").enable();
+		$$("component1_ListClass").enable();
+		$$("component1_ListClass").setReadOnly(true);
+		
+	};// @lock
+
+	ListClass.onRowClick = function ListClass_onRowClick (event)// @startlock
+	{// @endlock
+		$$("component1_cbJour").setValue("-");
+	};// @lock
+
 	btCreer.click = function btCreer_click (event)// @startlock
 	{// @endlock
+		sources.component1_Taches1.addNewElement();
+		
 		sources.component1_Taches1.addNewElement();
 		
 		$$("component1_btCreer").hide();
@@ -65,9 +118,9 @@ function constructor (id) {
 		
 		$$("component1_cbAnScol").disable();
 		$$("component1_cbJour").disable();
-		$$("component1_ListClasse").disable();
+		$$("component1_ListClass").disable();
 		
-		$$('component1_sPerJ').setValues("Créer");
+		$$('component1_cAction').setValue("Créer");
 	};// @lock
 
 	btUndo.click = function btUndo_click (event)// @startlock
@@ -87,13 +140,12 @@ function constructor (id) {
 		$$("component1_cbTypS").hide();
 		$$("component1_cbProf").hide();
 		$$("component1_cbSalle").hide();
-		$$("component1_cActivite").hide();
 		$$('component1_sPerJ').disable();
 		
 		$$("component1_cbAnScol").enable();
 		$$("component1_cbJour").enable();
-		$$("component1_ListClasse").enable();
-		$$("component1_ListClasse").setReadOnly(true);
+		$$("component1_ListClass").enable();
+		$$("component1_ListClass").setReadOnly(true);
 	};// @lock
 
 	btUpd.click = function btUpd_click (event)// @startlock
@@ -107,7 +159,7 @@ function constructor (id) {
 		$$("component1_cMat").hide();
 		$$("component1_cTypS").hide();
 		$$("component1_cProf").hide();
-		$$("component1_cSalle").hide();
+		//$$("component1_cSalle").hide();
 		$$("component1_cbMat").show();
 		$$("component1_cbTypS").show();
 		$$("component1_cbProf").show();
@@ -117,10 +169,14 @@ function constructor (id) {
 		
 		$$("component1_cbAnScol").disable();
 		$$("component1_cbJour").disable();
-		$$("component1_ListClasse").disable();
+		$$("component1_ListClass").disable();
 		
-		$$('component1_sPerJ').setValues("Modifier");
-		$$('component1_cbMat').setValues($$('component1_cMat').GetValues());
+		$$('component1_cAction').setValue("Modifier");
+		$$('component1_cbMat').setValue($$('component1_ccMat').getValue());
+		$$('component1_cbProf').setValue($$('component1_ccProf').getValue());
+		$$('component1_cbSalle').setValue($$('component1_ccSalle').getValue());
+		$$('component1_cbTypS').setValue($$('component1_cTypS').getValue());
+		//alert($$('component1_cMat').getValue());
 		
 		
 	};// @lock
@@ -270,6 +326,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_salles", "onCurrentElementChange", sallesEvent.onCurrentElementChange, "WAF");
+	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
+	WAF.addListener(this.id + "_ListClass", "onRowClick", ListClass.onRowClick, "WAF");
 	WAF.addListener(this.id + "_btCreer", "click", btCreer.click, "WAF");
 	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener(this.id + "_btUpd", "click", btUpd.click, "WAF");
