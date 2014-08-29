@@ -30,6 +30,7 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var btCreer = {};	// @button
 	var btUndo = {};	// @button
 	var btUpd = {};	// @button
 	var btDraw = {};	// @buttonImage
@@ -40,6 +41,34 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btCreer.click = function btCreer_click (event)// @startlock
+	{// @endlock
+		sources.component1_Taches1.addNewElement();
+		
+		$$("component1_btCreer").hide();
+		$$("component1_btUpd").hide();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
+		$$("component1_ListTaches").disable();
+		$$("component1_btDraw").hide();
+		$$("component1_cMat").hide();
+		$$("component1_cTypS").hide();
+		$$("component1_cProf").hide();
+		$$("component1_cSalle").hide();
+		$$("component1_cbMat").show();
+		$$("component1_cbTypS").show();
+		$$("component1_cbProf").show();
+		$$("component1_cbSalle").show();
+		$$("component1_cActivite").show();
+		$$('component1_sPerJ').enable();
+		
+		$$("component1_cbAnScol").disable();
+		$$("component1_cbJour").disable();
+		$$("component1_ListClasse").disable();
+		
+		$$('component1_sPerJ').setValues("Créer");
+	};// @lock
 
 	btUndo.click = function btUndo_click (event)// @startlock
 	{// @endlock
@@ -89,6 +118,9 @@ function constructor (id) {
 		$$("component1_cbAnScol").disable();
 		$$("component1_cbJour").disable();
 		$$("component1_ListClasse").disable();
+		
+		$$('component1_sPerJ').setValues("Modifier");
+		$$('component1_cbMat').setValues($$('component1_cMat').GetValues());
 		
 		
 	};// @lock
@@ -142,7 +174,7 @@ function constructor (id) {
             	if (vSalle === null) {
             		vTxt = vTxt + "-";
             	} else {
-            		vTxt = vTxt + Salle;
+            		vTxt = vTxt + vSalle;
             	}
             	v = "component1_vT"+i;
             	$$(v).setBackgroundColor(vCoul);
@@ -179,15 +211,20 @@ function constructor (id) {
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
 		var vAnScol = $$("component1_cbAnScol").getValue();
-		sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Classe, Filiere", vAnScol);
+		sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+		//sources.component1_Tache1.collectionRefresh();
 	};// @lock
 
 	cbJour.change = function cbJour_change (event)// @startlock
 	{// @endlock
-		var vJourS;
+		var vJourS, vAnScol, vClasse, vFil;
 		vJourS = $$("component1_cbJour").getValue();
-		sources.component1_Taches1.filterQuery("jourS = :1 order by hDeb",vJourS,{fromInitialQuery:true});	
-		$$("component1_tJour").setValue($$('component1_cbJour').getValue());
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vClasse = sources.component1_planning_Matiere.Classe;
+		vFil = sources.component1_planning_Matiere.Filiere;
+		sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+			
+			$$("component1_tJour").setValue($$('component1_cbJour').getValue());
 			if (vJourS !== "-") {
 				$$("component1_ListTaches").show();
 				$$("component1_btDraw").show();
@@ -212,7 +249,7 @@ function constructor (id) {
 				$$("component1_btUpd").hide();
 				$$("component1_btSave").hide();
 				$$("component1_btUndo").hide();
-			}		
+			}			
 		
 	};// @lock
 
@@ -233,6 +270,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btCreer", "click", btCreer.click, "WAF");
 	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener(this.id + "_btUpd", "click", btUpd.click, "WAF");
 	WAF.addListener(this.id + "_btDraw", "click", btDraw.click, "WAF");
