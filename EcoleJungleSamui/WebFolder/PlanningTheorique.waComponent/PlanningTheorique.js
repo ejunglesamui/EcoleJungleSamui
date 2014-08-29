@@ -30,6 +30,8 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var btUndo = {};	// @button
+	var btUpd = {};	// @button
 	var btDraw = {};	// @buttonImage
 	var ListTaches = {};	// @dataGrid
 	var cbAnScol = {};	// @combobox
@@ -38,6 +40,58 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btUndo.click = function btUndo_click (event)// @startlock
+	{// @endlock
+		$$("component1_btCreer").show();
+		$$("component1_btUpd").show();
+		$$("component1_btSave").hide();
+		$$("component1_btUndo").hide();
+		$$("component1_ListTaches").enable();
+		$$("component1_ListTaches").setReadOnly(true);
+		$$("component1_btDraw").show();
+		$$("component1_cMat").show();
+		$$("component1_cTypS").show();
+		$$("component1_cProf").show();
+		$$("component1_cSalle").show();
+		$$("component1_cbMat").hide();
+		$$("component1_cbTypS").hide();
+		$$("component1_cbProf").hide();
+		$$("component1_cbSalle").hide();
+		$$("component1_cActivite").hide();
+		$$('component1_sPerJ').disable();
+		
+		$$("component1_cbAnScol").enable();
+		$$("component1_cbJour").enable();
+		$$("component1_ListClasse").enable();
+		$$("component1_ListClasse").setReadOnly(true);
+	};// @lock
+
+	btUpd.click = function btUpd_click (event)// @startlock
+	{// @endlock
+		$$("component1_btCreer").hide();
+		$$("component1_btUpd").hide();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
+		$$("component1_ListTaches").disable();
+		$$("component1_btDraw").hide();
+		$$("component1_cMat").hide();
+		$$("component1_cTypS").hide();
+		$$("component1_cProf").hide();
+		$$("component1_cSalle").hide();
+		$$("component1_cbMat").show();
+		$$("component1_cbTypS").show();
+		$$("component1_cbProf").show();
+		$$("component1_cbSalle").show();
+		$$("component1_cActivite").show();
+		$$('component1_sPerJ').enable();
+		
+		$$("component1_cbAnScol").disable();
+		$$("component1_cbJour").disable();
+		$$("component1_ListClasse").disable();
+		
+		
+	};// @lock
 
 	btDraw.click = function btDraw_click (event)// @startlock
 	{// @endlock
@@ -51,9 +105,10 @@ function constructor (id) {
 				
 		vTaches = sources.component1_Taches1;
 		nb = vTaches.length; 
+		$$("component1_nbTask").setValue(nb+1);
        	for (var i = 0; i < nb; i++) {
         	vTaches.getElement(i, { onSuccess: function(event) {
-            	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle;
+            	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle, vType, vPosx, vLarge;
             	elem = event.element; 
             	vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
             	vPosy = 58+11*(elem.hDeb-32);
@@ -61,6 +116,24 @@ function constructor (id) {
             	vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
             	vCoul = elem.getAttributeValue("Matiere.CoulCode");
             	vSalle = elem.getAttributeValue("Salle.Nom");
+            	vType = elem.semaineType;
+            	switch (elem.semaineType) {
+					case 'Permanent':
+						vLarge = 140;
+						vPosx = 554;
+						break;
+					case 'Semaine paire':
+						vLarge = 70;
+						vPosx = 554;
+						break;
+					case 'Semaine impaire':
+						vLarge = 70;
+						vPosx = 624;
+						break;
+					default:
+						vLarge = 140;
+						vPosx = 554;
+				}
             	if (vProf === null) {
             		vTxt = vTxt + "-\n";
             	} else {
@@ -73,8 +146,8 @@ function constructor (id) {
             	}
             	v = "component1_vT"+i;
             	$$(v).setBackgroundColor(vCoul);
-				$$(v).resize(140,vTaille);
-				$$(v).move(554,vPosy);
+				$$(v).resize(vLarge,vTaille);
+				$$(v).move(vPosx,vPosy);
 				$$(v).setValue(vTxt);
 				$$(v).show();
         		}
@@ -117,8 +190,28 @@ function constructor (id) {
 		$$("component1_tJour").setValue($$('component1_cbJour').getValue());
 			if (vJourS !== "-") {
 				$$("component1_ListTaches").show();
+				$$("component1_btDraw").show();
+				$$("component1_cMat").show();
+				$$("component1_cTypS").show();
+				$$("component1_cProf").show();
+				$$("component1_cSalle").show();
+				$$("component1_cActivite").show();
+				$$("component1_btCreer").show();
+				$$("component1_btUpd").show();
+				$$("component1_btSave").hide();
+				$$("component1_btUndo").hide();
 			} else {
 				$$("component1_ListTaches").hide();
+				$$("component1_btDraw").hide();
+				$$("component1_cMat").hide();
+				$$("component1_cTypS").hide();
+				$$("component1_cProf").hide();
+				$$("component1_cSalle").hide();
+				$$("component1_cActivite").hide();
+				$$("component1_btCreer").hide();
+				$$("component1_btUpd").hide();
+				$$("component1_btSave").hide();
+				$$("component1_btUndo").hide();
 			}		
 		
 	};// @lock
@@ -140,6 +233,8 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
+	WAF.addListener(this.id + "_btUpd", "click", btUpd.click, "WAF");
 	WAF.addListener(this.id + "_btDraw", "click", btDraw.click, "WAF");
 	WAF.addListener(this.id + "_ListTaches", "onRowDraw", ListTaches.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_ListTaches", "onRowClick", ListTaches.onRowClick, "WAF");
