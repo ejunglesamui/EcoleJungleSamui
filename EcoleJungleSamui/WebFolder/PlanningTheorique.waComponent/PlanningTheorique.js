@@ -31,6 +31,7 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var btView = {};	// @buttonImage
 	var btSup = {};	// @button
 	var cbMat = {};	// @combobox
 	var matieresEvent = {};	// @dataSource
@@ -49,6 +50,83 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btView.click = function btView_click (event)// @startlock
+	{// @endlock
+		var vTaches, nb ;
+		for (var i = 0; i < 61; i++) {
+			v = "component1_vN"+i;
+			$$(v).hide();
+		}
+				
+		vTaches = sources.component1_Taches;
+		nb = vTaches.length; 
+       	for (var i = 0; i < nb; i++) {
+        	vTaches.getElement(i, { onSuccess: function(event) {
+            	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle, vType, vPosx, vLarge, vRefg;
+            	elem = event.element;
+            	switch (elem.jourS) {
+					case 'Lundi':
+						vRefg = 105;
+						break;
+					case 'Mardi':
+						vRefg = 247;
+						break;
+					case 'Mercredi':
+						vRefg = 389;
+						break;
+					case 'Jeudi':
+						vRefg = 531;
+						break;
+					case 'Vendredi':
+						vRefg = 673;
+						break;
+				}
+            	vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+            	vPosy = 66+11*(elem.hDeb-32);
+            	vTaille = (11*(elem.hFin-elem.hDeb))-1;
+            	vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+            	vCoul = elem.getAttributeValue("Matiere.CoulCode");
+            	vSalle = elem.getAttributeValue("Salle.Nom");
+            	vType = elem.semaineType;
+            	switch (elem.semaineType) {
+					case 'Permanent':
+						vLarge = 140;
+						vPosx = vRefg;
+						break;
+					case 'Semaine paire':
+						vLarge = 70;
+						vPosx = vRefg;
+						break;
+					case 'Semaine impaire':
+						vLarge = 70;
+						vPosx = vRefg+70;
+						break;
+					default:
+						vLarge = 140;
+						vPosx = vRefg;
+				}
+            	if (vProf === null) {
+            		vTxt = vTxt + "-\n";
+            	} else {
+            		vTxt = vTxt + vProf + "\n";
+            	}
+            	if (vSalle === null) {
+            		vTxt = vTxt + "-";
+            	} else {
+            		vTxt = vTxt + vSalle;
+            	}
+            	v = "component1_vN"+i;
+            	//alert(v+vCoul+vTaille+vPosx+vPosy+vTxt);
+            	$$(v).setBackgroundColor(vCoul);
+				$$(v).resize(vLarge,vTaille);
+				$$(v).move(vPosx,vPosy);
+				$$(v).setValue(vTxt);
+				$$(v).show();
+        		}
+      		});
+    	}
+	};// @lock
 	
 	$$('component1_sPerJ').addHandle(34);
 	$$('component1_sPerJ').disable();
@@ -224,6 +302,7 @@ function constructor (id) {
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
 		sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
 		//sources.component1_Tache1.collectionRefresh();
 		
 	};// @lock
@@ -431,6 +510,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btView", "click", btView.click, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_btSup", "click", btSup.click, "WAF");
 	WAF.addListener(this.id + "_cbMat", "change", cbMat.change, "WAF");
