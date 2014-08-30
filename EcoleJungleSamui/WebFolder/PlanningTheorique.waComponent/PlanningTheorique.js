@@ -31,6 +31,7 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var container6 = {};	// @container
 	var btView = {};	// @buttonImage
 	var btSup = {};	// @button
 	var cbMat = {};	// @combobox
@@ -51,6 +52,17 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	container6.click = function container6_click (event)// @startlock
+	{// @endlock
+		var vJourS, vAnScol, vClasse, vFil;
+		
+		vJourS = $$("component1_cbJour").getValue();
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vClasse = sources.component1_planning_Matiere.Classe;
+		vFil = sources.component1_planning_Matiere.Filiere;
+		sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+	};// @lock
+
 	btView.click = function btView_click (event)// @startlock
 	{// @endlock
 		var vTaches, nb ;
@@ -63,7 +75,7 @@ function constructor (id) {
 		nb = vTaches.length; 
        	for (var i = 0; i < nb; i++) {
         	vTaches.getElement(i, { onSuccess: function(event) {
-            	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle, vType, vPosx, vLarge, vRefg;
+            	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle, vType, vPosx, vLarge, vRefg, vLibH;
             	elem = event.element;
             	switch (elem.jourS) {
 					case 'Lundi':
@@ -85,6 +97,7 @@ function constructor (id) {
             	vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
             	vPosy = 66+11*(elem.hDeb-32);
             	vTaille = (11*(elem.hFin-elem.hDeb))-1;
+            	vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
             	vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
             	vCoul = elem.getAttributeValue("Matiere.CoulCode");
             	vSalle = elem.getAttributeValue("Salle.Nom");
@@ -106,11 +119,13 @@ function constructor (id) {
 						vLarge = 140;
 						vPosx = vRefg;
 				}
-            	if (vProf === null) {
-            		vTxt = vTxt + "-\n";
-            	} else {
-            		vTxt = vTxt + vProf + "\n";
-            	}
+            	//if (vProf === null) {
+            	//	vTxt = vTxt + "-\n";
+            	//} else {
+            	//	vTxt = vTxt + vProf + "\n";
+            	//}
+            	
+            	vTxt = vTxt + vLibH + "\n";
             	if (vSalle === null) {
             		vTxt = vTxt + "-";
             	} else {
@@ -227,6 +242,11 @@ function constructor (id) {
 	ListClass.onRowClick = function ListClass_onRowClick (event)// @startlock
 	{// @endlock
 		$$("component1_cbJour").setValue("-");
+		for (var i = 0; i < 61; i++) {
+			v = "component1_vN"+i;
+			$$(v).hide();
+
+		}
 	};// @lock
 
 	btCreer.click = function btCreer_click (event)// @startlock
@@ -348,8 +368,8 @@ function constructor (id) {
 		for (var i = 0; i < 12; i++) {
 			v = "component1_vT"+i;
 			$$(v).hide();
-			$$(v).resize(22,22);
-			$$(v).move(920,307);
+			//$$(v).resize(22,22);
+			//$$(v).move(920,307);
 		}
 				
 		vTaches = sources.component1_Taches1;
@@ -449,8 +469,7 @@ function constructor (id) {
 		for (var i = 0; i < 12; i++) {
 			v = "component1_vT"+i;
 			$$(v).hide();
-			$$(v).resize(22,22);
-			$$(v).move(1300,180);
+
 		}
 		
 		vJourS = $$("component1_cbJour").getValue();
@@ -510,6 +529,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_container6", "click", container6.click, "WAF");
 	WAF.addListener(this.id + "_btView", "click", btView.click, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_btSup", "click", btSup.click, "WAF");
