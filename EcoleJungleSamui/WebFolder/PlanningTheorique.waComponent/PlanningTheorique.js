@@ -179,7 +179,7 @@ function constructor (id) {
 		$$("component1_cbSalle").show();
 		$$("component1_cActivite").show();
 		$$('component1_sPerJ').enable();
-		$$('component1_sPerJ').setValues([36,40]);
+		$$('component1_sPerJ').setValues([35,39]);
 		
 		$$("component1_cbAnScol").disable();
 		$$("component1_cbJour").disable();
@@ -270,7 +270,7 @@ function constructor (id) {
 			v = "component1_vT"+i;
 			$$(v).hide();
 			$$(v).resize(22,22);
-			$$(v).move(1300,180);
+			$$(v).move(920,307);
 		}
 				
 		vTaches = sources.component1_Taches1;
@@ -281,7 +281,7 @@ function constructor (id) {
             	var elem, v, vPosy, vTaille, vProf, vTxt, vCoul, vSalle, vType, vPosx, vLarge;
             	elem = event.element; 
             	vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
-            	vPosy = 58+11*(elem.hDeb-32);
+            	vPosy = 54+11*(elem.hDeb-32);
             	vTaille = (11*(elem.hFin-elem.hDeb))-1;
             	vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
             	vCoul = elem.getAttributeValue("Matiere.CoulCode");
@@ -290,19 +290,19 @@ function constructor (id) {
             	switch (elem.semaineType) {
 					case 'Permanent':
 						vLarge = 140;
-						vPosx = 554;
+						vPosx = 295;
 						break;
 					case 'Semaine paire':
 						vLarge = 70;
-						vPosx = 554;
+						vPosx = 295;
 						break;
 					case 'Semaine impaire':
 						vLarge = 70;
-						vPosx = 624;
+						vPosx = 365;
 						break;
 					default:
 						vLarge = 140;
-						vPosx = 554;
+						vPosx = 295;
 				}
             	if (vProf === null) {
             		vTxt = vTxt + "-\n";
@@ -414,6 +414,14 @@ function constructor (id) {
 		
 	};// @lock
 
+	sPerJ.slidechange = function sPerJ_slidechange (event)// @startlock
+	{// @endlock
+		$$('component1_cHjDeb').setValue(event.data.values[0]); 
+		$$('component1_cHjFin').setValue(event.data.values[1]); 
+		$$('component1_tDeb').setValue(convTime(event.data.values[0]));
+		$$('component1_tFin').setValue(convTime(event.data.values[1]));
+	};// @lock
+
 	sPerJ.slide = function sPerJ_slide (event)// @startlock
 	{// @endlock
 		$$('component1_cHjDeb').setValue(event.data.values[0]); 
@@ -423,6 +431,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_btSup", "click", btSup.click, "WAF");
 	WAF.addListener(this.id + "_cbMat", "change", cbMat.change, "WAF");
 	WAF.addListener(this.id + "_matieres", "onCurrentElementChange", matieresEvent.onCurrentElementChange, "WAF");
