@@ -12,11 +12,7 @@ function constructor (id) {
 
 	this.load = function (data) {// @lock
 		
-		$$('component1_sPerJ').addHandle(34);
-		$$('component1_sPerJ').disable();
-		$$('component1_cAction').setValue("-");
-		$$('component1_sPerJ').setValues([36,40]);
-		
+			
 		function convTime (Horaire) {
 		
 		var vInt, vDec, vPart1, vPart2;
@@ -35,6 +31,7 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var btSup = {};	// @button
 	var cbMat = {};	// @combobox
 	var matieresEvent = {};	// @dataSource
 	var utilisateursEvent = {};	// @dataSource
@@ -52,6 +49,26 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+	
+	$$('component1_sPerJ').addHandle(34);
+	$$('component1_sPerJ').disable();
+	$$('component1_cAction').setValue("-");
+	$$('component1_sPerJ').setValues([36,40]);
+
+	btSup.click = function btSup_click (event)// @startlock
+	{// @endlock
+		
+		var isok, vMat, vHeure;
+		
+		vMat = $$('component1_cMat').getValue();
+		vHeure = " ( de " + $$('component1_tDeb').getValue() + " à " + $$('component1_tFin').getValue() + ")";
+		
+		isok = confirm( vMat + vHeure + "\n\nVoulez-vous vraiment supprimer cette activité du planning ?");
+		
+		if (isok) {
+			sources.component1_Taches1.removeCurrent();
+		}
+	};// @lock
 
 	cbMat.change = function cbMat_change (event)// @startlock
 	{// @endlock
@@ -80,8 +97,10 @@ function constructor (id) {
 
 	sallesEvent.onCurrentElementChange = function sallesEvent_onCurrentElementChange (event)// @startlock
 	{// @endlock
-		var  SalleID = sources.component1_Taches1.getAttributeValue("Salle.ID");
+		var  SalleID, vAction;
 		
+		SalleID = sources.component1_Taches1.getAttributeValue("Salle.ID");
+				
 		if (sources.component1_salles.ID !== SalleID) {
 			sources.component1_Taches1.Salle.set(sources.component1_salles);
 			sources.component1_Taches1.serverRefresh();
@@ -138,7 +157,7 @@ function constructor (id) {
 		$$('component1_ccJour').setValue($$('component1_cbJour').getValue());
 		
 		$$('component1_cbMat').setValue("");
-		$$('component1_cbProf').setValue("");
+		$$('component1_cbProf').setValue(null);
 		$$('component1_cbSalle').setValue("");
 		$$('component1_cbTypS').setValue("");
 		
@@ -395,23 +414,16 @@ function constructor (id) {
 		
 	};// @lock
 
-	sPerJ.slidechange = function sPerJ_slidechange (event)// @startlock
-	{// @endlock
-		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
-		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
-		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
-		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
-	};// @lock
-
 	sPerJ.slide = function sPerJ_slide (event)// @startlock
 	{// @endlock
-		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
-		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
-		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
-		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
+		$$('component1_cHjDeb').setValue(event.data.values[0]); 
+		$$('component1_cHjFin').setValue(event.data.values[1]); 
+		$$('component1_tDeb').setValue(convTime(event.data.values[0]));
+		$$('component1_tFin').setValue(convTime(event.data.values[1]));
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btSup", "click", btSup.click, "WAF");
 	WAF.addListener(this.id + "_cbMat", "change", cbMat.change, "WAF");
 	WAF.addListener(this.id + "_matieres", "onCurrentElementChange", matieresEvent.onCurrentElementChange, "WAF");
 	WAF.addListener(this.id + "_utilisateurs", "onCurrentElementChange", utilisateursEvent.onCurrentElementChange, "WAF");
@@ -426,7 +438,6 @@ function constructor (id) {
 	WAF.addListener(this.id + "_ListTaches", "onRowClick", ListTaches.onRowClick, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
 	WAF.addListener(this.id + "_cbJour", "change", cbJour.change, "WAF");
-	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slide", sPerJ.slide, "WAF");
 	// @endregion// @endlock
 
