@@ -13,8 +13,9 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 		
 		$$('component1_sPerJ').addHandle(34);
-		//$$('component1_sPerJ').disable();
+		$$('component1_sPerJ').disable();
 		$$('component1_cAction').setValue("-");
+		$$('component1_sPerJ').setValues([36,40]);
 		
 		function convTime (Horaire) {
 		
@@ -97,6 +98,11 @@ function constructor (id) {
 		
 		$$("component1_btCreer").show();
 		$$("component1_btUpd").show();
+		$$("component1_btUpd").disable();
+		
+		$$("component1_btSup").show();
+		$$("component1_btSup").disable();
+		
 		$$("component1_btSave").hide();
 		$$("component1_btUndo").hide();
 		$$("component1_ListTaches").enable();
@@ -138,6 +144,7 @@ function constructor (id) {
 		
 		$$("component1_btCreer").hide();
 		$$("component1_btUpd").hide();
+		$$("component1_btSup").hide();
 		$$("component1_btSave").show();
 		$$("component1_btSave").disable();
 		$$("component1_btUndo").show();
@@ -164,10 +171,13 @@ function constructor (id) {
 
 	btUndo.click = function btUndo_click (event)// @startlock
 	{// @endlock
-		var vJourS, vAnScol, vClasse, vFil;
+		var vJourS, vAnScol, vClasse, vFil, vnbT;
 		
 		$$("component1_btCreer").show();
 		$$("component1_btUpd").show();
+		$$("component1_btUpd").disable();
+		$$("component1_btSup").show();
+		$$("component1_btSup").disable();
 		$$("component1_btSave").hide();
 		$$("component1_btUndo").hide();
 		$$("component1_ListTaches").enable();
@@ -203,6 +213,7 @@ function constructor (id) {
 	{// @endlock
 		$$("component1_btCreer").hide();
 		$$("component1_btUpd").hide();
+		$$("component1_btSup").hide();
 		$$("component1_btSave").show();
 		$$("component1_btUndo").show();
 		$$("component1_ListTaches").disable();
@@ -316,6 +327,9 @@ function constructor (id) {
 	{// @endlock
 		var vAction = $$('component1_cAction').getValue();
 		
+		$$('component1_btUpd').enable();
+		$$('component1_btSup').enable();
+		
 		$$('component1_sPerJ').enable();
 		$$('component1_sPerJ').setValues([sources.component1_Taches1.hDeb,sources.component1_Taches1.hFin]);
 		if (vAction === "-") {
@@ -332,7 +346,7 @@ function constructor (id) {
 
 	cbJour.change = function cbJour_change (event)// @startlock
 	{// @endlock
-		var vJourS, vAnScol, vClasse, vFil;
+		var vJourS, vAnScol, vClasse, vFil, vnbT;
 		
 		for (var i = 0; i < 12; i++) {
 			v = "component1_vT"+i;
@@ -358,7 +372,10 @@ function constructor (id) {
 				$$("component1_cActivite").show();
 				$$("component1_btCreer").show();
 				$$("component1_btUpd").show();
+				$$("component1_btUpd").disable();
 				$$("component1_btSave").hide();
+				$$("component1_btSup").show();
+				$$("component1_btSup").disable();
 				$$("component1_btUndo").hide();
 				$$('component1_cAction').setValue("-");
 			} else {
@@ -373,6 +390,7 @@ function constructor (id) {
 				$$("component1_btUpd").hide();
 				$$("component1_btSave").hide();
 				$$("component1_btUndo").hide();
+				$$("component1_btSup").hide();
 			}			
 		
 	};// @lock
