@@ -12,6 +12,10 @@ function constructor (id) {
 
 	this.load = function (data) {// @lock
 		
+		$$('component1_sPerJ').addHandle(34);
+		//$$('component1_sPerJ').disable();
+		$$('component1_cAction').setValue("-");
+		
 		function convTime (Horaire) {
 		
 		var vInt, vDec, vPart1, vPart2;
@@ -30,6 +34,9 @@ function constructor (id) {
 	
 	
 	// @region namespaceDeclaration// @startlock
+	var cbMat = {};	// @combobox
+	var matieresEvent = {};	// @dataSource
+	var utilisateursEvent = {};	// @dataSource
 	var sallesEvent = {};	// @dataSource
 	var btSave = {};	// @button
 	var ListClass = {};	// @dataGrid
@@ -45,11 +52,35 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	cbMat.change = function cbMat_change (event)// @startlock
+	{// @endlock
+		$$("component1_btSave").enable();
+	};// @lock
+
+	matieresEvent.onCurrentElementChange = function matieresEvent_onCurrentElementChange (event)// @startlock
+	{// @endlock
+		var  MatID = sources.component1_Taches1.getAttributeValue("Matiere.ID");
+
+		if (sources.component1_matieres.ID !== MatID) {
+			sources.component1_Taches1.Matiere.set(sources.component1_matieres);
+			sources.component1_Taches1.serverRefresh();
+		}
+	};// @lock
+
+	utilisateursEvent.onCurrentElementChange = function utilisateursEvent_onCurrentElementChange (event)// @startlock
+	{// @endlock
+		var  ProfID = sources.component1_Taches1.getAttributeValue("Professeur.ID");
+		
+		if (sources.component1_utilisateurs.ID !== ProfID) {
+			sources.component1_Taches1.Professeur.set(sources.component1_utilisateurs);
+			sources.component1_Taches1.serverRefresh();
+		}
+	};// @lock
+
 	sallesEvent.onCurrentElementChange = function sallesEvent_onCurrentElementChange (event)// @startlock
 	{// @endlock
 		var  SalleID = sources.component1_Taches1.getAttributeValue("Salle.ID");
-		//alert(SalleID);
-		//alert(sources.component1_salles.ID);
+		
 		if (sources.component1_salles.ID !== SalleID) {
 			sources.component1_Taches1.Salle.set(sources.component1_salles);
 			sources.component1_Taches1.serverRefresh();
@@ -86,6 +117,8 @@ function constructor (id) {
 		$$("component1_ListClass").enable();
 		$$("component1_ListClass").setReadOnly(true);
 		
+		$$('component1_cAction').setValue("-");
+		
 	};// @lock
 
 	ListClass.onRowClick = function ListClass_onRowClick (event)// @startlock
@@ -96,12 +129,17 @@ function constructor (id) {
 	btCreer.click = function btCreer_click (event)// @startlock
 	{// @endlock
 		sources.component1_Taches1.addNewElement();
+		$$('component1_ccJour').setValue($$('component1_cbJour').getValue());
 		
-		sources.component1_Taches1.addNewElement();
+		$$('component1_cbMat').setValue("");
+		$$('component1_cbProf').setValue("");
+		$$('component1_cbSalle').setValue("");
+		$$('component1_cbTypS').setValue("");
 		
 		$$("component1_btCreer").hide();
 		$$("component1_btUpd").hide();
 		$$("component1_btSave").show();
+		$$("component1_btSave").disable();
 		$$("component1_btUndo").show();
 		$$("component1_ListTaches").disable();
 		$$("component1_btDraw").hide();
@@ -115,6 +153,7 @@ function constructor (id) {
 		$$("component1_cbSalle").show();
 		$$("component1_cActivite").show();
 		$$('component1_sPerJ').enable();
+		$$('component1_sPerJ').setValues([36,40]);
 		
 		$$("component1_cbAnScol").disable();
 		$$("component1_cbJour").disable();
@@ -125,6 +164,8 @@ function constructor (id) {
 
 	btUndo.click = function btUndo_click (event)// @startlock
 	{// @endlock
+		var vJourS, vAnScol, vClasse, vFil;
+		
 		$$("component1_btCreer").show();
 		$$("component1_btUpd").show();
 		$$("component1_btSave").hide();
@@ -146,6 +187,16 @@ function constructor (id) {
 		$$("component1_cbJour").enable();
 		$$("component1_ListClass").enable();
 		$$("component1_ListClass").setReadOnly(true);
+		
+		$$('component1_cAction').setValue("-");
+		
+		vJourS = $$("component1_cbJour").getValue();
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vClasse = sources.component1_planning_Matiere.Classe;
+		vFil = sources.component1_planning_Matiere.Filiere;
+		sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		//sources.component1_Tache1.collectionRefresh();
+		
 	};// @lock
 
 	btUpd.click = function btUpd_click (event)// @startlock
@@ -159,7 +210,7 @@ function constructor (id) {
 		$$("component1_cMat").hide();
 		$$("component1_cTypS").hide();
 		$$("component1_cProf").hide();
-		//$$("component1_cSalle").hide();
+		$$("component1_cSalle").hide();
 		$$("component1_cbMat").show();
 		$$("component1_cbTypS").show();
 		$$("component1_cbProf").show();
@@ -172,6 +223,7 @@ function constructor (id) {
 		$$("component1_ListClass").disable();
 		
 		$$('component1_cAction').setValue("Modifier");
+		
 		$$('component1_cbMat').setValue($$('component1_ccMat').getValue());
 		$$('component1_cbProf').setValue($$('component1_ccProf').getValue());
 		$$('component1_cbSalle').setValue($$('component1_ccSalle').getValue());
@@ -244,24 +296,31 @@ function constructor (id) {
 		
 	};// @lock
 	
-	$$('component1_sPerJ').addHandle(34);
-	$$('component1_sPerJ').disable();
 	
 
 	ListTaches.onRowDraw = function ListTaches_onRowDraw (event)// @startlock
 	{// @endlock
+		var vAction = $$('component1_cAction').getValue();
+		
 		if (sources.component1_Taches1.ID !== null){
 			$$('component1_sPerJ').enable();
 			$$('component1_sPerJ').setValues([sources.component1_Taches1.hDeb,sources.component1_Taches1.hFin]);
-			$$('component1_sPerJ').disable();
+			if (vAction === "-") {
+		  		$$('component1_sPerJ').disable();
+		  	}
+			
 		}
 	};// @lock
 
 	ListTaches.onRowClick = function ListTaches_onRowClick (event)// @startlock
 	{// @endlock
+		var vAction = $$('component1_cAction').getValue();
+		
 		$$('component1_sPerJ').enable();
 		$$('component1_sPerJ').setValues([sources.component1_Taches1.hDeb,sources.component1_Taches1.hFin]);
-		$$('component1_sPerJ').disable();
+		if (vAction === "-") {
+		  $$('component1_sPerJ').disable();
+		  }
 	};// @lock
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
@@ -274,6 +333,14 @@ function constructor (id) {
 	cbJour.change = function cbJour_change (event)// @startlock
 	{// @endlock
 		var vJourS, vAnScol, vClasse, vFil;
+		
+		for (var i = 0; i < 12; i++) {
+			v = "component1_vT"+i;
+			$$(v).hide();
+			$$(v).resize(22,22);
+			$$(v).move(1300,180);
+		}
+		
 		vJourS = $$("component1_cbJour").getValue();
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
@@ -293,6 +360,7 @@ function constructor (id) {
 				$$("component1_btUpd").show();
 				$$("component1_btSave").hide();
 				$$("component1_btUndo").hide();
+				$$('component1_cAction').setValue("-");
 			} else {
 				$$("component1_ListTaches").hide();
 				$$("component1_btDraw").hide();
@@ -326,6 +394,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_cbMat", "change", cbMat.change, "WAF");
+	WAF.addListener(this.id + "_matieres", "onCurrentElementChange", matieresEvent.onCurrentElementChange, "WAF");
+	WAF.addListener(this.id + "_utilisateurs", "onCurrentElementChange", utilisateursEvent.onCurrentElementChange, "WAF");
 	WAF.addListener(this.id + "_salles", "onCurrentElementChange", sallesEvent.onCurrentElementChange, "WAF");
 	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
 	WAF.addListener(this.id + "_ListClass", "onRowClick", ListClass.onRowClick, "WAF");
