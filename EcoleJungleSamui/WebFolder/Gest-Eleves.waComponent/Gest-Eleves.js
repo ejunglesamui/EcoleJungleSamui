@@ -13,6 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var ListEleves = {};	// @dataGrid
 	var cbPres = {};	// @checkbox
 	var btSave = {};	// @button
 	var btUndo = {};	// @button
@@ -20,6 +21,19 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+	
+	$$('component1_btUpdate').disable();
+
+	ListEleves.onRowClick = function ListEleves_onRowClick (event)// @startlock
+	{// @endlock
+		var vNom = $$('component1_cNom').getValue();
+		
+		if (vNom === "A") {
+			$$('component1_btUpdate').disable();
+		} else {
+			$$('component1_btUpdate').enable();
+		}
+	};// @lock
 
 	cbPres.click = function cbPres_click (event)// @startlock
 	{// @endlock
@@ -165,6 +179,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListEleves", "onRowClick", ListEleves.onRowClick, "WAF");
 	WAF.addListener(this.id + "_cbPres", "click", cbPres.click, "WAF");
 	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
 	WAF.addListener(this.id + "_btUndo", "click", btUndo.click, "WAF");
