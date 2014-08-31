@@ -13,6 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var cbClasse = {};	// @combobox
 	var cFin = {};	// @textField
 	var cDeb = {};	// @textField
 	var cFullA = {};	// @checkbox
@@ -23,6 +24,23 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	cbClasse.change = function cbClasse_change (event)// @startlock
+	{// @endlock
+		var vFil, vCond, vAnScol, vClasse;
+		
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vClasse = $$("component1_cNClasse").getValue();
+		//alert(vClasse);
+		sources.component1_frais_Scolaires.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+		
+		vFil = $$("component1_cCFil").getValue();
+		if (vFil) {
+			$$("component1_cbFil").show();
+		} else {
+			$$("component1_cbFil").hide();
+		}
+	};// @lock
 
 	cFin.change = function cFin_change (event)// @startlock
 	{// @endlock
@@ -96,10 +114,15 @@ function constructor (id) {
 		$$("component1_btSave").hide();
 		$$("component1_btUndo").hide();
 		$$("component1_btIns").show();
+		$$("component1_btUpd").show();
 		$$("component1_cbEleve").hide();
 		$$("component1_cbModR").hide();
 		$$("component1_cModeR").show();
 		$$("component1_cFullA").disable();
+		$$("component1_cbClasse").hide();
+		$$("component1_cbFil").hide();
+		//$$("component1_cCol").hide();
+		$$("component1_cCondFin").hide();
 		
 		$$("component1_cDeb").setReadOnly(true);
 		$$("component1_cFin").setReadOnly(true);
@@ -134,10 +157,14 @@ function constructor (id) {
 		$$("component1_btSave").show();
 		$$("component1_btUndo").show();
 		$$("component1_btIns").hide();
+		$$("component1_btUpd").hide();
 		$$("component1_cbEleve").show();
 		$$("component1_cbModR").show();
 		$$("component1_cModeR").hide();
 		$$("component1_cFullA").enable();
+		$$("component1_cbClasse").show();
+		//$$("component1_cCol").show();
+		$$("component1_cCondFin").show();
 		
 		$$("component1_cFullA").check();
 		$$("component1_cDeb").setValue($$("component1_cAnDeb").getValue());
@@ -150,8 +177,8 @@ function constructor (id) {
 		var vAnScol, vEleve, vNb;
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vEleve = $$("component1_cbEleve").getValue();
-		sources.psCtrl.query("Annee_Scolaire.ID = :1 and Eleve.ID = :2",{ onSuccess: function(event) { 
-			vNb = sources.psCtrl.length;
+		sources.component1_psCtrl.query("Annee_Scolaire.ID = :1 and Eleve.ID = :2",{ onSuccess: function(event) { 
+			vNb = sources.component1_psCtrl.length;
 			if (vNb > 0) {
 				$$("component1_btSave").disable();
 			} else {
@@ -186,6 +213,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_cbClasse", "change", cbClasse.change, "WAF");
 	WAF.addListener(this.id + "_cFin", "change", cFin.change, "WAF");
 	WAF.addListener(this.id + "_cDeb", "change", cDeb.change, "WAF");
 	WAF.addListener(this.id + "_cFullA", "click", cFullA.click, "WAF");
