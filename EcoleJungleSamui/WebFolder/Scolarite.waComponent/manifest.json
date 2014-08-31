@@ -1,6 +1,1 @@
-{
-    "name"    : "Scolarite",    
-    "html"    : "Scolarite.html",
-    "styles"  : [],
-    "scripts" : ["Scolarite.js"]
-}
+﻿{"name":"Scolarite","html":"Scolarite.html","scripts":["Scolarite.js"],"styles":["Scolarite.css"]}

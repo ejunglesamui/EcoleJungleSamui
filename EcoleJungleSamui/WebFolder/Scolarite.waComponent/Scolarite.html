@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
-<section>
-  <meta name="generator" content="Wakanda GUIDesigner"/>
-</section>
+﻿<!DOCTYPE html><section data-group="[]">
+    <meta name="generator" content="Wakanda GUIDesigner"/>
+    <meta name="WAF.catalog" content="Parcours_Scolaire,Eleves,Annees_Scolaires"/>
+    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Parcours_Scolaire" data-scope="local" data-lib="WAF" data-id="{id}parcours_Scolaire" data-dataType="string" data-autoLoad="false" content="parcours_Scolaire"/>
+    <meta data-type="dataSource" data-lib="WAF" data-source="Eleves" data-source-type="dataClass" data-dataType="string" data-autoLoad="true" name="WAF.config.datasources" data-scope="local" data-id="{id}eleves" content="eleves"/>
+    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Annees_Scolaires" data-scope="local" data-lib="WAF" data-id="{id}annees_Scolaires" data-dataType="string" data-autoLoad="true" content="annees_Scolaires"/>
+    <div id="{id}ListIns" data-type="dataGrid" data-selection-mode="single" data-readOnly="true" data-lib="WAF" data-label-position="top" data-label="Liste des inscrits" data-footer-text="item(s)" data-display-error="true" data-constraint-top="true" data-constraint-left="true" data-column="[{'sourceAttID':'Classe','colID':'Classe','width':'106','title':'Classe'},{'sourceAttID':'Filiere','colID':'Filiere','width':'80','title':'Filiere'},{'sourceAttID':'Eleve.Nom_Complet','colID':'Eleve_Nom_Complet','width':'167','title':'Eleve'}]" data-binding="{id}parcours_Scolaire" class="waf-widget waf-dataGrid"></div>
+		<div id="{id}ListEleves" data-type="dataGrid" data-lib="WAF" class="waf-widget waf-dataGrid" data-label="" data-label-position="top" data-selection-mode="single" data-display-error="true" data-footer-text="item(s)" data-column="[{'sourceAttID':'Nom_Complet','colID':'Nom_Complet','width':'150','title':'Nom_Complet'}]" data-constraint-left="true" data-constraint-top="true" data-binding="{id}eleves" data-readOnly="true" data-hideonload="true"></div>
+	<div id="{id}cbAnScol" data-type="combobox" data-limit="20" data-lib="WAF" data-label-position="left" data-label="Année scolaire : " data-editable="true" data-constraint-top="true" data-constraint-left="true" data-binding-options="[Annee_Scolaire] " data-binding-key="ID" data-binding="{id}annees_Scolaires" data-autoDispatch="true" class="waf-widget waf-combobox"><select><option value="">[Annee_Scolaire] </option></select></div>	<label id="{id}label1" data-type="label" data-lib="WAF" for="{id}cbAnScol" data-valign="middle" data-margin="5" class="waf-widget waf-label waf-label-combobox">Année scolaire : </label>
+		<label id="{id}label2" data-type="label" data-lib="WAF" for="{id}ListIns" data-valign="middle" data-margin="5" class="waf-widget waf-label waf-label-datagrid" data-constraint-left="true" data-constraint-top="true">Liste des inscrits</label>
+	</section>
