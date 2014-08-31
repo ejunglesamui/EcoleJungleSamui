@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem4 = {};	// @menuItem
 	var menuItem15 = {};	// @menuItem
 	var menuItem13 = {};	// @menuItem
 	var menuItem9 = {};	// @menuItem
@@ -15,6 +16,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem4.click = function menuItem4_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/Scolarite.waComponent");
+	};// @lock
 
 	menuItem15.click = function menuItem15_click (event)// @startlock
 	{// @endlock
@@ -103,6 +109,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem4", "click", menuItem4.click, "WAF");
 	WAF.addListener("menuItem15", "click", menuItem15.click, "WAF");
 	WAF.addListener("menuItem13", "click", menuItem13.click, "WAF");
 	WAF.addListener("menuItem9", "click", menuItem9.click, "WAF");

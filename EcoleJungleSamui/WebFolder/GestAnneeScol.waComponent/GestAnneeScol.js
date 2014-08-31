@@ -74,18 +74,18 @@ function constructor (id) {
 
 	sPerJ.slide = function sPerJ_slide (event)// @startlock
 	{// @endlock
-		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
-		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
-		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
-		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
+		$$('component1_cHjDeb').setValue(event.data.values[0]); 
+		$$('component1_cHjFin').setValue(event.data.values[1]); 
+		$$('component1_tDeb').setValue(convTime(event.data.values[0]));
+		$$('component1_tFin').setValue(convTime(event.data.values[1]));
 	};// @lock
 
 	sPerJ.slidechange = function sPerJ_slidechange (event)// @startlock
 	{// @endlock
-		$$('component1_cHjDeb').setValue($$('component1_sPerJ').getValue()[0]);
-		$$('component1_cHjFin').setValue($$('component1_sPerJ').getValue()[1]);
-		$$('component1_tDeb').setValue(convTime($$('component1_sPerJ').getValue()[0]));
-		$$('component1_tFin').setValue(convTime($$('component1_sPerJ').getValue()[1]));
+		$$('component1_cHjDeb').setValue(event.data.values[0]); 
+		$$('component1_cHjFin').setValue(event.data.values[1]); 
+		$$('component1_tDeb').setValue(convTime(event.data.values[0]));
+		$$('component1_tFin').setValue(convTime(event.data.values[1]));
 	};// @lock
 	
 	
