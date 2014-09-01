@@ -11,6 +11,7 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	this.load = function (data) {// @lock
+
 		
 	function SemNum(MaDate) {
 	
@@ -53,6 +54,8 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var ListChap = {};	// @dataGrid
+	var btSaveP = {};	// @button
 	var matieresEvent = {};	// @dataSource
 	var btUndoP = {};	// @button
 	var btNewP = {};	// @buttonImage
@@ -63,16 +66,53 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	ListChap.onRowDraw = function ListChap_onRowDraw (event)// @startlock
+	{// @endlock
+		var vAction = $$('component1_cAction').getValue();
+		
+		if (sources.component1_chapitres.ID !== null){
+			$$('component1_sPerS').enable();
+			$$('component1_sPerS').setValues([sources.component1_chapitres.sDeb,sources.component1_chapitres.sFin]);
+			if (vAction === "-") {
+		  		$$('component1_sPerS').disable();
+		  	}
+			
+		}
+	};// @lock
+
+	btSaveP.click = function btSaveP_click (event)// @startlock
+	{// @endlock
+		var vAction;
+		
+		vAction = $$('component1_cAction').getValue();
+		if (vAction === "Créer") {
+			$$('component1_cClasse').setValue($$('component1_cNClasse').getValue());
+			if ($$('component1_cCFil').getValue()) {
+				$$('component1_cFil').setValue($$('component1_cNFil').getValue());
+			} else {
+				$$('component1_cFil').setValue(" ");
+			}
+		}
+		
+		sources.component1_programme.save();
+		$$('component1').loadComponent("/GestProgramme.waComponent");
+		$$('component1_cAction').setValue("-");
+		
+	};// @lock
+
 	matieresEvent.onCurrentElementChange = function matieresEvent_onCurrentElementChange (event)// @startlock
 	{// @endlock
-		var  MatID , vAction;
+		var  MatID , vAction, vUser, AnScolID;
 		
 		MatID = sources.component1_programme.getAttributeValue("Matiere.ID");
 		vAction = $$('component1_cAction').getValue();
 		
 		if ((sources.component1_matieres.ID !== MatID) && ( vAction === "Créer" )) {
+			
 			sources.component1_programme.Matiere.set(sources.component1_matieres);
-			sources.component1_programme.serverRefresh();
+			sources.component1_programme.Professeur.set(sources.component1_utilisateurs);
+			sources.component1_programme.Annee_scolaire.set(sources.component1_annees_Scolaires);
+			//sources.component1_programme.serverRefresh();
 		}
 	};// @lock
 
@@ -159,9 +199,9 @@ function constructor (id) {
 	{// @endlock
 		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun;
 		
-		$$('component1_sPerS').addHandle(18);
+		$$('component1_sPerS').addHandle(91);
 		$$('component1_sPerS').disable();
-		$$('component1_sPerS').setValues([0,14]);
+		$$('component1_sPerS').setValues([70,91]);
 		$$('component1_cPlan').disable();
 		$$('component1_cCtrl').disable();
 		
@@ -169,7 +209,7 @@ function constructor (id) {
 		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
 		
 		vConv = $$("component1_cAnDeb").getValue();
-		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
 		vJour = vAnDeb.getDay();
 		
 		if (vJour === 0) {
@@ -183,26 +223,25 @@ function constructor (id) {
 				
 		vAnScol = $$("component1_cbAnScol").getValue();
 		$$("component1_cCtrl").disable();
-		vUser = WAF.directory.currentUser();
-		sources.component1_programme.query("Annee_Scolaire.ID = :1 and Professeur = :2 order by Matiere, Classe, Filiere", { onSuccess: function(event) { 
+		vUser = WAF.directory.currentUser().userName;
+		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
 		
-			//now = new Date();
-			//sources.component1_eleves.query("Utilisateur.Date_Entree < :1 AND (Utilisateur.Date_Sortie = null OR Utilisateur.Date_Sortie > :1) order by Nom_Complet", now, vAnScol);
-			//vConv = $$("component1_cAnDeb").getValue();
-			//vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
-			//vConv = $$("component1_cAnFin").getValue();
-			//vAnFin = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
-			//if ((now > vAnDeb) && (now < vAnFin)) {
-			//	$$("component1_btIns").show();
-			//} else {
-			//	$$("component1_btIns").hide();
-			//}
+			var vAnScol, vProf;
+			vProf = $$("component1_cProf").getValue();
+			vAnScol = $$("component1_cbAnScol").getValue();
+			sources.component1_programme.query("Annee_scolaire.ID = :1 and Professeur.ID = :2  order by Matiere, Classe, Filiere", { onSuccess: function(event) { 
 			
-			}, params:[vAnScol,vUser] }); 		
+					
+			}, params:[vAnScol,vProf] }); 		
+		
+		}, params:[vUser] });
+		
 		
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListChap", "onRowDraw", ListChap.onRowDraw, "WAF");
+	WAF.addListener(this.id + "_btSaveP", "click", btSaveP.click, "WAF");
 	WAF.addListener(this.id + "_matieres", "onCurrentElementChange", matieresEvent.onCurrentElementChange, "WAF");
 	WAF.addListener(this.id + "_btUndoP", "click", btUndoP.click, "WAF");
 	WAF.addListener(this.id + "_btNewP", "click", btNewP.click, "WAF");
