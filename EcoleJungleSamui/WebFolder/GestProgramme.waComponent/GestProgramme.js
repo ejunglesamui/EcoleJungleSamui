@@ -54,6 +54,13 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var btUpdC = {};	// @buttonImage
+	var btSupC = {};	// @buttonImage
+	var btSaveC = {};	// @button
+	var ListAbo = {};	// @dataGrid
+	var btUndoC = {};	// @button
+	var btNewC = {};	// @buttonImage
+	var btSupP = {};	// @buttonImage
 	var ListChap = {};	// @dataGrid
 	var btSaveP = {};	// @button
 	var matieresEvent = {};	// @dataSource
@@ -66,6 +73,106 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	btUpdC.click = function btUpdC_click (event)// @startlock
+	{// @endlock
+		$$('component1_ListPrgm').disable();
+		$$('component1_cbAnScol').disable();
+		$$('component1_ListChap').disable();
+		$$('component1_btNewP').hide();
+		$$('component1_btSupP').hide();
+		$$('component1_btSaveC').show();
+		$$('component1_btUndoC').show();
+		$$('component1_btNewC').hide();
+		$$('component1_btUpdC').hide();
+		$$('component1_btSupC').hide();
+		$$('component1_ListAbo').hide();
+		$$('component1_ListIns').hide();
+		
+		$$('component1_cChap').setReadOnly(false);
+		$$('component1_cOrdre').setReadOnly(false);
+		$$('component1_cPlan').enable();
+		$$('component1_cContenu').setReadOnly(false);
+		$$('component1_cCtrl').enable();
+		$$('component1_cDateCtrl').setReadOnly(false);
+		$$('component1_cComment').setReadOnly(false);
+				
+		$$('component1_cAction').setValue("Modifier");
+	};// @lock
+
+	btSupC.click = function btSupC_click (event)// @startlock
+	{// @endlock
+		var isok
+		
+		isok = confirm( "Voulez-vous vraiment supprimer ce chapitre ?");
+		
+		if (isok) {
+			sources.component1_chapitres.removeCurrent();
+		}
+	};// @lock
+
+	btSaveC.click = function btSaveC_click (event)// @startlock
+	{// @endlock
+		sources.component1_chapitres.save();
+		$$('component1').loadComponent("/GestProgramme.waComponent");
+		$$('component1_cAction').setValue("-");
+	};// @lock
+
+	ListAbo.onRowDraw = function ListAbo_onRowDraw (event)// @startlock
+	{// @endlock
+		var vAction = $$('component1_cAction').getValue();
+		
+		if (sources.component1_abonnes.ID !== null){
+			$$('component1_btSupC').disable();
+		} else {
+			$$('component1_btSupC').enable();
+		}
+	};// @lock
+
+	btUndoC.click = function btUndoC_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/GestProgramme.waComponent");
+		$$('component1_cAction').setValue("-");
+	};// @lock
+
+	btNewC.click = function btNewC_click (event)// @startlock
+	{// @endlock
+		sources.component1_chapitres.addNewElement();
+		
+		$$('component1_ListPrgm').disable();
+		$$('component1_cbAnScol').disable();
+		$$('component1_ListChap').disable();
+		$$('component1_btNewP').hide();
+		$$('component1_btSupP').hide();
+		$$('component1_btSaveC').show();
+		$$('component1_btUndoC').show();
+		$$('component1_btNewC').hide();
+		$$('component1_btUpdC').hide();
+		$$('component1_btSupC').hide();
+		$$('component1_ListAbo').hide();
+		$$('component1_ListIns').hide();
+		
+		$$('component1_cChap').setReadOnly(false);
+		$$('component1_cOrdre').setReadOnly(false);
+		$$('component1_cPlan').enable();
+		$$('component1_cContenu').setReadOnly(false);
+		$$('component1_cCtrl').enable();
+		$$('component1_cDateCtrl').setReadOnly(false);
+		$$('component1_cComment').setReadOnly(false);
+				
+		$$('component1_cAction').setValue("Créer");
+	};// @lock
+
+	btSupP.click = function btSupP_click (event)// @startlock
+	{// @endlock
+		var isok
+		
+		isok = confirm( "Voulez-vous vraiment supprimer ce programme ?");
+		
+		if (isok) {
+			sources.component1_programme.removeCurrent();
+		}
+	};// @lock
+
 	ListChap.onRowDraw = function ListChap_onRowDraw (event)// @startlock
 	{// @endlock
 		var vAction = $$('component1_cAction').getValue();
@@ -76,7 +183,10 @@ function constructor (id) {
 			if (vAction === "-") {
 		  		$$('component1_sPerS').disable();
 		  	}
+		  	$$('component1_btSupP').disable();
 			
+		} else {
+			$$('component1_btSupP').enable();
 		}
 	};// @lock
 
@@ -127,6 +237,7 @@ function constructor (id) {
 		sources.component1_programme.addNewElement();
 		
 		$$('component1_ListPrgm').disable();
+		$$('component1_cbAnScol').disable();
 		$$('component1_ListChap').hide();
 		$$('component1_cbMat').show();
 		$$('component1_cbClasse').show();
@@ -240,6 +351,13 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btUpdC", "click", btUpdC.click, "WAF");
+	WAF.addListener(this.id + "_btSupC", "click", btSupC.click, "WAF");
+	WAF.addListener(this.id + "_btSaveC", "click", btSaveC.click, "WAF");
+	WAF.addListener(this.id + "_ListAbo", "onRowDraw", ListAbo.onRowDraw, "WAF");
+	WAF.addListener(this.id + "_btUndoC", "click", btUndoC.click, "WAF");
+	WAF.addListener(this.id + "_btNewC", "click", btNewC.click, "WAF");
+	WAF.addListener(this.id + "_btSupP", "click", btSupP.click, "WAF");
 	WAF.addListener(this.id + "_ListChap", "onRowDraw", ListChap.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_btSaveP", "click", btSaveP.click, "WAF");
 	WAF.addListener(this.id + "_matieres", "onCurrentElementChange", matieresEvent.onCurrentElementChange, "WAF");
