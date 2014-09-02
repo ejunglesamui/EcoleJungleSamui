@@ -79,35 +79,43 @@ function constructor (id) {
 
 	btAddTous.click = function btAddTous_click (event)// @startlock
 	{// @endlock
-		var mySet, myInscrit, vIdIns, FindAbo, FindEle, newSet, newSet2, vId;
-
+		var myInscrits, nbInscrits, vIdIns, vIdAbo, myAbonnes, nbAbonnes, nbTrouve, inscrit, abonne, vFlag;
+		
 		$$('component1_cAction').setValue("AddUsr");
-		mySet = sources.component1_inscrits.getEntityCollection();
-		mySet.forEach(function(usr) {
-			myInscrit = usr.entity;
-			alert('entre dans boucle des inscrits');
-			vId = myInscrit.Eleve.getValue();
-			
-			vIdIns = 1;
-			FindAbo = sources.component1_abonnes.getEntityCollection();
-			FindAbo.query("eleve.ID = :1", { onSuccess: function(event) { 
-				newSet = event.entityCollection;
-				if(newSet.length === 0) {
-					alert('pas trouvé dans abonnés');
+		myInscrits = sources.component1_inscrits;
+		nbInscrits = myInscrits.length;
+		for (var i = 0; i < nbInscrits; i++) {
+			myInscrits.getElement(i, { onSuccess: function(event) {
+				inscrit = event.element;
+				vIdIns = inscrit.getAttributeValue("Eleve.ID");
+				//alert('traite inscrit '+vIdIns);
+				myAbonnes = sources.component1_abonnes;
+				nbAbonnes = myAbonnes.length;
+				vFlag = true;
+				for (var j = 0; j < nbAbonnes; j++) {
+					myAbonnes.getElement(j, { onSuccess: function(event) {
+						abonne = event.element;
+						vIdAbo = abonne.getAttributeValue("eleve.ID");
+						//alert('Compare Inscrit ' + vIdIns + ' avec abonné ' + vIdAbo);
+						if (vIdAbo === vIdIns) {
+							//alert ('Inscrit trouvé chez les abonnés');
+							vFlag = false;
+						}
+					}});
+				}
+				if (vFlag) {
 					sources.component1_eleves2.query("ID = :1", { onSuccess: function(event) { 
 						var vCount = sources.component1_eleves2.length;
 						if(vCount === 1) {
-							alert('trouvé chez les élèves');
 							sources.component1_abonnes.addNewElement();
 							sources.component1_abonnes.chapitre.set(sources.component1_chapitres);
 							sources.component1_abonnes.eleve.set(sources.component1_eleves2);
 							sources.component1_abonnes.save();
 						}
 					}, params:[vIdIns] });
-				}
-			}, params:[vIdIns] }); 		
-			
-		});
+				};
+		}});
+		};
 		
 	};// @lock
 
@@ -160,6 +168,10 @@ function constructor (id) {
 		$$('component1_cCtrl').enable();
 		$$('component1_cDateCtrl').setReadOnly(false);
 		$$('component1_cComment').setReadOnly(false);
+		$$('component1_btSuppAbo').hide();
+		$$('component1_btAddAbo').hide();
+		$$('component1_btAddTous').hide();
+		
 				
 		$$('component1_cAction').setValue("Modifier");
 	};// @lock
@@ -218,6 +230,9 @@ function constructor (id) {
 		$$('component1_ListAbo').hide();
 		$$('component1_ListIns').hide();
 		$$('component1_btSuppAbo').hide();
+		$$('component1_btSuppAbo').hide();
+		$$('component1_btAddAbo').hide();
+		$$('component1_btAddTous').hide();
 		
 		$$('component1_cChap').setReadOnly(false);
 		$$('component1_cOrdre').setReadOnly(false);
@@ -327,6 +342,8 @@ function constructor (id) {
 		$$('component1_ListAbo').hide();
 		$$('component1_ListIns').hide();
 		$$('component1_btSuppAbo').hide();
+		$$('component1_btAddAbo').hide();
+		$$('component1_btAddTous').hide();
 				
 		$$('component1_cAction').setValue("Créer");
 		
