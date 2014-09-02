@@ -54,6 +54,10 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var btAddTous = {};	// @buttonImage
+	var ListPrgm = {};	// @dataGrid
+	var btAddAbo = {};	// @buttonImage
+	var btSuppAbo = {};	// @buttonImage
 	var btUpdC = {};	// @buttonImage
 	var btSupC = {};	// @buttonImage
 	var btSaveC = {};	// @button
@@ -72,6 +76,67 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btAddTous.click = function btAddTous_click (event)// @startlock
+	{// @endlock
+		var mySet, myInscrit, vIdIns, FindAbo, FindEle, newSet, newSet2, vId;
+
+		$$('component1_cAction').setValue("AddUsr");
+		mySet = sources.component1_inscrits.getEntityCollection();
+		mySet.forEach(function(usr) {
+			myInscrit = usr.entity;
+			alert('entre dans boucle des inscrits');
+			vId = myInscrit.Eleve.getValue();
+			
+			vIdIns = 1;
+			FindAbo = sources.component1_abonnes.getEntityCollection();
+			FindAbo.query("eleve.ID = :1", { onSuccess: function(event) { 
+				newSet = event.entityCollection;
+				if(newSet.length === 0) {
+					alert('pas trouvé dans abonnés');
+					sources.component1_eleves2.query("ID = :1", { onSuccess: function(event) { 
+						var vCount = sources.component1_eleves2.length;
+						if(vCount === 1) {
+							alert('trouvé chez les élèves');
+							sources.component1_abonnes.addNewElement();
+							sources.component1_abonnes.chapitre.set(sources.component1_chapitres);
+							sources.component1_abonnes.eleve.set(sources.component1_eleves2);
+							sources.component1_abonnes.save();
+						}
+					}, params:[vIdIns] });
+				}
+			}, params:[vIdIns] }); 		
+			
+		});
+		
+	};// @lock
+
+	ListPrgm.onRowClick = function ListPrgm_onRowClick (event)// @startlock
+	{// @endlock
+		var vAnScol, vClasse, vFil, mySet;
+		
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vClasse = sources.component1_programme.getAttributeValue("Classe");
+		vFil = sources.component1_programme.getAttributeValue("Filiere");
+		sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+		
+	};// @lock
+
+	btAddAbo.click = function btAddAbo_click (event)// @startlock
+	{// @endlock
+		// Add your code here
+	};// @lock
+
+	btSuppAbo.click = function btSuppAbo_click (event)// @startlock
+	{// @endlock
+		var isok;
+		
+		isok = confirm( "Voulez-vous vraiment supprimer cet abonné à ce chapitre ? Tout le suivi existant pour cet abonné sur ce chapitre sera perdu.");
+		
+		if (isok) {
+			sources.component1_abonnes.removeCurrent();
+		}
+	};// @lock
 
 	btUpdC.click = function btUpdC_click (event)// @startlock
 	{// @endlock
@@ -123,8 +188,10 @@ function constructor (id) {
 		
 		if (sources.component1_abonnes.ID !== null){
 			$$('component1_btSupC').disable();
+			$$('component1_btSuppAbo').enable();
 		} else {
 			$$('component1_btSupC').enable();
+			$$('component1_btSuppAbo').disable();
 		}
 	};// @lock
 
@@ -150,6 +217,7 @@ function constructor (id) {
 		$$('component1_btSupC').hide();
 		$$('component1_ListAbo').hide();
 		$$('component1_ListIns').hide();
+		$$('component1_btSuppAbo').hide();
 		
 		$$('component1_cChap').setReadOnly(false);
 		$$('component1_cOrdre').setReadOnly(false);
@@ -258,6 +326,7 @@ function constructor (id) {
 		$$('component1_cComment').hide();
 		$$('component1_ListAbo').hide();
 		$$('component1_ListIns').hide();
+		$$('component1_btSuppAbo').hide();
 				
 		$$('component1_cAction').setValue("Créer");
 		
@@ -268,8 +337,8 @@ function constructor (id) {
 		$$('component1_cHjDeb').setValue(event.data.values[0]); 
 		$$('component1_cHjFin').setValue(event.data.values[1]); 
 		var vLun = $$('component1_cLun').getValue();
-		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.values[0]));
-		$$('component1_tSemFin').setValue(addDaysToDate(vLun,event.data.values[1]-3));
+		$$('component1_tSemDeb').setValue("Lun. "+addDaysToDate(vLun,event.data.values[0]));
+		$$('component1_tSemFin').setValue("Ven. "+addDaysToDate(vLun,event.data.values[1]-3));
 		$$('component1_cDeb').setValue(addDaysToDate(vLun,event.data.values[0]));
 		$$('component1_cFin').setValue(addDaysToDate(vLun,event.data.values[1]-3));
 		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[0])));
@@ -281,8 +350,8 @@ function constructor (id) {
 		$$('component1_cHjDeb').setValue(event.data.values[0]); 
 		$$('component1_cHjFin').setValue(event.data.values[1]); 
 		var vLun = $$('component1_cLun').getValue();
-		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.values[0]));
-		$$('component1_tSemFin').setValue(addDaysToDate(vLun,event.data.values[1]-3));
+		$$('component1_tSemDeb').setValue("Lun. "+addDaysToDate(vLun,event.data.values[0]));
+		$$('component1_tSemFin').setValue("Ven. "+addDaysToDate(vLun,event.data.values[1]-3));
 		$$('component1_cDeb').setValue(addDaysToDate(vLun,event.data.values[0]));
 		$$('component1_cFin').setValue(addDaysToDate(vLun,event.data.values[1]-3));
 		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[0])));
@@ -351,6 +420,10 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btAddTous", "click", btAddTous.click, "WAF");
+	WAF.addListener(this.id + "_ListPrgm", "onRowClick", ListPrgm.onRowClick, "WAF");
+	WAF.addListener(this.id + "_btAddAbo", "click", btAddAbo.click, "WAF");
+	WAF.addListener(this.id + "_btSuppAbo", "click", btSuppAbo.click, "WAF");
 	WAF.addListener(this.id + "_btUpdC", "click", btUpdC.click, "WAF");
 	WAF.addListener(this.id + "_btSupC", "click", btSupC.click, "WAF");
 	WAF.addListener(this.id + "_btSaveC", "click", btSaveC.click, "WAF");
