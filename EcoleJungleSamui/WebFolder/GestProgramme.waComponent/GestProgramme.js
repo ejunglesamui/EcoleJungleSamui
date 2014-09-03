@@ -54,6 +54,7 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var btAddFull = {};	// @buttonImage
 	var btAddTous = {};	// @buttonImage
 	var ListPrgm = {};	// @dataGrid
 	var btAddAbo = {};	// @buttonImage
@@ -76,6 +77,54 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btAddFull.click = function btAddFull_click (event)// @startlock
+	{// @endlock
+		
+		var myChapitres, nbChapitres, myInscrits, nbInscrits, vIdIns, vIdAbo, myAbonnes, nbAbonnes, nbTrouve, chapitre, inscrit, abonne, vFlag, chapID, mySet, nbAbos;
+		
+		$$('component1_cAction').setValue("AddFull");
+		//$$('component1_ListChap').disable();
+		myChapitres = sources.component1_chapitres;
+		nbChapitres = myChapitres.length;
+		for (var k = 0; k < nbChapitres; k++) {
+			myChapitres.getElement(k, { onSuccess: function(event) {
+				chapitre = event.element;
+				alert('traite le chapitre : ' + chapitre.Chapitre + ' ' + chapitre.ID);
+				chapID = chapitre.ID;
+				myInscrits = sources.component1_inscrits;
+				nbInscrits = myInscrits.length;
+				for (var i = 0; i < nbInscrits; i++) {
+					myInscrits.getElement(i, { onSuccess: function(event) {
+						inscrit = event.element;
+						vIdIns = inscrit.getAttributeValue("Eleve.ID");
+						alert('traite inscrit '+vIdIns);
+						ds.Abonne.query("chapitre.ID = :1", { onSuccess: function(event) { 
+							myAbos = event.entityCollection;
+							nbAbos = myAbos.length;
+							
+							
+							alert('Nombre abonnés pour le chapitre ' + ' : '+nbAbos);
+						}, params:[chapID] });
+					}});
+				};
+				
+			}});
+		}
+		
+		$$('component1_ListChap').enable();
+		$$('component1_ListChap').setReadOnly(true);
+	};// @lock
+
+	btAddTous.mouseout = function btAddTous_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cH1').hide();
+	};// @lock
+
+	btAddTous.mouseover = function btAddTous_mouseover (event)// @startlock
+	{// @endlock
+		$$('component1_cH1').show();
+	};// @lock
 
 	btAddTous.click = function btAddTous_click (event)// @startlock
 	{// @endlock
@@ -119,6 +168,17 @@ function constructor (id) {
 		
 	};// @lock
 
+	ListPrgm.onRowDraw = function ListPrgm_onRowDraw (event)// @startlock
+	{// @endlock
+		if (sources.component1_programme.ID !== null && event.row.rowNumber === 0){
+		
+			vAnScol = $$("component1_cbAnScol").getValue();
+			vClasse = sources.component1_programme.getAttributeValue("Classe");
+			vFil = sources.component1_programme.getAttributeValue("Filiere");
+			sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+		}
+	};// @lock
+
 	ListPrgm.onRowClick = function ListPrgm_onRowClick (event)// @startlock
 	{// @endlock
 		var vAnScol, vClasse, vFil, mySet;
@@ -132,7 +192,47 @@ function constructor (id) {
 
 	btAddAbo.click = function btAddAbo_click (event)// @startlock
 	{// @endlock
-		// Add your code here
+		var myInscrits, nbInscrits, vIdIns, vIdAbo, myAbonnes, nbAbonnes, nbTrouve, inscrit, abonne, vFlag;
+		
+		$$('component1_cAction').setValue("AddUsr");
+		myInscrits = sources.component1_inscrits;
+		vIdIns = myInscrits.getAttributeValue("Eleve.ID");
+		//alert('traite inscrit '+vIdIns);
+		myAbonnes = sources.component1_abonnes;
+		nbAbonnes = myAbonnes.length;
+		vFlag = true;
+		for (var j = 0; j < nbAbonnes; j++) {
+			myAbonnes.getElement(j, { onSuccess: function(event) {
+				abonne = event.element;
+				vIdAbo = abonne.getAttributeValue("eleve.ID");
+				//alert('Compare Inscrit ' + vIdIns + ' avec abonné ' + vIdAbo);
+				if (vIdAbo === vIdIns) {
+					//alert ('Inscrit trouvé chez les abonnés');
+					vFlag = false;
+				}
+			}});
+		}
+		if (vFlag) {
+			sources.component1_eleves2.query("ID = :1", { onSuccess: function(event) { 
+				var vCount = sources.component1_eleves2.length;
+				if(vCount === 1) {
+					sources.component1_abonnes.addNewElement();
+					sources.component1_abonnes.chapitre.set(sources.component1_chapitres);
+					sources.component1_abonnes.eleve.set(sources.component1_eleves2);
+					sources.component1_abonnes.save();
+				}
+			}, params:[vIdIns] });
+		};
+	};// @lock
+
+	btSuppAbo.mouseout = function btSuppAbo_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cH2').hide();
+	};// @lock
+
+	btSuppAbo.mouseover = function btSuppAbo_mouseover (event)// @startlock
+	{// @endlock
+		$$('component1_cH2').show();
 	};// @lock
 
 	btSuppAbo.click = function btSuppAbo_click (event)// @startlock
@@ -144,6 +244,16 @@ function constructor (id) {
 		if (isok) {
 			sources.component1_abonnes.removeCurrent();
 		}
+	};// @lock
+
+	btUpdC.mouseout = function btUpdC_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cH4').hide();
+	};// @lock
+
+	btUpdC.mouseover = function btUpdC_mouseover (event)// @startlock
+	{// @endlock
+		$$('component1_cH4').show();
 	};// @lock
 
 	btUpdC.click = function btUpdC_click (event)// @startlock
@@ -176,6 +286,16 @@ function constructor (id) {
 		$$('component1_cAction').setValue("Modifier");
 	};// @lock
 
+	btSupC.mouseout = function btSupC_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cH3').hide();
+	};// @lock
+
+	btSupC.mouseover = function btSupC_mouseover (event)// @startlock
+	{// @endlock
+		$$('component1_cH3').show();
+	};// @lock
+
 	btSupC.click = function btSupC_click (event)// @startlock
 	{// @endlock
 		var isok
@@ -198,7 +318,7 @@ function constructor (id) {
 	{// @endlock
 		var vAction = $$('component1_cAction').getValue();
 		
-		if (sources.component1_abonnes.ID !== null){
+		if (sources.component1_abonnes.ID !== null && event.row.rowNumber === 0){
 			$$('component1_btSupC').disable();
 			$$('component1_btSuppAbo').enable();
 		} else {
@@ -260,7 +380,7 @@ function constructor (id) {
 	{// @endlock
 		var vAction = $$('component1_cAction').getValue();
 		
-		if (sources.component1_chapitres.ID !== null){
+		if (sources.component1_chapitres.ID !== null ){
 			$$('component1_sPerS').enable();
 			$$('component1_sPerS').setValues([sources.component1_chapitres.sDeb,sources.component1_chapitres.sFin]);
 			if (vAction === "-") {
@@ -437,6 +557,16 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btUpdC", "mouseout", btUpdC.mouseout, "WAF");
+	WAF.addListener(this.id + "_btUpdC", "mouseover", btUpdC.mouseover, "WAF");
+	WAF.addListener(this.id + "_btSupC", "mouseout", btSupC.mouseout, "WAF");
+	WAF.addListener(this.id + "_btSupC", "mouseover", btSupC.mouseover, "WAF");
+	WAF.addListener(this.id + "_btSuppAbo", "mouseout", btSuppAbo.mouseout, "WAF");
+	WAF.addListener(this.id + "_btSuppAbo", "mouseover", btSuppAbo.mouseover, "WAF");
+	WAF.addListener(this.id + "_btAddTous", "mouseout", btAddTous.mouseout, "WAF");
+	WAF.addListener(this.id + "_btAddTous", "mouseover", btAddTous.mouseover, "WAF");
+	WAF.addListener(this.id + "_btAddFull", "click", btAddFull.click, "WAF");
+	WAF.addListener(this.id + "_ListPrgm", "onRowDraw", ListPrgm.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_btAddTous", "click", btAddTous.click, "WAF");
 	WAF.addListener(this.id + "_ListPrgm", "onRowClick", ListPrgm.onRowClick, "WAF");
 	WAF.addListener(this.id + "_btAddAbo", "click", btAddAbo.click, "WAF");
