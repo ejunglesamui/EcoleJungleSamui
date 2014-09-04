@@ -159,12 +159,17 @@ function constructor (id) {
 							sources.component1_abonnes.addNewElement();
 							sources.component1_abonnes.chapitre.set(sources.component1_chapitres);
 							sources.component1_abonnes.eleve.set(sources.component1_eleves2);
+							sources.component1_abonnes.avancement = "0";
 							sources.component1_abonnes.save();
 						}
 					}, params:[vIdIns] });
 				};
 		}});
 		};
+		
+		$$('component1_btSupC').disable();
+		$$('component1_btSuppAbo').enable();
+		
 		
 	};// @lock
 
@@ -223,6 +228,10 @@ function constructor (id) {
 				}
 			}, params:[vIdIns] });
 		};
+		
+		$$('component1_btSupC').disable();
+		$$('component1_btSuppAbo').enable();
+				
 	};// @lock
 
 	btSuppAbo.mouseout = function btSuppAbo_mouseout (event)// @startlock
@@ -312,6 +321,19 @@ function constructor (id) {
 		sources.component1_chapitres.save();
 		$$('component1').loadComponent("/GestProgramme.waComponent");
 		$$('component1_cAction').setValue("-");
+	};// @lock
+
+	ListAbo.onRowClick = function ListAbo_onRowClick (event)// @startlock
+	{// @endlock
+		var vAction = $$('component1_cAction').getValue();
+		
+		if (sources.component1_abonnes.ID !== null ){
+			$$('component1_btSupC').disable();
+			$$('component1_btSuppAbo').enable();
+		} else {
+			$$('component1_btSupC').enable();
+			$$('component1_btSuppAbo').disable();
+		}
 	};// @lock
 
 	ListAbo.onRowDraw = function ListAbo_onRowDraw (event)// @startlock
@@ -557,6 +579,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListAbo", "onRowClick", ListAbo.onRowClick, "WAF");
 	WAF.addListener(this.id + "_btUpdC", "mouseout", btUpdC.mouseout, "WAF");
 	WAF.addListener(this.id + "_btUpdC", "mouseover", btUpdC.mouseover, "WAF");
 	WAF.addListener(this.id + "_btSupC", "mouseout", btSupC.mouseout, "WAF");

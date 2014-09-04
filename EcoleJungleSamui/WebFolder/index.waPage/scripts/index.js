@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem14 = {};	// @menuItem
 	var menuItem2 = {};	// @menuItem
 	var menuItem4 = {};	// @menuItem
 	var menuItem15 = {};	// @menuItem
@@ -17,6 +18,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem14.click = function menuItem14_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/SuiviPlanning.waComponent");	
+	};// @lock
 
 	menuItem2.click = function menuItem2_click (event)// @startlock
 	{// @endlock
@@ -115,6 +121,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem14", "click", menuItem14.click, "WAF");
 	WAF.addListener("menuItem2", "click", menuItem2.click, "WAF");
 	WAF.addListener("menuItem4", "click", menuItem4.click, "WAF");
 	WAF.addListener("menuItem15", "click", menuItem15.click, "WAF");

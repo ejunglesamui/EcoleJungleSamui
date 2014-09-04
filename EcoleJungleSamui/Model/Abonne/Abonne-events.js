@@ -1,0 +1,1 @@
+﻿model.Abonne.events.onSave = function() {	this.UID_MAJ = currentUser().fullName;	this.Derniere_MAJ = new Date();};
