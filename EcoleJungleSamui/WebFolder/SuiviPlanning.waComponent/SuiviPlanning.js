@@ -53,6 +53,25 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var icon20 = {};	// @icon
+	var icon19 = {};	// @icon
+	var icon18 = {};	// @icon
+	var icon17 = {};	// @icon
+	var icon16 = {};	// @icon
+	var icon15 = {};	// @icon
+	var icon14 = {};	// @icon
+	var icon13 = {};	// @icon
+	var icon12 = {};	// @icon
+	var icon11 = {};	// @icon
+	var icon10 = {};	// @icon
+	var icon9 = {};	// @icon
+	var icon8 = {};	// @icon
+	var icon7 = {};	// @icon
+	var icon6 = {};	// @icon
+	var icon5 = {};	// @icon
+	var icon4 = {};	// @icon
+	var icon3 = {};	// @icon
+	var icon2 = {};	// @icon
 	var icon1 = {};	// @icon
 	var ListAbo = {};	// @dataGrid
 	var ListPrgm = {};	// @dataGrid
@@ -63,19 +82,383 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	icon20.mouseout = function icon20_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon20.mouseover = function icon20_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(19, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,453);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon19.mouseout = function icon19_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon19.mouseover = function icon19_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(18, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,431);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon18.mouseout = function icon18_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon18.mouseover = function icon18_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(17, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,409);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon17.mouseout = function icon17_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon17.mouseover = function icon17_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(16, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,387);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon16.mouseout = function icon16_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon16.mouseover = function icon16_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(15, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,365);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon15.mouseout = function icon15_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon15.mouseover = function icon15_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(14, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,343);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon14.mouseout = function icon14_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon14.mouseover = function icon14_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(13, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,321);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon13.mouseout = function icon13_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon13.mouseover = function icon13_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(12, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,299);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon12.mouseout = function icon12_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon12.mouseover = function icon12_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(11, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,277);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon11.mouseout = function icon11_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon11.mouseover = function icon11_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(10, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,255);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon10.mouseout = function icon10_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon10.mouseover = function icon10_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(9, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,233);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon9.mouseout = function icon9_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon9.mouseover = function icon9_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(8, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,211);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon8.mouseout = function icon8_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon8.mouseover = function icon8_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(7, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,189);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon7.mouseout = function icon7_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon7.mouseover = function icon7_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(6, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,167);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon6.mouseout = function icon6_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon6.mouseover = function icon6_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(5, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,145);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon5.mouseout = function icon5_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon5.mouseover = function icon5_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(4, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,123);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon4.mouseout = function icon4_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon4.mouseover = function icon4_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(3, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,101);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon3.mouseout = function icon3_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon3.mouseover = function icon3_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(2, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,79);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
+	icon2.mouseout = function icon2_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	icon2.mouseover = function icon2_mouseover (event)// @startlock
+	{// @endlock
+		var abo;
+		abo = sources.component1_abonnes;		
+		abo.getElement(1, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cCom').move(1142,57);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();
+		}});
+	};// @lock
+
 	icon1.mouseout = function icon1_mouseout (event)// @startlock
 	{// @endlock
-		$$('component1_cHelp').hide();
+		$$('component1_cCom').hide();
 	};// @lock
 
 	icon1.mouseover = function icon1_mouseover (event)// @startlock
 	{// @endlock
-		var abo = sources.component1_abonnes;		
+		var abo, eleveID;
+		abo = sources.component1_abonnes;		
 		abo.getElement(0, { onSuccess: function(event) {
 			var elem = event.element;
-			$$('component1_cHelp').move(1195,35);
+			$$('component1_cCom').move(1142,35);
 			$$('component1_cHelp').setValue(elem.commentaire);
-			$$('component1_cHelp').show();
+			eleveID = elem.getAttributeValue("eleve.ID");
+			sources.component1_eleves.query("ID = :1", {params:[eleveID]}); 
+			$$('component1_cCom').show();		
 		}});
 	};// @lock
 
@@ -247,6 +630,44 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_icon20", "mouseout", icon20.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon19", "mouseout", icon19.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon18", "mouseout", icon18.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon17", "mouseout", icon17.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon16", "mouseout", icon16.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon15", "mouseout", icon15.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon14", "mouseout", icon14.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon13", "mouseout", icon13.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon12", "mouseout", icon12.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon11", "mouseout", icon11.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon10", "mouseout", icon10.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon9", "mouseout", icon9.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon8", "mouseout", icon8.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon7", "mouseout", icon7.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon6", "mouseout", icon6.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon5", "mouseout", icon5.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon4", "mouseout", icon4.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon3", "mouseout", icon3.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon20", "mouseover", icon20.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon19", "mouseover", icon19.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon18", "mouseover", icon18.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon17", "mouseover", icon17.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon16", "mouseover", icon16.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon15", "mouseover", icon15.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon14", "mouseover", icon14.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon13", "mouseover", icon13.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon12", "mouseover", icon12.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon11", "mouseover", icon11.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon10", "mouseover", icon10.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon9", "mouseover", icon9.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon8", "mouseover", icon8.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon7", "mouseover", icon7.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon6", "mouseover", icon6.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon5", "mouseover", icon5.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon4", "mouseover", icon4.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon3", "mouseover", icon3.mouseover, "WAF");
+	WAF.addListener(this.id + "_icon2", "mouseout", icon2.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon2", "mouseover", icon2.mouseover, "WAF");
 	WAF.addListener(this.id + "_icon1", "mouseout", icon1.mouseout, "WAF");
 	WAF.addListener(this.id + "_icon1", "mouseover", icon1.mouseover, "WAF");
 	WAF.addListener(this.id + "_ListAbo", "onRowDraw", ListAbo.onRowDraw, "WAF");
