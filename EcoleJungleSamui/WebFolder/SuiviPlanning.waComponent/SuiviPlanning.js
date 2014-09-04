@@ -53,6 +53,7 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var icon1 = {};	// @icon
 	var ListAbo = {};	// @dataGrid
 	var ListPrgm = {};	// @dataGrid
 	var sPerS = {};	// @slider
@@ -61,6 +62,22 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	icon1.mouseout = function icon1_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cHelp').hide();
+	};// @lock
+
+	icon1.mouseover = function icon1_mouseover (event)// @startlock
+	{// @endlock
+		var abo = sources.component1_abonnes;		
+		abo.getElement(0, { onSuccess: function(event) {
+			var elem = event.element;
+			$$('component1_cHelp').move(1195,35);
+			$$('component1_cHelp').setValue(elem.commentaire);
+			$$('component1_cHelp').show();
+		}});
+	};// @lock
 
 	ListAbo.onRowDraw = function ListAbo_onRowDraw (event)// @startlock
 	{// @endlock
@@ -230,6 +247,8 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_icon1", "mouseout", icon1.mouseout, "WAF");
+	WAF.addListener(this.id + "_icon1", "mouseover", icon1.mouseover, "WAF");
 	WAF.addListener(this.id + "_ListAbo", "onRowDraw", ListAbo.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_ListPrgm", "onRowClick", ListPrgm.onRowClick, "WAF");
 	WAF.addListener(this.id + "_ListChap", "onRowClick", ListChap.onRowClick, "WAF");
