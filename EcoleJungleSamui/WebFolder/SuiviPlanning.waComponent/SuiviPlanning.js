@@ -501,6 +501,13 @@ function constructor (id) {
 				$$(v).setValue("-");
 			}
 			$$(v).show();
+			v = "component1_maj"+j;
+			if (elem.Derniere_MAJ !== null) {
+				$$(v).setValue(elem.Derniere_MAJ);
+			} else {
+				$$(v).setValue("-");
+			}
+			$$(v).show();
           }
 	};// @lock
 
@@ -576,20 +583,38 @@ function constructor (id) {
 
 	ListChap.onRowDraw = function ListChap_onRowDraw (event)// @startlock
 	{// @endlock
-		var vAction = $$('component1_cAction').getValue();
+		var vAction, vDeb, vFin, vToday;
+		vAction = $$('component1_cAction').getValue();
 		
 		if (sources.component1_chapitres.ID !== null ){
 			$$('component1_sPerS').enable();
-			$$('component1_sPerS').setValues([sources.component1_chapitres.sDeb,sources.component1_chapitres.sFin]);
-			if (vAction === "-") {
-		  		$$('component1_sPerS').disable();
-		  	}
+			vDeb = sources.component1_chapitres.sDeb;
+			vFin = sources.component1_chapitres.sFin;
+			vToday = $$('component1_sToday').getValue();
+			$$('component1_sPerS').setValues([vDeb,vFin]);
+			$$('component1_sPerS').disable();
+			if ( vToday > vDeb && vToday < vFin) {
+				$$('component1_cvert').show();
+				$$('component1_crouge').hide();
+				$$('component1_cgris').hide();
+			} else {
+				if (vToday < vDeb) {
+					$$('component1_cvert').hide();
+					$$('component1_crouge').hide();
+					$$('component1_cgris').show();
+				} else {
+					$$('component1_cvert').hide();
+					$$('component1_crouge').show();
+					$$('component1_cgris').hide();
+				}
+			}
+			
 		}
 	};// @lock
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
-		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun;
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, diff = {};
 		
 		$$('component1_sPerS').addHandle(91);
 		$$('component1_sPerS').disable();
@@ -610,7 +635,19 @@ function constructor (id) {
 		}
 		
 		vLunSem = addDaysToDate(vConv,aJour);
-		$$("component1_cLun").setValue(vLunSem);
+		vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
+		vToday = new Date();
+		tmp = vToday - vStart;
+		tmp = Math.floor(tmp/1000);
+		diff.sec = tmp % 60; 
+		tmp = Math.floor((tmp-diff.sec)/60);
+		diff.min = tmp % 60;
+		tmp = Math.floor((tmp-diff.min)/60);
+		diff.hour = tmp % 24;
+		tmp = Math.floor((tmp-diff.hour)/24);
+    	diff.day = tmp;
+    	$$("component1_cLun").setValue(vLunSem);
+    	$$("component1_sToday").setValue(tmp);
 				
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vUser = WAF.directory.currentUser().userName;
