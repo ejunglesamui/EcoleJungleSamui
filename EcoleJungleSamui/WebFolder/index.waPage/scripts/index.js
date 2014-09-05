@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem16 = {};	// @menuItem
 	var menuItem14 = {};	// @menuItem
 	var menuItem2 = {};	// @menuItem
 	var menuItem4 = {};	// @menuItem
@@ -18,6 +19,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem16.click = function menuItem16_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/EmploiduTemps.waComponent");
+	};// @lock
 
 	menuItem14.click = function menuItem14_click (event)// @startlock
 	{// @endlock
@@ -121,6 +127,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem16", "click", menuItem16.click, "WAF");
 	WAF.addListener("menuItem14", "click", menuItem14.click, "WAF");
 	WAF.addListener("menuItem2", "click", menuItem2.click, "WAF");
 	WAF.addListener("menuItem4", "click", menuItem4.click, "WAF");

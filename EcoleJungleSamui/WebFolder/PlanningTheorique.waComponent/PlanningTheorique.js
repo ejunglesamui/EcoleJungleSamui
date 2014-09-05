@@ -171,8 +171,9 @@ function constructor (id) {
 	matieresEvent.onCurrentElementChange = function matieresEvent_onCurrentElementChange (event)// @startlock
 	{// @endlock
 		var  MatID = sources.component1_Taches1.getAttributeValue("Matiere.ID");
-
-		if (sources.component1_matieres.ID !== MatID) {
+		vAction = $$('component1_cAction').getValue();
+		
+		if ((vAction = 'Créer') || (vAction = 'Modifier')) {
 			sources.component1_Taches1.Matiere.set(sources.component1_matieres);
 			sources.component1_Taches1.serverRefresh();
 		}
@@ -190,13 +191,16 @@ function constructor (id) {
 
 	sallesEvent.onCurrentElementChange = function sallesEvent_onCurrentElementChange (event)// @startlock
 	{// @endlock
-		var  SalleID, vAction;
+		var  SalleID, vAction, elem;
+		
 		
 		SalleID = sources.component1_Taches1.getAttributeValue("Salle.ID");
-				
-		if (sources.component1_salles.ID !== SalleID) {
+		vAction = $$('component1_cAction').getValue();
+		
+		if ((vAction = 'Créer') || (vAction = 'Modifier')) {
 			sources.component1_Taches1.Salle.set(sources.component1_salles);
 			sources.component1_Taches1.serverRefresh();
+			
 		}
 	};// @lock
 
@@ -254,9 +258,11 @@ function constructor (id) {
 		sources.component1_Taches1.addNewElement();
 		$$('component1_ccJour').setValue($$('component1_cbJour').getValue());
 		
-		$$('component1_cbMat').setValue("");
+		//$$('component1_cbMat').setValue("");
 		$$('component1_cbProf').setValue(null);
-		$$('component1_cbSalle').setValue("");
+		//$$('component1_cbSalle').setValue("");
+		sources.component1_salles.query("Nom != null order by Nom");
+		sources.component1_matieres.query("Nom != null order by Nom");
 		$$('component1_cbTypS').setValue("");
 		
 		$$("component1_btCreer").hide();
