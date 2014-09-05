@@ -79,12 +79,13 @@ function constructor (id) {
 
 	ListTask.onRowDraw = function ListTask_onRowDraw (event)// @startlock
 	{// @endlock
-		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX;
+		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI;
 		elem = event.element;
 		
 		if (elem !== null) {
 			vType = elem.semaineType;
-			if ((vType === 'Permanent')) {
+			vSemPI = $$('component1_cSemPI').getValue();
+			if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
 				j = event.row.rowNumber;
 				v = "component1_vN"+j;
 				switch (elem.jourS) {
@@ -95,13 +96,13 @@ function constructor (id) {
 						vRefg = 576;
 						break;
 					case 'Mercredi':
-						vRefg = 618;
+						vRefg = 718;
 						break;
 					case 'Jeudi':
-						vRefg = 740;
+						vRefg = 860;
 						break;
 					case 'Vendredi':
-						vRefg = 802;
+						vRefg = 1002;
 						break;
 					}
 				vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
@@ -120,6 +121,7 @@ function constructor (id) {
 				} else {
 					vTxt = vTxt + vSalle;
 				}
+				//alert(vCoul);
 				$$(v).setBackgroundColor(vCoul);
 				$$(v).resize(vLarge,vTaille);
 				$$(v).move(vPosx,vPosy);
@@ -139,27 +141,108 @@ function constructor (id) {
 		}
 	};// @lock
 
+	sPerS.slidestop = function sPerS_slidestop (event)// @startlock
+	{// @endlock
+		var vTaches, nb;
+		
+		for (var i = 0; i < 51; i++) {
+			v = "component1_vN"+i;
+			$$(v).hide();
+		}
+			
+		vTaches = sources.component1_Taches;
+		nb = vTaches.length; 
+       	for (var j = 0; j < nb; j++) {
+        	vTaches.getElement(j, { onSuccess: function(event) {
+        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI;
+            	elem = event.element;
+            	vType = elem.semaineType;
+				vSemPI = $$('component1_cSemPI').getValue();
+				if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+            		v = "component1_vN"+j;
+					switch (elem.jourS) {
+						case 'Lundi':
+							vRefg = 434;
+							break;
+						case 'Mardi':
+							vRefg = 576;
+							break;
+						case 'Mercredi':
+							vRefg = 718;
+							break;
+						case 'Jeudi':
+							vRefg = 860;
+							break;
+						case 'Vendredi':
+							vRefg = 1002;
+							break;
+						}
+					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+					vPosy = 83+11*(elem.hDeb-32);
+					vTaille = (11*(elem.hFin-elem.hDeb))-1;
+					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+					vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+					vCoul = elem.getAttributeValue("Matiere.CoulCode");
+					vSalle = elem.getAttributeValue("Salle.Nom");
+					vType = elem.semaineType;
+					vLarge = 140;
+					vPosx = vRefg;
+					vTxt = vTxt + vLibH + "\n";
+					if (vSalle === null) {
+						vTxt = vTxt + "-";
+					} else {
+						vTxt = vTxt + vSalle;
+					}
+					$$(v).setBackgroundColor(vCoul);
+					$$(v).resize(vLarge,vTaille);
+					$$(v).move(vPosx,vPosy);
+					$$(v).setValue(vTxt);
+					$$(v).show();
+				}
+        	}});
+    	}
+		
+	};// @lock
+
 	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
 	{// @endlock
-		var vLun = $$('component1_cLun').getValue();
+		var vLun, vSem;
+		vLun = $$('component1_cLun').getValue();
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
 		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
 		$$('component1_tS3').setValue(addDaysToDate(vLun,event.data.value+3));
 		$$('component1_tS4').setValue(addDaysToDate(vLun,event.data.value+4));
 		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
+		vSem = SemNum(addDaysToDate(vLun,event.data.value));
+		vSem = (vSem/2)-parseInt(vSem/2,10);
+		if (vSem === 0) {
+			$$('component1_cSemPI').setValue("Paire");
+		} else {
+			$$('component1_cSemPI').setValue("Impaire");
+		}
+		
 		//$$('component1_tSNumFin').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[1]-3)));
 	};// @lock
 
 	sPerS.slide = function sPerS_slide (event)// @startlock
 	{// @endlock
-		var vLun = $$('component1_cLun').getValue();
+		var vLun, vSem;
+		vLun = $$('component1_cLun').getValue();
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
 		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
 		$$('component1_tS3').setValue(addDaysToDate(vLun,event.data.value+3));
 		$$('component1_tS4').setValue(addDaysToDate(vLun,event.data.value+4));
 		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
+		vSem = SemNum(addDaysToDate(vLun,event.data.value));
+		vSem = (vSem/2)-parseInt(vSem/2,10);
+		if (vSem === 0) {
+			$$('component1_cSemPI').setValue("Paire");
+		} else {
+			$$('component1_cSemPI').setValue("Impaire");
+		}
+		
 		//$$('component1_tSNumFin').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[1]-3)));
 	};// @lock
 
@@ -213,6 +296,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_sPerS", "slidestop", sPerS.slidestop, "WAF");
 	WAF.addListener(this.id + "_ListTask", "onRowDraw", ListTask.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_ListClass", "onRowClick", ListClass.onRowClick, "WAF");
 	WAF.addListener(this.id + "_sPerS", "slidechange", sPerS.slidechange, "WAF");
