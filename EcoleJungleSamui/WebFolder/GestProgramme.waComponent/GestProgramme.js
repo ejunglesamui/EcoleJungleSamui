@@ -180,7 +180,11 @@ function constructor (id) {
 			vAnScol = $$("component1_cbAnScol").getValue();
 			vClasse = sources.component1_programme.getAttributeValue("Classe");
 			vFil = sources.component1_programme.getAttributeValue("Filiere");
-			sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+			if (vFil = '* (toutes)') {
+				sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  order by Eleve.Nom_Complet", vAnScol, vClasse);
+			} else {
+				sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+			}
 		}
 	};// @lock
 
@@ -191,7 +195,11 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_programme.getAttributeValue("Classe");
 		vFil = sources.component1_programme.getAttributeValue("Filiere");
-		sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+		if (vFil = '* (toutes)') {
+			sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  order by Eleve.Nom_Complet", vAnScol, vClasse);
+		} else {
+			sources.component1_inscrits.query("Annee_Scolaire.ID = :1 and Classe = :2  and Filiere = :3 order by Eleve.Nom_Complet", vAnScol, vClasse, vFil);
+		}
 		
 	};// @lock
 
