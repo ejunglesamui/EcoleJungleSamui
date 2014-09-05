@@ -74,14 +74,39 @@ function constructor (id) {
 		v = "component1_vN"+ind;
 		boxPos = $$(v).getPosition();
 		$$('component1_cChaps').move(boxPos.left+70, boxPos.top + 22);
-		vTaches = sources.component1_Taches
+		$$('component1_cChap1').setValue(" ");
+		$$('component1_cChap2').setValue(" ");
+		$$('component1_cChap3').setValue(" ");
+		$$('component1_cChap4').setValue(" ");
+		$$('component1_cChap5').setValue(" ");
+		vTaches = sources.component1_Taches;
 		vTaches.getElement(ind, { onSuccess: function(event) {
-				var elem, vTxt;
+				var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday;
 				elem = event.element;
 				vMat = elem.getAttributeValue("Matiere.Nom");
+				vMatID = elem.getAttributeValue("Matiere.ID");
 				if (vMat !== "Repas" && vMat !== "Etude") {
 					$$('component1_cTitre').setValue(vMat);
-					$$('component1_cChaps').show();
+					vAnScol = $$("component1_cbAnScol").getValue();
+					vClasse = $$("component1_cClasse").getValue();
+					vFil = $$("component1_cFil").getValue();
+					vToday = parseInt($$("component1_sToday").getValue(),10);
+					vQuery = "Programme.Annee_scolaire.ID = :1 and Programme.Matiere.ID = :2 and Programme.Classe = :3 and (Programme.Filiere = :4 or Programme.Filiere = :6) and sDeb <= :5 and sFin > :5 order by Ordre";
+					sources.component1_chapitres.query(vQuery, { onSuccess: function(event) {
+						var vchaps, vnbc;
+						vchaps = sources.component1_chapitres;
+						vnbc = vchaps.length;
+						for (var i = 0; i < vnbc; i++) {
+        					vchaps.getElement(i, { onSuccess: function(event)  {
+            					var elem, vlchap, j;
+            					elem = event.element;
+            					j = i+1;
+            					vlchap = "component1_cChap"+j;
+            					$$(vlchap).setValue("- "+elem.Chapitre);
+            				}});
+            			};
+            			$$('component1_cChaps').show();
+					}, params:[vAnScol, vMatID, vClasse, vFil, vToday, "* (toutes)"]});
 				}
 			}});
 		
@@ -790,6 +815,7 @@ function constructor (id) {
 	{// @endlock
 		var vLun, vSem;
 		vLun = $$('component1_cLun').getValue();
+		$$("component1_sToday").setValue(event.data.value);
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
 		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
@@ -811,6 +837,7 @@ function constructor (id) {
 	{// @endlock
 		var vLun, vSem;
 		vLun = $$('component1_cLun').getValue();
+		$$("component1_sToday").setValue(event.data.value);
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
 		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
