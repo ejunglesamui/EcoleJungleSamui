@@ -60,7 +60,7 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		if (vFil === null) {
+		if (vFil !== null) {
 			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
 		} else {
 			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 ", vAnScol, vClasse,  {fromInitialQuery:true} );
@@ -331,7 +331,7 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		if (vFil === null) {
+		if (vFil !== null) {
 			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
 			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
 		} else {
@@ -491,7 +491,7 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		if (vFil === null) {
+		if (vFil !== null) {
 			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil, {fromInitialQuery:true} );
 		} else {
 			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 order by hDeb",vJourS, vAnScol, vClasse, {fromInitialQuery:true} );
