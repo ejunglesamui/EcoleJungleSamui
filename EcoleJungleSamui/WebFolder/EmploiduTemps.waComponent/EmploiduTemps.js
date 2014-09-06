@@ -115,6 +115,57 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var ic50 = {};	// @icon
+	var ic49 = {};	// @icon
+	var ic48 = {};	// @icon
+	var ic47 = {};	// @icon
+	var ic46 = {};	// @icon
+	var ic45 = {};	// @icon
+	var ic44 = {};	// @icon
+	var ic43 = {};	// @icon
+	var ic42 = {};	// @icon
+	var ic41 = {};	// @icon
+	var ic40 = {};	// @icon
+	var ic39 = {};	// @icon
+	var ic38 = {};	// @icon
+	var ic37 = {};	// @icon
+	var ic36 = {};	// @icon
+	var ic35 = {};	// @icon
+	var ic34 = {};	// @icon
+	var ic33 = {};	// @icon
+	var ic32 = {};	// @icon
+	var ic31 = {};	// @icon
+	var ic30 = {};	// @icon
+	var ic29 = {};	// @icon
+	var ic28 = {};	// @icon
+	var ic27 = {};	// @icon
+	var ic26 = {};	// @icon
+	var ic25 = {};	// @icon
+	var ic24 = {};	// @icon
+	var ic23 = {};	// @icon
+	var ic22 = {};	// @icon
+	var ic21 = {};	// @icon
+	var ic20 = {};	// @icon
+	var ic19 = {};	// @icon
+	var ic18 = {};	// @icon
+	var ic17 = {};	// @icon
+	var ic16 = {};	// @icon
+	var ic15 = {};	// @icon
+	var ic14 = {};	// @icon
+	var ic13 = {};	// @icon
+	var ic12 = {};	// @icon
+	var ic11 = {};	// @icon
+	var ic10 = {};	// @icon
+	var ic9 = {};	// @icon
+	var ic8 = {};	// @icon
+	var ic7 = {};	// @icon
+	var ic6 = {};	// @icon
+	var ic5 = {};	// @icon
+	var ic4 = {};	// @icon
+	var ic3 = {};	// @icon
+	var ic2 = {};	// @icon
+	var ic1 = {};	// @icon
+	var ic0 = {};	// @icon
 	var vN50 = {};	// @textField
 	var vN49 = {};	// @textField
 	var vN48 = {};	// @textField
@@ -173,6 +224,516 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	ic50.mouseout = function ic50_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic50.click = function ic50_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic49.mouseout = function ic49_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic49.click = function ic49_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic48.mouseout = function ic48_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic48.click = function ic48_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic47.mouseout = function ic47_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic47.click = function ic47_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic46.mouseout = function ic46_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic46.click = function ic46_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic45.mouseout = function ic45_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic45.click = function ic45_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic44.mouseout = function ic44_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic44.click = function ic44_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic43.mouseout = function ic43_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic43.click = function ic43_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic42.mouseout = function ic42_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic42.click = function ic42_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic41.mouseout = function ic41_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic41.click = function ic41_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic40.mouseout = function ic40_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic40.click = function ic40_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic39.mouseout = function ic39_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic39.click = function ic39_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic38.mouseout = function ic38_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic38.click = function ic38_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic37.mouseout = function ic37_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic37.click = function ic37_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic36.mouseout = function ic36_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic36.click = function ic36_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic35.mouseout = function ic35_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic35.click = function ic35_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic34.mouseout = function ic34_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic34.click = function ic34_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic33.mouseout = function ic33_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic33.click = function ic33_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic32.mouseout = function ic32_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic32.click = function ic32_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic31.mouseout = function ic31_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic31.click = function ic31_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic30.mouseout = function ic30_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic30.click = function ic30_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic29.mouseout = function ic29_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic29.click = function ic29_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic28.mouseout = function ic28_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic28.click = function ic28_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic27.mouseout = function ic27_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic27.click = function ic27_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic26.mouseout = function ic26_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic26.click = function ic26_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic25.mouseout = function ic25_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic25.click = function ic25_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic24.mouseout = function ic24_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic24.click = function ic24_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic23.mouseout = function ic23_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic23.click = function ic23_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic22.mouseout = function ic22_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic22.click = function ic22_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic21.mouseout = function ic21_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic21.click = function ic21_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic20.mouseout = function ic20_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic20.click = function ic20_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic19.mouseout = function ic19_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic19.click = function ic19_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic18.mouseout = function ic18_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic18.click = function ic18_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic17.mouseout = function ic17_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic17.click = function ic17_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic16.mouseout = function ic16_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic16.click = function ic16_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic15.mouseout = function ic15_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic15.click = function ic15_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic14.mouseout = function ic14_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic14.click = function ic14_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic13.mouseout = function ic13_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic13.click = function ic13_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic12.mouseout = function ic12_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic12.click = function ic12_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic11.mouseout = function ic11_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic11.click = function ic11_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic10.mouseout = function ic10_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic10.click = function ic10_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic9.mouseout = function ic9_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic9.click = function ic9_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic8.mouseout = function ic8_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic8.click = function ic8_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic7.mouseout = function ic7_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic7.click = function ic7_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic6.mouseout = function ic6_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic6.click = function ic6_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic5.mouseout = function ic5_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic5.click = function ic5_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic4.mouseout = function ic4_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic4.click = function ic4_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic3.mouseout = function ic3_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic3.click = function ic3_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic2.mouseout = function ic2_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic2.click = function ic2_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic1.mouseout = function ic1_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
+
+	ic1.click = function ic1_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic0.click = function ic0_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic0.mouseout = function ic0_mouseout (event)// @startlock
+	{// @endlock
+		$$('component1_cCom').hide();
+	};// @lock
 
 	vN50.mouseout = function vN50_mouseout (event)// @startlock
 	{// @endlock
@@ -686,7 +1247,7 @@ function constructor (id) {
 
 	ListTask.onRowDraw = function ListTask_onRowDraw (event)// @startlock
 	{// @endlock
-		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI;
+		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vMat, vJourS;
 		elem = event.element;
 		
 		if (elem !== null) {
@@ -713,6 +1274,8 @@ function constructor (id) {
 						break;
 					}
 				vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+				vMat = elem.getAttributeValue("Matiere.ID");
+				vJourS = elem.jourS;
 				vPosy = 83+11*(elem.hDeb-32);
 				vTaille = (11*(elem.hFin-elem.hDeb))-1;
 				vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
@@ -734,6 +1297,32 @@ function constructor (id) {
 				$$(v).move(vPosx,vPosy);
 				$$(v).setValue(vTxt);
 				$$(v).show();
+				
+				vAnScol = $$("component1_cbAnScol").getValue();
+					vClasse = $$("component1_cClasse").getValue();
+					vFil = $$("component1_cFil").getValue();
+					vToday = parseInt($$("component1_sToday").getValue(),10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					vQuery = "Annee_Scolaire.ID = :1 and Classe = :2 and (Filiere = :3 or Filiere = :4) and sJour >= :5 and sJour < :6 and JourSem = :7 and Matiere.ID = :8";
+					sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.component1_remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "component1_ic"+vk;
+								v = "component1_vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vClasse, vFil, "* (toutes)",vToday, vToday+6, vJourS, vMat], userData: {boxn:j} });
 			}
 		}
 
@@ -744,16 +1333,21 @@ function constructor (id) {
 		for (var i = 0; i < 51; i++) {
 			v = "component1_vN"+i;
 			$$(v).hide();
+			v = "component1_ic"+i;
+			$$(v).hide();
 
 		}
+		
 	};// @lock
 
 	sPerS.slidestop = function sPerS_slidestop (event)// @startlock
 	{// @endlock
-		var vTaches, nb;
+		var vTaches, vRems, nb;
 		
 		for (var i = 0; i < 51; i++) {
 			v = "component1_vN"+i;
+			$$(v).hide();
+			v = "component1_ic"+i;
 			$$(v).hide();
 		}
 			
@@ -761,7 +1355,7 @@ function constructor (id) {
 		nb = vTaches.length; 
        	for (var j = 0; j < nb; j++) {
         	vTaches.getElement(j, { onSuccess: function(event) {
-        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI;
+        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vAnScol, vClasse, vFil, vToday, vQuery, vJourS, vMat;
             	elem = event.element;
             	vType = elem.semaineType;
 				vSemPI = $$('component1_cSemPI').getValue();
@@ -785,6 +1379,8 @@ function constructor (id) {
 							break;
 						}
 					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+					vMat = elem.getAttributeValue("Matiere.ID");
+					vJourS = elem.jourS;
 					vPosy = 83+11*(elem.hDeb-32);
 					vTaille = (11*(elem.hFin-elem.hDeb))-1;
 					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
@@ -805,8 +1401,36 @@ function constructor (id) {
 					$$(v).move(vPosx,vPosy);
 					$$(v).setValue(vTxt);
 					$$(v).show();
+					
+					vAnScol = $$("component1_cbAnScol").getValue();
+					vClasse = $$("component1_cClasse").getValue();
+					vFil = $$("component1_cFil").getValue();
+					vToday = parseInt($$("component1_sToday").getValue(),10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					vQuery = "Annee_Scolaire.ID = :1 and Classe = :2 and (Filiere = :3 or Filiere = :4) and sJour >= :5 and sJour < :6 and JourSem = :7 and Matiere.ID = :8";
+					sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.component1_remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "component1_ic"+vk;
+								v = "component1_vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vClasse, vFil, "* (toutes)",vToday, vToday+6, vJourS, vMat], userData: {boxn:j} });
+					
 				}
         	}});
+        	
     	}
 		
 	};// @lock
@@ -905,6 +1529,108 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ic50", "mouseout", ic50.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic50", "click", ic50.click, "WAF");
+	WAF.addListener(this.id + "_ic49", "mouseout", ic49.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic49", "click", ic49.click, "WAF");
+	WAF.addListener(this.id + "_ic48", "mouseout", ic48.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic48", "click", ic48.click, "WAF");
+	WAF.addListener(this.id + "_ic47", "mouseout", ic47.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic47", "click", ic47.click, "WAF");
+	WAF.addListener(this.id + "_ic46", "mouseout", ic46.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic46", "click", ic46.click, "WAF");
+	WAF.addListener(this.id + "_ic45", "mouseout", ic45.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic45", "click", ic45.click, "WAF");
+	WAF.addListener(this.id + "_ic44", "mouseout", ic44.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic44", "click", ic44.click, "WAF");
+	WAF.addListener(this.id + "_ic43", "mouseout", ic43.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic43", "click", ic43.click, "WAF");
+	WAF.addListener(this.id + "_ic42", "mouseout", ic42.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic42", "click", ic42.click, "WAF");
+	WAF.addListener(this.id + "_ic41", "mouseout", ic41.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic41", "click", ic41.click, "WAF");
+	WAF.addListener(this.id + "_ic40", "mouseout", ic40.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic40", "click", ic40.click, "WAF");
+	WAF.addListener(this.id + "_ic39", "mouseout", ic39.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic39", "click", ic39.click, "WAF");
+	WAF.addListener(this.id + "_ic38", "mouseout", ic38.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic38", "click", ic38.click, "WAF");
+	WAF.addListener(this.id + "_ic37", "mouseout", ic37.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic37", "click", ic37.click, "WAF");
+	WAF.addListener(this.id + "_ic36", "mouseout", ic36.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic36", "click", ic36.click, "WAF");
+	WAF.addListener(this.id + "_ic35", "mouseout", ic35.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic35", "click", ic35.click, "WAF");
+	WAF.addListener(this.id + "_ic34", "mouseout", ic34.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic34", "click", ic34.click, "WAF");
+	WAF.addListener(this.id + "_ic33", "mouseout", ic33.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic33", "click", ic33.click, "WAF");
+	WAF.addListener(this.id + "_ic32", "mouseout", ic32.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic32", "click", ic32.click, "WAF");
+	WAF.addListener(this.id + "_ic31", "mouseout", ic31.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic31", "click", ic31.click, "WAF");
+	WAF.addListener(this.id + "_ic30", "mouseout", ic30.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic30", "click", ic30.click, "WAF");
+	WAF.addListener(this.id + "_ic29", "mouseout", ic29.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic29", "click", ic29.click, "WAF");
+	WAF.addListener(this.id + "_ic28", "mouseout", ic28.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic28", "click", ic28.click, "WAF");
+	WAF.addListener(this.id + "_ic27", "mouseout", ic27.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic27", "click", ic27.click, "WAF");
+	WAF.addListener(this.id + "_ic26", "mouseout", ic26.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic26", "click", ic26.click, "WAF");
+	WAF.addListener(this.id + "_ic25", "mouseout", ic25.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic25", "click", ic25.click, "WAF");
+	WAF.addListener(this.id + "_ic24", "mouseout", ic24.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic24", "click", ic24.click, "WAF");
+	WAF.addListener(this.id + "_ic23", "mouseout", ic23.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic23", "click", ic23.click, "WAF");
+	WAF.addListener(this.id + "_ic22", "mouseout", ic22.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic22", "click", ic22.click, "WAF");
+	WAF.addListener(this.id + "_ic21", "mouseout", ic21.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic21", "click", ic21.click, "WAF");
+	WAF.addListener(this.id + "_ic20", "mouseout", ic20.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic20", "click", ic20.click, "WAF");
+	WAF.addListener(this.id + "_ic19", "mouseout", ic19.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic19", "click", ic19.click, "WAF");
+	WAF.addListener(this.id + "_ic18", "mouseout", ic18.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic18", "click", ic18.click, "WAF");
+	WAF.addListener(this.id + "_ic17", "mouseout", ic17.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic17", "click", ic17.click, "WAF");
+	WAF.addListener(this.id + "_ic16", "mouseout", ic16.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic16", "click", ic16.click, "WAF");
+	WAF.addListener(this.id + "_ic15", "mouseout", ic15.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic15", "click", ic15.click, "WAF");
+	WAF.addListener(this.id + "_ic14", "mouseout", ic14.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic14", "click", ic14.click, "WAF");
+	WAF.addListener(this.id + "_ic13", "mouseout", ic13.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic13", "click", ic13.click, "WAF");
+	WAF.addListener(this.id + "_ic12", "mouseout", ic12.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic12", "click", ic12.click, "WAF");
+	WAF.addListener(this.id + "_ic11", "mouseout", ic11.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic11", "click", ic11.click, "WAF");
+	WAF.addListener(this.id + "_ic10", "mouseout", ic10.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic10", "click", ic10.click, "WAF");
+	WAF.addListener(this.id + "_ic9", "mouseout", ic9.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic9", "click", ic9.click, "WAF");
+	WAF.addListener(this.id + "_ic8", "mouseout", ic8.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic8", "click", ic8.click, "WAF");
+	WAF.addListener(this.id + "_ic7", "mouseout", ic7.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic7", "click", ic7.click, "WAF");
+	WAF.addListener(this.id + "_ic6", "mouseout", ic6.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic6", "click", ic6.click, "WAF");
+	WAF.addListener(this.id + "_ic5", "mouseout", ic5.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic5", "click", ic5.click, "WAF");
+	WAF.addListener(this.id + "_ic4", "mouseout", ic4.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic4", "click", ic4.click, "WAF");
+	WAF.addListener(this.id + "_ic3", "mouseout", ic3.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic3", "click", ic3.click, "WAF");
+	WAF.addListener(this.id + "_ic2", "mouseout", ic2.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic2", "click", ic2.click, "WAF");
+	WAF.addListener(this.id + "_ic1", "mouseout", ic1.mouseout, "WAF");
+	WAF.addListener(this.id + "_ic1", "click", ic1.click, "WAF");
+	WAF.addListener(this.id + "_ic0", "click", ic0.click, "WAF");
+	WAF.addListener(this.id + "_ic0", "mouseout", ic0.mouseout, "WAF");
 	WAF.addListener(this.id + "_vN50", "mouseout", vN50.mouseout, "WAF");
 	WAF.addListener(this.id + "_vN49", "mouseout", vN49.mouseout, "WAF");
 	WAF.addListener(this.id + "_vN48", "mouseout", vN48.mouseout, "WAF");
