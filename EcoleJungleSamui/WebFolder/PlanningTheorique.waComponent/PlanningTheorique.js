@@ -60,7 +60,11 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		if (vFil === null) {
+			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		} else {
+			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 ", vAnScol, vClasse,  {fromInitialQuery:true} );
+		}
 	};// @lock
 
 	btView.click = function btView_click (event)// @startlock
@@ -327,8 +331,13 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
-		sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		if (vFil === null) {
+			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2 and Planning.Filiere = :3", vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		} else {
+			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 order by hDeb",vJourS, vAnScol, vClasse, {fromInitialQuery:true} );
+			sources.component1_Taches.filterQuery("Planning.Annee_Scolaire.ID = :1 and Planning.Classe = :2", vAnScol, vClasse, {fromInitialQuery:true} );
+		}
 		//sources.component1_Tache1.collectionRefresh();
 		
 	};// @lock
@@ -482,7 +491,12 @@ function constructor (id) {
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vClasse = sources.component1_planning_Matiere.Classe;
 		vFil = sources.component1_planning_Matiere.Filiere;
-		sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil,  {fromInitialQuery:true} );
+		if (vFil === null) {
+			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 and Planning.Filiere = :4 order by hDeb",vJourS, vAnScol, vClasse, vFil, {fromInitialQuery:true} );
+		} else {
+			sources.component1_Taches1.filterQuery("jourS = :1 and Planning.Annee_Scolaire.ID = :2 and Planning.Classe = :3 order by hDeb",vJourS, vAnScol, vClasse, {fromInitialQuery:true} );
+		}
+		
 			
 			$$("component1_tJour").setValue($$('component1_cbJour').getValue());
 			if (vJourS !== "-") {
