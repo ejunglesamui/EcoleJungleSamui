@@ -154,7 +154,7 @@ function constructor (id) {
 						vComment = elem.Commentaire;
 						vQui = elem.UID_Creation;
 						$$('component1_cComTxt').setValue(vComment);
-						$$('component1_cComTitre').setValue("Commentaire laissé par "+vQui);
+						$$('component1_cComTitre').setValue("Message laissé par "+vQui);
 						$$('component1_cComDate').setValue("Le "+vQuandF);
 						$$('component1_cCom').show();
 					}});
@@ -165,8 +165,101 @@ function constructor (id) {
 		return "Ok";
 	
 	}
+	
+	function newcom (ind) {
+		
+		var vRole, vMat, vCom, boxPos, v, vTaches;
+		vRole = $$("component1_cRole").getValue();
+		if (vRole !== "Elève") {
+			v = "component1_ic"+ind;
+			$$("component1_cBox").setValue(ind);
+			boxPos = $$(v).getPosition();
+			vTaches = sources.component1_Taches;
+			vTaches.getElement(ind, { onSuccess: function(event) {
+				var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday, vJourS, vHeure;
+				elem = event.element;
+				vToday = parseInt($$("component1_sToday").getValue(),10);
+				vMatID = elem.getAttributeValue("Matiere.ID"); 
+				vAnScol = $$("component1_cbAnScol").getValue();
+				vJourS = elem.jourS;
+				vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+				vClasse = $$("component1_cClasse").getValue();
+				vFil = $$("component1_cFil").getValue();
+				if (vFil !== null && vFil !== " " && vFil.length > 0) {
+					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+				} else {
+					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+				}
+				sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
+					var vcoms, vMat, vClasse, vFil, vBox, vToday, vLun, vJour, vJourD, vMatID;
+					vcoms = sources.component1_remarques;
+					if (vcoms.length > 0) {
+						vcoms.getElement(0, { onSuccess: function(event)  {
+							var elem, vCommment, vMat, vJour, vJourS, vQuand;
+							elem = event.element;
+							vQuand = elem.Jour;
+							vJour = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
+							$$('component1_cComJour').setValue(vJour);
+							$$('component1_cComAction').setValue("Modifier");
+							$$('component1_bComSup').show();
+							$$("component1_CreateCom").displayDialog();
+						}});
+					} else {
+						sources.component1_remarques.addNewElement();
+						vBox = event.userData.boxn;
+						vMatID = event.userData.MatID;
+						vClasse = $$("component1_cClasse").getValue();
+						vFil = $$("component1_cFil").getValue();
+						vAnScol = $$("component1_cbAnScol").getValue();
+						vJourS = vBox.jourS;
+						vToday = parseInt($$("component1_sToday").getValue(),10);
+						vHeure = vBox.hDeb + parseInt((vBox.hFin - vBox.hDeb)/2,10);
+						vLun = $$('component1_cLun').getValue();
+						switch (vJourS) {
+						case 'Mardi':
+							vToday = vToday+1;
+							break;
+						case 'Mercredi':
+							vToday = vToday+2;
+							break;
+						case 'Jeudi':
+							vToday = vToday+3;
+							break;
+						case 'Vendredi':
+							vToday = vToday+4;
+							break;
+						}
+						vJour = addDaysToDate(vLun,vToday);
+						vJourD = new Date(vJour.substr(6,4), parseInt(vJour.substr(3,2),10)-1, vJour.substr(0,2));
+						sources.component1_remarques.Matiere.set(sources.component1_matieres);
+						sources.component1_remarques.Annee_Scolaire.set(sources.component1_annees_Scolaires);
+						sources.component1_remarques.Emetteur.set(sources.component1_utilisateurs);
+						sources.component1_remarques.Classe = vClasse;
+						sources.component1_remarques.Filiere = vFil;
+						sources.component1_remarques.sHeure = vHeure;
+						sources.component1_remarques.sJour = vToday;
+						sources.component1_remarques.Jour = vJourD;
+						sources.component1_remarques.JourSem = vJourS;
+						sources.component1_matieres.query("ID = :1", { onSuccess: function(event) {
+							sources.component1_remarques.Matiere.set(sources.component1_matieres);
+							$$('component1_cComAction').setValue("Créer");
+							$$('component1_bComSup').hide();
+							sources.component1_matieres.query("");
+							$$("component1_CreateCom").displayDialog();
+						},params:[vMatID]});
+					}
+				},params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:elem, MatID:vMatID}});
+			}});
+		}
+		
+		return "Ok";
+	
+	}
 
 	// @region namespaceDeclaration// @startlock
+	var bComSup = {};	// @button
+	var bComOk = {};	// @button
+	var button4 = {};	// @button
 	var ic50 = {};	// @icon
 	var ic49 = {};	// @icon
 	var ic48 = {};	// @icon
@@ -276,6 +369,48 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	bComSup.click = function bComSup_click (event)// @startlock
+	{// @endlock
+		var isok, vBox, vCom;
+		
+		isok = confirm( "Voulez-vous vraiment supprimer ce message ?");
+		
+		if (isok) {
+			sources.component1_remarques.removeCurrent();
+			vBox = $$("component1_cBox").getValue();
+			vCom = "component1_ic"+vBox
+			$$(vCom).hide();
+		}
+		$$("component1_CreateCom").closeDialog();
+	};// @lock
+
+	bComOk.click = function bComOk_click (event)// @startlock
+	{// @endlock
+		var vBox, vCom, vAction, boxPos, ind;
+		sources.component1_remarques.save();
+		vAction = $$("component1_cComAction").getValue();
+		
+		if (vAction === "Créer") {
+			ind = $$("component1_cBox").getValue();
+			//alert(ind);
+			vCom = "component1_ic"+ind;
+			vBox = "component1_vN"+ind;
+			boxPos = $$(vBox).getPosition();
+			$$(vCom).setLeft(boxPos.left+121);
+			$$(vCom).setTop(boxPos.top + 2);
+			$$(vCom).show();
+		}
+		$$("component1_CreateCom").closeDialog();
+		
+	};// @lock
+
+	button4.click = function button4_click (event)// @startlock
+	{// @endlock
+		
+		$$("component1_CreateCom").closeDialog(); 
+		
+	};// @lock
 
 	ic50.mouseout = function ic50_mouseout (event)// @startlock
 	{// @endlock
@@ -787,6 +922,11 @@ function constructor (id) {
 		$$('component1_cCom').hide();
 	};// @lock
 
+	vN50.dblclick = function vN50_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(50);
+	};// @lock
+
 	vN50.mouseout = function vN50_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -795,6 +935,11 @@ function constructor (id) {
 	vN50.click = function vN50_click (event)// @startlock
 	{// @endlock
 		var res = chaps(50);
+	};// @lock
+
+	vN49.dblclick = function vN49_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(49);
 	};// @lock
 
 	vN49.mouseout = function vN49_mouseout (event)// @startlock
@@ -807,6 +952,11 @@ function constructor (id) {
 		var res = chaps(49);
 	};// @lock
 
+	vN48.dblclick = function vN48_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(48);
+	};// @lock
+
 	vN48.mouseout = function vN48_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -815,6 +965,11 @@ function constructor (id) {
 	vN48.click = function vN48_click (event)// @startlock
 	{// @endlock
 		var res = chaps(48);
+	};// @lock
+
+	vN47.dblclick = function vN47_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(47);
 	};// @lock
 
 	vN47.mouseout = function vN47_mouseout (event)// @startlock
@@ -827,6 +982,11 @@ function constructor (id) {
 		var res = chaps(47);
 	};// @lock
 
+	vN46.dblclick = function vN46_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(46);
+	};// @lock
+
 	vN46.mouseout = function vN46_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -835,6 +995,11 @@ function constructor (id) {
 	vN46.click = function vN46_click (event)// @startlock
 	{// @endlock
 		var res = chaps(46);
+	};// @lock
+
+	vN45.dblclick = function vN45_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(45);
 	};// @lock
 
 	vN45.mouseout = function vN45_mouseout (event)// @startlock
@@ -847,6 +1012,11 @@ function constructor (id) {
 		var res = chaps(45);
 	};// @lock
 
+	vN44.dblclick = function vN44_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(44);
+	};// @lock
+
 	vN44.mouseout = function vN44_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -855,6 +1025,11 @@ function constructor (id) {
 	vN44.click = function vN44_click (event)// @startlock
 	{// @endlock
 		var res = chaps(44);
+	};// @lock
+
+	vN43.dblclick = function vN43_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(43);
 	};// @lock
 
 	vN43.mouseout = function vN43_mouseout (event)// @startlock
@@ -867,6 +1042,11 @@ function constructor (id) {
 		var res = chaps(43);
 	};// @lock
 
+	vN42.dblclick = function vN42_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(42);
+	};// @lock
+
 	vN42.mouseout = function vN42_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -875,6 +1055,11 @@ function constructor (id) {
 	vN42.click = function vN42_click (event)// @startlock
 	{// @endlock
 		var res = chaps(42);
+	};// @lock
+
+	vN41.dblclick = function vN41_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(41);
 	};// @lock
 
 	vN41.mouseout = function vN41_mouseout (event)// @startlock
@@ -887,6 +1072,11 @@ function constructor (id) {
 		var res = chaps(41);
 	};// @lock
 
+	vN40.dblclick = function vN40_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(40);
+	};// @lock
+
 	vN40.mouseout = function vN40_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -895,6 +1085,11 @@ function constructor (id) {
 	vN40.click = function vN40_click (event)// @startlock
 	{// @endlock
 		var res = chaps(40);
+	};// @lock
+
+	vN39.dblclick = function vN39_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(39);
 	};// @lock
 
 	vN39.mouseout = function vN39_mouseout (event)// @startlock
@@ -907,6 +1102,11 @@ function constructor (id) {
 		var res = chaps(39);
 	};// @lock
 
+	vN38.dblclick = function vN38_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(38);
+	};// @lock
+
 	vN38.mouseout = function vN38_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -915,6 +1115,11 @@ function constructor (id) {
 	vN38.click = function vN38_click (event)// @startlock
 	{// @endlock
 		var res = chaps(38);
+	};// @lock
+
+	vN37.dblclick = function vN37_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(37);
 	};// @lock
 
 	vN37.mouseout = function vN37_mouseout (event)// @startlock
@@ -927,6 +1132,11 @@ function constructor (id) {
 		var res = chaps(37);
 	};// @lock
 
+	vN36.dblclick = function vN36_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(36);
+	};// @lock
+
 	vN36.mouseout = function vN36_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -935,6 +1145,11 @@ function constructor (id) {
 	vN36.click = function vN36_click (event)// @startlock
 	{// @endlock
 		var res = chaps(36);
+	};// @lock
+
+	vN35.dblclick = function vN35_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(35);
 	};// @lock
 
 	vN35.mouseout = function vN35_mouseout (event)// @startlock
@@ -947,6 +1162,11 @@ function constructor (id) {
 		var res = chaps(35);
 	};// @lock
 
+	vN34.dblclick = function vN34_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(34);
+	};// @lock
+
 	vN34.mouseout = function vN34_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -955,6 +1175,11 @@ function constructor (id) {
 	vN34.click = function vN34_click (event)// @startlock
 	{// @endlock
 		var res = chaps(34);
+	};// @lock
+
+	vN33.dblclick = function vN33_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(33);
 	};// @lock
 
 	vN33.mouseout = function vN33_mouseout (event)// @startlock
@@ -967,6 +1192,11 @@ function constructor (id) {
 		var res = chaps(33);
 	};// @lock
 
+	vN32.dblclick = function vN32_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(32);
+	};// @lock
+
 	vN32.mouseout = function vN32_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -975,6 +1205,11 @@ function constructor (id) {
 	vN32.click = function vN32_click (event)// @startlock
 	{// @endlock
 		var res = chaps(32);
+	};// @lock
+
+	vN31.dblclick = function vN31_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(31);
 	};// @lock
 
 	vN31.mouseout = function vN31_mouseout (event)// @startlock
@@ -987,6 +1222,11 @@ function constructor (id) {
 		var res = chaps(31);
 	};// @lock
 
+	vN30.dblclick = function vN30_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(30);
+	};// @lock
+
 	vN30.mouseout = function vN30_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -995,6 +1235,11 @@ function constructor (id) {
 	vN30.click = function vN30_click (event)// @startlock
 	{// @endlock
 		var res = chaps(30);
+	};// @lock
+
+	vN29.dblclick = function vN29_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(29);
 	};// @lock
 
 	vN29.mouseout = function vN29_mouseout (event)// @startlock
@@ -1007,6 +1252,11 @@ function constructor (id) {
 		var res = chaps(29);
 	};// @lock
 
+	vN28.dblclick = function vN28_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(28);
+	};// @lock
+
 	vN28.mouseout = function vN28_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1015,6 +1265,11 @@ function constructor (id) {
 	vN28.click = function vN28_click (event)// @startlock
 	{// @endlock
 		var res = chaps(28);
+	};// @lock
+
+	vN27.dblclick = function vN27_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(27);
 	};// @lock
 
 	vN27.mouseout = function vN27_mouseout (event)// @startlock
@@ -1027,6 +1282,11 @@ function constructor (id) {
 		var res = chaps(27);
 	};// @lock
 
+	vN26.dblclick = function vN26_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(26);
+	};// @lock
+
 	vN26.mouseout = function vN26_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1035,6 +1295,11 @@ function constructor (id) {
 	vN26.click = function vN26_click (event)// @startlock
 	{// @endlock
 		var res = chaps(26);
+	};// @lock
+
+	vN25.dblclick = function vN25_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(25);
 	};// @lock
 
 	vN25.mouseout = function vN25_mouseout (event)// @startlock
@@ -1047,6 +1312,11 @@ function constructor (id) {
 		var res = chaps(25);
 	};// @lock
 
+	vN24.dblclick = function vN24_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(24);
+	};// @lock
+
 	vN24.mouseout = function vN24_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1055,6 +1325,11 @@ function constructor (id) {
 	vN24.click = function vN24_click (event)// @startlock
 	{// @endlock
 		var res = chaps(24);
+	};// @lock
+
+	vN23.dblclick = function vN23_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(23);
 	};// @lock
 
 	vN23.mouseout = function vN23_mouseout (event)// @startlock
@@ -1067,6 +1342,11 @@ function constructor (id) {
 		var res = chaps(23);
 	};// @lock
 
+	vN22.dblclick = function vN22_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(22);
+	};// @lock
+
 	vN22.mouseout = function vN22_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1075,6 +1355,11 @@ function constructor (id) {
 	vN22.click = function vN22_click (event)// @startlock
 	{// @endlock
 		var res = chaps(22);
+	};// @lock
+
+	vN21.dblclick = function vN21_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(21);
 	};// @lock
 
 	vN21.mouseout = function vN21_mouseout (event)// @startlock
@@ -1087,6 +1372,11 @@ function constructor (id) {
 		var res = chaps(21);
 	};// @lock
 
+	vN20.dblclick = function vN20_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(20);
+	};// @lock
+
 	vN20.mouseout = function vN20_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1095,6 +1385,11 @@ function constructor (id) {
 	vN20.click = function vN20_click (event)// @startlock
 	{// @endlock
 		var res = chaps(20);
+	};// @lock
+
+	vN19.dblclick = function vN19_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(19);
 	};// @lock
 
 	vN19.mouseout = function vN19_mouseout (event)// @startlock
@@ -1107,6 +1402,11 @@ function constructor (id) {
 		var res = chaps(19);
 	};// @lock
 
+	vN18.dblclick = function vN18_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(18);
+	};// @lock
+
 	vN18.mouseout = function vN18_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1115,6 +1415,11 @@ function constructor (id) {
 	vN18.click = function vN18_click (event)// @startlock
 	{// @endlock
 		var res = chaps(18);
+	};// @lock
+
+	vN17.dblclick = function vN17_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(17);
 	};// @lock
 
 	vN17.mouseout = function vN17_mouseout (event)// @startlock
@@ -1127,6 +1432,11 @@ function constructor (id) {
 		var res = chaps(17);
 	};// @lock
 
+	vN16.dblclick = function vN16_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(16);
+	};// @lock
+
 	vN16.mouseout = function vN16_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1135,6 +1445,11 @@ function constructor (id) {
 	vN16.click = function vN16_click (event)// @startlock
 	{// @endlock
 		var res = chaps(16);
+	};// @lock
+
+	vN15.dblclick = function vN15_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(15);
 	};// @lock
 
 	vN15.mouseout = function vN15_mouseout (event)// @startlock
@@ -1147,6 +1462,11 @@ function constructor (id) {
 		var res = chaps(15);
 	};// @lock
 
+	vN14.dblclick = function vN14_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(14);
+	};// @lock
+
 	vN14.mouseout = function vN14_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1155,6 +1475,11 @@ function constructor (id) {
 	vN14.click = function vN14_click (event)// @startlock
 	{// @endlock
 		var res = chaps(14);
+	};// @lock
+
+	vN13.dblclick = function vN13_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(13);
 	};// @lock
 
 	vN13.mouseout = function vN13_mouseout (event)// @startlock
@@ -1167,6 +1492,11 @@ function constructor (id) {
 		var res = chaps(13);
 	};// @lock
 
+	vN12.dblclick = function vN12_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(12);
+	};// @lock
+
 	vN12.mouseout = function vN12_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1175,6 +1505,11 @@ function constructor (id) {
 	vN12.click = function vN12_click (event)// @startlock
 	{// @endlock
 		var res = chaps(12);
+	};// @lock
+
+	vN11.dblclick = function vN11_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(11);
 	};// @lock
 
 	vN11.mouseout = function vN11_mouseout (event)// @startlock
@@ -1187,6 +1522,11 @@ function constructor (id) {
 		var res = chaps(11);
 	};// @lock
 
+	vN10.dblclick = function vN10_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(10);
+	};// @lock
+
 	vN10.mouseout = function vN10_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1195,6 +1535,11 @@ function constructor (id) {
 	vN10.click = function vN10_click (event)// @startlock
 	{// @endlock
 		var res = chaps(10);
+	};// @lock
+
+	vN9.dblclick = function vN9_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(9);
 	};// @lock
 
 	vN9.mouseout = function vN9_mouseout (event)// @startlock
@@ -1207,6 +1552,11 @@ function constructor (id) {
 		var res = chaps(9);
 	};// @lock
 
+	vN8.dblclick = function vN8_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(8);
+	};// @lock
+
 	vN8.mouseout = function vN8_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1215,6 +1565,11 @@ function constructor (id) {
 	vN8.click = function vN8_click (event)// @startlock
 	{// @endlock
 		var res = chaps(8);
+	};// @lock
+
+	vN7.dblclick = function vN7_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(7);
 	};// @lock
 
 	vN7.mouseout = function vN7_mouseout (event)// @startlock
@@ -1227,6 +1582,11 @@ function constructor (id) {
 		var res = chaps(7);
 	};// @lock
 
+	vN6.dblclick = function vN6_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(6);
+	};// @lock
+
 	vN6.mouseout = function vN6_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1235,6 +1595,11 @@ function constructor (id) {
 	vN6.click = function vN6_click (event)// @startlock
 	{// @endlock
 		var res = chaps(6);
+	};// @lock
+
+	vN5.dblclick = function vN5_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(5);
 	};// @lock
 
 	vN5.mouseout = function vN5_mouseout (event)// @startlock
@@ -1247,6 +1612,11 @@ function constructor (id) {
 		var res = chaps(5);
 	};// @lock
 
+	vN4.dblclick = function vN4_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(4);
+	};// @lock
+
 	vN4.mouseout = function vN4_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1255,6 +1625,11 @@ function constructor (id) {
 	vN4.click = function vN4_click (event)// @startlock
 	{// @endlock
 		var res = chaps(4);
+	};// @lock
+
+	vN3.dblclick = function vN3_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(3);
 	};// @lock
 
 	vN3.mouseout = function vN3_mouseout (event)// @startlock
@@ -1267,6 +1642,11 @@ function constructor (id) {
 		var res = chaps(3);
 	};// @lock
 
+	vN2.dblclick = function vN2_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(2);
+	};// @lock
+
 	vN2.mouseout = function vN2_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1277,6 +1657,11 @@ function constructor (id) {
 		var res = chaps(2);
 	};// @lock
 
+	vN1.dblclick = function vN1_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(1);
+	};// @lock
+
 	vN1.mouseout = function vN1_mouseout (event)// @startlock
 	{// @endlock
 		$$('component1_cChaps').hide();
@@ -1285,6 +1670,11 @@ function constructor (id) {
 	vN1.click = function vN1_click (event)// @startlock
 	{// @endlock
 		var res = chaps(1);
+	};// @lock
+
+	vN0.dblclick = function vN0_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(0);
 	};// @lock
 
 	vN0.click = function vN0_click (event)// @startlock
@@ -1499,8 +1889,10 @@ function constructor (id) {
 
 	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
 	{// @endlock
-		var vLun, vSem;
+		var vLun, vSem, vYear;
 		vLun = $$('component1_cLun').getValue();
+		vYear = addDaysToDate(vLun,event.data.value);
+		$$('component1_cAnnee').setValue(vYear.substr(6,4));
 		$$("component1_sToday").setValue(event.data.value);
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
@@ -1521,9 +1913,11 @@ function constructor (id) {
 
 	sPerS.slide = function sPerS_slide (event)// @startlock
 	{// @endlock
-		var vLun, vSem;
+		var vLun, vSem, vYear;
 		vLun = $$('component1_cLun').getValue();
 		$$("component1_sToday").setValue(event.data.value);
+		vYear = addDaysToDate(vLun,event.data.value);
+		$$('component1_cAnnee').setValue(vYear.substr(6,4));
 		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
 		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
 		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
@@ -1614,6 +2008,60 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_bComSup", "click", bComSup.click, "WAF");
+	WAF.addListener(this.id + "_vN0", "dblclick", vN0.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN50", "dblclick", vN50.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN49", "dblclick", vN49.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN48", "dblclick", vN48.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN47", "dblclick", vN47.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN46", "dblclick", vN46.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN45", "dblclick", vN45.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN44", "dblclick", vN44.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN43", "dblclick", vN43.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN42", "dblclick", vN42.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN41", "dblclick", vN41.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN40", "dblclick", vN40.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN39", "dblclick", vN39.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN38", "dblclick", vN38.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN37", "dblclick", vN37.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN36", "dblclick", vN36.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN35", "dblclick", vN35.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN34", "dblclick", vN34.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN33", "dblclick", vN33.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN32", "dblclick", vN32.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN31", "dblclick", vN31.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN30", "dblclick", vN30.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN29", "dblclick", vN29.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN28", "dblclick", vN28.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN27", "dblclick", vN27.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN26", "dblclick", vN26.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN25", "dblclick", vN25.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN24", "dblclick", vN24.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN23", "dblclick", vN23.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN22", "dblclick", vN22.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN21", "dblclick", vN21.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN20", "dblclick", vN20.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN19", "dblclick", vN19.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN18", "dblclick", vN18.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN17", "dblclick", vN17.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN16", "dblclick", vN16.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN15", "dblclick", vN15.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN14", "dblclick", vN14.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN13", "dblclick", vN13.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN12", "dblclick", vN12.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN11", "dblclick", vN11.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN10", "dblclick", vN10.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN9", "dblclick", vN9.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN8", "dblclick", vN8.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN7", "dblclick", vN7.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN6", "dblclick", vN6.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN5", "dblclick", vN5.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN4", "dblclick", vN4.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN3", "dblclick", vN3.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN2", "dblclick", vN2.dblclick, "WAF");
+	WAF.addListener(this.id + "_vN1", "dblclick", vN1.dblclick, "WAF");
+	WAF.addListener(this.id + "_bComOk", "click", bComOk.click, "WAF");
+	WAF.addListener(this.id + "_button4", "click", button4.click, "WAF");
 	WAF.addListener(this.id + "_ic50", "mouseout", ic50.mouseout, "WAF");
 	WAF.addListener(this.id + "_ic50", "click", ic50.click, "WAF");
 	WAF.addListener(this.id + "_ic49", "mouseout", ic49.mouseout, "WAF");
