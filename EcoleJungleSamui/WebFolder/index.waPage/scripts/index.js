@@ -57,7 +57,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	menuItem5.click = function menuItem5_click (event)// @startlock
 	{// @endlock
-		$$('component1').loadComponent("/GestPlanning.waComponent");
+		$$('component1').loadComponent("/EmploiduTemps.waComponent");
 	};// @lock
 
 	menuItem19.click = function menuItem19_click (event)// @startlock

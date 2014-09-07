@@ -91,7 +91,7 @@ function constructor (id) {
 					vClasse = $$("component1_cClasse").getValue();
 					vFil = $$("component1_cFil").getValue();
 					vToday = parseInt($$("component1_sToday").getValue(),10);
-					if (vFil !== null) {
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
 						vQuery = "Programme.Annee_scolaire.ID = :1 and Programme.Matiere.ID = :2 and Programme.Classe = :3 and (Programme.Filiere = :4 or Programme.Filiere = :6) and sDeb <= :5 and sFin > :5 order by Ordre";
 					} else {
 						vQuery = "Programme.Annee_scolaire.ID = :1 and Programme.Matiere.ID = :2 and Programme.Classe = :3 and sDeb <= :5 and sFin > :5 order by Ordre";
@@ -135,24 +135,31 @@ function constructor (id) {
 			vAnScol = $$("component1_cbAnScol").getValue();
 			vJourS = elem.jourS;
 			vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
-			vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5";
+			vClasse = $$("component1_cClasse").getValue();
+			vFil = $$("component1_cFil").getValue();
+			if (vFil !== null && vFil !== " " && vFil.length > 0) {
+				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+			} else {
+				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+			}
 			sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
 				var vcoms;
 				vcoms = sources.component1_remarques;
 				if (vcoms.length > 0) {
 					vcoms.getElement(0, { onSuccess: function(event)  {
-						var elem, vQui, vQuand, vCommment;
+						var elem, vQui, vQuand, vCommment, vQuandF;
 						elem = event.element;
 						vQuand = elem.Date_Creation;
+						vQuandF = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
 						vComment = elem.Commentaire;
 						vQui = elem.UID_Creation;
 						$$('component1_cComTxt').setValue(vComment);
 						$$('component1_cComTitre').setValue("Commentaire laissé par "+vQui);
-						$$('component1_cComDate').setValue(vQuand);
+						$$('component1_cComDate').setValue("Le "+vQuandF);
 						$$('component1_cCom').show();
 					}});
 				}
-			},params:[vAnScol, vToday, vToday+6, vJourS, vHeure]});
+			},params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil]});
 		}});
 		
 		return "Ok";
@@ -1349,7 +1356,11 @@ function constructor (id) {
 				vToday = parseInt($$("component1_sToday").getValue(),10);
 				vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
 					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
-					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5";
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
 					sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
 						var vrems, vnbr, vJourSem, vMat, v, vboxn;
 						vboxn = event.userData.boxn;
@@ -1368,7 +1379,7 @@ function constructor (id) {
 								$$(icr).show();
 								}, userData: {k:vboxn}});
 						}
-					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure], userData: {boxn:j} });
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
 			}
 		}
 
@@ -1454,7 +1465,11 @@ function constructor (id) {
 					vToday = parseInt($$("component1_sToday").getValue(),10);
 					vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
 					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
-					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5";
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
 					sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
 						var vrems, vnbr, vJourSem, vMat, v, vboxn;
 						vboxn = event.userData.boxn;
@@ -1473,7 +1488,7 @@ function constructor (id) {
 								$$(icr).show();
 								}, userData: {k:vboxn}});
 						}
-					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure], userData: {boxn:j} });
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
 					
 				}
         	}});
@@ -1565,10 +1580,33 @@ function constructor (id) {
 		vUser = WAF.directory.currentUser().userName;
 		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
 		
-			var vAnScol, vProf;
+			var vAnScol, vProf, elem, vUserID;
+			elem = sources.component1_utilisateurs;
+			vUserID = elem.ID;
 			vProf = $$("component1_cProf").getValue();
 			vAnScol = $$("component1_cbAnScol").getValue();
-			sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);		
+			$$("component1_cRole").setValue(elem.Fonction);
+			if (elem.Fonction === "Elève") {
+				//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
+				sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
+					var vAnScol, elem, vClasse, vFil;
+					elem = sources.component1_parcours_Scolaire;
+					vClasse = elem.Classe;
+					vFil = elem.Filiere;
+					vAnScol = $$("component1_cbAnScol").getValue();
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						//alert("filière trouvée : "+vFil);
+						sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
+					} else {
+						sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+					}
+					$$("component1_ListClass").hide();
+					$$("component1_cClasse").show();
+					$$("component1_cFil").show();
+				},params:[vAnScol, vUserID] });
+			} else {
+				sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+			}		
 		
 		}, params:[vUser] });
 		

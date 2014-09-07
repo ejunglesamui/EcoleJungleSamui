@@ -656,7 +656,7 @@ function constructor (id) {
 			var vAnScol, vProf;
 			vProf = $$("component1_cProf").getValue();
 			vAnScol = $$("component1_cbAnScol").getValue();
-			sources.component1_programme.query("Annee_scolaire.ID = :1 and Professeur.ID = :2  order by Matiere, Classe, Filiere", { onSuccess: function(event) { 
+			sources.component1_programme.query("Annee_scolaire.ID = :1 and Professeur.ID = :2  order by Matiere, Classe", { onSuccess: function(event) { 
 			
 					
 			}, params:[vAnScol,vProf] }); 		
