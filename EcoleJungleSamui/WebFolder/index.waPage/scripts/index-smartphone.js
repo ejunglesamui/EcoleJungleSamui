@@ -128,13 +128,25 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ListClass.change = function ListClass_change (event)// @startlock
 	{// @endlock
+		var vJourS, vClasse, vFil, vAnScol, vQuery;
+		vJourS = $$('tJours').getValue();
+		vAnScol = $$("cbAnScol").getValue();
+		vClasse = $$("cClasse").getValue();
+		vFil = $$("cFil").getValue();
+		if (vFil !== null && vFil !== " " && vFil.length > 0) {
+			vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3 and Planning.Filiere = :4";
+		} else {
+			vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3";
+		}
+		sources.tache_Theorique.query(vQuery, vAnScol, vJourS, vClasse, vFil);
+		
 		for (var i = 0; i < 10; i++) {
 			v = "vN"+i;
 			$$(v).hide();
 			v = "ic"+i;
 			$$(v).hide();
-
 		}
+		
 	};// @lock
 
 	btMoins.click = function btMoins_click (event)// @startlock
@@ -147,6 +159,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			vCur = vCur - 2;
 		}
 		$$('sPerS').setValue(vCur);
+		
 	};// @lock
 
 	btPlus.click = function btPlus_click (event)// @startlock
@@ -223,25 +236,39 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 					if (elem.Fonction === "Elève") {
 						//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
 						sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
-							var vAnScol, elem, vClasse, vFil;
+							var vAnScol, elem, vClasse, vFil, vQuery;
 							elem = sources.parcours_Scolaire;
 							vClasse = elem.Classe;
 							vFil = elem.Filiere;
 							vAnScol = sources.annees_Scolaires.ID;
 							if (vFil !== null && vFil !== " " && vFil.length > 0) {
 								//alert("filière trouvée : "+vFil);
-								sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
+								vQuery = "Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3";
 							} else {
-								sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+								vQuery = "Annee_Scolaire.ID = :1 and Classe = :2";
 							}
-							$$("ListClass").hide();
-							$$("cClasse").show();
-							$$("cFil").show();
+							sources.planning_Matiere.query(vQuery, { onSuccess: function(event) { 
+								sources.Taches.filterQuery("jourS = 'Lundi' ",{fromInitialQuery:true});
+								$$("ListClass").hide();
+								$$("cClasse").show();
+								$$("cFil").show();
+							}, params:[vAnScol, vClasse] });
 							
 						},params:[vAnScol, vUserID] });
 					} else {
-						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
-					}		
+						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", { onSuccess: function(event) { 
+							vJourS = 'Lundi';
+							vAnScol = sources.annees_Scolaires.ID;
+							vClasse = sources.parcours_Scolaire.Classe;
+							vFil = sources.parcours_Scolaire.Filiere;
+							if (vFil !== null && vFil !== " " && vFil.length > 0) {
+								vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3 and Planning.Filiere = :4";
+							} else {
+								vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3";
+							}
+							sources.tache_Theorique.query(vQuery, vAnScol, vJourS, vClasse, vFil);
+						}, params:[vAnScol] });
+					}
 		
 				}, params:[vUser] });
 			}});
@@ -252,7 +279,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
 	{// @endlock
-		var vLun, vSem, vYear, vJour, vSlide, vJourS;
+		var vLun, vSem, vYear, vJour, vSlide, vJourS, vClasse, vFil, vAnScol, vQuery;;
 		vLun = $$('cLun').getValue();
 		$$("sToday").setValue(event.data.value);
 		vSlide = event.data.value;
@@ -300,6 +327,17 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		} else {
 			$$('cSemPI').setValue("Impaire");
 		}
+		
+		vAnScol = $$("cbAnScol").getValue();
+		vClasse = $$("cClasse").getValue();
+		vFil = $$("cFil").getValue();
+		if (vFil !== null && vFil !== " " && vFil.length > 0) {
+			vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3 and Planning.Filiere = :4";
+		} else {
+			vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3";
+		}
+		sources.tache_Theorique.query(vQuery, vAnScol, vJourS, vClasse, vFil);
+		
 	};// @lock
 
 	sPerS.slide = function sPerS_slide (event)// @startlock
