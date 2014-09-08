@@ -60,30 +60,28 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	function coms (ind) {
 		
 		var vMat, vCom, boxPos, v, vTaches;
-		v = "component1_ic"+ind;
-		boxPos = $$(v).getPosition();
-		$$('component1_cCom').move(boxPos.left+10, boxPos.top + 10);
-		$$('component1_cComTxt').setValue(" ");
-		$$('component1_cComTitre').setValue(" ");
-		$$('component1_cComDate').setValue(" ");
-		vTaches = sources.component1_Taches;
+		$$('cComTxt').setValue(" ");
+		$$('cComTitre').setValue(" ");
+		$$('cComDate').setValue(" ");
+		vTaches = sources.tache_Theorique;
 		vTaches.getElement(ind, { onSuccess: function(event) {
 			var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday, vJourS, vHeure;
 			elem = event.element;
-			vToday = parseInt($$("component1_sToday").getValue(),10);
-			vAnScol = $$("component1_cbAnScol").getValue();
+			vToday = parseInt($$("sToday").getValue(),10);
+			vAnScol = $$("cbAnScol").getValue();
 			vJourS = elem.jourS;
 			vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
-			vClasse = $$("component1_cClasse").getValue();
-			vFil = $$("component1_cFil").getValue();
+			vClasse = $$("cClasse").getValue();
+			vFil = $$("cFil").getValue();
 			if (vFil !== null && vFil !== " " && vFil.length > 0) {
 				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
 			} else {
 				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
 			}
-			sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
+			//alert("Cherche Année scolaire : "+vAnScol+" - Jour : "+vJourS+" - Classe : "+vClasse+" - Filiere : "+vFil+" - Heure : "+vHeure+" - Entre : "+vToday);
+			sources.remarques.query(vQuery, { onSuccess: function(event) {
 				var vcoms;
-				vcoms = sources.component1_remarques;
+				vcoms = sources.remarques;
 				if (vcoms.length > 0) {
 					vcoms.getElement(0, { onSuccess: function(event)  {
 						var elem, vQui, vQuand, vComment, vQuandF;
@@ -92,10 +90,10 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 						vQuandF = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
 						vComment = elem.Commentaire;
 						vQui = elem.UID_Creation;
-						$$('component1_cComTxt').setValue(vComment);
-						$$('component1_cComTitre').setValue("Message laissé par "+vQui);
-						$$('component1_cComDate').setValue("Le "+vQuandF);
-						$$('component1_cCom').show();
+						$$('cComTxt').setValue(vComment);
+						$$('cComTitre').setValue("Message laissé par "+vQui);
+						$$('cComDate').setValue("Le "+vQuandF);
+						$$('cCom').show();
 					}});
 				}
 			},params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil]});
@@ -106,6 +104,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	}
 
 // @region namespaceDeclaration// @startlock
+	var ListTask = {};	// @dataGrid
 	var ListClass = {};	// @select
 	var btMoins = {};	// @icon
 	var btPlus = {};	// @icon
@@ -125,6 +124,78 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	ListTask.onRowDraw = function ListTask_onRowDraw (event)// @startlock
+	{// @endlock
+		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vMat, vJourS, vHeure;
+		elem = event.element;
+		
+		if (elem !== null) {
+			vType = elem.semaineType;
+			vSemPI = $$('cSemPI').getValue();
+			if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+				j = event.row.rowNumber;
+				v = "vN"+j;
+				vRefg = 180;
+				vTxt = elem.getAttributeValue("Matiere.Nom");
+				vMat = elem.getAttributeValue("Matiere.ID");
+				vJourS = elem.jourS;
+				vPosy = 25+9*(elem.hDeb-32);
+				vTaille = (9*(elem.hFin-elem.hDeb))-1;
+				vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+				vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+				vCoul = elem.getAttributeValue("Matiere.CoulCode");
+				vSalle = elem.getAttributeValue("Salle.Nom");
+				vType = elem.semaineType;
+				vLarge = 126;
+				vPosx = vRefg;
+				if (vSalle === null) {
+					vTxt = vTxt + "\n";
+				} else {
+					vTxt = vTxt + "(" + vSalle + ")\n";
+				}
+				vTxt = vTxt + vLibH;
+				//alert(vCoul);
+				$$(v).setBackgroundColor(vCoul);
+				$$(v).resize(vLarge,vTaille);
+				$$(v).move(vPosx,vPosy);
+				$$(v).setValue(vTxt);
+				$$(v).show();
+				
+				vAnScol = $$("cbAnScol").getValue();
+				vClasse = $$("cClasse").getValue();
+				vFil = $$("cFil").getValue();
+				vToday = parseInt($$("sToday").getValue(),10);
+				vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
+					sources.remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "ic"+vk;
+								v = "vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+105);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
+			}
+		}
+
+	};// @lock
 
 	ListClass.change = function ListClass_change (event)// @startlock
 	{// @endlock
@@ -152,6 +223,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	btMoins.click = function btMoins_click (event)// @startlock
 	{// @endlock
 		var vCur;
+		
 		vCur = parseInt($$("sToday").getValue());
 		vCur = vCur - 1;
 		vJour = vCur - 7*parseInt(vCur/7);
@@ -165,6 +237,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	btPlus.click = function btPlus_click (event)// @startlock
 	{// @endlock
 		var vCur;
+		
 		vCur = parseInt($$("sToday").getValue());
 		vCur = vCur + 1;
 		vJour = vCur - 7*parseInt(vCur/7);
@@ -247,27 +320,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 							} else {
 								vQuery = "Annee_Scolaire.ID = :1 and Classe = :2";
 							}
-							sources.planning_Matiere.query(vQuery, { onSuccess: function(event) { 
-								sources.Taches.filterQuery("jourS = 'Lundi' ",{fromInitialQuery:true});
-								$$("ListClass").hide();
-								$$("cClasse").show();
-								$$("cFil").show();
-							}, params:[vAnScol, vClasse] });
+							$$("ListClass").hide();
+							$$("cClasse").show();
+							$$("cFil").show();
+							sources.planning_Matiere.query(vQuery, vAnScol, vClasse);
 							
 						},params:[vAnScol, vUserID] });
 					} else {
-						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", { onSuccess: function(event) { 
-							vJourS = 'Lundi';
-							vAnScol = sources.annees_Scolaires.ID;
-							vClasse = sources.parcours_Scolaire.Classe;
-							vFil = sources.parcours_Scolaire.Filiere;
-							if (vFil !== null && vFil !== " " && vFil.length > 0) {
-								vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3 and Planning.Filiere = :4";
-							} else {
-								vQuery = "Planning.Annee_Scolaire.ID = :1 and jourS = :2 and Planning.Classe = :3";
-							}
-							sources.tache_Theorique.query(vQuery, vAnScol, vJourS, vClasse, vFil);
-						}, params:[vAnScol] });
+						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
 					}
 		
 				}, params:[vUser] });
@@ -279,7 +339,15 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
 	{// @endlock
-		var vLun, vSem, vYear, vJour, vSlide, vJourS, vClasse, vFil, vAnScol, vQuery;;
+		var vLun, vSem, vYear, vJour, vSlide, vJourS, vClasse, vFil, vAnScol, vQuery;
+		
+		for (var i = 0; i < 10; i++) {
+			v = "vN"+i;
+			$$(v).hide();
+			v = "ic"+i;
+			$$(v).hide();
+		}
+		
 		vLun = $$('cLun').getValue();
 		$$("sToday").setValue(event.data.value);
 		vSlide = event.data.value;
@@ -399,7 +467,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic9.click = function ic9_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(9);
 	};// @lock
 
 	ic8.mouseout = function ic8_mouseout (event)// @startlock
@@ -409,7 +477,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic8.click = function ic8_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(8);
 	};// @lock
 
 	ic7.mouseout = function ic7_mouseout (event)// @startlock
@@ -419,7 +487,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic7.click = function ic7_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(7);
 	};// @lock
 
 	ic6.mouseout = function ic6_mouseout (event)// @startlock
@@ -429,7 +497,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic6.click = function ic6_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(6);
 	};// @lock
 
 	ic5.mouseout = function ic5_mouseout (event)// @startlock
@@ -439,7 +507,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic5.click = function ic5_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(5);
 	};// @lock
 
 	ic4.mouseout = function ic4_mouseout (event)// @startlock
@@ -449,7 +517,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic4.click = function ic4_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(4);
 	};// @lock
 
 	ic3.mouseout = function ic3_mouseout (event)// @startlock
@@ -459,7 +527,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic3.click = function ic3_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(3);
 	};// @lock
 
 	ic2.mouseout = function ic2_mouseout (event)// @startlock
@@ -469,7 +537,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic2.click = function ic2_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(2);
 	};// @lock
 
 	ic1.mouseout = function ic1_mouseout (event)// @startlock
@@ -479,7 +547,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	ic1.click = function ic1_click (event)// @startlock
 	{// @endlock
-		var res = coms(0);
+		var res = coms(1);
 	};// @lock
 
 	ic0.mouseout = function ic0_mouseout (event)// @startlock
@@ -510,6 +578,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("ListTask", "onRowDraw", ListTask.onRowDraw, "WAF");
 	WAF.addListener("sPerS", "slidechange", sPerS.slidechange, "WAF");
 	WAF.addListener("ListClass", "change", ListClass.change, "WAF");
 	WAF.addListener("btMoins", "click", btMoins.click, "WAF");
