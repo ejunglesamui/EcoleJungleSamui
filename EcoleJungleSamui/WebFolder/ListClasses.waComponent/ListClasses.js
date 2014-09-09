@@ -170,10 +170,11 @@ function constructor (id) {
             		vBox = "component1_cl"+j;
             		$$(vBox).getLabel().setValue(vClasse);
             		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2", { onSuccess: function(event) {
-            			var vEle, vEnb, vSec, vPrim, vTot, vClasse, vSec, vPrim, vCar, iBox;
+            			var vEle, vEnb, vSec, vPrim, vTot, vClasse, vSec, vPrim, vCar, iBox, vBox;
             			vEle = sources.component1_parcours_Scolaire;
             			vEnb = vEle.length;
             			iBox = event.userData.boxn;
+            			vBox = event.userData.cBox;
             			vTot = parseInt($$("component1_vTot").getValue());
             			vTot = vTot + vEnb;
             			$$("component1_vTot").setValue(vTot);
@@ -183,15 +184,17 @@ function constructor (id) {
             				vLarge = 160;
             			}
             			vClasse = iBox.Nom;
-            			vCar = vClasse.substr(1,1);
+            			vCar = vClasse.substr(0,1);
             			if (vCar === 'M' || vCar === 'C') {
             				vPrim = parseInt($$("component1_vPrim").getValue());
             				vPrim = vPrim + vEnb;
             				$$("component1_vPrim").setValue(vPrim);
+            				$$(vBox).setBackgroundColor("#007f7f");
             			} else {
             				vSec = parseInt($$("component1_vSec").getValue());
             				vSec = vSec + vEnb;
             				$$("component1_vSec").setValue(vSec);
+            				$$(vBox).setBackgroundColor("#7f007f");
             			}
             			$$(vBox).resize(vLarge,22);
             			vPrim = parseInt($$("component1_vPrim").getValue());
@@ -204,8 +207,8 @@ function constructor (id) {
             				$$("component1_vSec").resize(vLarge,22);
             			}
             			$$(vBox).show();
-            			$$(vBox).focus();
-            		}, params:[vAnScol, vClasse], userData: {boxn:elem}});
+            			//$$(vBox).focus();
+            		}, params:[vAnScol, vClasse], userData: {boxn:elem, cBox:vBox}});
 				}});
 			};
 		}});
