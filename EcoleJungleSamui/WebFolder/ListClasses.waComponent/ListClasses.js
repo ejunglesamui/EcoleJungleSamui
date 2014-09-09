@@ -207,7 +207,7 @@ function constructor (id) {
             				$$("component1_vSec").resize(vLarge,22);
             			}
             			$$(vBox).show();
-            			//$$(vBox).focus();
+            			$$(vBox).focus();
             		}, params:[vAnScol, vClasse], userData: {boxn:elem, cBox:vBox}});
 				}});
 			};
