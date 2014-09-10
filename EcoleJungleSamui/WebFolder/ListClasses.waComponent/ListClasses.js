@@ -154,7 +154,7 @@ function constructor (id) {
 	{// @endlock
 		var vAnScol, vClasses, nbC, iBox;
 		
-		sources.component1_classes.query("Nom != '-'", { onSuccess: function(event) { 
+		sources.component1_classes.query("Nom != '-' order by Ordre desc", { onSuccess: function(event) { 
 			var elem, nbC;
 			vClasses = sources.component1_classes;
 			$$("component1_vTot").setValue("0");
