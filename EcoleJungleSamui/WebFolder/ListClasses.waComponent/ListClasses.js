@@ -11,10 +11,12 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	this.load = function (data) {// @lock
+
 		
 	function lst (ind) {
 		
 		var v, vClasse, vAnScol;
+		$$("component1_ListEleves").setRowHeight(28);
 		v = "component1_cl"+ind;
 		vClasse = $$(v).getLabel().getValue();
 		vAnScol = $$("component1_cbAnScol").getValue();
@@ -56,6 +58,7 @@ function constructor (id) {
 	vTot.click = function vTot_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
+		$$("component1_ListEleves").setRowHeight(20);
 		vAnScol = $$("component1_cbAnScol").getValue();
 		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
 	};// @lock
@@ -63,6 +66,7 @@ function constructor (id) {
 	vSec.click = function vSec_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
+		$$("component1_ListEleves").setRowHeight(20);
 		vAnScol = $$("component1_cbAnScol").getValue();
 		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe != :2 and  Classe != :3 order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
 	};// @lock
@@ -70,6 +74,7 @@ function constructor (id) {
 	vPrim.click = function vPrim_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
+		$$("component1_ListEleves").setRowHeight(20);
 		vAnScol = $$("component1_cbAnScol").getValue();
 		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and (Classe = :2 or Classe = :3)  order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
 		

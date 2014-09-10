@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem6 = {};	// @menuItem
 	var menuItem23 = {};	// @menuItem
 	var menuItem1 = {};	// @menuItem
 	var menuItem16 = {};	// @menuItem
@@ -21,6 +22,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem6.click = function menuItem6_click (event)// @startlock
+	{// @endlock
+		$$('component1').loadComponent("/PlanningSalles.waComponent");
+	};// @lock
 
 	menuItem23.click = function menuItem23_click (event)// @startlock
 	{// @endlock
@@ -139,6 +145,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem6", "click", menuItem6.click, "WAF");
 	WAF.addListener("menuItem23", "click", menuItem23.click, "WAF");
 	WAF.addListener("menuItem1", "click", menuItem1.click, "WAF");
 	WAF.addListener("menuItem16", "click", menuItem16.click, "WAF");
