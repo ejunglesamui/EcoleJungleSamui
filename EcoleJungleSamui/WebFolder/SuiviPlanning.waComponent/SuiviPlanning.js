@@ -464,7 +464,7 @@ function constructor (id) {
 
 	ListAbo.onRowDraw = function ListAbo_onRowDraw (event)// @startlock
 	{// @endlock
-		var elem, j, v, vNom;
+		var elem, j, v, vNom, split_date, ndate, nday, nmonth, nyear, ndate_text;;
 		elem = event.element;
 		
 		if (elem !== null) {
@@ -489,14 +489,30 @@ function constructor (id) {
 			}
 			v = "component1_deb"+j;
 			if (elem.debut_reel !== null) {
-				$$(v).setValue(elem.debut_reel);
+				ndate = elem.debut_reel;
+				nday = ndate.getDate();
+				nday = ((nday < 10) ? '0' : '') + nday; 
+				nmonth = ndate.getMonth() + 1;
+				nmonth = ((nmonth < 10) ? '0' : '') + nmonth; 
+				nyear = ndate.getYear();
+				nyear = ((nyear < 200) ? 1900 : 0) + nyear; 
+				ndate_text = nday + '/' + nmonth + '/' + nyear;
+				$$(v).setValue(ndate_text);
 			} else {
 				$$(v).setValue("-");
 			}
 			$$(v).show();
 			v = "component1_fin"+j;
 			if (elem.fin_reelle !== null) {
-				$$(v).setValue(elem.fin_reelle);
+				ndate = elem.fin_reelle;
+				nday = ndate.getDate();
+				nday = ((nday < 10) ? '0' : '') + nday; 
+				nmonth = ndate.getMonth() + 1;
+				nmonth = ((nmonth < 10) ? '0' : '') + nmonth; 
+				nyear = ndate.getYear();
+				nyear = ((nyear < 200) ? 1900 : 0) + nyear; 
+				ndate_text = nday + '/' + nmonth + '/' + nyear;
+				$$(v).setValue(ndate_text);
 			} else {
 				$$(v).setValue("-");
 			}
