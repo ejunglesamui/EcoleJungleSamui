@@ -18,13 +18,16 @@ function constructor (id) {
 		v = "component1_cl"+ind;
 		vClasse = $$(v).getLabel().getValue();
 		vAnScol = $$("component1_cbAnScol").getValue();
-		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
 		
 		return "Ok";
 	
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var vTot = {};	// @textField
+	var vSec = {};	// @textField
+	var vPrim = {};	// @textField
 	var cl19 = {};	// @textField
 	var cl18 = {};	// @textField
 	var cl17 = {};	// @textField
@@ -49,6 +52,28 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	vTot.click = function vTot_click (event)// @startlock
+	{// @endlock
+		var vAnScol;
+		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+	};// @lock
+
+	vSec.click = function vSec_click (event)// @startlock
+	{// @endlock
+		var vAnScol;
+		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe != :2 and  Classe != :3 order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
+	};// @lock
+
+	vPrim.click = function vPrim_click (event)// @startlock
+	{// @endlock
+		var vAnScol;
+		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and (Classe = :2 or Classe = :3)  order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
+		
+	};// @lock
 
 	cl19.click = function cl19_click (event)// @startlock
 	{// @endlock
@@ -169,7 +194,7 @@ function constructor (id) {
             		vAnScol = $$("component1_cbAnScol").getValue();
             		vBox = "component1_cl"+j;
             		$$(vBox).getLabel().setValue(vClasse);
-            		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2", { onSuccess: function(event) {
+            		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", { onSuccess: function(event) {
             			var vEle, vEnb, vSec, vPrim, vTot, vClasse, vSec, vPrim, vCar, iBox, vBox;
             			vEle = sources.component1_parcours_Scolaire;
             			vEnb = vEle.length;
@@ -216,6 +241,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_vTot", "click", vTot.click, "WAF");
+	WAF.addListener(this.id + "_vSec", "click", vSec.click, "WAF");
+	WAF.addListener(this.id + "_vPrim", "click", vPrim.click, "WAF");
 	WAF.addListener(this.id + "_cl19", "click", cl19.click, "WAF");
 	WAF.addListener(this.id + "_cl18", "click", cl18.click, "WAF");
 	WAF.addListener(this.id + "_cl17", "click", cl17.click, "WAF");
