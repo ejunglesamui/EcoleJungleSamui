@@ -12,6 +12,8 @@ function constructor (id) {
 
 	this.load = function (data) {// @lock
 		
+		$$("cchg").hide();	
+		
 			
 		function convTime (Horaire) {
 		
@@ -528,8 +530,7 @@ function constructor (id) {
 				$$("component1_btSave").hide();
 				$$("component1_btUndo").hide();
 				$$("component1_btSup").hide();
-			}
-			$$("cchg").hide();			
+			}		
 		
 	};// @lock
 
