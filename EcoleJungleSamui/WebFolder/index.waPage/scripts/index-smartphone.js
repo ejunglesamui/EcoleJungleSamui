@@ -255,6 +255,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		if (vUser === null) {
 			$$('main').destroy();
 		 } else {
+		 	$$("cchg").show();
 			sources.annees_Scolaires.query("", { onSuccess: function(event) { 
 		 		
 				vConv = $$("cAnDeb").getValue();
@@ -332,8 +333,10 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		
 				}, params:[vUser] });
 			}});
+			$$("cchg").hide();
 			
 		 }
+		 
 
 	};// @lock
 
