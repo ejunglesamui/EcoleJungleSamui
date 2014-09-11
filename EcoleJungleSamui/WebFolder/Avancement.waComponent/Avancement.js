@@ -193,6 +193,7 @@ function constructor (id) {
 				sources.component1_abonne.query(vQuery, vAnScol, vUserID, vToday )
 			}
 		}, params:[vUser] });
+		$$("cchg").hide();
 				
 	};// @lock
 

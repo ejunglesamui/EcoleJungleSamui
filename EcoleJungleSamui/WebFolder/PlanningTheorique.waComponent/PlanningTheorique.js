@@ -528,7 +528,8 @@ function constructor (id) {
 				$$("component1_btSave").hide();
 				$$("component1_btUndo").hide();
 				$$("component1_btSup").hide();
-			}			
+			}
+			$$("cchg").hide();			
 		
 	};// @lock
 

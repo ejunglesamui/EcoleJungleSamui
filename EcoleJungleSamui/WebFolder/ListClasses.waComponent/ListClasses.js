@@ -242,6 +242,7 @@ function constructor (id) {
 				}});
 			};
 		}});
+		$$("cchg").hide();
 		
 	};// @lock
 

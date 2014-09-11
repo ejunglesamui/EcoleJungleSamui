@@ -678,6 +678,7 @@ function constructor (id) {
 			}, params:[vAnScol,vProf] }); 		
 		
 		}, params:[vUser] });
+		$$("cchg").hide();
 		
 		
 	};// @lock

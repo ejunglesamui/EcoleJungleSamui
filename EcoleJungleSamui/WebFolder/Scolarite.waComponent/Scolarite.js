@@ -277,7 +277,8 @@ function constructor (id) {
 				$$("component1_btIns").hide();
 			}
 			
-			}, params:[vAnScol] }); 		
+			}, params:[vAnScol] }); 
+			$$("cchg").hide();		
 		
 	};// @lock
 

@@ -12,6 +12,8 @@ function constructor (id) {
 
 	this.load = function (data) {// @lock
 		
+	$$("cchg").hide();
+		
 	function convTime (Horaire) {
 		
 		var vInt, vDec, vPart1, vPart2;

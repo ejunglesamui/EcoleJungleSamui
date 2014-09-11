@@ -26,81 +26,97 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	menuItem17.click = function menuItem17_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/Avancement.waComponent");
 	};// @lock
 
 	menuItem6.click = function menuItem6_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/PlanningSalles.waComponent");
 	};// @lock
 
 	menuItem23.click = function menuItem23_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/ListClasses.waComponent");
 	};// @lock
 
 	menuItem1.click = function menuItem1_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/ListClasses.waComponent");
 	};// @lock
 
 	menuItem16.click = function menuItem16_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/EmploiduTemps.waComponent");
 	};// @lock
 
 	menuItem14.click = function menuItem14_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/SuiviPlanning.waComponent");	
 	};// @lock
 
 	menuItem2.click = function menuItem2_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/GestProgramme.waComponent");
 	};// @lock
 
 	menuItem4.click = function menuItem4_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/Scolarite.waComponent");
 	};// @lock
 
 	menuItem15.click = function menuItem15_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/GestClasses.waComponent");
 	};// @lock
 
 	menuItem13.click = function menuItem13_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/PlanningTheorique.waComponent");
 	};// @lock
 
 	menuItem9.click = function menuItem9_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/GestMatieres.waComponent");
 	};// @lock
 
 	menuItem5.click = function menuItem5_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/EmploiduTemps.waComponent");
 	};// @lock
 
 	menuItem19.click = function menuItem19_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/GestAnneeScol.waComponent");
 	};// @lock
 
 	menuItem12.click = function menuItem12_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/GestFamilles.waComponent");
 	};// @lock
 
 	menuItem11.click = function menuItem11_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/Gest-Eleves.waComponent");
 	};// @lock
 
 	menuItem10.click = function menuItem10_click (event)// @startlock
 	{// @endlock
+		$$("cchg").show();
 		$$('component1').loadComponent("/Gest_Utilisateurs.waComponent");
 	};// @lock
 

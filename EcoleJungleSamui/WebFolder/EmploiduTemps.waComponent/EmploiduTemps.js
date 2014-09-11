@@ -1941,6 +1941,7 @@ function constructor (id) {
 		
 			
 		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
+		//$$("component1_pgb1").startListening();
 		
 		vConv = $$("component1_cAnDeb").getValue();
 		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
@@ -2003,6 +2004,8 @@ function constructor (id) {
 			}		
 		
 		}, params:[vUser] });
+		$$("cchg").hide();
+		//$$("component1_pgb1").stopListening();
 		
 		
 	};// @lock

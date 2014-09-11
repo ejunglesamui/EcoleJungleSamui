@@ -128,6 +128,7 @@ function constructor (id) {
 		}
 		
 		$$("component1_cbJour").setValue("Lundi");
+		$$("cchg").hide();
 				
 	};// @lock
 
