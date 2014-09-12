@@ -7,7 +7,7 @@ function constructor (id) {
 
 	// @region beginComponentDeclaration// @startlock
 	var $comp = this;
-	this.name = 'PlanningSalles';
+	this.name = 'PlanningMatieres';
 	// @endregion// @endlock
 
 	this.load = function (data) {// @lock
@@ -30,7 +30,7 @@ function constructor (id) {
 
 	// @region namespaceDeclaration// @startlock
 	var cbJour = {};	// @combobox
-	var cbSalle = {};	// @combobox
+	var cbMat = {};	// @combobox
 	var cbAnScol = {};	// @combobox
 	// @endregion// @endlock
 
@@ -38,7 +38,7 @@ function constructor (id) {
 
 	cbJour.change = function cbJour_change (event)// @startlock
 	{// @endlock
-		var vAnScol, vSalle, vJourS, v;
+		var vAnScol, vMat, vJourS, v, vClasse;
 		
 		for (var i = 0; i < 80; i++) {
 			v = "component1_textField"+i;
@@ -46,11 +46,11 @@ function constructor (id) {
 		}
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
-		vSalle = $$("component1_cbSalle").getValue();
+		vMat = $$("component1_cbMat").getValue();
 		vJourS = $$("component1_cbJour").getValue();
-		v = "Utilisation de la "+sources.component1_salles.Nom+" le "+vJourS;
+		v = "Cours de "+sources.component1_matieres.Nom+" le "+vJourS;
 		$$("component1_chead").setValue(v);
-		sources.component1_tache_Theorique.query("Planning.Annee_Scolaire.ID = :1 and Salle.ID = :2 and jourS = :3 order by Planning.Classe, Planning.Filiere, hDeb", { onSuccess: function(event) { 
+		sources.component1_tache_Theorique.query("Planning.Annee_Scolaire.ID = :1 and Matiere.ID = :2 and jourS = :3 order by Planning.Classe, Planning.Filiere, hDeb", { onSuccess: function(event) { 
 			var vTaches, nbT, vRupt, vLeft;
 			vTaches = sources.component1_tache_Theorique;
 			nbT = vTaches.length;
@@ -71,7 +71,7 @@ function constructor (id) {
 						vRupt = vComp;
 						vLeft = vLeft + 74;
 					}
-            		vTxt = elem.getAttributeValue("Matiere.Nom")+"\n"+vComp+"\n";
+            		vTxt = elem.getAttributeValue("Matiere.Nom")+"\n"+vComp+" - "+elem.getAttributeValue("Salle.Nom")+"\n";
             		vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
             		vTxt = vTxt + vLibH
             		vPosy = 68+11*(elem.hDeb-32);
@@ -104,10 +104,10 @@ function constructor (id) {
         			
         		}});
         	};
-		}, params:[vAnScol, vSalle, vJourS]});
+		}, params:[vAnScol, vMat, vJourS]});
 	};// @lock
 
-	cbSalle.change = function cbSalle_change (event)// @startlock
+	cbMat.change = function cbMat_change (event)// @startlock
 	{// @endlock
 		var vAnScol, vSalle, v;
 		
@@ -117,7 +117,7 @@ function constructor (id) {
 		}
 		
 		$$("component1_cbJour").setValue("Lundi");
-		v = "Utilisation de la "+sources.component1_salles.Nom+" le Lundi";
+		v = "Cours de "+sources.component1_matieres.Nom+" le Lundi";
 		$$("component1_chead").setValue(v);
 		
 	};// @lock
@@ -138,7 +138,7 @@ function constructor (id) {
 
 	// @region eventManager// @startlock
 	WAF.addListener(this.id + "_cbJour", "change", cbJour.change, "WAF");
-	WAF.addListener(this.id + "_cbSalle", "change", cbSalle.change, "WAF");
+	WAF.addListener(this.id + "_cbMat", "change", cbMat.change, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
 	// @endregion// @endlock
 
