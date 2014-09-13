@@ -15,7 +15,8 @@ function constructor (id) {
 	function addMonthToDate(old_date, delta_m) {
 		var split_date, new_date, new_day, new_month, new_year, new_date_date;
 		split_date = old_date.split('/');
-		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, split_date[0]*1);
+		vM = 1;
+		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, vM);
 		new_month = new_date.getMonth() + 1;
 		new_month = ((new_month < 10) ? '0' : '') + new_month; 
 		new_year = new_date.getYear();
