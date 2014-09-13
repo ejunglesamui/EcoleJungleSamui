@@ -344,864 +344,1152 @@ function constructor (id) {
 	{// @endlock
 		$$("component1_t24").hide();
 		$$("component1_nt24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt24.click = function nt24_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt24").hide();
 		$$("component1_t24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c24.click = function c24_click (event)// @startlock
 	{// @endlock
 		$$("component1_c24").hide();
 		$$("component1_nc24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc24.click = function nc24_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc24").hide();
 		$$("component1_c24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np24.click = function np24_click (event)// @startlock
 	{// @endlock
 		$$("component1_np24").hide();
 		$$("component1_p24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p24.click = function p24_click (event)// @startlock
 	{// @endlock
 		$$("component1_p24").hide();
 		$$("component1_np24").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t23.click = function t23_click (event)// @startlock
 	{// @endlock
 		$$("component1_t23").hide();
 		$$("component1_nt23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt23.click = function nt23_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt23").hide();
 		$$("component1_t23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c23.click = function c23_click (event)// @startlock
 	{// @endlock
 		$$("component1_c23").hide();
 		$$("component1_nc23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc23.click = function nc23_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc23").hide();
 		$$("component1_c23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np23.click = function np23_click (event)// @startlock
 	{// @endlock
 		$$("component1_np23").hide();
 		$$("component1_p23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p23.click = function p23_click (event)// @startlock
 	{// @endlock
 		$$("component1_p23").hide();
 		$$("component1_np23").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t22.click = function t22_click (event)// @startlock
 	{// @endlock
 		$$("component1_t22").hide();
 		$$("component1_nt22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt22.click = function nt22_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt22").hide();
 		$$("component1_t22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c22.click = function c22_click (event)// @startlock
 	{// @endlock
 		$$("component1_c22").hide();
 		$$("component1_nc22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc22.click = function nc22_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc22").hide();
 		$$("component1_c22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np22.click = function np22_click (event)// @startlock
 	{// @endlock
 		$$("component1_np22").hide();
 		$$("component1_p22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p22.click = function p22_click (event)// @startlock
 	{// @endlock
 		$$("component1_p22").hide();
 		$$("component1_np22").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t21.click = function t21_click (event)// @startlock
 	{// @endlock
 		$$("component1_t21").hide();
 		$$("component1_nt21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt21.click = function nt21_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt21").hide();
 		$$("component1_t21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c21.click = function c21_click (event)// @startlock
 	{// @endlock
 		$$("component1_c21").hide();
 		$$("component1_nc21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc21.click = function nc21_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc21").hide();
 		$$("component1_c21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np21.click = function np21_click (event)// @startlock
 	{// @endlock
 		$$("component1_np21").hide();
 		$$("component1_p21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p21.click = function p21_click (event)// @startlock
 	{// @endlock
 		$$("component1_p21").hide();
 		$$("component1_np21").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t20.click = function t20_click (event)// @startlock
 	{// @endlock
 		$$("component1_t20").hide();
 		$$("component1_nt20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt20.click = function nt20_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt20").hide();
 		$$("component1_t20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c20.click = function c20_click (event)// @startlock
 	{// @endlock
 		$$("component1_c20").hide();
 		$$("component1_nc20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc20.click = function nc20_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc20").hide();
 		$$("component1_c20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np20.click = function np20_click (event)// @startlock
 	{// @endlock
 		$$("component1_np20").hide();
 		$$("component1_p20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p20.click = function p20_click (event)// @startlock
 	{// @endlock
 		$$("component1_p20").hide();
 		$$("component1_np20").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t19.click = function t19_click (event)// @startlock
 	{// @endlock
 		$$("component1_t19").hide();
 		$$("component1_nt19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt19.click = function nt19_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt19").hide();
 		$$("component1_t19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c19.click = function c19_click (event)// @startlock
 	{// @endlock
 		$$("component1_c19").hide();
 		$$("component1_nc19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc19.click = function nc19_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc19").hide();
 		$$("component1_c19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np19.click = function np19_click (event)// @startlock
 	{// @endlock
 		$$("component1_np19").hide();
 		$$("component1_p19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p19.click = function p19_click (event)// @startlock
 	{// @endlock
 		$$("component1_p19").hide();
 		$$("component1_np19").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t18.click = function t18_click (event)// @startlock
 	{// @endlock
 		$$("component1_t18").hide();
 		$$("component1_nt18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt18.click = function nt18_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt18").hide();
 		$$("component1_t18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c18.click = function c18_click (event)// @startlock
 	{// @endlock
 		$$("component1_c18").hide();
 		$$("component1_nc18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc18.click = function nc18_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc18").hide();
 		$$("component1_c18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np18.click = function np18_click (event)// @startlock
 	{// @endlock
 		$$("component1_np18").hide();
 		$$("component1_p18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p18.click = function p18_click (event)// @startlock
 	{// @endlock
 		$$("component1_p18").hide();
 		$$("component1_np18").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t17.click = function t17_click (event)// @startlock
 	{// @endlock
 		$$("component1_t17").hide();
 		$$("component1_nt17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt17.click = function nt17_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt17").hide();
 		$$("component1_t17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c17.click = function c17_click (event)// @startlock
 	{// @endlock
 		$$("component1_c17").hide();
 		$$("component1_nc17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc17.click = function nc17_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc17").hide();
 		$$("component1_c17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np17.click = function np17_click (event)// @startlock
 	{// @endlock
 		$$("component1_np17").hide();
 		$$("component1_p17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p17.click = function p17_click (event)// @startlock
 	{// @endlock
 		$$("component1_p17").hide();
 		$$("component1_np17").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t16.click = function t16_click (event)// @startlock
 	{// @endlock
 		$$("component1_t16").hide();
 		$$("component1_nt16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt16.click = function nt16_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt16").hide();
 		$$("component1_t16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c16.click = function c16_click (event)// @startlock
 	{// @endlock
 		$$("component1_c16").hide();
 		$$("component1_nc16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc16.click = function nc16_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc16").hide();
 		$$("component1_c16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np16.click = function np16_click (event)// @startlock
 	{// @endlock
 		$$("component1_np16").hide();
 		$$("component1_p16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p16.click = function p16_click (event)// @startlock
 	{// @endlock
 		$$("component1_p16").hide();
 		$$("component1_np16").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t15.click = function t15_click (event)// @startlock
 	{// @endlock
 		$$("component1_t15").hide();
 		$$("component1_nt15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt15.click = function nt15_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt15").hide();
 		$$("component1_t15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c15.click = function c15_click (event)// @startlock
 	{// @endlock
 		$$("component1_c15").hide();
 		$$("component1_nc15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc15.click = function nc15_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc15").hide();
 		$$("component1_c15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np15.click = function np15_click (event)// @startlock
 	{// @endlock
 		$$("component1_np15").hide();
 		$$("component1_p15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p15.click = function p15_click (event)// @startlock
 	{// @endlock
 		$$("component1_p15").hide();
 		$$("component1_np15").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t14.click = function t14_click (event)// @startlock
 	{// @endlock
 		$$("component1_t14").hide();
 		$$("component1_nt14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt14.click = function nt14_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt14").hide();
 		$$("component1_t14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c14.click = function c14_click (event)// @startlock
 	{// @endlock
 		$$("component1_c14").hide();
 		$$("component1_nc14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc14.click = function nc14_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc14").hide();
 		$$("component1_c14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np14.click = function np14_click (event)// @startlock
 	{// @endlock
 		$$("component1_np14").hide();
 		$$("component1_p14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p14.click = function p14_click (event)// @startlock
 	{// @endlock
 		$$("component1_p14").hide();
 		$$("component1_np14").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t13.click = function t13_click (event)// @startlock
 	{// @endlock
 		$$("component1_t13").hide();
 		$$("component1_nt13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt13.click = function nt13_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt13").hide();
 		$$("component1_t13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c13.click = function c13_click (event)// @startlock
 	{// @endlock
 		$$("component1_c13").hide();
 		$$("component1_nc13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc13.click = function nc13_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc13").hide();
 		$$("component1_c13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np13.click = function np13_click (event)// @startlock
 	{// @endlock
 		$$("component1_np13").hide();
 		$$("component1_p13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p13.click = function p13_click (event)// @startlock
 	{// @endlock
 		$$("component1_p13").hide();
 		$$("component1_np13").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t12.click = function t12_click (event)// @startlock
 	{// @endlock
 		$$("component1_t12").hide();
 		$$("component1_nt12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt12.click = function nt12_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt12").hide();
 		$$("component1_t12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c12.click = function c12_click (event)// @startlock
 	{// @endlock
 		$$("component1_c12").hide();
 		$$("component1_nc12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc12.click = function nc12_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc12").hide();
 		$$("component1_c12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np12.click = function np12_click (event)// @startlock
 	{// @endlock
 		$$("component1_np12").hide();
 		$$("component1_p12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p12.click = function p12_click (event)// @startlock
 	{// @endlock
 		$$("component1_p12").hide();
 		$$("component1_np12").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t11.click = function t11_click (event)// @startlock
 	{// @endlock
 		$$("component1_t11").hide();
 		$$("component1_nt11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt11.click = function nt11_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt11").hide();
 		$$("component1_t11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c11.click = function c11_click (event)// @startlock
 	{// @endlock
 		$$("component1_c11").hide();
 		$$("component1_nc11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc11.click = function nc11_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc11").hide();
 		$$("component1_c11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np11.click = function np11_click (event)// @startlock
 	{// @endlock
 		$$("component1_np11").hide();
 		$$("component1_p11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p11.click = function p11_click (event)// @startlock
 	{// @endlock
 		$$("component1_p11").hide();
 		$$("component1_np11").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t10.click = function t10_click (event)// @startlock
 	{// @endlock
 		$$("component1_t10").hide();
 		$$("component1_nt10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt10.click = function nt10_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt10").hide();
 		$$("component1_t10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c10.click = function c10_click (event)// @startlock
 	{// @endlock
 		$$("component1_c10").hide();
 		$$("component1_nc10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc10.click = function nc10_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc10").hide();
 		$$("component1_c10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np10.click = function np10_click (event)// @startlock
 	{// @endlock
 		$$("component1_np10").hide();
 		$$("component1_p10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p10.click = function p10_click (event)// @startlock
 	{// @endlock
 		$$("component1_p10").hide();
 		$$("component1_np10").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t9.click = function t9_click (event)// @startlock
 	{// @endlock
 		$$("component1_t9").hide();
 		$$("component1_nt9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt9.click = function nt9_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt9").hide();
 		$$("component1_t9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c9.click = function c9_click (event)// @startlock
 	{// @endlock
 		$$("component1_c9").hide();
 		$$("component1_nc9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc9.click = function nc9_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc9").hide();
 		$$("component1_c9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np9.click = function np9_click (event)// @startlock
 	{// @endlock
 		$$("component1_np9").hide();
 		$$("component1_p9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p9.click = function p9_click (event)// @startlock
 	{// @endlock
 		$$("component1_p9").hide();
 		$$("component1_np9").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t8.click = function t8_click (event)// @startlock
 	{// @endlock
 		$$("component1_t8").hide();
 		$$("component1_nt8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt8.click = function nt8_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt8").hide();
 		$$("component1_t8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c8.click = function c8_click (event)// @startlock
 	{// @endlock
 		$$("component1_c8").hide();
 		$$("component1_nc8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc8.click = function nc8_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc8").hide();
 		$$("component1_c8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np8.click = function np8_click (event)// @startlock
 	{// @endlock
 		$$("component1_np8").hide();
 		$$("component1_p8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p8.click = function p8_click (event)// @startlock
 	{// @endlock
 		$$("component1_p8").hide();
 		$$("component1_np8").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t7.click = function t7_click (event)// @startlock
 	{// @endlock
 		$$("component1_t7").hide();
 		$$("component1_nt7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt7.click = function nt7_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt7").hide();
 		$$("component1_t7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c7.click = function c7_click (event)// @startlock
 	{// @endlock
 		$$("component1_c7").hide();
 		$$("component1_nc7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc7.click = function nc7_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc7").hide();
 		$$("component1_c7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np7.click = function np7_click (event)// @startlock
 	{// @endlock
 		$$("component1_np7").hide();
 		$$("component1_p7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p7.click = function p7_click (event)// @startlock
 	{// @endlock
 		$$("component1_p7").hide();
 		$$("component1_np7").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t6.click = function t6_click (event)// @startlock
 	{// @endlock
 		$$("component1_t6").hide();
 		$$("component1_nt6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt6.click = function nt6_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt6").hide();
 		$$("component1_t6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c6.click = function c6_click (event)// @startlock
 	{// @endlock
 		$$("component1_c6").hide();
 		$$("component1_nc6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc6.click = function nc6_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc6").hide();
 		$$("component1_c6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np6.click = function np6_click (event)// @startlock
 	{// @endlock
 		$$("component1_np6").hide();
 		$$("component1_p6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p6.click = function p6_click (event)// @startlock
 	{// @endlock
 		$$("component1_p6").hide();
 		$$("component1_np6").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t5.click = function t5_click (event)// @startlock
 	{// @endlock
 		$$("component1_t5").hide();
 		$$("component1_nt5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt5.click = function nt5_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt5").hide();
 		$$("component1_t5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c5.click = function c5_click (event)// @startlock
 	{// @endlock
 		$$("component1_c5").hide();
 		$$("component1_nc5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc5.click = function nc5_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc5").hide();
 		$$("component1_c5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np5.click = function np5_click (event)// @startlock
 	{// @endlock
 		$$("component1_np5").hide();
 		$$("component1_p5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p5.click = function p5_click (event)// @startlock
 	{// @endlock
 		$$("component1_p5").hide();
 		$$("component1_np5").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t4.click = function t4_click (event)// @startlock
 	{// @endlock
 		$$("component1_t4").hide();
 		$$("component1_nt4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt4.click = function nt4_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt4").hide();
 		$$("component1_t4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c4.click = function c4_click (event)// @startlock
 	{// @endlock
 		$$("component1_c4").hide();
 		$$("component1_nc4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc4.click = function nc4_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc4").hide();
 		$$("component1_c4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np4.click = function np4_click (event)// @startlock
 	{// @endlock
 		$$("component1_np4").hide();
 		$$("component1_p4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p4.click = function p4_click (event)// @startlock
 	{// @endlock
 		$$("component1_p4").hide();
 		$$("component1_np4").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t3.click = function t3_click (event)// @startlock
 	{// @endlock
 		$$("component1_t3").hide();
 		$$("component1_nt3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt3.click = function nt3_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt3").hide();
 		$$("component1_t3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c3.click = function c3_click (event)// @startlock
 	{// @endlock
 		$$("component1_c3").hide();
 		$$("component1_nc3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc3.click = function nc3_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc3").hide();
 		$$("component1_c3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np3.click = function np3_click (event)// @startlock
 	{// @endlock
 		$$("component1_np3").hide();
 		$$("component1_p3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p3.click = function p3_click (event)// @startlock
 	{// @endlock
 		$$("component1_p3").hide();
 		$$("component1_np3").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t2.click = function t2_click (event)// @startlock
 	{// @endlock
 		$$("component1_t2").hide();
 		$$("component1_nt2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt2.click = function nt2_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt2").hide();
 		$$("component1_t2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c2.click = function c2_click (event)// @startlock
 	{// @endlock
 		$$("component1_c2").hide();
 		$$("component1_nc2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc2.click = function nc2_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc2").hide();
 		$$("component1_c2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np2.click = function np2_click (event)// @startlock
 	{// @endlock
 		$$("component1_np2").hide();
 		$$("component1_p2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p2.click = function p2_click (event)// @startlock
 	{// @endlock
 		$$("component1_p2").hide();
 		$$("component1_np2").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t1.click = function t1_click (event)// @startlock
 	{// @endlock
 		$$("component1_t1").hide();
 		$$("component1_nt1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nt1.click = function nt1_click (event)// @startlock
 	{// @endlock
 		$$("component1_nt1").hide();
 		$$("component1_t1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c1.click = function c1_click (event)// @startlock
 	{// @endlock
 		$$("component1_c1").hide();
 		$$("component1_nc1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc1.click = function nc1_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc1").hide();
 		$$("component1_c1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np1.click = function np1_click (event)// @startlock
 	{// @endlock
 		$$("component1_np1").hide();
 		$$("component1_p1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p1.click = function p1_click (event)// @startlock
 	{// @endlock
 		$$("component1_p1").hide();
 		$$("component1_np1").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
@@ -1278,36 +1566,49 @@ function constructor (id) {
 	{// @endlock
 		$$("component1_nt0").hide();
 		$$("component1_t0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	t0.click = function t0_click (event)// @startlock
 	{// @endlock
 		$$("component1_t0").hide();
 		$$("component1_nt0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	c0.click = function c0_click (event)// @startlock
 	{// @endlock
 		$$("component1_c0").hide();
 		$$("component1_nc0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	nc0.click = function nc0_click (event)// @startlock
 	{// @endlock
 		$$("component1_nc0").hide();
 		$$("component1_c0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	np0.click = function np0_click (event)// @startlock
 	{// @endlock
 		$$("component1_np0").hide();
 		$$("component1_p0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
 	};// @lock
 
 	p0.click = function p0_click (event)// @startlock
 	{// @endlock
 		$$("component1_p0").hide();
 		$$("component1_np0").show();
+		$$("component1_btSave").show();
+		$$("component1_btUndo").show();
+		
 	};// @lock
 
 	// @region eventManager// @startlock
