@@ -13,7 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 		
 	function addMonthToDate(old_date, delta_m) {
-		var split_date, new_date, new_day, new_month, new_year, new_date_date;
+		var split_date, new_date, new_day, new_month, new_year, new_date_date, vM;
 		split_date = old_date.split('/');
 		vM = 1;
 		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, vM);
@@ -27,10 +27,11 @@ function constructor (id) {
 	}
 	
 	function LibMonthToDate(old_date, delta_m) {
-		var split_date, new_date, new_day, new_month, new_year, new_date_text, tab_mois, vLMois;
+		var split_date, new_date, new_day, new_month, new_year, new_date_text, tab_mois, vLMois, vM;
 		tab_mois=new Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
 		split_date = old_date.split('/');
-		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, split_date[0]*1);
+		vM = 1;
+		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, vM);
 		new_month = new_date.getMonth();
 		new_year = new_date.getYear();
 		new_year = ((new_year < 200) ? 1900 : 0) + new_year; 
