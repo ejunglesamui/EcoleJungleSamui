@@ -13,7 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 		
 	function addMonthToDate(old_date, delta_m) {
-		var split_date, new_date, new_day, new_month, new_year, new_date_text;
+		var split_date, new_date, new_day, new_month, new_year, new_date_date;
 		split_date = old_date.split('/');
 		new_date = new Date(split_date[2], split_date[1]*1 - 1 + delta_m, split_date[0]*1);
 		new_month = new_date.getMonth() + 1;
@@ -128,7 +128,7 @@ function constructor (id) {
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
 		var vAnScol = $$("component1_cbAnScol").getValue();
-		sources.component1_calendrier.query("Annee_Scolaire.ID = :1",vAnScol);
+		sources.component1_calendrier.query("Annee_Scolaire.ID = :1 order by sMois",vAnScol);
 		$$("cchg").hide();
 		
 	};// @lock

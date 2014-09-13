@@ -13,11 +13,67 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 	
 	$$("cchg").hide();
+	
+	function SemNum(MaDate) {
+	
+		var annee = parseInt(MaDate.substr(6,4),10),
+			mm = parseInt(MaDate.substr(3,2),10)-1,
+			NumSemaine = 0,
+			ListeMois = [31,28,31,30,31,30,31,31,30,31,30,31],
+			TotalJour=0,
+			JourDebutAn, DebutAn,
+			cpt, 
+			jj = parseInt(MaDate.substr(0,2),10);
+			
+		if (annee %4 === 0 && (annee %100 !== 0 || annee %400 === 0)) {ListeMois[1]=29;}
+		for (cpt=0; cpt<mm; cpt++){TotalJour+=ListeMois[cpt];}
+		TotalJour+=jj;
+		DebutAn = new Date(annee,0,1);
+		JourDebutAn=DebutAn.getDay();
+		if(JourDebutAn===0){JourDebutAn=7;}
+		TotalJour-=8-JourDebutAn;
+		NumSemaine = 1;
+		NumSemaine+=Math.floor(TotalJour/7);
+		if(TotalJour%7!==0){NumSemaine+=1;}
+	
+		return(NumSemaine);
+	}
+	
+	function addDaysToDate(old_date, delta_days) {
+		var split_date, new_date, new_day, new_month, new_year, new_date_text;
+		split_date = old_date.split('/');
+		new_date = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1 + delta_days);
+		new_day = new_date.getDate();
+		new_day = ((new_day < 10) ? '0' : '') + new_day; 
+		new_month = new_date.getMonth() + 1;
+		new_month = ((new_month < 10) ? '0' : '') + new_month; 
+		new_year = new_date.getYear();
+		new_year = ((new_year < 200) ? 1900 : 0) + new_year; 
+		new_date_text = new_day + '/' + new_month + '/' + new_year;
+		
+		return new_date_text;
+	}
+	
+	function convTime (Horaire) {
+		
+		var vInt, vDec, vPart1, vPart2;
+		
+		vInt = parseInt(Horaire/4,10)+':';
+		if (vInt.length ===2) {
+			vInt = '0'+vInt;
+		}
+		vDec = 15*(Horaire-4*parseInt(Horaire/4,10)) + ' ';
+		if (vDec.length === 2) {
+			vDec = '0'+vDec;
+		}
+		return (vInt+vDec);
+		
+	}
 
 	// @region namespaceDeclaration// @startlock
-	var ListClass = {};	// @dataGrid
-	var sPerS = {};	// @slider
 	var cbAnScol = {};	// @combobox
+	var sPerS = {};	// @slider
+	var ListClass = {};	// @dataGrid
 	var nt0 = {};	// @icon
 	var t0 = {};	// @icon
 	var c0 = {};	// @icon
@@ -28,6 +84,55 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	cbAnScol.change = function cbAnScol_change (event)// @startlock
+	{// @endlock
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {};
+		
+			
+		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
+		//$$("component1_pgb1").startListening();
+		
+					
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vUser = WAF.directory.currentUser().userName;
+		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
+		
+			var vAnScol, vProf, elem, vUserID, vToday, vMois = 1;
+			elem = sources.component1_utilisateurs;
+			vUserID = elem.ID;
+			vProf = $$("component1_cProf").getValue();
+			vAnScol = $$("component1_cbAnScol").getValue();
+			$$("component1_cRole").setValue(elem.Fonction);
+			if (elem.Fonction === "Elève") {
+				//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
+				sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
+					var vAnScol, elem, vClasse, vFil, vToday;
+					vToday = new Date();
+					vAnScol = $$("component1_cbAnScol").getValue();
+					sources.component1_calendrier.query("Annee_Scolaire.ID = :1 and dDeb <= :2 and dFin >= :2", vAnScol, vToday);
+					$$("component1_ListClass").hide();
+					$$("component1_cClasse").show();
+					$$("component1_cFil").show();
+				},params:[vAnScol, vUserID] });
+			} else {
+				//sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+				vToday = new Date();
+				sources.component1_calendrier.query("Annee_Scolaire.ID = :1 and dDeb <= :2 and dFin >= :2", vAnScol, vToday);
+			}		
+		
+		}, params:[vUser] });
+		$$("cchg").hide();
+		//$$("component1_pgb1").stopListening();
+		
+	};// @lock
+
+	sPerS.slide = function sPerS_slide (event)// @startlock
+	{// @endlock
+		var vCal;
+		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_calendrier.query("Annee_Scolaire.ID = :1 and sMois = :2", vAnScol, event.data.value);
+	};// @lock
+
 	ListClass.onRowClick = function ListClass_onRowClick (event)// @startlock
 	{// @endlock
 		for (var i = 0; i < 51; i++) {
@@ -37,229 +142,6 @@ function constructor (id) {
 			$$(v).hide();
 
 		}
-		
-	};// @lock
-
-	sPerS.slidestop = function sPerS_slidestop (event)// @startlock
-	{// @endlock
-		var vTaches, vRems, nb;
-		
-		for (var i = 0; i < 51; i++) {
-			v = "component1_vN"+i;
-			$$(v).hide();
-			v = "component1_ic"+i;
-			$$(v).hide();
-		}
-			
-		vTaches = sources.component1_Taches;
-		nb = vTaches.length; 
-       	for (var j = 0; j < nb; j++) {
-        	vTaches.getElement(j, { onSuccess: function(event) {
-        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vAnScol, vClasse, vFil, vToday, vQuery, vJourS, vMat, vHeure;
-            	elem = event.element;
-            	vType = elem.semaineType;
-				vSemPI = $$('component1_cSemPI').getValue();
-				if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
-            		v = "component1_vN"+j;
-					switch (elem.jourS) {
-						case 'Lundi':
-							vRefg = 434;
-							break;
-						case 'Mardi':
-							vRefg = 576;
-							break;
-						case 'Mercredi':
-							vRefg = 718;
-							break;
-						case 'Jeudi':
-							vRefg = 860;
-							break;
-						case 'Vendredi':
-							vRefg = 1002;
-							break;
-						}
-					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
-					vMat = elem.getAttributeValue("Matiere.ID");
-					vJourS = elem.jourS;
-					vPosy = 83+11*(elem.hDeb-32);
-					vTaille = (11*(elem.hFin-elem.hDeb))-1;
-					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
-					vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
-					vCoul = elem.getAttributeValue("Matiere.CoulCode");
-					vSalle = elem.getAttributeValue("Salle.Nom");
-					vType = elem.semaineType;
-					vLarge = 140;
-					vPosx = vRefg;
-					vTxt = vTxt + vLibH + "\n";
-					if (vSalle === null) {
-						vTxt = vTxt + "-";
-					} else {
-						vTxt = vTxt + vSalle;
-					}
-					$$(v).setBackgroundColor(vCoul);
-					$$(v).resize(vLarge,vTaille);
-					$$(v).move(vPosx,vPosy);
-					$$(v).setValue(vTxt);
-					$$(v).show();
-					
-					vAnScol = $$("component1_cbAnScol").getValue();
-					vClasse = $$("component1_cClasse").getValue();
-					vFil = $$("component1_cFil").getValue();
-					vToday = parseInt($$("component1_sToday").getValue(),10);
-					vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
-					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
-					if (vFil !== null && vFil !== " " && vFil.length > 0) {
-						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
-					} else {
-						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
-					}
-					sources.component1_remarques.query(vQuery, { onSuccess: function(event) {
-						var vrems, vnbr, vJourSem, vMat, v, vboxn;
-						vboxn = event.userData.boxn;
-						//alert('query box :'+vboxn);
-						vrems = sources.component1_remarques;
-						if (vrems.length > 0) {
-							vrems.getElement(0, { onSuccess: function(event)  {
-								var vk;
-								vk = event.userData.k;
-								icr = "component1_ic"+vk;
-								v = "component1_vN"+vk;
-								boxPos = $$(v).getPosition();
-								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
-								$$(icr).setLeft(boxPos.left+121);
-								$$(icr).setTop(boxPos.top + 2);
-								$$(icr).show();
-								}, userData: {k:vboxn}});
-						}
-					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
-					
-				}
-        	}});
-        	
-    	}
-		
-	};// @lock
-
-	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
-	{// @endlock
-		var vLun, vSem, vYear;
-		vLun = $$('component1_cLun').getValue();
-		vYear = addDaysToDate(vLun,event.data.value);
-		$$('component1_cAnnee').setValue(vYear.substr(6,4));
-		$$("component1_sToday").setValue(event.data.value);
-		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
-		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
-		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
-		$$('component1_tS3').setValue(addDaysToDate(vLun,event.data.value+3));
-		$$('component1_tS4').setValue(addDaysToDate(vLun,event.data.value+4));
-		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
-		vSem = SemNum(addDaysToDate(vLun,event.data.value));
-		vSem = (vSem/2)-parseInt(vSem/2,10);
-		if (vSem === 0) {
-			$$('component1_cSemPI').setValue("Paire");
-		} else {
-			$$('component1_cSemPI').setValue("Impaire");
-		}
-		
-		//$$('component1_tSNumFin').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[1]-3)));
-	};// @lock
-
-	sPerS.slide = function sPerS_slide (event)// @startlock
-	{// @endlock
-		var vLun, vSem, vYear;
-		vLun = $$('component1_cLun').getValue();
-		$$("component1_sToday").setValue(event.data.value);
-		vYear = addDaysToDate(vLun,event.data.value);
-		$$('component1_cAnnee').setValue(vYear.substr(6,4));
-		$$('component1_tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
-		$$('component1_tS1').setValue(addDaysToDate(vLun,event.data.value+1));
-		$$('component1_tS2').setValue(addDaysToDate(vLun,event.data.value+2));
-		$$('component1_tS3').setValue(addDaysToDate(vLun,event.data.value+3));
-		$$('component1_tS4').setValue(addDaysToDate(vLun,event.data.value+4));
-		$$('component1_tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
-		vSem = SemNum(addDaysToDate(vLun,event.data.value));
-		vSem = (vSem/2)-parseInt(vSem/2,10);
-		if (vSem === 0) {
-			$$('component1_cSemPI').setValue("Paire");
-		} else {
-			$$('component1_cSemPI').setValue("Impaire");
-		}
-		
-		//$$('component1_tSNumFin').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.values[1]-3)));
-	};// @lock
-
-	cbAnScol.change = function cbAnScol_change (event)// @startlock
-	{// @endlock
-		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {};
-		
-			
-		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
-		//$$("component1_pgb1").startListening();
-		
-		vConv = $$("component1_cAnDeb").getValue();
-		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
-		vJour = vAnDeb.getDay();
-		
-		if (vJour === 0) {
-			aJour = 1;
-		} else {
-			aJour = 8 - vJour;
-		}
-		
-		vLunSem = addDaysToDate(vConv,aJour);
-		vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
-		vToday = new Date();
-		tmp = vToday - vStart;
-		tmp = Math.floor(tmp/1000);
-		diff.sec = tmp % 60; 
-		tmp = Math.floor((tmp-diff.sec)/60);
-		diff.min = tmp % 60;
-		tmp = Math.floor((tmp-diff.min)/60);
-		diff.hour = tmp % 24;
-		tmp = Math.floor((tmp-diff.hour)/24);
-    	diff.day = tmp;
-    	vSemCour = parseInt(tmp/7,10);
-    	$$("component1_cLun").setValue(vLunSem);
-    	$$("component1_sToday").setValue(tmp);
-    	$$('component1_sPerS').enable();
-    	$$('component1_sPerS').setValue(vSemCour);
-				
-		vAnScol = $$("component1_cbAnScol").getValue();
-		vUser = WAF.directory.currentUser().userName;
-		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
-		
-			var vAnScol, vProf, elem, vUserID;
-			elem = sources.component1_utilisateurs;
-			vUserID = elem.ID;
-			vProf = $$("component1_cProf").getValue();
-			vAnScol = $$("component1_cbAnScol").getValue();
-			$$("component1_cRole").setValue(elem.Fonction);
-			if (elem.Fonction === "Elève") {
-				//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
-				sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
-					var vAnScol, elem, vClasse, vFil;
-					elem = sources.component1_parcours_Scolaire;
-					vClasse = elem.Classe;
-					vFil = elem.Filiere;
-					vAnScol = $$("component1_cbAnScol").getValue();
-					if (vFil !== null && vFil !== " " && vFil.length > 0) {
-						//alert("filière trouvée : "+vFil);
-						sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
-					} else {
-						sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
-					}
-					$$("component1_ListClass").hide();
-					$$("component1_cClasse").show();
-					$$("component1_cFil").show();
-				},params:[vAnScol, vUserID] });
-			} else {
-				sources.component1_planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
-			}		
-		
-		}, params:[vUser] });
-		$$("cchg").hide();
-		//$$("component1_pgb1").stopListening();
-		
 		
 	};// @lock
 
@@ -300,11 +182,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
-	WAF.addListener(this.id + "_ListClass", "onRowClick", ListClass.onRowClick, "WAF");
-	WAF.addListener(this.id + "_sPerS", "slidestop", sPerS.slidestop, "WAF");
-	WAF.addListener(this.id + "_sPerS", "slidechange", sPerS.slidechange, "WAF");
-	WAF.addListener(this.id + "_sPerS", "slide", sPerS.slide, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
+	WAF.addListener(this.id + "_sPerS", "slide", sPerS.slide, "WAF");
+	WAF.addListener(this.id + "_ListClass", "onRowClick", ListClass.onRowClick, "WAF");
 	WAF.addListener(this.id + "_nt0", "click", nt0.click, "WAF");
 	WAF.addListener(this.id + "_t0", "click", t0.click, "WAF");
 	WAF.addListener(this.id + "_c0", "click", c0.click, "WAF");
