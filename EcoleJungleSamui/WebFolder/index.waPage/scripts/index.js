@@ -2,6 +2,8 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem20 = {};	// @menuItem
+	var menuItem8 = {};	// @menuItem
 	var menuItem7 = {};	// @menuItem
 	var menuItem18 = {};	// @menuItem
 	var menuItem21 = {};	// @menuItem
@@ -26,6 +28,18 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem20.click = function menuItem20_click (event)// @startlock
+	{// @endlock
+		$$("cchg").show();
+		$$('component1').loadComponent("/UpdPsw.waComponent");
+	};// @lock
+
+	menuItem8.click = function menuItem8_click (event)// @startlock
+	{// @endlock
+		$$("cchg").show();
+		$$('component1').loadComponent("/UpdPsw.waComponent");
+	};// @lock
 
 	menuItem7.click = function menuItem7_click (event)// @startlock
 	{// @endlock
@@ -188,6 +202,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem20", "click", menuItem20.click, "WAF");
+	WAF.addListener("menuItem8", "click", menuItem8.click, "WAF");
 	WAF.addListener("menuItem7", "click", menuItem7.click, "WAF");
 	WAF.addListener("menuItem18", "click", menuItem18.click, "WAF");
 	WAF.addListener("menuItem21", "click", menuItem21.click, "WAF");
