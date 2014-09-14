@@ -183,6 +183,7 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var btSave = {};	// @button
 	var t24 = {};	// @icon
 	var nt24 = {};	// @icon
 	var c24 = {};	// @icon
@@ -339,6 +340,58 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btSave.click = function btSave_click (event)// @startlock
+	{// @endlock
+		var jbcl, vCal, vdDeb, nb, vQuand, vjSem, split_date, dbcl, jdbcl, vAnScol, elem, vUserID;
+		
+		vCal = sources.component1_calendrier;
+		nb = 1+vCal.nbj;
+		vQuand = vCal.dDeb;
+		vdDeb = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
+		vdDeb = addDaysToDate(vdDeb, 0);
+		elem = sources.component1_parcours_Scolaire;
+		vUserID = elem.getAttributeValue("Eleve.ID");
+					
+		for (var i = 0; i < 25; i++) {
+			vAnScol = $$("component1_cbAnScol").getValue();
+			split_date = vdDeb.split('/');
+			dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
+			//alert("Traite Utilisateur "+vUserID+" pour année scolaire "+vAnScol+" de la ligne "+dbcl);
+			sources.component1_releve_Presences.query("Eleve.Annee_Scolaire.ID = :1 and Jour_Ouvre = :2 and Eleve.Eleve.ID = :3", { onSuccess: function(event) {
+				var ip,vip, ic, vic, it, vit, iBox, nbRec, jBox;
+				iBox = event.userData.boxn;
+				jBox = event.userData.boxj;
+				ip = "component1_np"+iBox;
+				vip = $$(ip).isVisible();
+				ic = "component1_c"+iBox;
+				vic = $$(ic).isVisible();
+				it = "component1_t"+iBox;
+				vit = $$(it).isVisible();
+				elem = sources.component1_releve_Presences;
+				nbRec = elem.length; 
+				if (vip || vic || vit) {
+					if (nbRec === 0) {
+						alert(jBox+ "A changé mais n'existe pas");
+					} else {
+						alert(jBox+ "A changé et existe pas");
+					}
+				} else {
+					if (nbRec > 0) {
+						alert(jBox+ "Existe et doit être supprimé");
+					}
+				}
+			}, params:[vAnScol, dbcl, vUserID], userData: {boxn:i, boxj:vdDeb} });
+			split_date = vdDeb.split('/');
+			dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
+			jdbcl = dbcl.getDay();
+			if (jdbcl === 5) {
+				vdDeb = addDaysToDate(vdDeb, 3);
+			} else {
+				vdDeb = addDaysToDate(vdDeb, 1);
+			}
+		}
+	};// @lock
 
 	t24.click = function t24_click (event)// @startlock
 	{// @endlock
@@ -1612,6 +1665,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btSave", "click", btSave.click, "WAF");
 	WAF.addListener(this.id + "_t24", "click", t24.click, "WAF");
 	WAF.addListener(this.id + "_nt24", "click", nt24.click, "WAF");
 	WAF.addListener(this.id + "_c24", "click", c24.click, "WAF");
