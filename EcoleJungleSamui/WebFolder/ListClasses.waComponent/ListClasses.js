@@ -1,7 +1,9 @@
 ﻿
 (function Component (id) {// @lock
 
-// Add the code that needs to be shared between components here
+	var wURL = window.location.href,
+	wPathname = window.location.pathname,
+	iFrame;
 
 function constructor (id) {
 
@@ -27,6 +29,7 @@ function constructor (id) {
 	}
 
 	// @region namespaceDeclaration// @startlock
+	var btExport = {};	// @buttonImage
 	var vTot = {};	// @textField
 	var vSec = {};	// @textField
 	var vPrim = {};	// @textField
@@ -54,6 +57,22 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btExport.click = function btExport_click (event)// @startlock
+	{// @endlock
+		//Export Eleves
+		if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/exportEleves";
+			wExportURL += ".xls";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "exportEleves";
+			wExportURL += ".xls";
+		}
+
+		$('#component1_frame1 iframe').attr('src',wExportURL);
+	};// @lock
 
 	vTot.click = function vTot_click (event)// @startlock
 	{// @endlock
@@ -247,6 +266,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btExport", "click", btExport.click, "WAF");
 	WAF.addListener(this.id + "_vTot", "click", vTot.click, "WAF");
 	WAF.addListener(this.id + "_vSec", "click", vSec.click, "WAF");
 	WAF.addListener(this.id + "_vPrim", "click", vPrim.click, "WAF");
