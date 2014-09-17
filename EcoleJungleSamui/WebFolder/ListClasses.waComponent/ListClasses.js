@@ -60,7 +60,7 @@ function constructor (id) {
 
 	btExport.click = function btExport_click (event)// @startlock
 	{// @endlock
-		sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
+		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
 		//Export Eleves
 		if (wPathname.indexOf("index") != -1) {
 			wExportURL = wURL.replace(wPathname, '');

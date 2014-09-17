@@ -28,8 +28,16 @@ function constructor (id) {
 	btEleves.click = function btEleves_click (event)// @startlock
 	{// @endlock
 	
-		 var string = "/printEleves";
-		 $('#component1_frame1 iframe').attr('src',string);
+		var wExportURL;
+	
+		 if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/printEleves";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "printEleves";
+		}
+		 $('#component1_frame1 iframe').attr('src',wExportURL);
 		 
 	};// @lock
 
