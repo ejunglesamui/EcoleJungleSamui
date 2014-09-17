@@ -17,6 +17,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 		
 	$$("cchg").hide();
+	
  
 
 	// @region namespaceDeclaration// @startlock
