@@ -31,13 +31,16 @@ function constructor (id) {
 	
 		var wExportURL;
 	
-		 if (wPathname.indexOf("index") != -1) {
+		if (wPathname.indexOf("index") != -1) {
 			wExportURL = wURL.replace(wPathname, '');
 			wExportURL += "/printEleves";
+			wExportURL += ".html";
 		} else {
 			wExportURL = wURL;
 			wExportURL += "printEleves";
+			wExportURL += ".html";
 		}
+		 //var string = fiche.print1();
 		 $('#component1_frame1 iframe').attr('src',wExportURL);
 		 
 	};// @lock
