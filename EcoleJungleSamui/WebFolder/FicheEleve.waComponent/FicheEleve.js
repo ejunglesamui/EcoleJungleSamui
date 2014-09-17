@@ -41,7 +41,8 @@ function constructor (id) {
 			wExportURL += ".html";
 		}
 		 //var string = fiche.print1();
-		 $('#component1_frame1 iframe').attr('src',wExportURL);
+		 $('#component1_frame1 iFrame').attr('src',wExportURL);
+		 
 		 
 	};// @lock
 
