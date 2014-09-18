@@ -479,7 +479,7 @@ function constructor (id) {
 			$$(v).show();
 			$$(v).disable();
 			v = "component1_ps"+j;
-			$$(v).setValue(elem.avancement+" %");
+			$$(v).setValue(((elem.avancement === null) ? '0' : elem.avancement)+" %");
 			$$(v).show();
 			v = "component1_icon"+j;
 			if (elem.commentaire !== null) {
