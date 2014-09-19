@@ -2,11 +2,25 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem3 = {};	// @menuItem
+	var menuItem2 = {};	// @menuItem
 	var documentEvent = {};	// @document
 	var login1 = {};	// @login
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem3.click = function menuItem3_click (event)// @startlock
+	{// @endlock
+		$$("cchg").show();
+		$$("component1").loadComponent("/ListClasses.waComponent");
+	};// @lock
+
+	menuItem2.click = function menuItem2_click (event)// @startlock
+	{// @endlock
+		$$("cchg").show();
+		$$("component1").loadComponent("/EmploiduTemps.waComponent");
+	};// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
@@ -54,6 +68,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem3", "click", menuItem3.click, "WAF");
+	WAF.addListener("menuItem2", "click", menuItem2.click, "WAF");
 	WAF.addListener("document", "onLoad", documentEvent.onLoad, "WAF");
 	WAF.addListener("login1", "logout", login1.logout, "WAF");
 	WAF.addListener("login1", "login", login1.login, "WAF");
