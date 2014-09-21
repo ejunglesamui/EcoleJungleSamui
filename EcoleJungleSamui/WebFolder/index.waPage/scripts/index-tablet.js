@@ -2,6 +2,11 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var btUndo = {};	// @button
+	var bComOk = {};	// @button
+	var bComSup = {};	// @button
+	var btMoins = {};	// @icon
+	var btPlus = {};	// @icon
 	var mEdT = {};	// @menuItem
 	var ic49 = {};	// @icon
 	var ic48 = {};	// @icon
@@ -112,6 +117,256 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	btUndo.click = function btUndo_click (event)// @startlock
+	{// @endlock
+		$$("CreateCom").hide(); 
+	};// @lock
+
+	bComOk.click = function bComOk_click (event)// @startlock
+	{// @endlock
+		var vBox, vCom, vAction, boxPos, ind;
+		sources.remarques.save();
+		vAction = $$("cComAction").getValue();
+		
+		if (vAction === "Créer") {
+			ind = $$("cBox").getValue();
+			//alert(ind);
+			vCom = "ic"+ind;
+			vBox = "vN"+ind;
+			boxPos = $$(vBox).getPosition();
+			$$(vCom).setLeft(boxPos.left+121);
+			$$(vCom).setTop(boxPos.top + 2);
+			$$(vCom).show();
+		}
+		$$("CreateCom").hide();
+	};// @lock
+
+	bComSup.click = function bComSup_click (event)// @startlock
+	{// @endlock
+		var isok, vBox, vCom;
+		
+		isok = confirm( "Voulez-vous vraiment supprimer ce message ?");
+		
+		if (isok) {
+			sources.remarques.removeCurrent();
+			vBox = $$("cBox").getValue();
+			vCom = "ic"+vBox
+			$$(vCom).hide();
+		}
+		$$("CreateCom").hide();
+	};// @lock
+
+	btMoins.click = function btMoins_click (event)// @startlock
+	{// @endlock
+		var vCur;
+		
+		vCur = parseInt($$("sToday").getValue());
+		vCur = vCur - 7;
+		$$('sPerS').setValue(vCur);
+		
+		var vTaches, vRems, nb;
+		
+		for (var i = 0; i < 50; i++) {
+			v = "vN"+i;
+			$$(v).hide();
+			v = "ic"+i;
+			$$(v).hide();
+		}
+			
+		vTaches = sources.Taches;
+		nb = vTaches.length; 
+       	for (var j = 0; j < nb; j++) {
+        	vTaches.getElement(j, { onSuccess: function(event) {
+        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vAnScol, vClasse, vFil, vToday, vQuery, vJourS, vMat, vHeure;
+            	elem = event.element;
+            	vType = elem.semaineType;
+				vSemPI = $$('cSemPI').getValue();
+				if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+            		v = "vN"+j;
+					switch (elem.jourS) {
+						case 'Lundi':
+							vRefg = 276;
+							break;
+						case 'Mardi':
+							vRefg = 418;
+							break;
+						case 'Mercredi':
+							vRefg = 560;
+							break;
+						case 'Jeudi':
+							vRefg = 702;
+							break;
+						case 'Vendredi':
+							vRefg = 844;
+							break;
+						}
+					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+					vMat = elem.getAttributeValue("Matiere.ID");
+					vJourS = elem.jourS;
+					vPosy = 86+11*(elem.hDeb-32);
+					vTaille = (11*(elem.hFin-elem.hDeb))-1;
+					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+					vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+					vCoul = elem.getAttributeValue("Matiere.CoulCode");
+					vSalle = elem.getAttributeValue("Salle.Nom");
+					vType = elem.semaineType;
+					vLarge = 140;
+					vPosx = vRefg;
+					vTxt = vTxt + vLibH + "\n";
+					if (vSalle === null) {
+						vTxt = vTxt + "-";
+					} else {
+						vTxt = vTxt + vSalle;
+					}
+					$$(v).setBackgroundColor(vCoul);
+					$$(v).resize(vLarge,vTaille);
+					$$(v).move(vPosx,vPosy);
+					$$(v).setValue(vTxt);
+					$$(v).show();
+					
+					vAnScol = $$("cbAnScol").getValue();
+					vClasse = $$("cClasse").getValue();
+					vFil = $$("cFil").getValue();
+					vToday = parseInt($$("sToday").getValue(),10);
+					vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
+					sources.remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "ic"+vk;
+								v = "vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
+					
+				}
+        	}});
+        	
+    	}
+	};// @lock
+
+	btPlus.click = function btPlus_click (event)// @startlock
+	{// @endlock
+		var vCur;
+		
+		vCur = parseInt($$("sToday").getValue());
+		vCur = vCur + 7;
+		$$('sPerS').setValue(vCur);
+		
+		var vTaches, vRems, nb;
+		
+		for (var i = 0; i < 50; i++) {
+			v = "vN"+i;
+			$$(v).hide();
+			v = "ic"+i;
+			$$(v).hide();
+		}
+			
+		vTaches = sources.Taches;
+		nb = vTaches.length; 
+       	for (var j = 0; j < nb; j++) {
+        	vTaches.getElement(j, { onSuccess: function(event) {
+        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vAnScol, vClasse, vFil, vToday, vQuery, vJourS, vMat, vHeure;
+            	elem = event.element;
+            	vType = elem.semaineType;
+				vSemPI = $$('cSemPI').getValue();
+				if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+            		v = "vN"+j;
+					switch (elem.jourS) {
+						case 'Lundi':
+							vRefg = 276;
+							break;
+						case 'Mardi':
+							vRefg = 418;
+							break;
+						case 'Mercredi':
+							vRefg = 560;
+							break;
+						case 'Jeudi':
+							vRefg = 702;
+							break;
+						case 'Vendredi':
+							vRefg = 844;
+							break;
+						}
+					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+					vMat = elem.getAttributeValue("Matiere.ID");
+					vJourS = elem.jourS;
+					vPosy = 86+11*(elem.hDeb-32);
+					vTaille = (11*(elem.hFin-elem.hDeb))-1;
+					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+					vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+					vCoul = elem.getAttributeValue("Matiere.CoulCode");
+					vSalle = elem.getAttributeValue("Salle.Nom");
+					vType = elem.semaineType;
+					vLarge = 140;
+					vPosx = vRefg;
+					vTxt = vTxt + vLibH + "\n";
+					if (vSalle === null) {
+						vTxt = vTxt + "-";
+					} else {
+						vTxt = vTxt + vSalle;
+					}
+					$$(v).setBackgroundColor(vCoul);
+					$$(v).resize(vLarge,vTaille);
+					$$(v).move(vPosx,vPosy);
+					$$(v).setValue(vTxt);
+					$$(v).show();
+					
+					vAnScol = $$("cbAnScol").getValue();
+					vClasse = $$("cClasse").getValue();
+					vFil = $$("cFil").getValue();
+					vToday = parseInt($$("sToday").getValue(),10);
+					vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
+					sources.remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "ic"+vk;
+								v = "vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
+					
+				}
+        	}});
+        	
+    	}
+		
+	};// @lock
 
 	mEdT.click = function mEdT_click (event)// @startlock
 	{// @endlock
@@ -840,6 +1095,90 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	}
 	
 	function newcom (ind) {
+		
+		var vRole, vMat, vCom, boxPos, v, vTaches;
+		vRole = $$("cRole").getValue();
+		if (vRole !== "Elève") {
+			v = "ic"+ind;
+			$$("cBox").setValue(ind);
+			boxPos = $$(v).getPosition();
+			vTaches = sources.Taches;
+			vTaches.getElement(ind, { onSuccess: function(event) {
+				var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday, vJourS, vHeure;
+				elem = event.element;
+				vToday = parseInt($$("sToday").getValue(),10);
+				vMatID = elem.getAttributeValue("Matiere.ID"); 
+				vAnScol = $$("cbAnScol").getValue();
+				vJourS = elem.jourS;
+				vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+				vClasse = $$("cClasse").getValue();
+				vFil = $$("cFil").getValue();
+				if (vFil !== null && vFil !== " " && vFil.length > 0) {
+					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+				} else {
+					vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+				}
+				sources.remarques.query(vQuery, { onSuccess: function(event) {
+					var vcoms, vMat, vClasse, vFil, vBox, vToday, vLun, vJour, vJourD, vMatID;
+					vcoms = sources.remarques;
+					if (vcoms.length > 0) {
+						vcoms.getElement(0, { onSuccess: function(event)  {
+							var elem, vCommment, vMat, vJour, vJourS, vQuand;
+							elem = event.element;
+							vQuand = elem.Jour;
+							vJour = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
+							$$('cComJour').setValue(vJour);
+							$$('cComAction').setValue("Modifier");
+							$$('bComSup').show();
+							$$("CreateCom").show();
+						}});
+					} else {
+						sources.remarques.addNewElement();
+						vBox = event.userData.boxn;
+						vMatID = event.userData.MatID;
+						vClasse = $$("cClasse").getValue();
+						vFil = $$("cFil").getValue();
+						vAnScol = $$("cbAnScol").getValue();
+						vJourS = vBox.jourS;
+						vToday = parseInt($$("sToday").getValue(),10);
+						vHeure = vBox.hDeb + parseInt((vBox.hFin - vBox.hDeb)/2,10);
+						vLun = $$('cLun').getValue();
+						switch (vJourS) {
+						case 'Mardi':
+							vToday = vToday+1;
+							break;
+						case 'Mercredi':
+							vToday = vToday+2;
+							break;
+						case 'Jeudi':
+							vToday = vToday+3;
+							break;
+						case 'Vendredi':
+							vToday = vToday+4;
+							break;
+						}
+						vJour = addDaysToDate(vLun,vToday);
+						vJourD = new Date(vJour.substr(6,4), parseInt(vJour.substr(3,2),10)-1, vJour.substr(0,2));
+						sources.remarques.Matiere.set(sources.matieres);
+						sources.remarques.Annee_Scolaire.set(sources.annees_Scolaires);
+						sources.remarques.Emetteur.set(sources.utilisateurs);
+						sources.remarques.Classe = vClasse;
+						sources.remarques.Filiere = vFil;
+						sources.remarques.sHeure = vHeure;
+						sources.remarques.sJour = vToday;
+						sources.remarques.Jour = vJourD;
+						sources.remarques.JourSem = vJourS;
+						sources.matieres.query("ID = :1", { onSuccess: function(event) {
+							sources.remarques.Matiere.set(sources.matieres);
+							$$('cComAction').setValue("Créer");
+							$$('bComSup').hide();
+							sources.matieres.query("");
+							$$("CreateCom").show();
+						},params:[vMatID]});
+					}
+				},params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:elem, MatID:vMatID}});
+			}});
+		}
 		
 		return "Ok";
 	
@@ -2015,6 +2354,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("btUndo", "click", btUndo.click, "WAF");
+	WAF.addListener("bComOk", "click", bComOk.click, "WAF");
+	WAF.addListener("bComSup", "click", bComSup.click, "WAF");
+	WAF.addListener("btMoins", "click", btMoins.click, "WAF");
+	WAF.addListener("btPlus", "click", btPlus.click, "WAF");
 	WAF.addListener("mEdT", "click", mEdT.click, "WAF");
 	WAF.addListener("ic49", "click", ic49.click, "WAF");
 	WAF.addListener("ic48", "click", ic48.click, "WAF");
