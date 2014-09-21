@@ -2,38 +2,91 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
-	var textField28 = {};	// @textField
-	var textField27 = {};	// @textField
-	var textField26 = {};	// @textField
-	var textField25 = {};	// @textField
-	var textField24 = {};	// @textField
-	var textField23 = {};	// @textField
-	var textField22 = {};	// @textField
-	var textField21 = {};	// @textField
-	var textField20 = {};	// @textField
-	var textField19 = {};	// @textField
-	var textField18 = {};	// @textField
-	var textField17 = {};	// @textField
-	var textField16 = {};	// @textField
-	var textField15 = {};	// @textField
-	var textField14 = {};	// @textField
-	var textField13 = {};	// @textField
-	var textField12 = {};	// @textField
-	var textField11 = {};	// @textField
-	var textField10 = {};	// @textField
-	var textField9 = {};	// @textField
-	var textField8 = {};	// @textField
-	var textField7 = {};	// @textField
-	var textField6 = {};	// @textField
-	var textField5 = {};	// @textField
-	var textField4 = {};	// @textField
+	var mEdT = {};	// @menuItem
+	var ic49 = {};	// @icon
+	var ic48 = {};	// @icon
+	var ic47 = {};	// @icon
+	var ic46 = {};	// @icon
+	var ic45 = {};	// @icon
+	var ic44 = {};	// @icon
+	var ic43 = {};	// @icon
+	var ic42 = {};	// @icon
+	var ic41 = {};	// @icon
+	var ic40 = {};	// @icon
+	var ic39 = {};	// @icon
+	var ic38 = {};	// @icon
+	var ic37 = {};	// @icon
+	var ic36 = {};	// @icon
+	var ic35 = {};	// @icon
+	var ic34 = {};	// @icon
+	var ic33 = {};	// @icon
+	var ic32 = {};	// @icon
+	var ic31 = {};	// @icon
+	var ic30 = {};	// @icon
+	var ic29 = {};	// @icon
+	var ic28 = {};	// @icon
+	var ic27 = {};	// @icon
+	var ic26 = {};	// @icon
+	var ic25 = {};	// @icon
+	var ic24 = {};	// @icon
+	var ic23 = {};	// @icon
+	var ic22 = {};	// @icon
+	var ic21 = {};	// @icon
+	var ic20 = {};	// @icon
+	var ic19 = {};	// @icon
+	var ic18 = {};	// @icon
+	var ic17 = {};	// @icon
+	var ic16 = {};	// @icon
+	var ic15 = {};	// @icon
+	var ic14 = {};	// @icon
+	var ic13 = {};	// @icon
+	var ic12 = {};	// @icon
+	var ic11 = {};	// @icon
+	var ic10 = {};	// @icon
+	var ic9 = {};	// @icon
+	var ic8 = {};	// @icon
+	var ic7 = {};	// @icon
+	var ic6 = {};	// @icon
+	var ic5 = {};	// @icon
+	var ic4 = {};	// @icon
+	var ic3 = {};	// @icon
+	var ic2 = {};	// @icon
+	var ic1 = {};	// @icon
+	var ic0 = {};	// @icon
+	var ListTask = {};	// @dataGrid
+	var ListClass = {};	// @select
+	var sPerS = {};	// @slider
+	var cbAnScol = {};	// @select
+	var vN49 = {};	// @textField
+	var vN48 = {};	// @textField
+	var vN47 = {};	// @textField
+	var vN46 = {};	// @textField
+	var vN45 = {};	// @textField
+	var vN40 = {};	// @textField
+	var vN41 = {};	// @textField
+	var vN42 = {};	// @textField
+	var vN43 = {};	// @textField
+	var vN44 = {};	// @textField
+	var vN39 = {};	// @textField
+	var vN38 = {};	// @textField
+	var vN37 = {};	// @textField
+	var vN36 = {};	// @textField
+	var vN35 = {};	// @textField
+	var vN30 = {};	// @textField
+	var vN31 = {};	// @textField
+	var vN32 = {};	// @textField
+	var vN33 = {};	// @textField
+	var vN34 = {};	// @textField
+	var vN29 = {};	// @textField
+	var vN28 = {};	// @textField
+	var vN27 = {};	// @textField
 	var vN26 = {};	// @textField
 	var vN25 = {};	// @textField
-	var vN24 = {};	// @textField
-	var vN23 = {};	// @textField
-	var vN22 = {};	// @textField
-	var vN21 = {};	// @textField
 	var vN20 = {};	// @textField
+	var vN21 = {};	// @textField
+	var vN22 = {};	// @textField
+	var vN23 = {};	// @textField
+	var vN24 = {};	// @textField
 	var vN19 = {};	// @textField
 	var vN18 = {};	// @textField
 	var vN17 = {};	// @textField
@@ -52,7 +105,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	var vN4 = {};	// @textField
 	var vN3 = {};	// @textField
 	var vN2 = {};	// @textField
-	var textField2 = {};	// @textField
+	var vN1 = {};	// @textField
 	var vN0 = {};	// @textField
 	var documentEvent = {};	// @document
 	var login1 = {};	// @login
@@ -60,379 +113,1408 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 // eventHandlers// @lock
 
-	textField28.mouseout = function textField28_mouseout (event)// @startlock
+	mEdT.click = function mEdT_click (event)// @startlock
+	{// @endlock
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {};
+		$$("cchg").show();
+		sources.annees_Scolaires.query("", { onSuccess: function(event) { 
+			vConv = $$("cAnDeb").getValue();
+			vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
+			vJour = vAnDeb.getDay();
+		
+			if (vJour === 0) {
+				aJour = 1;
+			} else {
+				aJour = 8 - vJour;
+			}
+		
+			vLunSem = addDaysToDate(vConv,aJour);
+			vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
+			vToday = new Date();
+			tmp = vToday - vStart;
+			tmp = Math.floor(tmp/1000);
+			diff.sec = tmp % 60; 
+			tmp = Math.floor((tmp-diff.sec)/60);
+			diff.min = tmp % 60;
+			tmp = Math.floor((tmp-diff.min)/60);
+			diff.hour = tmp % 24;
+			tmp = Math.floor((tmp-diff.hour)/24);
+    		diff.day = tmp;
+    		vSemCour = parseInt(tmp/7,10);
+    		$$("cLun").setValue(vLunSem);
+    		$$("sToday").setValue(tmp);
+    		$$('sPerS').enable();
+    		$$('sPerS').setValue(vSemCour);
+				
+			vAnScol = sources.annees_Scolaires.ID;
+			vUser = WAF.directory.currentUser().userName;
+			sources.utilisateurs.query("Login = :1", { onSuccess: function(event) { 
+		
+				var vAnScol, vProf, elem, vUserID;
+				elem = sources.utilisateurs;
+				vUserID = elem.ID;
+				vProf = $$("cProf").getValue();
+				vAnScol = sources.annees_Scolaires.ID;
+				$$("cRole").setValue(elem.Fonction);
+				if (elem.Fonction === "Elève") {
+					//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
+					sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
+						var vAnScol, elem, vClasse, vFil;
+						elem = sources.parcours_Scolaire;
+						vClasse = elem.Classe;
+						vFil = elem.Filiere;
+						vAnScol = sources.annees_Scolaires.ID;
+						if (vFil !== null && vFil !== " " && vFil.length > 0) {
+							//alert("filière trouvée : "+vFil);
+							sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
+						} else {
+							sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+						}
+						$$("ListClass").hide();
+						$$("cClasse").show();
+						$$("cFil").show();
+					},params:[vAnScol, vUserID] });
+				} else {
+					sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+				}		
+		
+			}, params:[vUser] });
+			$$("cchg").hide();
+		}});
+	};// @lock
+
+			
+
+	ic49.click = function ic49_click (event)// @startlock
+	{// @endlock
+		var res = coms(49);
+	};// @lock
+
+	ic49.mouseout = function ic49_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic48.click = function ic48_click (event)// @startlock
+	{// @endlock
+		var res = coms(48);
+	};// @lock
+
+	ic48.mouseout = function ic48_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic47.click = function ic47_click (event)// @startlock
+	{// @endlock
+		var res = coms(47);
+	};// @lock
+
+	ic47.mouseout = function ic47_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic46.click = function ic46_click (event)// @startlock
+	{// @endlock
+		var res = coms(46);
+	};// @lock
+
+	ic46.mouseout = function ic46_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic45.click = function ic45_click (event)// @startlock
+	{// @endlock
+		var res = coms(45);
+	};// @lock
+
+	ic45.mouseout = function ic45_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic44.click = function ic44_click (event)// @startlock
+	{// @endlock
+		var res = coms(44);
+	};// @lock
+
+	ic44.mouseout = function ic44_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic43.click = function ic43_click (event)// @startlock
+	{// @endlock
+		var res = coms(43);
+	};// @lock
+
+	ic43.mouseout = function ic43_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic42.click = function ic42_click (event)// @startlock
+	{// @endlock
+		var res = coms(42);
+	};// @lock
+
+	ic42.mouseout = function ic42_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic41.click = function ic41_click (event)// @startlock
+	{// @endlock
+		var res = coms(41);
+	};// @lock
+
+	ic41.mouseout = function ic41_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic40.click = function ic40_click (event)// @startlock
+	{// @endlock
+		var res = coms(40);
+	};// @lock
+
+	ic40.mouseout = function ic40_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic39.click = function ic39_click (event)// @startlock
+	{// @endlock
+		var res = coms(39);
+	};// @lock
+
+	ic39.mouseout = function ic39_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic38.click = function ic38_click (event)// @startlock
+	{// @endlock
+		var res = coms(38);
+	};// @lock
+
+	ic38.mouseout = function ic38_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic37.click = function ic37_click (event)// @startlock
+	{// @endlock
+		var res = coms(37);
+	};// @lock
+
+	ic37.mouseout = function ic37_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic36.click = function ic36_click (event)// @startlock
+	{// @endlock
+		var res = coms(36);
+	};// @lock
+
+	ic36.mouseout = function ic36_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic35.click = function ic35_click (event)// @startlock
+	{// @endlock
+		var res = coms(35);
+	};// @lock
+
+	ic35.mouseout = function ic35_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic34.click = function ic34_click (event)// @startlock
+	{// @endlock
+		var res = coms(34);
+	};// @lock
+
+	ic34.mouseout = function ic34_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic33.click = function ic33_click (event)// @startlock
+	{// @endlock
+		var res = coms(33);
+	};// @lock
+
+	ic33.mouseout = function ic33_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic32.click = function ic32_click (event)// @startlock
+	{// @endlock
+		var res = coms(32);
+	};// @lock
+
+	ic32.mouseout = function ic32_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic31.click = function ic31_click (event)// @startlock
+	{// @endlock
+		var res = coms(31);
+	};// @lock
+
+	ic31.mouseout = function ic31_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic30.click = function ic30_click (event)// @startlock
+	{// @endlock
+		var res = coms(30);
+	};// @lock
+
+	ic30.mouseout = function ic30_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic29.click = function ic29_click (event)// @startlock
+	{// @endlock
+		var res = coms(29);
+	};// @lock
+
+	ic29.mouseout = function ic29_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic28.click = function ic28_click (event)// @startlock
+	{// @endlock
+		var res = coms(28);
+	};// @lock
+
+	ic28.mouseout = function ic28_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic27.click = function ic27_click (event)// @startlock
+	{// @endlock
+		var res = coms(27);
+	};// @lock
+
+	ic27.mouseout = function ic27_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic26.click = function ic26_click (event)// @startlock
+	{// @endlock
+		var res = coms(26);
+	};// @lock
+
+	ic26.mouseout = function ic26_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic25.click = function ic25_click (event)// @startlock
+	{// @endlock
+		var res = coms(25);
+	};// @lock
+
+	ic25.mouseout = function ic25_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic24.click = function ic24_click (event)// @startlock
+	{// @endlock
+		var res = coms(24);
+	};// @lock
+
+	ic24.mouseout = function ic24_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic23.click = function ic23_click (event)// @startlock
+	{// @endlock
+		var res = coms(23);
+	};// @lock
+
+	ic23.mouseout = function ic23_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic22.click = function ic22_click (event)// @startlock
+	{// @endlock
+		var res = coms(22);
+	};// @lock
+
+	ic22.mouseout = function ic22_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic21.click = function ic21_click (event)// @startlock
+	{// @endlock
+		var res = coms(21);
+	};// @lock
+
+	ic21.mouseout = function ic21_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic20.click = function ic20_click (event)// @startlock
+	{// @endlock
+		var res = coms(20);
+	};// @lock
+
+	ic20.mouseout = function ic20_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic19.click = function ic19_click (event)// @startlock
+	{// @endlock
+		var res = coms(19);
+	};// @lock
+
+	ic19.mouseout = function ic19_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic18.click = function ic18_click (event)// @startlock
+	{// @endlock
+		var res = coms(18);
+	};// @lock
+
+	ic18.mouseout = function ic18_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic17.click = function ic17_click (event)// @startlock
+	{// @endlock
+		var res = coms(17);
+	};// @lock
+
+	ic17.mouseout = function ic17_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic16.click = function ic16_click (event)// @startlock
+	{// @endlock
+		var res = coms(16);
+	};// @lock
+
+	ic16.mouseout = function ic16_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic15.click = function ic15_click (event)// @startlock
+	{// @endlock
+		var res = coms(15);
+	};// @lock
+
+	ic15.mouseout = function ic15_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic14.click = function ic14_click (event)// @startlock
+	{// @endlock
+		var res = coms(14);
+	};// @lock
+
+	ic14.mouseout = function ic14_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic13.click = function ic13_click (event)// @startlock
+	{// @endlock
+		var res = coms(13);
+	};// @lock
+
+	ic13.mouseout = function ic13_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic12.click = function ic12_click (event)// @startlock
+	{// @endlock
+		var res = coms(12);
+	};// @lock
+
+	ic12.mouseout = function ic12_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic11.click = function ic11_click (event)// @startlock
+	{// @endlock
+		var res = coms(11);
+	};// @lock
+
+	ic11.mouseout = function ic11_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic10.click = function ic10_click (event)// @startlock
+	{// @endlock
+		var res = coms(10);
+	};// @lock
+
+	ic10.mouseout = function ic10_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic9.click = function ic9_click (event)// @startlock
+	{// @endlock
+		var res = coms(9);
+	};// @lock
+
+	ic9.mouseout = function ic9_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic8.click = function ic8_click (event)// @startlock
+	{// @endlock
+		var res = coms(8);
+	};// @lock
+
+	ic8.mouseout = function ic8_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic7.click = function ic7_click (event)// @startlock
+	{// @endlock
+		var res = coms(7);
+	};// @lock
+
+	ic7.mouseout = function ic7_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic6.click = function ic6_click (event)// @startlock
+	{// @endlock
+		var res = coms(6);
+	};// @lock
+
+	ic6.mouseout = function ic6_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic5.click = function ic5_click (event)// @startlock
+	{// @endlock
+		var res = coms(5);
+	};// @lock
+
+	ic5.mouseout = function ic5_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic4.click = function ic4_click (event)// @startlock
+	{// @endlock
+		var res = coms(4);
+	};// @lock
+
+	ic4.mouseout = function ic4_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic3.click = function ic3_click (event)// @startlock
+	{// @endlock
+		var res = coms(3);
+	};// @lock
+
+	ic3.mouseout = function ic3_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic2.click = function ic2_click (event)// @startlock
+	{// @endlock
+		var res = coms(2);
+	};// @lock
+
+	ic2.mouseout = function ic2_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic1.click = function ic1_click (event)// @startlock
+	{// @endlock
+		var res = coms(1);
+	};// @lock
+
+	ic1.mouseout = function ic1_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	ic0.click = function ic0_click (event)// @startlock
+	{// @endlock
+		var res = coms(0);
+	};// @lock
+
+	ic0.mouseout = function ic0_mouseout (event)// @startlock
+	{// @endlock
+		$$('cCom').hide();
+	};// @lock
+
+	function SemNum(MaDate) {
+	
+		var annee = parseInt(MaDate.substr(6,4),10),
+			mm = parseInt(MaDate.substr(3,2),10)-1,
+			NumSemaine = 0,
+			ListeMois = [31,28,31,30,31,30,31,31,30,31,30,31],
+			TotalJour=0,
+			JourDebutAn, DebutAn,
+			cpt, 
+			jj = parseInt(MaDate.substr(0,2),10);
+			
+		if (annee %4 === 0 && (annee %100 !== 0 || annee %400 === 0)) {ListeMois[1]=29;}
+		for (cpt=0; cpt<mm; cpt++){TotalJour+=ListeMois[cpt];}
+		TotalJour+=jj;
+		DebutAn = new Date(annee,0,1);
+		JourDebutAn=DebutAn.getDay();
+		if(JourDebutAn===0){JourDebutAn=7;}
+		TotalJour-=8-JourDebutAn;
+		NumSemaine = 1;
+		NumSemaine+=Math.floor(TotalJour/7);
+		if(TotalJour%7!==0){NumSemaine+=1;}
+	
+		return(NumSemaine);
+	}
+	
+	function addDaysToDate(old_date, delta_days) {
+		var split_date, new_date, new_day, new_month, new_year, new_date_text;
+		split_date = old_date.split('/');
+		new_date = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1 + delta_days);
+		new_day = new_date.getDate();
+		new_day = ((new_day < 10) ? '0' : '') + new_day; 
+		new_month = new_date.getMonth() + 1;
+		new_month = ((new_month < 10) ? '0' : '') + new_month; 
+		new_year = new_date.getYear();
+		new_year = ((new_year < 200) ? 1900 : 0) + new_year; 
+		new_date_text = new_day + '/' + new_month + '/' + new_year;
+		
+		return new_date_text;
+	}
+	
+	function convTime (Horaire) {
+		
+		var vInt, vDec, vPart1, vPart2;
+		
+		vInt = parseInt(Horaire/4,10)+':';
+		if (vInt.length ===2) {
+			vInt = '0'+vInt;
+		}
+		vDec = 15*(Horaire-4*parseInt(Horaire/4,10)) + ' ';
+		if (vDec.length === 2) {
+			vDec = '0'+vDec;
+		}
+		return (vInt+vDec);
+		
+	}
+	
+	function chaps (ind) {
+		
+		var vMat, vTaches, boxPos, v;
+		v = "vN"+ind;
+		boxPos = $$(v).getPosition();
+		$$('cChaps').move(boxPos.left-240, boxPos.top + 22);
+		$$('cChap1').setValue(" ");
+		$$('cChap2').setValue(" ");
+		$$('cChap3').setValue(" ");
+		$$('cChap4').setValue(" ");
+		$$('cChap5').setValue(" ");
+		vTaches = sources.Taches;
+		vTaches.getElement(ind, { onSuccess: function(event) {
+				var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday;
+				elem = event.element;
+				vMat = elem.getAttributeValue("Matiere.Nom");
+				vMatID = elem.getAttributeValue("Matiere.ID");
+				if (vMat !== "Repas" && vMat !== "Etude") {
+					$$('cTitre').setValue(vMat);
+					vAnScol = $$("cbAnScol").getValue();
+					vClasse = $$("cClasse").getValue();
+					vFil = $$("cFil").getValue();
+					vToday = parseInt($$("sToday").getValue(),10);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Programme.Annee_scolaire.ID = :1 and Programme.Matiere.ID = :2 and Programme.Classe = :3 and (Programme.Filiere = :4 or Programme.Filiere = :6) and sDeb <= :5 and sFin > :5 order by Ordre";
+					} else {
+						vQuery = "Programme.Annee_scolaire.ID = :1 and Programme.Matiere.ID = :2 and Programme.Classe = :3 and sDeb <= :5 and sFin > :5 order by Ordre";
+					}
+					sources.chapitres.query(vQuery, { onSuccess: function(event) {
+						var vchaps, vnbc;
+						vchaps = sources.chapitres;
+						vnbc = vchaps.length;
+						for (var i = 0; i < vnbc; i++) {
+        					vchaps.getElement(i, { onSuccess: function(event)  {
+            					var elem, vlchap, j;
+            					elem = event.element;
+            					j = i+1;
+            					vlchap = "cChap"+j;
+            					$$(vlchap).setValue("- "+elem.Chapitre);
+            				}});
+            			};
+            			$$('cChaps').show();
+					}, params:[vAnScol, vMatID, vClasse, vFil, vToday, "* (toutes)"]});
+				}
+			}});
+		
+		return "Ok";
+	
+	}
+	
+	function coms (ind) {
+		
+		var vMat, vCom, boxPos, v, vTaches;
+		v = "ic"+ind;
+		boxPos = $$(v).getPosition();
+		$$('cCom').move(boxPos.left-310, boxPos.top + 10);
+		$$('cComTxt').setValue(" ");
+		$$('cComTitre').setValue(" ");
+		$$('cComDate').setValue(" ");
+		vTaches = sources.Taches;
+		vTaches.getElement(ind, { onSuccess: function(event) {
+			var elem, vTxt, vAnScol, vMat, vMatID, vQuery, vClasse, vFil, vToday, vJourS, vHeure;
+			elem = event.element;
+			vToday = parseInt($$("sToday").getValue(),10);
+			vAnScol = $$("cbAnScol").getValue();
+			vJourS = elem.jourS;
+			vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+			vClasse = $$("cClasse").getValue();
+			vFil = $$("cFil").getValue();
+			if (vFil !== null && vFil !== " " && vFil.length > 0) {
+				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+			} else {
+				vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+			}
+			sources.remarques.query(vQuery, { onSuccess: function(event) {
+				var vcoms;
+				vcoms = sources.remarques;
+				if (vcoms.length > 0) {
+					vcoms.getElement(0, { onSuccess: function(event)  {
+						var elem, vQui, vQuand, vCommment, vQuandF;
+						elem = event.element;
+						vQuand = elem.Date_Creation;
+						vQuandF = vQuand.getDate() + '/' + (vQuand.getMonth()+1) + '/' +  vQuand.getFullYear();
+						vComment = elem.Commentaire;
+						vQui = elem.UID_Creation;
+						$$('cComTxt').setValue(vComment);
+						$$('cComTitre').setValue("Message laissé par "+vQui);
+						$$('cComDate').setValue("Le "+vQuandF);
+						$$('cCom').show();
+					}});
+				}
+			},params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil]});
+		}});
+		
+		return "Ok";
+	
+	}
+	
+	function newcom (ind) {
+		
+		return "Ok";
+	
+	}
+
+	ListTask.onRowDraw = function ListTask_onRowDraw (event)// @startlock
+	{// @endlock
+		var elem, j, v, vNom, vRefg, vTxt, vPosy,vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vMat, vJourS, vHeure;
+		elem = event.element;
+		
+		if (elem !== null) {
+			vType = elem.semaineType;
+			vSemPI = $$('cSemPI').getValue();
+			if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+				j = event.row.rowNumber;
+				v = "vN"+j;
+				switch (elem.jourS) {
+					case 'Lundi':
+						vRefg = 276;
+						break;
+					case 'Mardi':
+						vRefg = 418;
+						break;
+					case 'Mercredi':
+						vRefg = 560;
+						break;
+					case 'Jeudi':
+						vRefg = 702;
+						break;
+					case 'Vendredi':
+						vRefg = 844;
+						break;
+					}
+				vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+				vMat = elem.getAttributeValue("Matiere.ID");
+				vJourS = elem.jourS;
+				vPosy = 86+11*(elem.hDeb-32);
+				vTaille = (11*(elem.hFin-elem.hDeb))-1;
+				vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+				vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+				vCoul = elem.getAttributeValue("Matiere.CoulCode");
+				vSalle = elem.getAttributeValue("Salle.Nom");
+				vType = elem.semaineType;
+				vLarge = 140;
+				vPosx = vRefg;
+				vTxt = vTxt + vLibH + "\n";
+				if (vSalle === null) {
+					vTxt = vTxt + "-";
+				} else {
+					vTxt = vTxt + vSalle;
+				}
+				//alert(vCoul);
+				$$(v).setBackgroundColor(vCoul);
+				$$(v).resize(vLarge,vTaille);
+				$$(v).move(vPosx,vPosy);
+				$$(v).setValue(vTxt);
+				$$(v).show();
+				
+				vAnScol = $$("cbAnScol").getValue();
+				vClasse = $$("cClasse").getValue();
+				vFil = $$("cFil").getValue();
+				vToday = parseInt($$("sToday").getValue(),10);
+				vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						//alert("Req sans filière. Année Scolaire:"+vAnScol+" - Jour: "+vToday+" - Jour Semaine:"+vJourS+" - Heure:"+vHeure+" - Classe:"+vClasse);
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
+					sources.remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.remarques;
+						//alert(vrems.length+" pour la box "+vboxn);
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "ic"+vk;
+								v = "vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
+			}
+		}
+
+	};// @lock
+
+	ListClass.change = function ListClass_change (event)// @startlock
+	{// @endlock
+		for (var i = 0; i < 50; i++) {
+			v = "vN"+i;
+			$$(v).hide();
+			v = "ic"+i;
+			$$(v).hide();
+
+		}
+	};// @lock
+
+	sPerS.slidestop = function sPerS_slidestop (event)// @startlock
+	{// @endlock
+		var vTaches, vRems, nb;
+		
+		for (var i = 0; i < 50; i++) {
+			v = "vN"+i;
+			$$(v).hide();
+			v = "ic"+i;
+			$$(v).hide();
+		}
+			
+		vTaches = sources.Taches;
+		nb = vTaches.length; 
+       	for (var j = 0; j < nb; j++) {
+        	vTaches.getElement(j, { onSuccess: function(event) {
+        		var elem, v, vNom, vRefg, vTxt, vPosy, vPosx, vTaille, vLibH, vProf, vCoul, vSalle, vType, vLarge, vPosX, vSemPI, vAnScol, vClasse, vFil, vToday, vQuery, vJourS, vMat, vHeure;
+            	elem = event.element;
+            	vType = elem.semaineType;
+				vSemPI = $$('cSemPI').getValue();
+				if ((vType === 'Permanent') || (vType === 'Semaine paire' && vSemPI === 'Paire') || (vType === 'Semaine impaire' && vSemPI === 'Impaire')) {
+            		v = "vN"+j;
+					switch (elem.jourS) {
+						case 'Lundi':
+							vRefg = 276;
+							break;
+						case 'Mardi':
+							vRefg = 418;
+							break;
+						case 'Mercredi':
+							vRefg = 560;
+							break;
+						case 'Jeudi':
+							vRefg = 702;
+							break;
+						case 'Vendredi':
+							vRefg = 844;
+							break;
+						}
+					vTxt = elem.getAttributeValue("Matiere.Nom")+"\n";
+					vMat = elem.getAttributeValue("Matiere.ID");
+					vJourS = elem.jourS;
+					vPosy = 86+11*(elem.hDeb-32);
+					vTaille = (11*(elem.hFin-elem.hDeb))-1;
+					vLibH = convTime(elem.hDeb) + " - " + convTime(elem.hFin);
+					vProf = elem.getAttributeValue("Professeur.Nom_Prenom");
+					vCoul = elem.getAttributeValue("Matiere.CoulCode");
+					vSalle = elem.getAttributeValue("Salle.Nom");
+					vType = elem.semaineType;
+					vLarge = 140;
+					vPosx = vRefg;
+					vTxt = vTxt + vLibH + "\n";
+					if (vSalle === null) {
+						vTxt = vTxt + "-";
+					} else {
+						vTxt = vTxt + vSalle;
+					}
+					$$(v).setBackgroundColor(vCoul);
+					$$(v).resize(vLarge,vTaille);
+					$$(v).move(vPosx,vPosy);
+					$$(v).setValue(vTxt);
+					$$(v).show();
+					
+					vAnScol = $$("cbAnScol").getValue();
+					vClasse = $$("cClasse").getValue();
+					vFil = $$("cFil").getValue();
+					vToday = parseInt($$("sToday").getValue(),10);
+					vHeure = elem.hDeb + parseInt((elem.hFin - elem.hDeb)/2,10);
+					//alert ('remarque pour Classe : '+vClasse+' - Filiere :'+vFil+' - Slider : '+vToday+' - Année Scolaire '+vAnScol+' - Matière '+vMat+' - Jour semaine : '+vJourS+' - Box : '+j);
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6 and Filiere = :7";
+					} else {
+						vQuery = "Annee_Scolaire.ID = :1 and sJour >= :2 and sJour < :3 and JourSem = :4 and sHeure = :5  and Classe = :6";
+					}
+					sources.remarques.query(vQuery, { onSuccess: function(event) {
+						var vrems, vnbr, vJourSem, vMat, v, vboxn;
+						vboxn = event.userData.boxn;
+						//alert('query box :'+vboxn);
+						vrems = sources.remarques;
+						if (vrems.length > 0) {
+							vrems.getElement(0, { onSuccess: function(event)  {
+								var vk;
+								vk = event.userData.k;
+								icr = "ic"+vk;
+								v = "vN"+vk;
+								boxPos = $$(v).getPosition();
+								//alert('trouvé - Position : '+ boxPos.right + ' - '+ boxPos.bottom + ' Box : '+icr);
+								$$(icr).setLeft(boxPos.left+121);
+								$$(icr).setTop(boxPos.top + 2);
+								$$(icr).show();
+								}, userData: {k:vboxn}});
+						}
+					}, params:[vAnScol, vToday, vToday+6, vJourS, vHeure, vClasse, vFil], userData: {boxn:j} });
+					
+				}
+        	}});
+        	
+    	}
+		
+	};// @lock
+
+	sPerS.slidechange = function sPerS_slidechange (event)// @startlock
+	{// @endlock
+		var vLun, vSem, vYear;
+		vLun = $$('cLun').getValue();
+		$$("sToday").setValue(event.data.value);
+		vYear = addDaysToDate(vLun,event.data.value);
+		$$('cAnnee').setValue(vYear.substr(6,4));
+		$$('tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
+		$$('tS1').setValue(addDaysToDate(vLun,event.data.value+1));
+		$$('tS2').setValue(addDaysToDate(vLun,event.data.value+2));
+		$$('tS3').setValue(addDaysToDate(vLun,event.data.value+3));
+		$$('tS4').setValue(addDaysToDate(vLun,event.data.value+4));
+		$$('tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
+		vSem = SemNum(addDaysToDate(vLun,event.data.value));
+		vSem = (vSem/2)-parseInt(vSem/2,10);
+		if (vSem === 0) {
+			$$('cSemPI').setValue("Paire");
+		} else {
+			$$('cSemPI').setValue("Impaire");
+		}
+	};// @lock
+
+	sPerS.slide = function sPerS_slide (event)// @startlock
+	{// @endlock
+		var vLun, vSem, vYear;
+		vLun = $$('cLun').getValue();
+		$$("sToday").setValue(event.data.value);
+		vYear = addDaysToDate(vLun,event.data.value);
+		$$('cAnnee').setValue(vYear.substr(6,4));
+		$$('tSemDeb').setValue(addDaysToDate(vLun,event.data.value));
+		$$('tS1').setValue(addDaysToDate(vLun,event.data.value+1));
+		$$('tS2').setValue(addDaysToDate(vLun,event.data.value+2));
+		$$('tS3').setValue(addDaysToDate(vLun,event.data.value+3));
+		$$('tS4').setValue(addDaysToDate(vLun,event.data.value+4));
+		$$('tSNumDeb').setValue("Sem " + SemNum(addDaysToDate(vLun,event.data.value)));
+		vSem = SemNum(addDaysToDate(vLun,event.data.value));
+		vSem = (vSem/2)-parseInt(vSem/2,10);
+		if (vSem === 0) {
+			$$('cSemPI').setValue("Paire");
+		} else {
+			$$('cSemPI').setValue("Impaire");
+		}
+	};// @lock
+
+	cbAnScol.change = function cbAnScol_change (event)// @startlock
+	{// @endlock
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {};
+			
+		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
+		//$$("component1_pgb1").startListening();
+		
+		vConv = $$("cAnDeb").getValue();
+		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
+		vJour = vAnDeb.getDay();
+		
+		if (vJour === 0) {
+			aJour = 1;
+		} else {
+			aJour = 8 - vJour;
+		}
+		
+		vLunSem = addDaysToDate(vConv,aJour);
+		vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
+		vToday = new Date();
+		tmp = vToday - vStart;
+		tmp = Math.floor(tmp/1000);
+		diff.sec = tmp % 60; 
+		tmp = Math.floor((tmp-diff.sec)/60);
+		diff.min = tmp % 60;
+		tmp = Math.floor((tmp-diff.min)/60);
+		diff.hour = tmp % 24;
+		tmp = Math.floor((tmp-diff.hour)/24);
+    	diff.day = tmp;
+    	vSemCour = parseInt(tmp/7,10);
+    	$$("cLun").setValue(vLunSem);
+    	$$("sToday").setValue(tmp);
+    	$$('sPerS').enable();
+    	$$('sPerS').setValue(vSemCour);
+				
+		vAnScol = $$("cbAnScol").getValue();
+		vUser = WAF.directory.currentUser().userName;
+		sources.utilisateurs.query("Login = :1", { onSuccess: function(event) { 
+		
+			var vAnScol, vProf, elem, vUserID;
+			elem = sources.utilisateurs;
+			vUserID = elem.ID;
+			vProf = $$("cProf").getValue();
+			vAnScol = $$("cbAnScol").getValue();
+			$$("cRole").setValue(elem.Fonction);
+			if (elem.Fonction === "Elève") {
+				//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
+				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
+					var vAnScol, elem, vClasse, vFil;
+					elem = sources.parcours_Scolaire;
+					vClasse = elem.Classe;
+					vFil = elem.Filiere;
+					vAnScol = $$("cbAnScol").getValue();
+					if (vFil !== null && vFil !== " " && vFil.length > 0) {
+						//alert("filière trouvée : "+vFil);
+						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
+					} else {
+						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+					}
+					$$("ListClass").hide();
+					$$("cClasse").show();
+					$$("cFil").show();
+				},params:[vAnScol, vUserID] });
+			} else {
+				sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+			}		
+		
+		}, params:[vUser] });
+		//$$("component1_pgb1").stopListening();
+		
+	};// @lock
+
+	vN49.dblclick = function vN49_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(49);
+	};// @lock
+
+	vN49.click = function vN49_click (event)// @startlock
+	{// @endlock
+		var res = chaps(49);
+	};// @lock
+
+	vN49.mouseout = function vN49_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField28.dblclick = function textField28_dblclick (event)// @startlock
+	vN48.dblclick = function vN48_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(48);
 	};// @lock
 
-	textField28.click = function textField28_click (event)// @startlock
+	vN48.click = function vN48_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(48);
 	};// @lock
 
-	textField27.mouseout = function textField27_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	textField27.dblclick = function textField27_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	textField27.click = function textField27_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	textField26.mouseout = function textField26_mouseout (event)// @startlock
+	vN48.mouseout = function vN48_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField26.dblclick = function textField26_dblclick (event)// @startlock
+	vN47.dblclick = function vN47_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(47);
 	};// @lock
 
-	textField26.click = function textField26_click (event)// @startlock
+	vN47.click = function vN47_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(47);
 	};// @lock
 
-	textField25.mouseout = function textField25_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	textField25.dblclick = function textField25_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	textField25.click = function textField25_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	textField24.mouseout = function textField24_mouseout (event)// @startlock
+	vN47.mouseout = function vN47_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField24.dblclick = function textField24_dblclick (event)// @startlock
+	vN46.dblclick = function vN46_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(46);
 	};// @lock
 
-	textField24.click = function textField24_click (event)// @startlock
+	vN46.click = function vN46_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(46);
 	};// @lock
 
-	textField23.mouseout = function textField23_mouseout (event)// @startlock
+	vN46.mouseout = function vN46_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField23.dblclick = function textField23_dblclick (event)// @startlock
+	vN45.dblclick = function vN45_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(45);
 	};// @lock
 
-	textField23.click = function textField23_click (event)// @startlock
+	vN45.click = function vN45_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(45);
 	};// @lock
 
-	textField22.mouseout = function textField22_mouseout (event)// @startlock
+	vN45.mouseout = function vN45_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField22.dblclick = function textField22_dblclick (event)// @startlock
+	vN40.dblclick = function vN40_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(40);
 	};// @lock
 
-	textField22.click = function textField22_click (event)// @startlock
+	vN40.click = function vN40_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(40);
 	};// @lock
 
-	textField21.mouseout = function textField21_mouseout (event)// @startlock
+	vN40.mouseout = function vN40_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField21.dblclick = function textField21_dblclick (event)// @startlock
+	vN41.dblclick = function vN41_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(41);
 	};// @lock
 
-	textField21.click = function textField21_click (event)// @startlock
+	vN41.click = function vN41_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(41);
 	};// @lock
 
-	textField20.mouseout = function textField20_mouseout (event)// @startlock
+	vN41.mouseout = function vN41_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField20.dblclick = function textField20_dblclick (event)// @startlock
+	vN42.dblclick = function vN42_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(42);
 	};// @lock
 
-	textField20.click = function textField20_click (event)// @startlock
+	vN42.click = function vN42_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(42);
 	};// @lock
 
-	textField19.mouseout = function textField19_mouseout (event)// @startlock
+	vN42.mouseout = function vN42_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField19.dblclick = function textField19_dblclick (event)// @startlock
+	vN43.dblclick = function vN43_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(43);
 	};// @lock
 
-	textField19.click = function textField19_click (event)// @startlock
+	vN43.click = function vN43_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(43);
 	};// @lock
 
-	textField18.mouseout = function textField18_mouseout (event)// @startlock
+	vN43.mouseout = function vN43_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField18.dblclick = function textField18_dblclick (event)// @startlock
+	vN44.dblclick = function vN44_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(44);
 	};// @lock
 
-	textField18.click = function textField18_click (event)// @startlock
+	vN44.click = function vN44_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(44);
 	};// @lock
 
-	textField17.mouseout = function textField17_mouseout (event)// @startlock
+	vN44.mouseout = function vN44_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField17.dblclick = function textField17_dblclick (event)// @startlock
+	vN39.dblclick = function vN39_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(39);
 	};// @lock
 
-	textField17.click = function textField17_click (event)// @startlock
+	vN39.click = function vN39_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(39);
 	};// @lock
 
-	textField16.mouseout = function textField16_mouseout (event)// @startlock
+	vN39.mouseout = function vN39_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField16.dblclick = function textField16_dblclick (event)// @startlock
+	vN38.dblclick = function vN38_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(38);
 	};// @lock
 
-	textField16.click = function textField16_click (event)// @startlock
+	vN38.click = function vN38_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(38);
 	};// @lock
 
-	textField15.mouseout = function textField15_mouseout (event)// @startlock
+	vN38.mouseout = function vN38_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField15.dblclick = function textField15_dblclick (event)// @startlock
+	vN37.dblclick = function vN37_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(37);
 	};// @lock
 
-	textField15.click = function textField15_click (event)// @startlock
+	vN37.click = function vN37_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(37);
 	};// @lock
 
-	textField14.mouseout = function textField14_mouseout (event)// @startlock
+	vN37.mouseout = function vN37_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField14.dblclick = function textField14_dblclick (event)// @startlock
+	vN36.dblclick = function vN36_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(36);
 	};// @lock
 
-	textField14.click = function textField14_click (event)// @startlock
+	vN36.click = function vN36_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(36);
 	};// @lock
 
-	textField13.mouseout = function textField13_mouseout (event)// @startlock
+	vN36.mouseout = function vN36_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField13.dblclick = function textField13_dblclick (event)// @startlock
+	vN35.dblclick = function vN35_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(35);
 	};// @lock
 
-	textField13.click = function textField13_click (event)// @startlock
+	vN35.click = function vN35_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(35);
 	};// @lock
 
-	textField12.mouseout = function textField12_mouseout (event)// @startlock
+	vN35.mouseout = function vN35_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField12.dblclick = function textField12_dblclick (event)// @startlock
+	vN30.dblclick = function vN30_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(30);
 	};// @lock
 
-	textField12.click = function textField12_click (event)// @startlock
+	vN30.click = function vN30_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(30);
 	};// @lock
 
-	textField11.mouseout = function textField11_mouseout (event)// @startlock
+	vN30.mouseout = function vN30_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField11.dblclick = function textField11_dblclick (event)// @startlock
+	vN31.dblclick = function vN31_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(31);
 	};// @lock
 
-	textField11.click = function textField11_click (event)// @startlock
+	vN31.click = function vN31_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(31);
 	};// @lock
 
-	textField10.mouseout = function textField10_mouseout (event)// @startlock
+	vN31.mouseout = function vN31_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField10.dblclick = function textField10_dblclick (event)// @startlock
+	vN32.dblclick = function vN32_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(32);
 	};// @lock
 
-	textField10.click = function textField10_click (event)// @startlock
+	vN32.click = function vN32_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(32);
 	};// @lock
 
-	textField9.mouseout = function textField9_mouseout (event)// @startlock
+	vN32.mouseout = function vN32_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField9.dblclick = function textField9_dblclick (event)// @startlock
+	vN33.dblclick = function vN33_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(33);
 	};// @lock
 
-	textField9.click = function textField9_click (event)// @startlock
+	vN33.click = function vN33_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(33);
 	};// @lock
 
-	textField8.mouseout = function textField8_mouseout (event)// @startlock
+	vN33.mouseout = function vN33_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField8.dblclick = function textField8_dblclick (event)// @startlock
+	vN34.dblclick = function vN34_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(34);
 	};// @lock
 
-	textField8.click = function textField8_click (event)// @startlock
+	vN34.click = function vN34_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(34);
 	};// @lock
 
-	textField7.mouseout = function textField7_mouseout (event)// @startlock
+	vN34.mouseout = function vN34_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField7.dblclick = function textField7_dblclick (event)// @startlock
+	vN29.dblclick = function vN29_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(29);
 	};// @lock
 
-	textField7.click = function textField7_click (event)// @startlock
+	vN29.click = function vN29_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(29);
 	};// @lock
 
-	textField6.mouseout = function textField6_mouseout (event)// @startlock
+	vN29.mouseout = function vN29_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField6.dblclick = function textField6_dblclick (event)// @startlock
+	vN28.dblclick = function vN28_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(28);
 	};// @lock
 
-	textField6.click = function textField6_click (event)// @startlock
+	vN28.click = function vN28_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(28);
 	};// @lock
 
-	textField5.mouseout = function textField5_mouseout (event)// @startlock
+	vN28.mouseout = function vN28_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField5.dblclick = function textField5_dblclick (event)// @startlock
+	vN27.dblclick = function vN27_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(27);
 	};// @lock
 
-	textField5.click = function textField5_click (event)// @startlock
+	vN27.click = function vN27_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(27);
 	};// @lock
 
-	textField4.mouseout = function textField4_mouseout (event)// @startlock
+	vN27.mouseout = function vN27_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
 	};// @lock
 
-	textField4.dblclick = function textField4_dblclick (event)// @startlock
+	vN26.dblclick = function vN26_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(26);
 	};// @lock
 
-	textField4.click = function textField4_click (event)// @startlock
+	vN26.click = function vN26_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(26);
 	};// @lock
 
 	vN26.mouseout = function vN26_mouseout (event)// @startlock
@@ -440,14 +1522,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN26.dblclick = function vN26_dblclick (event)// @startlock
+	vN25.dblclick = function vN25_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(25);
 	};// @lock
 
-	vN26.click = function vN26_click (event)// @startlock
+	vN25.click = function vN25_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(25);
 	};// @lock
 
 	vN25.mouseout = function vN25_mouseout (event)// @startlock
@@ -455,74 +1537,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN25.dblclick = function vN25_dblclick (event)// @startlock
+	vN20.dblclick = function vN20_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(20);
 	};// @lock
 
-	vN25.click = function vN25_click (event)// @startlock
+	vN20.click = function vN20_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	vN24.mouseout = function vN24_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	vN24.dblclick = function vN24_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	vN24.click = function vN24_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	vN23.mouseout = function vN23_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	vN23.dblclick = function vN23_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	vN23.click = function vN23_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	vN22.mouseout = function vN22_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	vN22.dblclick = function vN22_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	vN22.click = function vN22_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
-	};// @lock
-
-	vN21.mouseout = function vN21_mouseout (event)// @startlock
-	{// @endlock
-		$$('cChaps').hide();
-	};// @lock
-
-	vN21.dblclick = function vN21_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	vN21.click = function vN21_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
+		var res = chaps(20);
 	};// @lock
 
 	vN20.mouseout = function vN20_mouseout (event)// @startlock
@@ -530,14 +1552,74 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN20.dblclick = function vN20_dblclick (event)// @startlock
+	vN21.dblclick = function vN21_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(21);
 	};// @lock
 
-	vN20.click = function vN20_click (event)// @startlock
+	vN21.click = function vN21_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(21);
+	};// @lock
+
+	vN21.mouseout = function vN21_mouseout (event)// @startlock
+	{// @endlock
+		$$('cChaps').hide();
+	};// @lock
+
+	vN22.dblclick = function vN22_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(22);
+	};// @lock
+
+	vN22.click = function vN22_click (event)// @startlock
+	{// @endlock
+		var res = chaps(22);
+	};// @lock
+
+	vN22.mouseout = function vN22_mouseout (event)// @startlock
+	{// @endlock
+		$$('cChaps').hide();
+	};// @lock
+
+	vN23.dblclick = function vN23_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(23);
+	};// @lock
+
+	vN23.click = function vN23_click (event)// @startlock
+	{// @endlock
+		var res = chaps(23);
+	};// @lock
+
+	vN23.mouseout = function vN23_mouseout (event)// @startlock
+	{// @endlock
+		$$('cChaps').hide();
+	};// @lock
+
+	vN24.dblclick = function vN24_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(24);
+	};// @lock
+
+	vN24.click = function vN24_click (event)// @startlock
+	{// @endlock
+		var res = chaps(24);
+	};// @lock
+
+	vN24.mouseout = function vN24_mouseout (event)// @startlock
+	{// @endlock
+		$$('cChaps').hide();
+	};// @lock
+
+	vN19.dblclick = function vN19_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(19);
+	};// @lock
+
+	vN19.click = function vN19_click (event)// @startlock
+	{// @endlock
+		var res = chaps(19);
 	};// @lock
 
 	vN19.mouseout = function vN19_mouseout (event)// @startlock
@@ -545,14 +1627,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN19.dblclick = function vN19_dblclick (event)// @startlock
+	vN18.dblclick = function vN18_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(18);
 	};// @lock
 
-	vN19.click = function vN19_click (event)// @startlock
+	vN18.click = function vN18_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(18);
 	};// @lock
 
 	vN18.mouseout = function vN18_mouseout (event)// @startlock
@@ -560,14 +1642,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN18.dblclick = function vN18_dblclick (event)// @startlock
+	vN17.dblclick = function vN17_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(17);
 	};// @lock
 
-	vN18.click = function vN18_click (event)// @startlock
+	vN17.click = function vN17_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(17);
 	};// @lock
 
 	vN17.mouseout = function vN17_mouseout (event)// @startlock
@@ -575,14 +1657,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN17.dblclick = function vN17_dblclick (event)// @startlock
+	vN16.dblclick = function vN16_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(16);
 	};// @lock
 
-	vN17.click = function vN17_click (event)// @startlock
+	vN16.click = function vN16_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(16);
 	};// @lock
 
 	vN16.mouseout = function vN16_mouseout (event)// @startlock
@@ -590,14 +1672,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN16.dblclick = function vN16_dblclick (event)// @startlock
+	vN15.dblclick = function vN15_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(15);
 	};// @lock
 
-	vN16.click = function vN16_click (event)// @startlock
+	vN15.click = function vN15_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(15);
 	};// @lock
 
 	vN15.mouseout = function vN15_mouseout (event)// @startlock
@@ -605,14 +1687,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN15.dblclick = function vN15_dblclick (event)// @startlock
+	vN14.dblclick = function vN14_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(14);
 	};// @lock
 
-	vN15.click = function vN15_click (event)// @startlock
+	vN14.click = function vN14_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(14);
 	};// @lock
 
 	vN14.mouseout = function vN14_mouseout (event)// @startlock
@@ -620,14 +1702,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN14.dblclick = function vN14_dblclick (event)// @startlock
+	vN13.dblclick = function vN13_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(13);
 	};// @lock
 
-	vN14.click = function vN14_click (event)// @startlock
+	vN13.click = function vN13_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(13);
 	};// @lock
 
 	vN13.mouseout = function vN13_mouseout (event)// @startlock
@@ -635,14 +1717,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN13.dblclick = function vN13_dblclick (event)// @startlock
+	vN12.dblclick = function vN12_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(12);
 	};// @lock
 
-	vN13.click = function vN13_click (event)// @startlock
+	vN12.click = function vN12_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(12);
 	};// @lock
 
 	vN12.mouseout = function vN12_mouseout (event)// @startlock
@@ -650,14 +1732,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN12.dblclick = function vN12_dblclick (event)// @startlock
+	vN11.dblclick = function vN11_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(11);
 	};// @lock
 
-	vN12.click = function vN12_click (event)// @startlock
+	vN11.click = function vN11_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(11);
 	};// @lock
 
 	vN11.mouseout = function vN11_mouseout (event)// @startlock
@@ -665,14 +1747,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN11.dblclick = function vN11_dblclick (event)// @startlock
+	vN10.dblclick = function vN10_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(10);
 	};// @lock
 
-	vN11.click = function vN11_click (event)// @startlock
+	vN10.click = function vN10_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(10);
 	};// @lock
 
 	vN10.mouseout = function vN10_mouseout (event)// @startlock
@@ -680,14 +1762,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN10.dblclick = function vN10_dblclick (event)// @startlock
+	vN9.dblclick = function vN9_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(9);
 	};// @lock
 
-	vN10.click = function vN10_click (event)// @startlock
+	vN9.click = function vN9_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(9);
 	};// @lock
 
 	vN9.mouseout = function vN9_mouseout (event)// @startlock
@@ -695,14 +1777,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN9.dblclick = function vN9_dblclick (event)// @startlock
+	vN8.dblclick = function vN8_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(8);
 	};// @lock
 
-	vN9.click = function vN9_click (event)// @startlock
+	vN8.click = function vN8_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(8);
 	};// @lock
 
 	vN8.mouseout = function vN8_mouseout (event)// @startlock
@@ -710,14 +1792,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN8.dblclick = function vN8_dblclick (event)// @startlock
+	vN7.dblclick = function vN7_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(7);
 	};// @lock
 
-	vN8.click = function vN8_click (event)// @startlock
+	vN7.click = function vN7_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(7);
 	};// @lock
 
 	vN7.mouseout = function vN7_mouseout (event)// @startlock
@@ -725,14 +1807,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN7.dblclick = function vN7_dblclick (event)// @startlock
+	vN6.dblclick = function vN6_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(6);
 	};// @lock
 
-	vN7.click = function vN7_click (event)// @startlock
+	vN6.click = function vN6_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(6);
 	};// @lock
 
 	vN6.mouseout = function vN6_mouseout (event)// @startlock
@@ -740,14 +1822,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN6.dblclick = function vN6_dblclick (event)// @startlock
+	vN5.dblclick = function vN5_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(5);
 	};// @lock
 
-	vN6.click = function vN6_click (event)// @startlock
+	vN5.click = function vN5_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(5);
 	};// @lock
 
 	vN5.mouseout = function vN5_mouseout (event)// @startlock
@@ -755,14 +1837,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN5.dblclick = function vN5_dblclick (event)// @startlock
+	vN4.dblclick = function vN4_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(4);
 	};// @lock
 
-	vN5.click = function vN5_click (event)// @startlock
+	vN4.click = function vN4_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(4);
 	};// @lock
 
 	vN4.mouseout = function vN4_mouseout (event)// @startlock
@@ -770,14 +1852,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN4.dblclick = function vN4_dblclick (event)// @startlock
+	vN3.dblclick = function vN3_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(3);
 	};// @lock
 
-	vN4.click = function vN4_click (event)// @startlock
+	vN3.click = function vN3_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(3);
 	};// @lock
 
 	vN3.mouseout = function vN3_mouseout (event)// @startlock
@@ -785,14 +1867,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN3.dblclick = function vN3_dblclick (event)// @startlock
+	vN2.dblclick = function vN2_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(2);
 	};// @lock
 
-	vN3.click = function vN3_click (event)// @startlock
+	vN2.click = function vN2_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(2);
 	};// @lock
 
 	vN2.mouseout = function vN2_mouseout (event)// @startlock
@@ -800,29 +1882,19 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		$$('cChaps').hide();
 	};// @lock
 
-	vN2.dblclick = function vN2_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	vN2.click = function vN2_click (event)// @startlock
+	vN1.click = function vN1_click (event)// @startlock
 	{// @endlock
 		var res = chaps(1);
 	};// @lock
 
-	textField2.mouseout = function textField2_mouseout (event)// @startlock
+	vN1.dblclick = function vN1_dblclick (event)// @startlock
+	{// @endlock
+		var res = newcom(1);
+	};// @lock
+
+	vN1.mouseout = function vN1_mouseout (event)// @startlock
 	{// @endlock
 		$$('cChaps').hide();
-	};// @lock
-
-	textField2.dblclick = function textField2_dblclick (event)// @startlock
-	{// @endlock
-		var res = newcom(1);
-	};// @lock
-
-	textField2.click = function textField2_click (event)// @startlock
-	{// @endlock
-		var res = chaps(1);
 	};// @lock
 
 	vN0.mouseout = function vN0_mouseout (event)// @startlock
@@ -832,25 +1904,94 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	vN0.dblclick = function vN0_dblclick (event)// @startlock
 	{// @endlock
-		var res = newcom(1);
+		var res = newcom(0);
 	};// @lock
 
 	vN0.click = function vN0_click (event)// @startlock
 	{// @endlock
-		var res = chaps(1);
+		var res = chaps(0);
 	};// @lock
 
 	documentEvent.onLoad = function documentEvent_onLoad (event)// @startlock
 	{// @endlock
-		var vUser = WAF.directory.currentUser();
+		var vUser, vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {};
+		vUser = WAF.directory.currentUser();
 		if (vUser === null) {
 			$$('main').hide();
 		 } else {
 		 	$$('main').show();
+		 	$$("ListTask").setRowHeight(5);
 		 	if (waf.directory.currentUserBelongsTo("Elève")) {
 				$$('mEleves').hide();
 				$$('mCantine').hide();
 			}
+			
+				$$("cchg").show();
+				sources.annees_Scolaires.query("", { onSuccess: function(event) { 
+				vConv = $$("cAnDeb").getValue();
+				vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
+				vJour = vAnDeb.getDay();
+		
+				if (vJour === 0) {
+					aJour = 1;
+				} else {
+					aJour = 8 - vJour;
+				}
+		
+				vLunSem = addDaysToDate(vConv,aJour);
+				vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
+				vToday = new Date();
+				tmp = vToday - vStart;
+				tmp = Math.floor(tmp/1000);
+				diff.sec = tmp % 60; 
+				tmp = Math.floor((tmp-diff.sec)/60);
+				diff.min = tmp % 60;
+				tmp = Math.floor((tmp-diff.min)/60);
+				diff.hour = tmp % 24;
+				tmp = Math.floor((tmp-diff.hour)/24);
+    			diff.day = tmp;
+    			vSemCour = parseInt(tmp/7,10);
+    			$$("cLun").setValue(vLunSem);
+    			$$("sToday").setValue(tmp);
+    			$$('sPerS').enable();
+    			$$('sPerS').setValue(vSemCour);
+				
+				vAnScol = sources.annees_Scolaires.ID;
+				vUser = WAF.directory.currentUser().userName;
+				sources.utilisateurs.query("Login = :1", { onSuccess: function(event) { 
+		
+					var vAnScol, vProf, elem, vUserID;
+					elem = sources.utilisateurs;
+					vUserID = elem.ID;
+					vProf = $$("cProf").getValue();
+					vAnScol = sources.annees_Scolaires.ID;
+					$$("cRole").setValue(elem.Fonction);
+					if (elem.Fonction === "Elève") {
+						//alert("Année scolaire : "+vAnScol+" - Elève : "+vUserID);
+						sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.Utilisateur.ID = :2", { onSuccess: function(event) { 
+							var vAnScol, elem, vClasse, vFil;
+							elem = sources.parcours_Scolaire;
+							vClasse = elem.Classe;
+							vFil = elem.Filiere;
+							vAnScol = sources.annees_Scolaires.ID;
+							if (vFil !== null && vFil !== " " && vFil.length > 0) {
+								//alert("filière trouvée : "+vFil);
+								sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2 and Filiere = :3", vAnScol, vClasse, vFil);
+							} else {
+								sources.planning_Matiere.query("Annee_Scolaire.ID = :1 and Classe = :2", vAnScol, vClasse);
+							}
+							$$("ListClass").hide();
+							$$("cClasse").show();
+							$$("cFil").show();
+						},params:[vAnScol, vUserID] });
+					} else {
+						sources.planning_Matiere.query("Annee_Scolaire.ID = :1 order by Ordre desc, Filiere", vAnScol);
+					}		
+		
+				}, params:[vUser] });
+				$$("cchg").hide();
+			}});
+				
 		}
 			
 	};// @lock
@@ -874,159 +2015,260 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
-	WAF.addListener("textField28", "mouseout", textField28.mouseout, "WAF");
-	WAF.addListener("textField28", "dblclick", textField28.dblclick, "WAF");
-	WAF.addListener("textField28", "click", textField28.click, "WAF");
-	WAF.addListener("textField27", "mouseout", textField27.mouseout, "WAF");
-	WAF.addListener("textField27", "dblclick", textField27.dblclick, "WAF");
-	WAF.addListener("textField27", "click", textField27.click, "WAF");
-	WAF.addListener("textField26", "mouseout", textField26.mouseout, "WAF");
-	WAF.addListener("textField26", "dblclick", textField26.dblclick, "WAF");
-	WAF.addListener("textField26", "click", textField26.click, "WAF");
-	WAF.addListener("textField25", "mouseout", textField25.mouseout, "WAF");
-	WAF.addListener("textField25", "dblclick", textField25.dblclick, "WAF");
-	WAF.addListener("textField25", "click", textField25.click, "WAF");
-	WAF.addListener("textField24", "mouseout", textField24.mouseout, "WAF");
-	WAF.addListener("textField24", "dblclick", textField24.dblclick, "WAF");
-	WAF.addListener("textField24", "click", textField24.click, "WAF");
-	WAF.addListener("textField23", "mouseout", textField23.mouseout, "WAF");
-	WAF.addListener("textField23", "dblclick", textField23.dblclick, "WAF");
-	WAF.addListener("textField23", "click", textField23.click, "WAF");
-	WAF.addListener("textField22", "mouseout", textField22.mouseout, "WAF");
-	WAF.addListener("textField22", "dblclick", textField22.dblclick, "WAF");
-	WAF.addListener("textField22", "click", textField22.click, "WAF");
-	WAF.addListener("textField21", "mouseout", textField21.mouseout, "WAF");
-	WAF.addListener("textField21", "dblclick", textField21.dblclick, "WAF");
-	WAF.addListener("textField21", "click", textField21.click, "WAF");
-	WAF.addListener("textField20", "mouseout", textField20.mouseout, "WAF");
-	WAF.addListener("textField20", "dblclick", textField20.dblclick, "WAF");
-	WAF.addListener("textField20", "click", textField20.click, "WAF");
-	WAF.addListener("textField19", "mouseout", textField19.mouseout, "WAF");
-	WAF.addListener("textField19", "dblclick", textField19.dblclick, "WAF");
-	WAF.addListener("textField19", "click", textField19.click, "WAF");
-	WAF.addListener("textField18", "mouseout", textField18.mouseout, "WAF");
-	WAF.addListener("textField18", "dblclick", textField18.dblclick, "WAF");
-	WAF.addListener("textField18", "click", textField18.click, "WAF");
-	WAF.addListener("textField17", "mouseout", textField17.mouseout, "WAF");
-	WAF.addListener("textField17", "dblclick", textField17.dblclick, "WAF");
-	WAF.addListener("textField17", "click", textField17.click, "WAF");
-	WAF.addListener("textField16", "mouseout", textField16.mouseout, "WAF");
-	WAF.addListener("textField16", "dblclick", textField16.dblclick, "WAF");
-	WAF.addListener("textField16", "click", textField16.click, "WAF");
-	WAF.addListener("textField15", "mouseout", textField15.mouseout, "WAF");
-	WAF.addListener("textField15", "dblclick", textField15.dblclick, "WAF");
-	WAF.addListener("textField15", "click", textField15.click, "WAF");
-	WAF.addListener("textField14", "mouseout", textField14.mouseout, "WAF");
-	WAF.addListener("textField14", "dblclick", textField14.dblclick, "WAF");
-	WAF.addListener("textField14", "click", textField14.click, "WAF");
-	WAF.addListener("textField13", "mouseout", textField13.mouseout, "WAF");
-	WAF.addListener("textField13", "dblclick", textField13.dblclick, "WAF");
-	WAF.addListener("textField13", "click", textField13.click, "WAF");
-	WAF.addListener("textField12", "mouseout", textField12.mouseout, "WAF");
-	WAF.addListener("textField12", "dblclick", textField12.dblclick, "WAF");
-	WAF.addListener("textField12", "click", textField12.click, "WAF");
-	WAF.addListener("textField11", "mouseout", textField11.mouseout, "WAF");
-	WAF.addListener("textField11", "dblclick", textField11.dblclick, "WAF");
-	WAF.addListener("textField11", "click", textField11.click, "WAF");
-	WAF.addListener("textField10", "mouseout", textField10.mouseout, "WAF");
-	WAF.addListener("textField10", "dblclick", textField10.dblclick, "WAF");
-	WAF.addListener("textField10", "click", textField10.click, "WAF");
-	WAF.addListener("textField9", "mouseout", textField9.mouseout, "WAF");
-	WAF.addListener("textField9", "dblclick", textField9.dblclick, "WAF");
-	WAF.addListener("textField9", "click", textField9.click, "WAF");
-	WAF.addListener("textField8", "mouseout", textField8.mouseout, "WAF");
-	WAF.addListener("textField8", "dblclick", textField8.dblclick, "WAF");
-	WAF.addListener("textField8", "click", textField8.click, "WAF");
-	WAF.addListener("textField7", "mouseout", textField7.mouseout, "WAF");
-	WAF.addListener("textField7", "dblclick", textField7.dblclick, "WAF");
-	WAF.addListener("textField7", "click", textField7.click, "WAF");
-	WAF.addListener("textField6", "mouseout", textField6.mouseout, "WAF");
-	WAF.addListener("textField6", "dblclick", textField6.dblclick, "WAF");
-	WAF.addListener("textField6", "click", textField6.click, "WAF");
-	WAF.addListener("textField5", "mouseout", textField5.mouseout, "WAF");
-	WAF.addListener("textField5", "dblclick", textField5.dblclick, "WAF");
-	WAF.addListener("textField5", "click", textField5.click, "WAF");
-	WAF.addListener("textField4", "mouseout", textField4.mouseout, "WAF");
-	WAF.addListener("textField4", "dblclick", textField4.dblclick, "WAF");
-	WAF.addListener("textField4", "click", textField4.click, "WAF");
-	WAF.addListener("vN26", "mouseout", vN26.mouseout, "WAF");
-	WAF.addListener("vN26", "dblclick", vN26.dblclick, "WAF");
-	WAF.addListener("vN26", "click", vN26.click, "WAF");
-	WAF.addListener("vN25", "mouseout", vN25.mouseout, "WAF");
-	WAF.addListener("vN25", "dblclick", vN25.dblclick, "WAF");
-	WAF.addListener("vN25", "click", vN25.click, "WAF");
-	WAF.addListener("vN24", "mouseout", vN24.mouseout, "WAF");
+	WAF.addListener("mEdT", "click", mEdT.click, "WAF");
+	WAF.addListener("ic49", "click", ic49.click, "WAF");
+	WAF.addListener("ic48", "click", ic48.click, "WAF");
+	WAF.addListener("ic47", "click", ic47.click, "WAF");
+	WAF.addListener("ic46", "click", ic46.click, "WAF");
+	WAF.addListener("ic45", "click", ic45.click, "WAF");
+	WAF.addListener("ic44", "click", ic44.click, "WAF");
+	WAF.addListener("ic43", "click", ic43.click, "WAF");
+	WAF.addListener("ic42", "click", ic42.click, "WAF");
+	WAF.addListener("ic41", "click", ic41.click, "WAF");
+	WAF.addListener("ic40", "click", ic40.click, "WAF");
+	WAF.addListener("ic39", "click", ic39.click, "WAF");
+	WAF.addListener("ic38", "click", ic38.click, "WAF");
+	WAF.addListener("ic37", "click", ic37.click, "WAF");
+	WAF.addListener("ic36", "click", ic36.click, "WAF");
+	WAF.addListener("ic35", "click", ic35.click, "WAF");
+	WAF.addListener("ic34", "click", ic34.click, "WAF");
+	WAF.addListener("ic33", "click", ic33.click, "WAF");
+	WAF.addListener("ic32", "click", ic32.click, "WAF");
+	WAF.addListener("ic31", "click", ic31.click, "WAF");
+	WAF.addListener("ic30", "click", ic30.click, "WAF");
+	WAF.addListener("ic29", "click", ic29.click, "WAF");
+	WAF.addListener("ic28", "click", ic28.click, "WAF");
+	WAF.addListener("ic27", "click", ic27.click, "WAF");
+	WAF.addListener("ic26", "click", ic26.click, "WAF");
+	WAF.addListener("ic25", "click", ic25.click, "WAF");
+	WAF.addListener("ic24", "click", ic24.click, "WAF");
+	WAF.addListener("ic23", "click", ic23.click, "WAF");
+	WAF.addListener("ic22", "click", ic22.click, "WAF");
+	WAF.addListener("ic21", "click", ic21.click, "WAF");
+	WAF.addListener("ic20", "click", ic20.click, "WAF");
+	WAF.addListener("ic19", "click", ic19.click, "WAF");
+	WAF.addListener("ic18", "click", ic18.click, "WAF");
+	WAF.addListener("ic17", "click", ic17.click, "WAF");
+	WAF.addListener("ic16", "click", ic16.click, "WAF");
+	WAF.addListener("ic15", "click", ic15.click, "WAF");
+	WAF.addListener("ic14", "click", ic14.click, "WAF");
+	WAF.addListener("ic13", "click", ic13.click, "WAF");
+	WAF.addListener("ic12", "click", ic12.click, "WAF");
+	WAF.addListener("ic11", "click", ic11.click, "WAF");
+	WAF.addListener("ic10", "click", ic10.click, "WAF");
+	WAF.addListener("ic9", "click", ic9.click, "WAF");
+	WAF.addListener("ic8", "click", ic8.click, "WAF");
+	WAF.addListener("ic7", "click", ic7.click, "WAF");
+	WAF.addListener("ic6", "click", ic6.click, "WAF");
+	WAF.addListener("ic5", "click", ic5.click, "WAF");
+	WAF.addListener("ic4", "click", ic4.click, "WAF");
+	WAF.addListener("ic3", "click", ic3.click, "WAF");
+	WAF.addListener("ic2", "click", ic2.click, "WAF");
+	WAF.addListener("ic1", "click", ic1.click, "WAF");
+	WAF.addListener("ic0", "click", ic0.click, "WAF");
+	WAF.addListener("ic49", "mouseout", ic49.mouseout, "WAF");
+	WAF.addListener("ic48", "mouseout", ic48.mouseout, "WAF");
+	WAF.addListener("ic47", "mouseout", ic47.mouseout, "WAF");
+	WAF.addListener("ic46", "mouseout", ic46.mouseout, "WAF");
+	WAF.addListener("ic45", "mouseout", ic45.mouseout, "WAF");
+	WAF.addListener("ic44", "mouseout", ic44.mouseout, "WAF");
+	WAF.addListener("ic43", "mouseout", ic43.mouseout, "WAF");
+	WAF.addListener("ic42", "mouseout", ic42.mouseout, "WAF");
+	WAF.addListener("ic41", "mouseout", ic41.mouseout, "WAF");
+	WAF.addListener("ic40", "mouseout", ic40.mouseout, "WAF");
+	WAF.addListener("ic39", "mouseout", ic39.mouseout, "WAF");
+	WAF.addListener("ic38", "mouseout", ic38.mouseout, "WAF");
+	WAF.addListener("ic37", "mouseout", ic37.mouseout, "WAF");
+	WAF.addListener("ic36", "mouseout", ic36.mouseout, "WAF");
+	WAF.addListener("ic35", "mouseout", ic35.mouseout, "WAF");
+	WAF.addListener("ic34", "mouseout", ic34.mouseout, "WAF");
+	WAF.addListener("ic33", "mouseout", ic33.mouseout, "WAF");
+	WAF.addListener("ic32", "mouseout", ic32.mouseout, "WAF");
+	WAF.addListener("ic31", "mouseout", ic31.mouseout, "WAF");
+	WAF.addListener("ic30", "mouseout", ic30.mouseout, "WAF");
+	WAF.addListener("ic29", "mouseout", ic29.mouseout, "WAF");
+	WAF.addListener("ic28", "mouseout", ic28.mouseout, "WAF");
+	WAF.addListener("ic27", "mouseout", ic27.mouseout, "WAF");
+	WAF.addListener("ic26", "mouseout", ic26.mouseout, "WAF");
+	WAF.addListener("ic25", "mouseout", ic25.mouseout, "WAF");
+	WAF.addListener("ic24", "mouseout", ic24.mouseout, "WAF");
+	WAF.addListener("ic23", "mouseout", ic23.mouseout, "WAF");
+	WAF.addListener("ic22", "mouseout", ic22.mouseout, "WAF");
+	WAF.addListener("ic21", "mouseout", ic21.mouseout, "WAF");
+	WAF.addListener("ic20", "mouseout", ic20.mouseout, "WAF");
+	WAF.addListener("ic19", "mouseout", ic19.mouseout, "WAF");
+	WAF.addListener("ic18", "mouseout", ic18.mouseout, "WAF");
+	WAF.addListener("ic17", "mouseout", ic17.mouseout, "WAF");
+	WAF.addListener("ic16", "mouseout", ic16.mouseout, "WAF");
+	WAF.addListener("ic15", "mouseout", ic15.mouseout, "WAF");
+	WAF.addListener("ic14", "mouseout", ic14.mouseout, "WAF");
+	WAF.addListener("ic13", "mouseout", ic13.mouseout, "WAF");
+	WAF.addListener("ic12", "mouseout", ic12.mouseout, "WAF");
+	WAF.addListener("ic11", "mouseout", ic11.mouseout, "WAF");
+	WAF.addListener("ic10", "mouseout", ic10.mouseout, "WAF");
+	WAF.addListener("ic9", "mouseout", ic9.mouseout, "WAF");
+	WAF.addListener("ic8", "mouseout", ic8.mouseout, "WAF");
+	WAF.addListener("ic7", "mouseout", ic7.mouseout, "WAF");
+	WAF.addListener("ic6", "mouseout", ic6.mouseout, "WAF");
+	WAF.addListener("ic5", "mouseout", ic5.mouseout, "WAF");
+	WAF.addListener("ic4", "mouseout", ic4.mouseout, "WAF");
+	WAF.addListener("ic3", "mouseout", ic3.mouseout, "WAF");
+	WAF.addListener("ic2", "mouseout", ic2.mouseout, "WAF");
+	WAF.addListener("ic1", "mouseout", ic1.mouseout, "WAF");
+	WAF.addListener("ic0", "mouseout", ic0.mouseout, "WAF");
+	WAF.addListener("ListTask", "onRowDraw", ListTask.onRowDraw, "WAF");
+	WAF.addListener("ListClass", "change", ListClass.change, "WAF");
+	WAF.addListener("sPerS", "slidestop", sPerS.slidestop, "WAF");
+	WAF.addListener("sPerS", "slidechange", sPerS.slidechange, "WAF");
+	WAF.addListener("sPerS", "slide", sPerS.slide, "WAF");
+	WAF.addListener("cbAnScol", "change", cbAnScol.change, "WAF");
+	WAF.addListener("vN49", "dblclick", vN49.dblclick, "WAF");
+	WAF.addListener("vN44", "dblclick", vN44.dblclick, "WAF");
+	WAF.addListener("vN39", "dblclick", vN39.dblclick, "WAF");
+	WAF.addListener("vN34", "dblclick", vN34.dblclick, "WAF");
+	WAF.addListener("vN29", "dblclick", vN29.dblclick, "WAF");
 	WAF.addListener("vN24", "dblclick", vN24.dblclick, "WAF");
-	WAF.addListener("vN24", "click", vN24.click, "WAF");
-	WAF.addListener("vN23", "mouseout", vN23.mouseout, "WAF");
-	WAF.addListener("vN23", "dblclick", vN23.dblclick, "WAF");
-	WAF.addListener("vN23", "click", vN23.click, "WAF");
-	WAF.addListener("vN22", "mouseout", vN22.mouseout, "WAF");
-	WAF.addListener("vN22", "dblclick", vN22.dblclick, "WAF");
-	WAF.addListener("vN22", "click", vN22.click, "WAF");
-	WAF.addListener("vN21", "mouseout", vN21.mouseout, "WAF");
-	WAF.addListener("vN21", "dblclick", vN21.dblclick, "WAF");
-	WAF.addListener("vN21", "click", vN21.click, "WAF");
-	WAF.addListener("vN20", "mouseout", vN20.mouseout, "WAF");
-	WAF.addListener("vN20", "dblclick", vN20.dblclick, "WAF");
-	WAF.addListener("vN20", "click", vN20.click, "WAF");
-	WAF.addListener("vN19", "mouseout", vN19.mouseout, "WAF");
 	WAF.addListener("vN19", "dblclick", vN19.dblclick, "WAF");
-	WAF.addListener("vN19", "click", vN19.click, "WAF");
-	WAF.addListener("vN18", "mouseout", vN18.mouseout, "WAF");
-	WAF.addListener("vN18", "dblclick", vN18.dblclick, "WAF");
-	WAF.addListener("vN18", "click", vN18.click, "WAF");
-	WAF.addListener("vN17", "mouseout", vN17.mouseout, "WAF");
-	WAF.addListener("vN17", "dblclick", vN17.dblclick, "WAF");
-	WAF.addListener("vN17", "click", vN17.click, "WAF");
-	WAF.addListener("vN16", "mouseout", vN16.mouseout, "WAF");
-	WAF.addListener("vN16", "dblclick", vN16.dblclick, "WAF");
-	WAF.addListener("vN16", "click", vN16.click, "WAF");
-	WAF.addListener("vN15", "mouseout", vN15.mouseout, "WAF");
-	WAF.addListener("vN15", "dblclick", vN15.dblclick, "WAF");
-	WAF.addListener("vN15", "click", vN15.click, "WAF");
-	WAF.addListener("vN14", "mouseout", vN14.mouseout, "WAF");
 	WAF.addListener("vN14", "dblclick", vN14.dblclick, "WAF");
-	WAF.addListener("vN14", "click", vN14.click, "WAF");
-	WAF.addListener("vN13", "mouseout", vN13.mouseout, "WAF");
-	WAF.addListener("vN13", "dblclick", vN13.dblclick, "WAF");
-	WAF.addListener("vN13", "click", vN13.click, "WAF");
-	WAF.addListener("vN12", "mouseout", vN12.mouseout, "WAF");
-	WAF.addListener("vN12", "dblclick", vN12.dblclick, "WAF");
-	WAF.addListener("vN12", "click", vN12.click, "WAF");
-	WAF.addListener("vN11", "mouseout", vN11.mouseout, "WAF");
-	WAF.addListener("vN11", "dblclick", vN11.dblclick, "WAF");
-	WAF.addListener("vN11", "click", vN11.click, "WAF");
-	WAF.addListener("vN10", "mouseout", vN10.mouseout, "WAF");
-	WAF.addListener("vN10", "dblclick", vN10.dblclick, "WAF");
-	WAF.addListener("vN10", "click", vN10.click, "WAF");
-	WAF.addListener("vN9", "mouseout", vN9.mouseout, "WAF");
 	WAF.addListener("vN9", "dblclick", vN9.dblclick, "WAF");
-	WAF.addListener("vN9", "click", vN9.click, "WAF");
-	WAF.addListener("vN8", "mouseout", vN8.mouseout, "WAF");
-	WAF.addListener("vN8", "dblclick", vN8.dblclick, "WAF");
-	WAF.addListener("vN8", "click", vN8.click, "WAF");
-	WAF.addListener("vN7", "mouseout", vN7.mouseout, "WAF");
-	WAF.addListener("vN7", "dblclick", vN7.dblclick, "WAF");
-	WAF.addListener("vN7", "click", vN7.click, "WAF");
-	WAF.addListener("vN6", "mouseout", vN6.mouseout, "WAF");
-	WAF.addListener("vN6", "dblclick", vN6.dblclick, "WAF");
-	WAF.addListener("vN6", "click", vN6.click, "WAF");
-	WAF.addListener("vN5", "mouseout", vN5.mouseout, "WAF");
-	WAF.addListener("vN5", "dblclick", vN5.dblclick, "WAF");
-	WAF.addListener("vN5", "click", vN5.click, "WAF");
-	WAF.addListener("vN4", "mouseout", vN4.mouseout, "WAF");
 	WAF.addListener("vN4", "dblclick", vN4.dblclick, "WAF");
-	WAF.addListener("vN4", "click", vN4.click, "WAF");
-	WAF.addListener("vN3", "mouseout", vN3.mouseout, "WAF");
+	WAF.addListener("vN48", "dblclick", vN48.dblclick, "WAF");
+	WAF.addListener("vN43", "dblclick", vN43.dblclick, "WAF");
+	WAF.addListener("vN38", "dblclick", vN38.dblclick, "WAF");
+	WAF.addListener("vN33", "dblclick", vN33.dblclick, "WAF");
+	WAF.addListener("vN28", "dblclick", vN28.dblclick, "WAF");
+	WAF.addListener("vN23", "dblclick", vN23.dblclick, "WAF");
+	WAF.addListener("vN18", "dblclick", vN18.dblclick, "WAF");
+	WAF.addListener("vN13", "dblclick", vN13.dblclick, "WAF");
+	WAF.addListener("vN8", "dblclick", vN8.dblclick, "WAF");
 	WAF.addListener("vN3", "dblclick", vN3.dblclick, "WAF");
-	WAF.addListener("vN3", "click", vN3.click, "WAF");
-	WAF.addListener("vN2", "mouseout", vN2.mouseout, "WAF");
+	WAF.addListener("vN47", "dblclick", vN47.dblclick, "WAF");
+	WAF.addListener("vN42", "dblclick", vN42.dblclick, "WAF");
+	WAF.addListener("vN37", "dblclick", vN37.dblclick, "WAF");
+	WAF.addListener("vN32", "dblclick", vN32.dblclick, "WAF");
+	WAF.addListener("vN27", "dblclick", vN27.dblclick, "WAF");
+	WAF.addListener("vN22", "dblclick", vN22.dblclick, "WAF");
+	WAF.addListener("vN17", "dblclick", vN17.dblclick, "WAF");
+	WAF.addListener("vN12", "dblclick", vN12.dblclick, "WAF");
+	WAF.addListener("vN7", "dblclick", vN7.dblclick, "WAF");
 	WAF.addListener("vN2", "dblclick", vN2.dblclick, "WAF");
+	WAF.addListener("vN46", "dblclick", vN46.dblclick, "WAF");
+	WAF.addListener("vN41", "dblclick", vN41.dblclick, "WAF");
+	WAF.addListener("vN36", "dblclick", vN36.dblclick, "WAF");
+	WAF.addListener("vN31", "dblclick", vN31.dblclick, "WAF");
+	WAF.addListener("vN26", "dblclick", vN26.dblclick, "WAF");
+	WAF.addListener("vN21", "dblclick", vN21.dblclick, "WAF");
+	WAF.addListener("vN16", "dblclick", vN16.dblclick, "WAF");
+	WAF.addListener("vN11", "dblclick", vN11.dblclick, "WAF");
+	WAF.addListener("vN6", "dblclick", vN6.dblclick, "WAF");
+	WAF.addListener("vN45", "dblclick", vN45.dblclick, "WAF");
+	WAF.addListener("vN40", "dblclick", vN40.dblclick, "WAF");
+	WAF.addListener("vN35", "dblclick", vN35.dblclick, "WAF");
+	WAF.addListener("vN30", "dblclick", vN30.dblclick, "WAF");
+	WAF.addListener("vN25", "dblclick", vN25.dblclick, "WAF");
+	WAF.addListener("vN20", "dblclick", vN20.dblclick, "WAF");
+	WAF.addListener("vN15", "dblclick", vN15.dblclick, "WAF");
+	WAF.addListener("vN10", "dblclick", vN10.dblclick, "WAF");
+	WAF.addListener("vN5", "dblclick", vN5.dblclick, "WAF");
+	WAF.addListener("vN49", "click", vN49.click, "WAF");
+	WAF.addListener("vN48", "click", vN48.click, "WAF");
+	WAF.addListener("vN47", "click", vN47.click, "WAF");
+	WAF.addListener("vN46", "click", vN46.click, "WAF");
+	WAF.addListener("vN45", "click", vN45.click, "WAF");
+	WAF.addListener("vN44", "click", vN44.click, "WAF");
+	WAF.addListener("vN43", "click", vN43.click, "WAF");
+	WAF.addListener("vN42", "click", vN42.click, "WAF");
+	WAF.addListener("vN41", "click", vN41.click, "WAF");
+	WAF.addListener("vN40", "click", vN40.click, "WAF");
+	WAF.addListener("vN39", "click", vN39.click, "WAF");
+	WAF.addListener("vN38", "click", vN38.click, "WAF");
+	WAF.addListener("vN37", "click", vN37.click, "WAF");
+	WAF.addListener("vN36", "click", vN36.click, "WAF");
+	WAF.addListener("vN35", "click", vN35.click, "WAF");
+	WAF.addListener("vN34", "click", vN34.click, "WAF");
+	WAF.addListener("vN33", "click", vN33.click, "WAF");
+	WAF.addListener("vN32", "click", vN32.click, "WAF");
+	WAF.addListener("vN31", "click", vN31.click, "WAF");
+	WAF.addListener("vN30", "click", vN30.click, "WAF");
+	WAF.addListener("vN29", "click", vN29.click, "WAF");
+	WAF.addListener("vN28", "click", vN28.click, "WAF");
+	WAF.addListener("vN27", "click", vN27.click, "WAF");
+	WAF.addListener("vN26", "click", vN26.click, "WAF");
+	WAF.addListener("vN25", "click", vN25.click, "WAF");
+	WAF.addListener("vN24", "click", vN24.click, "WAF");
+	WAF.addListener("vN23", "click", vN23.click, "WAF");
+	WAF.addListener("vN22", "click", vN22.click, "WAF");
+	WAF.addListener("vN21", "click", vN21.click, "WAF");
+	WAF.addListener("vN20", "click", vN20.click, "WAF");
+	WAF.addListener("vN19", "click", vN19.click, "WAF");
+	WAF.addListener("vN18", "click", vN18.click, "WAF");
+	WAF.addListener("vN17", "click", vN17.click, "WAF");
+	WAF.addListener("vN16", "click", vN16.click, "WAF");
+	WAF.addListener("vN15", "click", vN15.click, "WAF");
+	WAF.addListener("vN14", "click", vN14.click, "WAF");
+	WAF.addListener("vN13", "click", vN13.click, "WAF");
+	WAF.addListener("vN12", "click", vN12.click, "WAF");
+	WAF.addListener("vN11", "click", vN11.click, "WAF");
+	WAF.addListener("vN10", "click", vN10.click, "WAF");
+	WAF.addListener("vN9", "click", vN9.click, "WAF");
+	WAF.addListener("vN8", "click", vN8.click, "WAF");
+	WAF.addListener("vN7", "click", vN7.click, "WAF");
+	WAF.addListener("vN6", "click", vN6.click, "WAF");
+	WAF.addListener("vN5", "click", vN5.click, "WAF");
+	WAF.addListener("vN4", "click", vN4.click, "WAF");
+	WAF.addListener("vN3", "click", vN3.click, "WAF");
 	WAF.addListener("vN2", "click", vN2.click, "WAF");
-	WAF.addListener("textField2", "mouseout", textField2.mouseout, "WAF");
-	WAF.addListener("textField2", "dblclick", textField2.dblclick, "WAF");
-	WAF.addListener("textField2", "click", textField2.click, "WAF");
+	WAF.addListener("vN1", "click", vN1.click, "WAF");
+	WAF.addListener("vN1", "dblclick", vN1.dblclick, "WAF");
+	WAF.addListener("vN49", "mouseout", vN49.mouseout, "WAF");
+	WAF.addListener("vN48", "mouseout", vN48.mouseout, "WAF");
+	WAF.addListener("vN47", "mouseout", vN47.mouseout, "WAF");
+	WAF.addListener("vN46", "mouseout", vN46.mouseout, "WAF");
+	WAF.addListener("vN45", "mouseout", vN45.mouseout, "WAF");
+	WAF.addListener("vN40", "mouseout", vN40.mouseout, "WAF");
+	WAF.addListener("vN41", "mouseout", vN41.mouseout, "WAF");
+	WAF.addListener("vN42", "mouseout", vN42.mouseout, "WAF");
+	WAF.addListener("vN43", "mouseout", vN43.mouseout, "WAF");
+	WAF.addListener("vN44", "mouseout", vN44.mouseout, "WAF");
+	WAF.addListener("vN39", "mouseout", vN39.mouseout, "WAF");
+	WAF.addListener("vN38", "mouseout", vN38.mouseout, "WAF");
+	WAF.addListener("vN37", "mouseout", vN37.mouseout, "WAF");
+	WAF.addListener("vN36", "mouseout", vN36.mouseout, "WAF");
+	WAF.addListener("vN35", "mouseout", vN35.mouseout, "WAF");
+	WAF.addListener("vN30", "mouseout", vN30.mouseout, "WAF");
+	WAF.addListener("vN31", "mouseout", vN31.mouseout, "WAF");
+	WAF.addListener("vN32", "mouseout", vN32.mouseout, "WAF");
+	WAF.addListener("vN33", "mouseout", vN33.mouseout, "WAF");
+	WAF.addListener("vN34", "mouseout", vN34.mouseout, "WAF");
+	WAF.addListener("vN29", "mouseout", vN29.mouseout, "WAF");
+	WAF.addListener("vN28", "mouseout", vN28.mouseout, "WAF");
+	WAF.addListener("vN27", "mouseout", vN27.mouseout, "WAF");
+	WAF.addListener("vN26", "mouseout", vN26.mouseout, "WAF");
+	WAF.addListener("vN25", "mouseout", vN25.mouseout, "WAF");
+	WAF.addListener("vN20", "mouseout", vN20.mouseout, "WAF");
+	WAF.addListener("vN21", "mouseout", vN21.mouseout, "WAF");
+	WAF.addListener("vN22", "mouseout", vN22.mouseout, "WAF");
+	WAF.addListener("vN23", "mouseout", vN23.mouseout, "WAF");
+	WAF.addListener("vN24", "mouseout", vN24.mouseout, "WAF");
+	WAF.addListener("vN19", "mouseout", vN19.mouseout, "WAF");
+	WAF.addListener("vN18", "mouseout", vN18.mouseout, "WAF");
+	WAF.addListener("vN17", "mouseout", vN17.mouseout, "WAF");
+	WAF.addListener("vN16", "mouseout", vN16.mouseout, "WAF");
+	WAF.addListener("vN15", "mouseout", vN15.mouseout, "WAF");
+	WAF.addListener("vN14", "mouseout", vN14.mouseout, "WAF");
+	WAF.addListener("vN13", "mouseout", vN13.mouseout, "WAF");
+	WAF.addListener("vN12", "mouseout", vN12.mouseout, "WAF");
+	WAF.addListener("vN11", "mouseout", vN11.mouseout, "WAF");
+	WAF.addListener("vN10", "mouseout", vN10.mouseout, "WAF");
+	WAF.addListener("vN9", "mouseout", vN9.mouseout, "WAF");
+	WAF.addListener("vN8", "mouseout", vN8.mouseout, "WAF");
+	WAF.addListener("vN7", "mouseout", vN7.mouseout, "WAF");
+	WAF.addListener("vN6", "mouseout", vN6.mouseout, "WAF");
+	WAF.addListener("vN5", "mouseout", vN5.mouseout, "WAF");
+	WAF.addListener("vN4", "mouseout", vN4.mouseout, "WAF");
+	WAF.addListener("vN3", "mouseout", vN3.mouseout, "WAF");
+	WAF.addListener("vN2", "mouseout", vN2.mouseout, "WAF");
+	WAF.addListener("vN1", "mouseout", vN1.mouseout, "WAF");
 	WAF.addListener("vN0", "mouseout", vN0.mouseout, "WAF");
 	WAF.addListener("vN0", "dblclick", vN0.dblclick, "WAF");
 	WAF.addListener("vN0", "click", vN0.click, "WAF");
