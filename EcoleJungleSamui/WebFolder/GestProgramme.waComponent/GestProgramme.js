@@ -235,6 +235,7 @@ function constructor (id) {
 					sources.component1_abonnes.addNewElement();
 					sources.component1_abonnes.chapitre.set(sources.component1_chapitres);
 					sources.component1_abonnes.eleve.set(sources.component1_eleves2);
+					sources.component1_abonnes.avancement = "0";
 					sources.component1_abonnes.save();
 				}
 			}, params:[vIdIns] });
