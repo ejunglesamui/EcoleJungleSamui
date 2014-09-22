@@ -11,13 +11,22 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	this.load = function (data) {// @lock
+		
+	$$("cchg").hide();
 
 	// @region namespaceDeclaration// @startlock
+	var btPgm = {};	// @buttonImage
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
 
+	btPgm.click = function btPgm_click (event)// @startlock
+	{// @endlock
+		$$('component1_video1').loadVideoByUrl("/Videos/GestPgm.mp4");
+	};// @lock
+
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btPgm", "click", btPgm.click, "WAF");
 	// @endregion// @endlock
 
 	};// @lock
