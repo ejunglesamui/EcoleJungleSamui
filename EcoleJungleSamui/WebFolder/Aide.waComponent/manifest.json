@@ -1,0 +1,6 @@
+{
+    "name"    : "Aide",    
+    "html"    : "Aide.html",
+    "styles"  : [],
+    "scripts" : ["Aide.js"]
+}
