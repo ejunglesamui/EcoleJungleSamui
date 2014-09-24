@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var mPointage = {};	// @menuItem
 	var btUndo = {};	// @button
 	var bComOk = {};	// @button
 	var bComSup = {};	// @button
@@ -117,6 +118,66 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	mPointage.click = function mPointage_click (event)// @startlock
+	{// @endlock
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {}, tab_jour, tab_mois, cToday;
+			
+		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
+		//$$("component1_pgb1").startListening();
+		
+		vConv = $$("cAnDeb2").getValue();
+		tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+		tab_mois=new Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+		$$("ListEle").setRowHeight(28);
+		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2),10)-1, vConv.substr(0,2));
+		vJour = vAnDeb.getDay();
+		
+		if (vJour === 0) {
+			aJour = 1;
+		} else {
+			aJour = 8 - vJour;
+		}
+		
+		vLunSem = addDaysToDate(vConv,aJour);
+		vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
+		vToday = new Date();
+		cToday = tab_jour[vToday.getDay()] + " " + ((vToday.getDate() < 10) ? '0': '')+ vToday.getDate() + " " + tab_mois[vToday.getMonth()] + " " + vToday.getFullYear();
+		$$('cToday').setValue(cToday);
+		tmp = vToday - vStart;
+		tmp = Math.floor(tmp/1000);
+		diff.sec = tmp % 60; 
+		tmp = Math.floor((tmp-diff.sec)/60);
+		diff.min = tmp % 60;
+		tmp = Math.floor((tmp-diff.min)/60);
+		diff.hour = tmp % 24;
+		tmp = Math.floor((tmp-diff.hour)/24);
+    	diff.day = tmp;
+    	vSemCour = parseInt(tmp/7,10);
+    	$$("cLun2").setValue(vLunSem);
+    	$$("sToday2").setValue(tmp);
+				
+		vUser = WAF.directory.currentUser().userName;
+		sources.utilisateurs.query("Login = :1", { onSuccess: function(event) { 
+		
+			var vAnScol, vProf, elem, vUserID, vToday;
+			elem = sources.utilisateurs;
+			vUserID = elem.ID;
+			vProf = $$("cProf2").getValue();
+			vAnScol = $$("cbAnScol2").getValue();
+			$$("cRole2").setValue(elem.Fonction);
+			if (elem.Fonction !== "Elève") {
+				vToday = new Date();
+				sources.annees_Scolaires.query("Date_Debut <= :1 and Date_fin >= :1", { onSuccess: function(event) { 
+					var anScol, vAnScol;
+					anScol = sources.annees_Scolaires;
+					vAnScol = anScol.ID;
+					sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+				}, params:[vToday] });
+			}		
+		
+		}, params:[vUser] });
+	};// @lock
 
 	btUndo.click = function btUndo_click (event)// @startlock
 	{// @endlock
@@ -2354,6 +2415,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("mPointage", "click", mPointage.click, "WAF");
 	WAF.addListener("btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener("bComOk", "click", bComOk.click, "WAF");
 	WAF.addListener("bComSup", "click", bComSup.click, "WAF");

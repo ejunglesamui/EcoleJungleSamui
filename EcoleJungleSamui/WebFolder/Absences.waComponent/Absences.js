@@ -37,7 +37,7 @@ function constructor (id) {
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
 		sources.component1_calendrier.query("Annee_Scolaire.ID = :1 and sMois = :2", { onSuccess: function(event) {
-			var vdDeb, elem, ind, ibx, nb, vQuand, vBox, dbcl, jdbcl, vAnScol, split_date, dbcl, eps, vUserID;
+			var vdDeb, elem, ind, ibx, nb, vQuand, vBox, dbcl, jdbcl, vAnScol, split_date, dbcl, eps, vUserID, vNow, vToday;
 			elem = sources.component1_calendrier;
 			nb = 1+elem.nbj;
 			vQuand = elem.dDeb;
@@ -104,6 +104,9 @@ function constructor (id) {
 				vAnScol = $$("component1_cbAnScol").getValue();
 				eps = sources.component1_parcours_Scolaire;
 				vUserID = eps.getAttributeValue("Eleve.ID");
+				vNow = new Date();
+				vToday = vNow.getDate() + '/' + (vNow.getMonth()+1) + '/' +  vNow.getFullYear();
+				vToday = addDaysToDate(vToday,0);
 		
 				for (var j = ind; j < nb; j++) {
 					vBox = "component1_j"+ibx;
@@ -113,6 +116,12 @@ function constructor (id) {
 					if (jdbcl !== 0 && jdbcl !== 6) {
 						$$(vBox).setValue(split_date[0]);
 						$$(vBox).show();
+						//alert('Today '+vToday+' - Boucle '+vdDeb);
+						if (vdDeb === vToday) { 
+							$$(vBox).setBackgroundColor("#F5A9A9");
+						} else {
+							$$(vBox).setBackgroundColor("#AAD4FF");
+						}
 						sources.component1_releve_Presences.query("Eleve.Annee_Scolaire.ID = :1 and Jour_Ouvre = :2 and Eleve.Eleve.ID = :3", { onSuccess: function(event) {
 							var iBox, ip, ic, it, nip, nic, nit, elerp;
 							iBox = event.userData.boxn;
@@ -414,7 +423,7 @@ function constructor (id) {
 
 	btSave.click = function btSave_click (event)// @startlock
 	{// @endlock
-		var jbcl, vCal, vdDeb, nb, vQuand, vjSem, split_date, dbcl, jdbcl, vAnScol, elem, vUserID, vjo, jo, jDeb;
+		var jbcl, vCal, vdDeb, nb, vQuand, vjSem, split_date, dbcl, jdbcl, vAnScol, elem, vUserID, vjo, jo, jDeb, vToday, vNow, fNow;
 		
 		vCal = sources.component1_calendrier;
 		jDeb = vCal.JDeb;
@@ -430,7 +439,7 @@ function constructor (id) {
 		}
 		elem = sources.component1_parcours_Scolaire;
 		vUserID = elem.getAttributeValue("Eleve.ID");
-					
+							
 		for (var i = 0; i < 25; i++) {
 			jo = "component1_j"+i;
 			vjo = $$(jo).isVisible();
@@ -440,8 +449,9 @@ function constructor (id) {
 				dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
 				//alert("Traite Utilisateur "+vUserID+" pour année scolaire "+vAnScol+" de la ligne "+dbcl);
 				sources.component1_releve_Presences.query("Eleve.Annee_Scolaire.ID = :1 and Jour_Ouvre = :2 and Eleve.Eleve.ID = :3", { onSuccess: function(event) {
-					var ip,vip, ic, vic, it, vit, iBox, nbRec, jBox, tab_jour;
+					var ip,vip, ic, vic, it, vit, iBox, nbRec, jBox, tab_jour, cBox;
 					tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+					
 					iBox = event.userData.boxn;
 					jBox = event.userData.boxj;
 					ip = "component1_np"+iBox;
