@@ -2,6 +2,8 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var cbClasse = {};	// @select
+	var chf = {};	// @switchbox
 	var mPointage = {};	// @menuItem
 	var btUndo = {};	// @button
 	var bComOk = {};	// @button
@@ -118,6 +120,38 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	cbClasse.change = function cbClasse_change (event)// @startlock
+	{// @endlock
+		var vClasse, vAnScol, vRole;
+		vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			vClasse = $$('cbClasse').getValue();
+			vAnScol = $$("cbAnScol2").getValue();
+			//alert('Classe : '+vClasse+' - Année scolaire : '+vAnScol);
+			if ($$('chf').getValue()) {
+				$$('cbClasse').show();
+				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
+			} else {
+				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+				$$('cbClasse').hide();
+			}
+		}
+	};// @lock
+
+	chf.touchend = function chf_touchend (event)// @startlock
+	{// @endlock
+		var vClasse, vAnScol;
+		vClasse = $$('cbClasse').getValue();
+		vAnScol = $$("cbAnScol2").getValue();
+		if ($$('chf').getValue()) {
+			$$('cbClasse').show();
+			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
+		} else {
+			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+			$$('cbClasse').hide();
+		}
+	};// @lock
 
 	mPointage.click = function mPointage_click (event)// @startlock
 	{// @endlock
@@ -2415,6 +2449,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("cbClasse", "change", cbClasse.change, "WAF");
+	WAF.addListener("chf", "touchend", chf.touchend, "WAF");
 	WAF.addListener("mPointage", "click", mPointage.click, "WAF");
 	WAF.addListener("btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener("bComOk", "click", bComOk.click, "WAF");
