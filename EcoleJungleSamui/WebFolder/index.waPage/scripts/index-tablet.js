@@ -2,6 +2,14 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var ListEle = {};	// @dataGrid
+	var btSave2 = {};	// @button
+	var ict = {};	// @icon
+	var icnt = {};	// @icon
+	var icc = {};	// @icon
+	var icnc = {};	// @icon
+	var icp = {};	// @icon
+	var icnp = {};	// @icon
 	var cbClasse = {};	// @select
 	var chf = {};	// @switchbox
 	var mPointage = {};	// @menuItem
@@ -121,6 +129,178 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 // eventHandlers// @lock
 
+	ListEle.onRowClick = function ListEle_onRowClick (event)// @startlock
+	{// @endlock
+		var res = ShowDay($$("vToday2").getValue());
+	};// @lock
+
+	function ShowDay(vDay) {
+		
+		var jbcl, vCal, vdDeb, nb, vQuand, vjSem, split_date, dbcl, jdbcl, vAnScol, elem, vUserID, vjo, jo, jDeb, vToday, vNow, fNow;
+		
+		$$("icnp").hide();
+		$$("icp").show();
+		$$("icc").hide();
+		$$("icnc").show();
+		$$("ict").hide();
+		$$("icnt").show();
+		$$("lCant").setValue("N'a pas mangé à la cantine");
+		$$("lThai").setValue("Pas de cours thaï");
+		$$("lPres").setValue("Présent(e)");
+		
+		vAnScol = $$("cbAnScol2").getValue();
+		eps = sources.parcours_Scolaire;
+		vUserID = eps.getAttributeValue("Eleve.ID");
+		split_date = vDay.split('/');
+		dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
+		sources.releve_Presences.query("Eleve.Annee_Scolaire.ID = :1 and Jour_Ouvre = :2 and Eleve.Eleve.ID = :3", { onSuccess: function(event) {
+			var iBox, ip, ic, it, nip, nic, nit, elerp;
+			elerp = sources.releve_Presences;
+			if (elerp.length > 0) {
+				if (elerp.Present) {
+					$$("icnp").show();
+					$$("icp").hide();
+					$$("lPres").setValue("Absent(e)");
+				}
+				if (elerp.Cantine) {
+					$$("icc").show();
+					$$("icnc").hide();
+					$$("lCant").setValue("A mangé à la cantine");
+				}
+				if (elerp.CoursThai) {
+					$$("ict").show();
+					$$("icnt").hide();
+					$$("lThai").setValue("A pris un cours thaï");
+				}
+			}
+		}, params:[vAnScol, dbcl, vUserID] });
+						
+		return('OK');
+	}
+
+	btSave2.click = function btSave2_click (event)// @startlock
+	{// @endlock
+		var jbcl, vCal, vdDeb, nb, vQuand, vjSem, split_date, dbcl, jdbcl, vAnScol, elem, vUserID, vjo, jo, jDeb, vToday, vNow, fNow;
+		
+		elem = sources.parcours_Scolaire;
+		vUserID = elem.getAttributeValue("Eleve.ID");
+							
+		vAnScol = $$("cbAnScol2").getValue();
+		vdDeb = $$("vToday2").getValue();
+		split_date = vdDeb.split('/');
+		dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
+		//alert("Traite Utilisateur "+vUserID+" pour année scolaire "+vAnScol+" de la ligne "+dbcl);
+		sources.releve_Presences.query("Eleve.Annee_Scolaire.ID = :1 and Jour_Ouvre = :2 and Eleve.Eleve.ID = :3", { onSuccess: function(event) {
+			var ip,vip, ic, vic, it, vit, iBox, nbRec, jBox, tab_jour, cBox;
+			tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+			vip = $$("icnp").isVisible();
+			vic = $$("icc").isVisible();
+			vit = $$("ict").isVisible();
+			elem = sources.releve_Presences;
+			nbRec = elem.length; 
+			if (vip || vic || vit) {
+				if (nbRec === 0) {
+					sources.releve_Presences.addNewElement();
+					vdDeb = $$("vToday2").getValue();
+					split_date = vdDeb.split('/');
+					dbcl = new Date(split_date[2], split_date[1]*1 - 1, split_date[0]*1);
+					$$("cJsem2").setValue(tab_jour[dbcl.getDay()]);
+					$$("cJouv2").setValue(vdDeb);
+					$$("cCant2").setValue(vic);
+					$$("cPres2").setValue(vip);
+					$$("cThai2").setValue(vit);
+					$$("csMois2").setValue($$("sToday2").getValue());
+					sources.releve_Presences.Eleve.set(sources.parcours_Scolaire);
+					sources.releve_Presences.save();
+				} else {
+					$$("cCant2").setValue(vic);
+					$$("cPres2").setValue(vip);
+					$$("cThai2").setValue(vit);
+					sources.releve_Presences.save();
+				}
+			} else {
+				if (nbRec > 0) {
+					sources.releve_Presences.removeCurrent();
+				}
+			}
+		}, params:[vAnScol, dbcl, vUserID] });
+				
+		$$("btSave2").hide();
+		$$("btUndo2").hide();
+	};// @lock
+
+	ict.click = function ict_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("ict").hide();
+			$$("icnt").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lThai").setValue("Pas de cours thaï");
+		}
+	};// @lock
+
+	icnt.click = function icnt_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("icnt").hide();
+			$$("ict").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lThai").setValue("A pris un cours thaï");
+		}
+	};// @lock
+
+	icc.click = function icc_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("icc").hide();
+			$$("icnc").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lCant").setValue("N'a pas mangé à la cantine");
+		}
+	};// @lock
+
+	icnc.click = function icnc_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("icnc").hide();
+			$$("icc").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lCant").setValue("A mangé à la cantine");
+		}
+	};// @lock
+
+	icp.click = function icp_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("icp").hide();
+			$$("icnp").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lPres").setValue("Absent(e)");
+		}
+	};// @lock
+
+	icnp.click = function icnp_click (event)// @startlock
+	{// @endlock
+		var vRole = $$('cRole2').getValue();
+		if (vRole !== 'Elève') {
+			$$("icnp").hide();
+			$$("icp").show();
+			$$("btSave2").show();
+			$$("btUndo2").show();
+			$$("lPres").setValue("Présent(e)");
+		}
+	};// @lock
+
 	cbClasse.change = function cbClasse_change (event)// @startlock
 	{// @endlock
 		var vClasse, vAnScol, vRole;
@@ -155,7 +335,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	mPointage.click = function mPointage_click (event)// @startlock
 	{// @endlock
-		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {}, tab_jour, tab_mois, cToday;
+		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {}, tab_jour, tab_mois, cToday, lToday, res;
 			
 		// Détermine le Lundi de la semaine qui suit la date de début d'année scolaire
 		//$$("component1_pgb1").startListening();
@@ -177,7 +357,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		vStart = new Date(vLunSem.substr(6,4), parseInt(vLunSem.substr(3,2),10)-1, vLunSem.substr(0,2));
 		vToday = new Date();
 		cToday = tab_jour[vToday.getDay()] + " " + ((vToday.getDate() < 10) ? '0': '')+ vToday.getDate() + " " + tab_mois[vToday.getMonth()] + " " + vToday.getFullYear();
+		lToday = ((vToday.getDate() < 10) ? '0': '')+ vToday.getDate() + "/" + (((vToday.getMonth()+1) < 10) ? '0': '') + (vToday.getMonth()+1) + "/" + vToday.getFullYear();
 		$$('cToday').setValue(cToday);
+		$$('vToday2').setValue(lToday);
 		tmp = vToday - vStart;
 		tmp = Math.floor(tmp/1000);
 		diff.sec = tmp % 60; 
@@ -206,7 +388,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 					var anScol, vAnScol;
 					anScol = sources.annees_Scolaires;
 					vAnScol = anScol.ID;
-					sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+					sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", { onSuccess: function(event) { 
+						var res = ShowDay($$("vToday2").getValue());
+					}, params:[vAnScol] });
 				}, params:[vToday] });
 			}		
 		
@@ -2449,6 +2633,14 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("ListEle", "onRowClick", ListEle.onRowClick, "WAF");
+	WAF.addListener("btSave2", "click", btSave2.click, "WAF");
+	WAF.addListener("ict", "click", ict.click, "WAF");
+	WAF.addListener("icnt", "click", icnt.click, "WAF");
+	WAF.addListener("icc", "click", icc.click, "WAF");
+	WAF.addListener("icnc", "click", icnc.click, "WAF");
+	WAF.addListener("icp", "click", icp.click, "WAF");
+	WAF.addListener("icnp", "click", icnp.click, "WAF");
 	WAF.addListener("cbClasse", "change", cbClasse.change, "WAF");
 	WAF.addListener("chf", "touchend", chf.touchend, "WAF");
 	WAF.addListener("mPointage", "click", mPointage.click, "WAF");
