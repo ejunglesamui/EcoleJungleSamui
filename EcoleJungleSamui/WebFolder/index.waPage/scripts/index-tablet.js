@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var btUndo2 = {};	// @button
 	var ListEle = {};	// @dataGrid
 	var btSave2 = {};	// @button
 	var ict = {};	// @icon
@@ -128,6 +129,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	btUndo2.click = function btUndo2_click (event)// @startlock
+	{// @endlock
+		var res = ShowDay($$("vToday2").getValue());
+	};// @lock
 
 	ListEle.onRowClick = function ListEle_onRowClick (event)// @startlock
 	{// @endlock
@@ -303,19 +309,24 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	cbClasse.change = function cbClasse_change (event)// @startlock
 	{// @endlock
-		var vClasse, vAnScol, vRole;
+		var vClasse, vAnScol, vRole, res;
 		vRole = $$('cRole2').getValue();
 		if (vRole !== 'Elève') {
-			vClasse = $$('cbClasse').getValue();
+			vClasse = sources.classes.Nom;
 			vAnScol = $$("cbAnScol2").getValue();
 			//alert('Classe : '+vClasse+' - Année scolaire : '+vAnScol);
 			if ($$('chf').getValue()) {
 				$$('cbClasse').show();
-				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
+				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", { onSuccess: function(event) {
+					res = ShowDay($$("vToday2").getValue());
+				}, params:[vAnScol, vClasse] });
 			} else {
-				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
 				$$('cbClasse').hide();
+				sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", { onSuccess: function(event) {
+					res = ShowDay($$("vToday2").getValue());
+				}, params:[vAnScol] });
 			}
+			
 		}
 	};// @lock
 
@@ -2633,6 +2644,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("btUndo2", "click", btUndo2.click, "WAF");
 	WAF.addListener("ListEle", "onRowClick", ListEle.onRowClick, "WAF");
 	WAF.addListener("btSave2", "click", btSave2.click, "WAF");
 	WAF.addListener("ict", "click", ict.click, "WAF");
