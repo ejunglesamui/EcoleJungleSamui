@@ -297,7 +297,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		var vAnScol, vClasses, nbC, iBox;
 		
 		$$("cchg").show();
-		$$("ListEleves").setRowHeight(25);
+		$$("ListEleves").setRowHeight(28);
 		sources.classes.query("Nom != '-' order by Ordre desc", { onSuccess: function(event) { 
 			var elem, nbC;
 			vClasses = sources.classes;
@@ -364,7 +364,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		var vAnScol, vClasses, nbC, iBox;
 		
 		$$("cchg").show();
-		$$("ListEleves").setRowHeight(25);
+		$$("ListEleves").setRowHeight(28);
 		sources.classes.query("Nom != '-' order by Ordre desc", { onSuccess: function(event) { 
 			var elem, nbC;
 			vClasses = sources.classes;
