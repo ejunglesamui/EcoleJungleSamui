@@ -171,7 +171,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	vTot.click = function vTot_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
-		$$("ListEleves").setRowHeight(20);
+		$$("ListEleves").setRowHeight(28);
 		vAnScol = $$("cbAnScol3").getValue();
 		sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
 	};// @lock
@@ -179,7 +179,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	vSec.click = function vSec_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
-		$$("ListEleves").setRowHeight(20);
+		$$("ListEleves").setRowHeight(28);
 		vAnScol = $$("cbAnScol3").getValue();
 		sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe != :2 and  Classe != :3 order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
 	};// @lock
@@ -187,7 +187,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	vPrim.click = function vPrim_click (event)// @startlock
 	{// @endlock
 		var vAnScol;
-		$$("ListEleves").setRowHeight(20);
+		$$("ListEleves").setRowHeight(28);
 		vAnScol = $$("cbAnScol3").getValue();
 		sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and (Classe = :2 or Classe = :3)  order by Eleve.Nom_Complet", vAnScol, "C*", "M*");
 	};// @lock
@@ -361,68 +361,74 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	mEleves.click = function mEleves_click (event)// @startlock
 	{// @endlock
-		var vAnScol, vClasses, nbC, iBox;
+		var vAnScol, vClasses, nbC, iBox, vToday;
 		
 		$$("cchg").show();
 		$$("ListEleves").setRowHeight(28);
-		sources.classes.query("Nom != '-' order by Ordre desc", { onSuccess: function(event) { 
-			var elem, nbC;
-			vClasses = sources.classes;
-			$$("vTot").setValue("0");
-			$$("vSec").setValue("0");
-			$$("vPrim").setValue("0");
-			nbC = vClasses.length;
-       		for (var j = 0; j < nbC; j++) {
-        		vClasses.getElement(j, { onSuccess: function(event) {
-        			var elem, vNb, vBox, vClasse, vAnScol;
-            		elem = event.element;
-            		vClasse = elem.Nom;
-            		vAnScol = $$("cbAnScol3").getValue();
-            		vBox = "cl"+j;
-            		$$(vBox).getLabel().setValue(vClasse);
-            		sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", { onSuccess: function(event) {
-            			var vEle, vEnb, vSec, vPrim, vTot, vClasse, vSec, vPrim, vCar, iBox, vBox;
-            			vEle = sources.parcours_Scolaire;
-            			vEnb = vEle.length;
-            			iBox = event.userData.boxn;
-            			vBox = event.userData.cBox;
-            			vTot = parseInt($$("vTot").getValue());
-            			vTot = vTot + vEnb;
-            			$$("vTot").setValue(vTot);
-            			$$(vBox).setValue(vEnb);
-            			vLarge = 20 + 7*vEnb;
-            			if (vLarge > 160) {
-            				vLarge = 160;
-            			}
-            			vClasse = iBox.Nom;
-            			vCar = vClasse.substr(0,1);
-            			if (vCar === 'M' || vCar === 'C') {
+		vToday = new Date();
+		sources.annees_Scolaires.query("Date_Debut <= :1 and Date_fin >= :1", { onSuccess: function(event) { 
+			var anScol, vAnScol;
+			anScol = sources.annees_Scolaires;
+			vAnScol = anScol.ID;
+			sources.classes.query("Nom != '-' order by Ordre desc", { onSuccess: function(event) { 
+				var elem, nbC;
+				vClasses = sources.classes;
+				$$("vTot").setValue("0");
+				$$("vSec").setValue("0");
+				$$("vPrim").setValue("0");
+				nbC = vClasses.length;
+       			for (var j = 0; j < nbC; j++) {
+        			vClasses.getElement(j, { onSuccess: function(event) {
+        				var elem, vNb, vBox, vClasse, vAnScol;
+            			elem = event.element;
+            			vClasse = elem.Nom;
+            			vAnScol = $$("cbAnScol3").getValue();
+            			vBox = "cl"+j;
+            			$$(vBox).getLabel().setValue(vClasse);
+            			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", { onSuccess: function(event) {
+            				var vEle, vEnb, vSec, vPrim, vTot, vClasse, vSec, vPrim, vCar, iBox, vBox;
+            				vEle = sources.parcours_Scolaire;
+            				vEnb = vEle.length;
+            				iBox = event.userData.boxn;
+            				vBox = event.userData.cBox;
+            				vTot = parseInt($$("vTot").getValue());
+            				vTot = vTot + vEnb;
+            				$$("vTot").setValue(vTot);
+            				$$(vBox).setValue(vEnb);
+            				vLarge = 20 + 7*vEnb;
+            				if (vLarge > 160) {
+            					vLarge = 160;
+            				}
+            				vClasse = iBox.Nom;
+            				vCar = vClasse.substr(0,1);
+            				if (vCar === 'M' || vCar === 'C') {
+            					vPrim = parseInt($$("vPrim").getValue());
+            					vPrim = vPrim + vEnb;
+            					$$("vPrim").setValue(vPrim);
+            					$$(vBox).setBackgroundColor("#007f7f");
+            				} else {
+            					vSec = parseInt($$("vSec").getValue());
+            					vSec = vSec + vEnb;
+            					$$("vSec").setValue(vSec);
+            					$$(vBox).setBackgroundColor("#7f007f");
+            				}
+            				$$(vBox).resize(vLarge,22);
             				vPrim = parseInt($$("vPrim").getValue());
-            				vPrim = vPrim + vEnb;
-            				$$("vPrim").setValue(vPrim);
-            				$$(vBox).setBackgroundColor("#007f7f");
-            			} else {
             				vSec = parseInt($$("vSec").getValue());
-            				vSec = vSec + vEnb;
-            				$$("vSec").setValue(vSec);
-            				$$(vBox).setBackgroundColor("#7f007f");
-            			}
-            			$$(vBox).resize(vLarge,22);
-            			vPrim = parseInt($$("vPrim").getValue());
-            			vSec = parseInt($$("vSec").getValue());
-            			vTot = parseInt($$("vTot").getValue());
-            			if (vTot > 0) {
-            				vLarge = 30 + parseInt(140*(vPrim/vTot));
-            				$$("vPrim").resize(vLarge,22);
-            				vLarge = 30 + parseInt(140*(vSec/vTot));
-            				$$("vSec").resize(vLarge,22);
-            			}
-            			$$(vBox).show();
-            			$$(vBox).focus();
-            		}, params:[vAnScol, vClasse], userData: {boxn:elem, cBox:vBox}});
-				}});
-			};
-		}});
+            				vTot = parseInt($$("vTot").getValue());
+            				if (vTot > 0) {
+            					vLarge = 30 + parseInt(140*(vPrim/vTot));
+            					$$("vPrim").resize(vLarge,22);
+            					vLarge = 30 + parseInt(140*(vSec/vTot));
+            					$$("vSec").resize(vLarge,22);
+            				}
+            				$$(vBox).show();
+            				$$(vBox).focus();
+            			}, params:[vAnScol, vClasse], userData: {boxn:elem, cBox:vBox}});
+					}});
+				};
+			}});
+		}, params:[vToday] });
 		$$("cchg").hide();
 	};// @lock
 
@@ -626,7 +632,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		}
 	};// @lock
 
-	chf.touchend = function chf_touchend (event)// @startlock
+	chf.touchmove = function chf_touchmove (event)// @startlock
 	{// @endlock
 		var vClasse, vAnScol;
 		vClasse = $$('cbClasse').getValue();
@@ -2940,6 +2946,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
+	WAF.addListener("chf", "touchmove", chf.touchmove, "WAF");
 	WAF.addListener("vTot", "click", vTot.click, "WAF");
 	WAF.addListener("vSec", "click", vSec.click, "WAF");
 	WAF.addListener("vPrim", "click", vPrim.click, "WAF");
@@ -2975,7 +2982,6 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	WAF.addListener("icp", "click", icp.click, "WAF");
 	WAF.addListener("icnp", "click", icnp.click, "WAF");
 	WAF.addListener("cbClasse", "change", cbClasse.change, "WAF");
-	WAF.addListener("chf", "touchend", chf.touchend, "WAF");
 	WAF.addListener("mPointage", "click", mPointage.click, "WAF");
 	WAF.addListener("btUndo", "click", btUndo.click, "WAF");
 	WAF.addListener("bComOk", "click", bComOk.click, "WAF");
