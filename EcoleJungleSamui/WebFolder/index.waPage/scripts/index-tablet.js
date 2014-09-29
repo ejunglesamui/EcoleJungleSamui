@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var chf = {};	// @switchbox
 	var vTot = {};	// @textField
 	var vSec = {};	// @textField
 	var vPrim = {};	// @textField
@@ -37,7 +38,6 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	var icp = {};	// @icon
 	var icnp = {};	// @icon
 	var cbClasse = {};	// @select
-	var chf = {};	// @switchbox
 	var mPointage = {};	// @menuItem
 	var btUndo = {};	// @button
 	var bComOk = {};	// @button
@@ -154,6 +154,20 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	chf.touchend = function chf_touchend (event)// @startlock
+	{// @endlock
+		var vClasse, vAnScol;
+		vClasse = $$('cbClasse').getValue();
+		vAnScol = $$("cbAnScol2").getValue();
+		if ($$('chf').getValue()) {
+			$$('cbClasse').show();
+			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
+		} else {
+			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
+			$$('cbClasse').hide();
+		}
+	};// @lock
 
 	function lst (ind) {
 		
@@ -632,20 +646,6 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		}
 	};// @lock
 
-	chf.touchmove = function chf_touchmove (event)// @startlock
-	{// @endlock
-		var vClasse, vAnScol;
-		vClasse = $$('cbClasse').getValue();
-		vAnScol = $$("cbAnScol2").getValue();
-		if ($$('chf').getValue()) {
-			$$('cbClasse').show();
-			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Classe = :2 order by Eleve.Nom_Complet", vAnScol, vClasse);
-		} else {
-			sources.parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
-			$$('cbClasse').hide();
-		}
-	};// @lock
-
 	mPointage.click = function mPointage_click (event)// @startlock
 	{// @endlock
 		var vAnScol, now, vAnDeb, vAnFin, vConv, vUser, vLunSem, vJour, aJour, vLun, vDiff, vStart, vToday, tmp, vSemCour, diff = {}, tab_jour, tab_mois, cToday, lToday, res;
@@ -987,7 +987,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			diff.hour = tmp % 24;
 			tmp = Math.floor((tmp-diff.hour)/24);
     		diff.day = tmp;
-    		vSemCour = parseInt(tmp/7,10);
+    		vSemCour = 7*parseInt(tmp/7,10);
+    		//alert(vSemCour);
     		$$("cLun").setValue(vLunSem);
     		$$("sToday").setValue(tmp);
     		$$('sPerS').enable();
@@ -2050,7 +2051,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		diff.hour = tmp % 24;
 		tmp = Math.floor((tmp-diff.hour)/24);
     	diff.day = tmp;
-    	vSemCour = parseInt(tmp/7,10);
+    	vSemCour = 7*parseInt(tmp/7,10);
     	$$("cLun").setValue(vLunSem);
     	$$("sToday").setValue(tmp);
     	$$('sPerS').enable();
@@ -2881,7 +2882,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 				diff.hour = tmp % 24;
 				tmp = Math.floor((tmp-diff.hour)/24);
     			diff.day = tmp;
-    			vSemCour = parseInt(tmp/7,10);
+    			vSemCour = 7*parseInt(tmp/7,10);
     			$$("cLun").setValue(vLunSem);
     			$$("sToday").setValue(tmp);
     			$$('sPerS').enable();
@@ -2946,7 +2947,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	
 
 // @region eventManager// @startlock
-	WAF.addListener("chf", "touchmove", chf.touchmove, "WAF");
+	WAF.addListener("chf", "touchend", chf.touchend, "WAF");
 	WAF.addListener("vTot", "click", vTot.click, "WAF");
 	WAF.addListener("vSec", "click", vSec.click, "WAF");
 	WAF.addListener("vPrim", "click", vPrim.click, "WAF");
