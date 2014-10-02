@@ -13,6 +13,9 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var ListFact = {};	// @dataGrid
+	var sFact = {};	// @textField
+	var ckp = {};	// @checkbox
 	var cbFact = {};	// @combobox
 	var cbType = {};	// @combobox
 	var Solde = {};	// @textField
@@ -25,6 +28,143 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	ListFact.onRowClick = function ListFact_onRowClick (event)// @startlock
+	{// @endlock
+		var vSolde, vRegs, vnbl, vFact, vMont, vAnScol, vFam;
+		
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vFam = sources.component1_familles.ID;
+		
+		if ($$('component1_ckp').getValue()) {
+			
+			$$('component1_bNew').hide();
+			$$('component1_bUpdate').hide();
+			$$('component1_TotFact').hide();
+			$$('component1_TotReg').hide();
+			$$('component1_Solde').hide();
+			$$('component1_lb0').hide();
+			$$('component1_lb1').hide();
+			$$('component1_lb2').hide();
+			$$('component1_sFact').show();
+			$$('component1_lb4').show();
+			
+			vFact = sources.component1_factures.ID;
+            vMont = 0 - (sources.component1_factures.Total);
+           	$$("component1_sFact").setValue(vMont);
+			sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 and Fact_R1.ID = :3 order by Date_Paiement", { onSuccess: function(event) { 
+				var vTot = 0, vRegs, vnbl, vSolde;
+				vRegs = sources.component1_paiements;
+				vnbl = vRegs.length;
+				for (var i = 0; i < vnbl; i++) {
+        			vRegs.getElement(i, { onSuccess: function(event)  {
+           				var elem, vMont, vSolde;
+           				elem = event.element;
+            			vSolde = parseInt($$("component1_sFact").getValue(),10);
+            			vMont += elem.Montant;
+            			vSolde += elem.Montant;
+            			$$("component1_sFact").setValue(vSolde);
+            		}});
+            	};
+            	vSolde = parseInt($$("component1_Solde").getValue(),10);
+            },params:[vAnScol, vFam, vFact] });			
+			
+		}
+	};// @lock
+
+	sFact.change = function sFact_change (event)// @startlock
+	{// @endlock
+		var vSolde = parseInt($$("component1_Solde").getValue(),10);
+		if (vSolde < 0) {
+			$$("component1_Solde").setTextColor("red");
+		} else {
+			$$("component1_Solde").setTextColor("black");
+		}
+	};// @lock
+
+	ckp.change = function ckp_change (event)// @startlock
+	{// @endlock
+		var vSolde, vRegs, vnbl, vFact, vMont, vAnScol, vFam;
+		
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vFam = sources.component1_familles.ID;
+		
+		if ($$('component1_ckp').getValue()) {
+			
+			$$('component1_bNew').hide();
+			$$('component1_bUpdate').hide();
+			$$('component1_TotFact').hide();
+			$$('component1_TotReg').hide();
+			$$('component1_Solde').hide();
+			$$('component1_lb0').hide();
+			$$('component1_lb1').hide();
+			$$('component1_lb2').hide();
+			$$('component1_sFact').show();
+			$$('component1_lb4').show();
+			
+			vFact = sources.component1_factures.ID;
+            vMont = 0 - (sources.component1_factures.Total);
+           	$$("component1_sFact").setValue(vMont);
+			sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 and Fact_R1.ID = :3 order by Date_Paiement", { onSuccess: function(event) { 
+				var vTot = 0, vRegs, vnbl, vSolde;
+				vRegs = sources.component1_paiements;
+				vnbl = vRegs.length;
+				for (var i = 0; i < vnbl; i++) {
+        			vRegs.getElement(i, { onSuccess: function(event)  {
+           				var elem, vMont, vSolde;
+           				elem = event.element;
+            			vSolde = parseInt($$("component1_sFact").getValue(),10);
+            			vMont += elem.Montant;
+            			vSolde += elem.Montant;
+            			$$("component1_sFact").setValue(vSolde);
+            		}});
+            	};
+            	vSolde = parseInt($$("component1_Solde").getValue(),10);
+            },params:[vAnScol, vFam, vFact] });			
+			
+		} else {
+			
+			$$('component1_TotFact').show();
+			$$('component1_TotReg').show();
+			$$('component1_Solde').show();
+			$$('component1_lb0').show();
+			$$('component1_lb1').show();
+			$$('component1_lb2').show();
+			$$('component1_sFact').hide();
+			$$('component1_lb4').hide();
+			vMont = 0 - ($$("component1_TotFact").getValue());
+			$$("component1_Solde").setValue(vMont);
+			sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 order by Date_Paiement", { onSuccess: function(event) { 
+				var vTot = 0, vRegs, vnbl, vSolde;
+				vRegs = sources.component1_paiements;
+				vnbl = vRegs.length;
+				if (vnbl > 0) {
+					$$('component1_bUpdate').show();
+				} else {
+					$$('component1_bUpdate').hide();
+				}
+				$$("component1_TotReg").setValue(0);
+				for (var i = 0; i < vnbl; i++) {
+        			vRegs.getElement(i, { onSuccess: function(event)  {
+            			var elem, vMont, vSolde;
+            			elem = event.element;
+            			vMont = parseInt($$("component1_TotReg").getValue(),10);
+            			vSolde = parseInt($$("component1_Solde").getValue(),10);
+            			vMont += elem.Montant;
+            			vSolde += elem.Montant;
+            			$$("component1_TotReg").setValue(vMont);
+            			$$("component1_Solde").setValue(vSolde);
+            		}});
+            	};
+            	vSolde = parseInt($$("component1_Solde").getValue(),10);
+            	if (vSolde < 0) {
+					$$('component1_bNew').show();
+				} else {
+					$$('component1_bNew').hide();
+				}
+			},params:[vAnScol, vFam] });
+		}
+	};// @lock
 
 	cbFact.click = function cbFact_click (event)// @startlock
 	{// @endlock
@@ -73,35 +213,58 @@ function constructor (id) {
             };
             vAnScol = $$("component1_cbAnScol").getValue();
 			vFam = sources.component1_familles.ID;
-            sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 order by Date_Paiement", { onSuccess: function(event) { 
-				var vTot = 0, vRegs, vnbl, vSolde;
-				vRegs = sources.component1_paiements;
-				vnbl = vRegs.length;
-				if (vnbl > 0) {
-					$$('component1_bUpdate').show();
-				} else {
-					$$('component1_bUpdate').hide();
-				}
-				$$("component1_TotReg").setValue(0);
-				for (var i = 0; i < vnbl; i++) {
-        			vRegs.getElement(i, { onSuccess: function(event)  {
-            			var elem, vMont, vSolde;
-            			elem = event.element;
-            			vMont = parseInt($$("component1_TotReg").getValue(),10);
-            			vSolde = parseInt($$("component1_Solde").getValue(),10);
-            			vMont += elem.Montant;
-            			vSolde += elem.Montant;
-            			$$("component1_TotReg").setValue(vMont);
-            			$$("component1_Solde").setValue(vSolde);
-            		}});
-            	};
-            	vSolde = parseInt($$("component1_Solde").getValue(),10);
-            	if (vSolde < 0) {
-					$$('component1_bNew').show();
-				} else {
-					$$('component1_bNew').hide();
-				}
-			},params:[vAnScol, vFam] });
+			if ($$('component1_ckp').getValue() === false) {
+            	sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 order by Date_Paiement", { onSuccess: function(event) { 
+					var vTot = 0, vRegs, vnbl, vSolde;
+					vRegs = sources.component1_paiements;
+					vnbl = vRegs.length;
+					if (vnbl > 0) {
+						$$('component1_bUpdate').show();
+					} else {
+						$$('component1_bUpdate').hide();
+					}
+					$$("component1_TotReg").setValue(0);
+					for (var i = 0; i < vnbl; i++) {
+        				vRegs.getElement(i, { onSuccess: function(event)  {
+            				var elem, vMont, vSolde;
+            				elem = event.element;
+            				vMont = parseInt($$("component1_TotReg").getValue(),10);
+            				vSolde = parseInt($$("component1_Solde").getValue(),10);
+            				vMont += elem.Montant;
+            				vSolde += elem.Montant;
+            				$$("component1_TotReg").setValue(vMont);
+            				$$("component1_Solde").setValue(vSolde);
+            			}});
+            		};
+            		vSolde = parseInt($$("component1_Solde").getValue(),10);
+            		if (vSolde < 0) {
+						$$('component1_bNew').show();
+					} else {
+						$$('component1_bNew').hide();
+					}
+				},params:[vAnScol, vFam] });
+			} else {
+            	vFact = sources.component1_factures.ID;
+            	vMont = 0 - (sources.component1_factures.Total);
+            	//alert(vFact+" "+vMont);
+            	$$("component1_sFact").setValue(vMont);
+				sources.component1_paiements.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 and Fact_R1.ID = :3 order by Date_Paiement", { onSuccess: function(event) { 
+					var vTot = 0, vRegs, vnbl, vSolde;
+					vRegs = sources.component1_paiements;
+					vnbl = vRegs.length;
+					for (var i = 0; i < vnbl; i++) {
+        				vRegs.getElement(i, { onSuccess: function(event)  {
+            				var elem, vMont, vSolde;
+            				elem = event.element;
+            				vSolde = parseInt($$("component1_sFact").getValue(),10);
+            				vMont += elem.Montant;
+            				vSolde += elem.Montant;
+            				$$("component1_sFact").setValue(vSolde);
+            			}});
+            		};
+            		vSolde = parseInt($$("component1_Solde").getValue(),10);
+            	},params:[vAnScol, vFam, vFact] });
+			}
 		},params:[vAnScol, vFam] });
 	};// @lock
 
@@ -129,6 +292,8 @@ function constructor (id) {
 		$$('component1_IdeReg').hide();
 		$$('component1_MonReg').hide();
 		$$('component1_cbFact').hide();
+		$$('component1_ckp').show();
+
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vFam = sources.component1_familles.ID;
@@ -160,6 +325,7 @@ function constructor (id) {
 		$$('component1_IdeReg').hide();
 		$$('component1_MonReg').hide();
 		$$('component1_cbFact').hide();
+		$$('component1_ckp').show();
 
 		sources.component1_paiements.Fact_R1.set(sources.component1_factures);
 		sources.component1_paiements.save();
@@ -204,9 +370,9 @@ function constructor (id) {
          vSolde = parseInt($$("component1_Solde").getValue(),10);
          if (vSolde < 0) {
 			$$('component1_bNew').show();
-		} else {
+		 } else {
 			$$('component1_bNew').hide();
-		}
+		 }
 				
 	};// @lock
 
@@ -234,6 +400,7 @@ function constructor (id) {
 		$$('component1_MonReg').show();
 		$$('component1_cbFact').show();
 		$$('component1_cbFact').setValue($$('component1_FactReg').getValue());
+		$$('component1_ckp').hide();
 			
 		
 	};// @lock
@@ -265,6 +432,7 @@ function constructor (id) {
 		$$('component1_MonReg').show();
 		//$$('component1_MonReg').setValue(0);
 		$$('component1_cbFact').show();
+		$$('component1_ckp').hide();
 		
 		$$('component1_DatReg').focus();
 					
@@ -281,6 +449,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListFact", "onRowClick", ListFact.onRowClick, "WAF");
+	WAF.addListener(this.id + "_sFact", "change", sFact.change, "WAF");
+	WAF.addListener(this.id + "_ckp", "change", ckp.change, "WAF");
 	WAF.addListener(this.id + "_cbFact", "click", cbFact.click, "WAF");
 	WAF.addListener(this.id + "_cbType", "change", cbType.change, "WAF");
 	WAF.addListener(this.id + "_Solde", "change", Solde.change, "WAF");
