@@ -286,6 +286,7 @@ function constructor (id) {
 		$$('component1_ListFam').enable();
 		$$('component1_ListFam').setReadOnly(true);
 		$$('component1_ListReg').enable();
+		$$('component1_cbAnScol').enable();
 		$$('component1_ListReg').setReadOnly(true);
 		$$('component1_DatReg').hide();
 		$$('component1_cbType').hide();
@@ -293,6 +294,7 @@ function constructor (id) {
 		$$('component1_MonReg').hide();
 		$$('component1_cbFact').hide();
 		$$('component1_ckp').show();
+		$$('component1_cCom').setReadOnly(true);
 
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
@@ -319,6 +321,7 @@ function constructor (id) {
 		$$('component1_ListFam').enable();
 		$$('component1_ListFam').setReadOnly(true);
 		$$('component1_ListReg').enable();
+		$$('component1_cbAnScol').enable();
 		$$('component1_ListReg').setReadOnly(true);
 		$$('component1_DatReg').hide();
 		$$('component1_cbType').hide();
@@ -326,6 +329,7 @@ function constructor (id) {
 		$$('component1_MonReg').hide();
 		$$('component1_cbFact').hide();
 		$$('component1_ckp').show();
+		$$('component1_cCom').setReadOnly(true);
 
 		sources.component1_paiements.Fact_R1.set(sources.component1_factures);
 		sources.component1_paiements.save();
@@ -393,6 +397,7 @@ function constructor (id) {
 		$$('component1_bNew').hide();
 		$$('component1_ListFam').disable();
 		$$('component1_ListReg').disable();
+		$$('component1_cbAnScol').disable();
 		$$('component1_DatReg').show();
 		$$('component1_cbType').show();
 		$$('component1_cbType').setValue($$('component1_TypReg').getValue());
@@ -401,6 +406,7 @@ function constructor (id) {
 		$$('component1_cbFact').show();
 		$$('component1_cbFact').setValue($$('component1_FactReg').getValue());
 		$$('component1_ckp').hide();
+		$$('component1_cCom').setReadOnly(false);
 			
 		
 	};// @lock
@@ -425,6 +431,7 @@ function constructor (id) {
 		$$('component1_bNew').hide();
 		$$('component1_ListFam').disable();
 		$$('component1_ListReg').disable();
+		$$('component1_cbAnScol').disable();
 		$$('component1_DatReg').show();
 		$$('component1_cbType').show();
 		$$("component1_TypReg").setValue($$("component1_cbType").getValue());
@@ -433,6 +440,7 @@ function constructor (id) {
 		//$$('component1_MonReg').setValue(0);
 		$$('component1_cbFact').show();
 		$$('component1_ckp').hide();
+		$$('component1_cCom').setReadOnly(false);
 		
 		$$('component1_DatReg').focus();
 					
