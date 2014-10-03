@@ -2,11 +2,23 @@
     <meta name="generator" content="Wakanda GUIDesigner"/>
     <meta name="WAF.catalog" content="Eleves,Familles,Annees_Scolaires,Factures,Paiements,Lignes"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Eleves" data-scope="local" data-lib="WAF" data-id="{id}eleves" data-dataType="string" data-autoLoad="true" content="eleves"/>
-    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Familles" data-scope="local" data-lib="WAF" data-initialOrderBy="Famille_Nom" data-id="{id}familles" data-dataType="string" data-autoLoad="true" content="familles"/>
+    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Familles" data-scope="local" data-lib="WAF" data-id="{id}familles" data-dataType="string" data-autoLoad="false" content="familles"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Annees_Scolaires" data-scope="local" data-lib="WAF" data-id="{id}annees_Scolaires" data-dataType="string" data-autoLoad="true" content="annees_Scolaires"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Factures" data-scope="local" data-lib="WAF" data-id="{id}factures" data-dataType="string" data-autoLoad="false" content="factures"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Paiements" data-scope="local" data-lib="WAF" data-id="{id}paiements" data-dataType="string" data-autoLoad="false" content="paiements"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="{id}factures.lignesCollection" data-scope="local" data-lib="WAF" data-initialOrderBy="Ordre" data-id="{id}lignesFact" data-dataType="string" data-autoLoad="true" content="lignesFact"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -60,6 +72,6 @@
 		<label id="{id}label15" for="{id}ckp" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-checkbox">N'afficher que les paiements de la facture sélectionnée</label>
 	<input value="0" type="text" id="{id}sFact" data-type="textField" data-readOnly="true" data-password="false" data-multiline="false" data-lib="WAF" data-label-position="left" data-label="Solde : " data-hideonload="true" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-textField"/>	<label id="{id}label16" for="{id}sFact" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" class="waf-widget waf-label waf-label-textfield">Solde : </label>
 	<div id="{id}lb4" data-type="richText" data-target="_blank" data-plainText="true" data-overflow="Hidden" data-lib="WAF" data-label-position="left" data-label="" data-hideonload="true" data-constraint-top="true" data-constraint-left="true" data-autoWidth="true" class="waf-widget waf-richText">THB</div>
-		<label id="{id}label17" data-type="label" data-lib="WAF" for="{id}cCom" data-valign="middle" data-margin="5" class="waf-widget waf-label waf-label-textfield" data-constraint-left="true" data-constraint-top="true">Commentaire : </label>
-		<textarea id="{id}cCom" data-type="textField" data-hideonload="false" data-lib="WAF" data-binding="{id}paiements.Commentaire" class="waf-widget waf-textField" data-label="Commentaire : " data-label-position="left" data-multiline="true" data-readOnly="true" data-password="false" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-left="true" data-constraint-top="true"></textarea>
+		<label id="{id}label17" for="{id}cCom" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textfield">Commentaire : </label>
+		<textarea id="{id}cCom" data-type="textField" data-readOnly="true" data-password="false" data-multiline="true" data-lib="WAF" data-label-position="left" data-label="Commentaire : " data-hideonload="false" data-datapicker-on="false" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-binding="{id}paiements.Commentaire" class="waf-widget waf-textField"></textarea>
 	</section>

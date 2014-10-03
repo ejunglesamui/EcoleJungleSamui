@@ -451,6 +451,7 @@ function constructor (id) {
 		var vAnScol;
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_familles.query("Enfants_Scolarises.Scolarite.Annee_Scolaire.ID = :1 order by Famille_Nom ", vAnScol);
 		$$("cchg").hide();
 		
 		

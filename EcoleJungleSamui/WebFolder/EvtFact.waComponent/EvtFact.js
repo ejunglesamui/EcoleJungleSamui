@@ -143,6 +143,8 @@ function constructor (id) {
 		$$('component1_ListEle').hide();
 		$$('component1_ListEle').enable();
 		$$('component1_ListEle').setReadOnly(true);
+		$$('component1_hcreer').hide();
+		$$('component1_hgene').show();
 		
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
@@ -187,6 +189,8 @@ function constructor (id) {
 		$$('component1_ListEle').setReadOnly(true);
 		$$('component1_bUpdate').show();
 		$$('component1_bSup').show();
+		$$('component1_hcreer').hide();
+		$$('component1_hgene').show();
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vFam = sources.component1_familles.ID;
@@ -211,9 +215,9 @@ function constructor (id) {
 		$$('component1_bUndo').show();
 		$$('component1_ListFam').disable();
 		$$('component1_ListEvt').disable();
-		$$('component1_ListEle').show();
-		$$('component1_ListEle').disable();
+		$$('component1_ListEle').hide();
 		$$('component1_cbAnScol').disable();
+		$$('component1_hgene').hide();
 		$$('component1_cbArt').setValue($$('component1_TypArt').getValue());
 				
 	};// @lock
@@ -241,6 +245,8 @@ function constructor (id) {
 		$$('component1_ListFam').disable();
 		$$('component1_ListEvt').disable();
 		$$('component1_ListEle').show();
+		$$('component1_hcreer').show();
+		$$('component1_hgene').hide();
 		$$('component1_cbAnScol').disable();
 		$$('component1_cbArt').focus();
 					
@@ -273,6 +279,7 @@ function constructor (id) {
 		var vAnScol;
 		
 		vAnScol = $$("component1_cbAnScol").getValue();
+		sources.component1_familles.query("Enfants_Scolarises.Scolarite.Annee_Scolaire.ID = :1 order by Famille_Nom ", vAnScol);
 		$$("cchg").hide();
 		
 		
