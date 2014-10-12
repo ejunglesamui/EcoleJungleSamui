@@ -23,6 +23,7 @@ function constructor (id) {
 
 
 	// @region namespaceDeclaration// @startlock
+	var btPrgm = {};	// @buttonImage
 	var cbAnScol = {};	// @combobox
 	var sPerS = {};	// @slider
 	var btSuivi = {};	// @buttonImage
@@ -31,6 +32,26 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btPrgm.click = function btPrgm_click (event)// @startlock
+	{// @endlock
+		var vUser;
+		
+		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
+		//Export Eleves
+		if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/SuiviPrgm";
+			wExportURL += ".html";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "SuiviPrgm";
+			wExportURL += ".html";
+		}
+
+		$('#component1_frame1 iframe').attr('src',wExportURL);
+		 
+	};// @lock
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
@@ -149,6 +170,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btPrgm", "click", btPrgm.click, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
 	WAF.addListener(this.id + "_sPerS", "slidestop", sPerS.slidestop, "WAF");
 	WAF.addListener(this.id + "_sPerS", "slide", sPerS.slide, "WAF");
