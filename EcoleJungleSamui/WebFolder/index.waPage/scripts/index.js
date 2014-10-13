@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var menuItem30 = {};	// @menuItem
 	var menuItem29 = {};	// @menuItem
 	var menuItem28 = {};	// @menuItem
 	var menuItem27 = {};	// @menuItem
@@ -36,6 +37,12 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
 
 // eventHandlers// @lock
+
+	menuItem30.click = function menuItem30_click (event)// @startlock
+	{// @endlock
+		$$("cchg").show();
+		$$('component1').loadComponent("/GestNotes.waComponent");
+	};// @lock
 
 	menuItem29.click = function menuItem29_click (event)// @startlock
 	{// @endlock
@@ -259,6 +266,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("menuItem30", "click", menuItem30.click, "WAF");
 	WAF.addListener("menuItem29", "click", menuItem29.click, "WAF");
 	WAF.addListener("menuItem28", "click", menuItem28.click, "WAF");
 	WAF.addListener("menuItem27", "click", menuItem27.click, "WAF");
