@@ -13,6 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var ichelp = {};	// @icon
 	var btAdd = {};	// @buttonImage
 	var btMoy = {};	// @buttonImage
 	var cbTrim = {};	// @combobox
@@ -23,6 +24,26 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	ichelp.mouseout = function ichelp_mouseout (event)// @startlock
+	{// @endlock
+		$$("component1_hglob").hide();
+	};// @lock
+
+	ichelp.mouseover = function ichelp_mouseover (event)// @startlock
+	{// @endlock
+		$$("component1_hglob").show();
+	};// @lock
+
+	btAdd.mouseout = function btAdd_mouseout (event)// @startlock
+	{// @endlock
+		$$("component1_hinit").hide();
+	};// @lock
+
+	btAdd.mouseover = function btAdd_mouseover (event)// @startlock
+	{// @endlock
+		$$("component1_hinit").show();
+	};// @lock
 
 	btAdd.click = function btAdd_click (event)// @startlock
 	{// @endlock
@@ -63,12 +84,13 @@ function constructor (id) {
 					}
 					if (vFlag) {
 						sources.component1_psIns.query("ID = :1", { onSuccess: function(event) { 
-							var vCount = sources.component1_psIns.length;
+							var vCount, vAnScol, vClasse, vMat, vFil;
+							vCount = sources.component1_psIns.length;
 							if(vCount === 1) {
 								sources.component1_releve_Notes.addNewElement();
 								sources.component1_releve_Notes.Matiere.set(sources.component1_matieres);
 								sources.component1_releve_Notes.Eleve.set(sources.component1_psIns);
-								sources.component1_releve_Notes.save();
+								sources.component1_releve_Notes.save();							
 							}
 						}, params:[vIdIns] });
 					};
@@ -77,6 +99,16 @@ function constructor (id) {
 			
 				
 		}, params:[vAnScol, vClasse, vMat, vFil] });
+	};// @lock
+
+	btMoy.mouseout = function btMoy_mouseout (event)// @startlock
+	{// @endlock
+		$$("component1_hmoy").hide();
+	};// @lock
+
+	btMoy.mouseover = function btMoy_mouseover (event)// @startlock
+	{// @endlock
+		$$("component1_hmoy").show();
 	};// @lock
 
 	btMoy.click = function btMoy_click (event)// @startlock
@@ -393,6 +425,12 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ichelp", "mouseout", ichelp.mouseout, "WAF");
+	WAF.addListener(this.id + "_ichelp", "mouseover", ichelp.mouseover, "WAF");
+	WAF.addListener(this.id + "_btMoy", "mouseout", btMoy.mouseout, "WAF");
+	WAF.addListener(this.id + "_btMoy", "mouseover", btMoy.mouseover, "WAF");
+	WAF.addListener(this.id + "_btAdd", "mouseout", btAdd.mouseout, "WAF");
+	WAF.addListener(this.id + "_btAdd", "mouseover", btAdd.mouseover, "WAF");
 	WAF.addListener(this.id + "_btAdd", "click", btAdd.click, "WAF");
 	WAF.addListener(this.id + "_btMoy", "click", btMoy.click, "WAF");
 	WAF.addListener(this.id + "_cbTrim", "change", cbTrim.change, "WAF");
