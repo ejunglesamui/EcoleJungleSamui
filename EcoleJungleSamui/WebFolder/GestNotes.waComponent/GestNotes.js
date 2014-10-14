@@ -232,23 +232,41 @@ function constructor (id) {
 
 	cbTrim.change = function cbTrim_change (event)// @startlock
 	{// @endlock
-		var vTrim;
+		var vTrim, now, vMonth, vAnCours;
 		
 		vTrim = $$("component1_cbTrim").getValue();
+		vAnCours = $$("component1_ancours").getValue();
+		now = new Date();
+		vMonth = now.getMonth()+1;
 		if (vTrim === "T1") {
 			$$("component1_ListNT1").show();
 			$$("component1_ListNT2").hide();
 			$$("component1_ListNT3").hide();
+			if (vMonth !== 9 && vMonth !== 10 && vMonth !== 11 && vMonth !== 12 && vAnCours) {
+				$$("component1_halert").show();
+			} else {
+				$$("component1_halert").hide();
+			}
 		}
 		if (vTrim === "T2") {
 			$$("component1_ListNT1").hide();
 			$$("component1_ListNT2").show();
 			$$("component1_ListNT3").hide();
+			if (vMonth !== 1 && vMonth !== 2 && vMonth !== 3 && vAnCours) {
+				$$("component1_halert").show();
+			} else {
+				$$("component1_halert").hide();
+			}
 		}
 		if (vTrim === "T3") {
 			$$("component1_ListNT1").hide();
 			$$("component1_ListNT2").hide();
 			$$("component1_ListNT3").show();
+			if (vMonth !== 4 && vMonth !== 5 && vMonth !== 6 && vMonth !== 7 && vAnCours) {
+				$$("component1_halert").show();
+			} else {
+				$$("component1_halert").hide();
+			}
 		}
 	};// @lock
 
@@ -293,20 +311,26 @@ function constructor (id) {
 
 	cbMat.change = function cbMat_change (event)// @startlock
 	{// @endlock
-		var vAnScol, vMat, vClasse, vFil, vnFil, vQuery, vlMat;
+		var vAnScol, vMat, vClasse, vFil, vnFil, vQuery, vlMat, vAnCours;
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vMat = $$("component1_cbMat").getValue();
 		vlMat = $$("component1_lMat").getValue();
 		vClasse = $$("component1_cbClasse").getValue();
 		vFil = $$("component1_cbFil").getValue();
 		vnFil = $$("component1_cCFil").getValue();
+		vAnCours = $$("component1_ancours").getValue();
 		
 		if (vlMat === "-") {
 			$$("component1_btAdd").hide();
 			$$("component1_btMoy").hide();
 		} else {
-			$$("component1_btAdd").show();
-			$$("component1_btMoy").show();
+			if (vAnCours) {
+				$$("component1_btAdd").show();
+				$$("component1_btMoy").show();
+			} else {
+				$$("component1_btAdd").hide();
+				$$("component1_btMoy").hide();
+			}
 		}
 		
 		
@@ -385,12 +409,29 @@ function constructor (id) {
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
-		var vAnScol, vMat, vClasse, vFil, vnFil, vQuery;
+		var vAnScol, vMat, vClasse, vFil, vnFil, vQuery, now, vConv, vAnDeb, vAnFin;
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vMat = $$("component1_cbMat").getValue();
 		vClasse = $$("component1_cbClasse").getValue();
 		vFil = $$("component1_cbFil").getValue();
 		vnFil = $$("component1_cCFil").getValue();
+		
+		now = new Date();
+		vConv = $$("component1_cAnDeb").getValue();
+		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+		vConv = $$("component1_cAnFin").getValue();
+		vAnFin = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+		if ((now > vAnDeb) && (now < vAnFin)) {
+			$$("component1_ListNT1").enable();
+			$$("component1_ListNT2").enable();
+			$$("component1_ListNT3").enable();
+			$$("component1_ancours").check();
+		} else {
+			$$("component1_ListNT1").disable();
+			$$("component1_ListNT2").disable();
+			$$("component1_ListNT3").disable();
+			$$("component1_ancours").uncheck();
+		}
 		
 		
 		vQuery = "Eleve.Annee_Scolaire.ID = :1 and Eleve.Classe = :2 and Matiere.ID = :3 ";
