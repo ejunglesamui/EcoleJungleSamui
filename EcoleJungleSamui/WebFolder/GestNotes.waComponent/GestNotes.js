@@ -13,6 +13,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var btUpdate = {};	// @buttonImage
 	var ichelp = {};	// @icon
 	var btAdd = {};	// @buttonImage
 	var btMoy = {};	// @buttonImage
@@ -24,6 +25,66 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btUpdate.click = function btUpdate_click (event)// @startlock
+	{// @endlock
+		
+		var vAnScol, vMat, vClasse, vFil, vnFil, vQuery, now, vConv, vAnDeb, vAnFin;
+		vAnScol = $$("component1_cbAnScol").getValue();
+		vMat = $$("component1_cbMat").getValue();
+		vClasse = $$("component1_cbClasse").getValue();
+		vFil = $$("component1_cbFil").getValue();
+		vnFil = $$("component1_cCFil").getValue();
+		
+		now = new Date();
+		vConv = $$("component1_cAnDeb").getValue();
+		vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+		vConv = $$("component1_cAnFin").getValue();
+		vAnFin = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+		if ((now > vAnDeb) && (now < vAnFin)) {
+			$$("component1_ListNT1").enable();
+			$$("component1_ListNT2").enable();
+			$$("component1_ListNT3").enable();
+			$$("component1_ancours").check();
+		} else {
+			$$("component1_ListNT1").disable();
+			$$("component1_ListNT2").disable();
+			$$("component1_ListNT3").disable();
+			$$("component1_ancours").uncheck();
+		}
+		
+		
+		vQuery = "Eleve.Annee_Scolaire.ID = :1 and Eleve.Classe = :2 and Matiere.ID = :3 ";
+		if (vnFil) {
+			vQuery += "and Eleve.Filiere = :4 ";
+		}
+		vQuery += "order by Eleve.Eleve.Nom_Complet";
+		
+		sources.component1_releve_Notes.query(vQuery, { onSuccess: function(event) { 
+		
+			var vTrim;
+			vTrim = $$("component1_cbTrim").getValue();
+			if (vTrim === "T1") {
+				$$("component1_ListNT1").show();
+				$$("component1_ListNT2").hide();
+				$$("component1_ListNT3").hide();
+			}
+			if (vTrim === "T2") {
+				$$("component1_ListNT1").hide();
+				$$("component1_ListNT2").show();
+				$$("component1_ListNT3").hide();
+			}
+			if (vTrim === "T3") {
+				$$("component1_ListNT1").hide();
+				$$("component1_ListNT2").hide();
+				$$("component1_ListNT3").show();
+			}
+						
+		}, params:[vAnScol, vClasse, vMat, vFil] });
+		
+		$$("component1_btAdd").show();
+		$$("component1_btUpdate").hide();
+	};// @lock
 
 	ichelp.mouseout = function ichelp_mouseout (event)// @startlock
 	{// @endlock
@@ -90,15 +151,15 @@ function constructor (id) {
 								sources.component1_releve_Notes.addNewElement();
 								sources.component1_releve_Notes.Matiere.set(sources.component1_matieres);
 								sources.component1_releve_Notes.Eleve.set(sources.component1_psIns);
-								sources.component1_releve_Notes.save();							
+								sources.component1_releve_Notes.save();		
 							}
 						}, params:[vIdIns] });
 					};
 				}});
-			};
-			
-				
+			};		
 		}, params:[vAnScol, vClasse, vMat, vFil] });
+		$$("component1_btAdd").hide();
+		$$("component1_btUpdate").show();
 	};// @lock
 
 	btMoy.mouseout = function btMoy_mouseout (event)// @startlock
@@ -466,6 +527,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btUpdate", "click", btUpdate.click, "WAF");
 	WAF.addListener(this.id + "_ichelp", "mouseout", ichelp.mouseout, "WAF");
 	WAF.addListener(this.id + "_ichelp", "mouseover", ichelp.mouseover, "WAF");
 	WAF.addListener(this.id + "_btMoy", "mouseout", btMoy.mouseout, "WAF");
