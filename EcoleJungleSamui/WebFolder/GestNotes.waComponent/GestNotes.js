@@ -121,6 +121,7 @@ function constructor (id) {
 			vQuery += "and Filiere = :3 ";
 		}
 		vQuery += "order by Eleve.Nom_Complet";
+		//alert(vQuery+ ' -  Filiere : ' + vFil + ' - Classe : ' + vClasse + ' - Année Scolaire : ' + vAnScol);
 		
 		sources.component1_parcours_Scolaire.query(vQuery, { onSuccess: function(event) { 
 			var myInscrits, nbInscrits, inscrits, vIdIns, myNotes, nbNotes, vNote, vIdEleve, vAnScol, vMat, vClasse, vFil, vnFil, vQuery;
@@ -157,7 +158,7 @@ function constructor (id) {
 					};
 				}});
 			};		
-		}, params:[vAnScol, vClasse, vMat, vFil] });
+		}, params:[vAnScol, vClasse, vFil] });
 		$$("component1_btAdd").hide();
 		$$("component1_btUpdate").show();
 	};// @lock
