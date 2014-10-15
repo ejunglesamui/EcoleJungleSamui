@@ -15,6 +15,8 @@ function constructor (id) {
 	$$("cchg").hide();
 
 	// @region namespaceDeclaration// @startlock
+	var btFact = {};	// @buttonImage
+	var btNotes = {};	// @buttonImage
 	var btPoint = {};	// @buttonImage
 	var btUser = {};	// @buttonImage
 	var btEdT = {};	// @buttonImage
@@ -22,6 +24,16 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btFact.click = function btFact_click (event)// @startlock
+	{// @endlock
+		$$('component1_video1').loadVideoByUrl("/Videos/GestFact.mp4");
+	};// @lock
+
+	btNotes.click = function btNotes_click (event)// @startlock
+	{// @endlock
+		$$('component1_video1').loadVideoByUrl("/Videos/GestNote.mp4");
+	};// @lock
 
 	btPoint.click = function btPoint_click (event)// @startlock
 	{// @endlock
@@ -44,6 +56,8 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btFact", "click", btFact.click, "WAF");
+	WAF.addListener(this.id + "_btNotes", "click", btNotes.click, "WAF");
 	WAF.addListener(this.id + "_btPoint", "click", btPoint.click, "WAF");
 	WAF.addListener(this.id + "_btUser", "click", btUser.click, "WAF");
 	WAF.addListener(this.id + "_btEdT", "click", btEdT.click, "WAF");
