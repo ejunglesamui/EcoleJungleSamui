@@ -1,0 +1,1 @@
+﻿model.HistFact.events.onInit = function() {	this.UID_Creation = currentUser().fullName;	this.Date_Creation = new Date();};

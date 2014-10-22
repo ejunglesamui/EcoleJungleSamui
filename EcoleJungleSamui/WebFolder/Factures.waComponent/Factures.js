@@ -1,7 +1,9 @@
 ﻿
 (function Component (id) {// @lock
 
-// Add the code that needs to be shared between components here
+	var wURL = window.location.href,
+	wPathname = window.location.pathname,
+	iFrame;
 
 function constructor (id) {
 
@@ -50,11 +52,11 @@ function constructor (id) {
 		//Export Eleves
 		if (wPathname.indexOf("index") != -1) {
 			wExportURL = wURL.replace(wPathname, '');
-			wExportURL += "/ListEleves";
+			wExportURL += "/FactMens";
 			wExportURL += ".html";
 		} else {
 			wExportURL = wURL;
-			wExportURL += "ListEleves";
+			wExportURL += "FactMens";
 			wExportURL += ".html";
 		}
 
@@ -87,7 +89,7 @@ function constructor (id) {
 		vUser = WAF.directory.currentUser().userName;
 		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
 		
-			var vAnScol, vProf, elem, vUserID, vUser, vToday, vMois = 1;
+			var vAnScol, vProf, elem, vUserID, vUser, vToday, vMois = 1, now, vConv, vAnDeb, vAnFin;
 			
 				vUser = WAF.directory.currentUser().userName;
 				sources.component1_userParam.query("Utilisateur.Login = :1", { onSuccess: function(event) { 
@@ -116,6 +118,16 @@ function constructor (id) {
 			vAnScol = $$("component1_cbAnScol").getValue();
 			$$("component1_cRole").setValue(elem.Fonction);
 			
+			now = new Date();
+			vConv = $$("component1_cAnDeb").getValue();
+			vAnDeb = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+			vConv = $$("component1_cAnFin").getValue();
+			vAnFin = new Date(vConv.substr(6,4), parseInt(vConv.substr(3,2))-1, vConv.substr(0,2));
+			if ((now > vAnDeb) && (now < vAnFin)) {
+				$$("component1_ancours").check();
+			} else {
+				$$("component1_ancours").uncheck();
+			}
 					
 		}, params:[vUser] });
 		$$("cchg").hide();
@@ -126,15 +138,48 @@ function constructor (id) {
 
 	sPerS.slidestop = function sPerS_slidestop (event)// @startlock
 	{// @endlock
+		var vAnScol;
+		vAnScol = $$("component1_cbAnScol").getValue();
 		sources.component1_userParam.Mois = event.data.value;
 		sources.component1_userParam.LibMois = $$("component1_cMois").getValue();
 		sources.component1_userParam.save();
+		sources.component1_histFact.query("Annee_Scolaire.ID = :1 and sMois = :2", { onSuccess: function(event) { 
+			var elem, libDupli, new_day, new_month, new_year, new_date_text, now, vMonth, cal;
+			elem = sources.component1_histFact;
+			if (elem.length === 0) {
+				now = new Date();
+				cal = sources.component1_calendrier;
+				if (now > cal.dFin) {
+					$$("component1_btFact").show();
+					$$("component1_libFact").show();
+				}
+			} else {
+				$$("component1_btDupli").show();
+				new_day = elem.Date_Creation.getDate();
+				new_day = ((new_day < 10) ? '0' : '') + new_day; // ajoute un zéro devant pour la forme
+				new_month = elem.Date_Creation.getMonth() + 1;
+				new_month = ((new_month < 10) ? '0' : '') + new_month; // ajoute un zéro devant pour la forme
+				new_year = elem.Date_Creation.getYear();
+				new_year = ((new_year < 200) ? 1900 : 0) + new_year; 
+				new_date_text = new_day + '/' + new_month + '/' + new_year;
+				libDupli = "Editer les duplicatas de factures. ";
+				libDupli += elem.NbFact + " factures émises le " + new_date_text;
+				libDupli += " (n° " + elem.Ind_Deb + " à n° " + elem.Ind_Fin + ")";
+				$$("component1_libDupli").setValue(libDupli);
+				$$("component1_libDupli").show();
+			}
+		}, params:[vAnScol, event.data.value] });
+		
 	};// @lock
 
 	sPerS.slide = function sPerS_slide (event)// @startlock
 	{// @endlock
-		var vCal;
+		var vAnScol;
 		vAnScol = $$("component1_cbAnScol").getValue();
+		$$("component1_btFact").hide();
+		$$("component1_btDupli").hide();
+		$$("component1_libFact").hide();
+		$$("component1_libDupli").hide();
 		sources.component1_calendrier.query("Annee_Scolaire.ID = :1 and sMois = :2", vAnScol, event.data.value);
 	};// @lock
 
