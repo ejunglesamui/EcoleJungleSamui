@@ -71,6 +71,8 @@ function constructor (id) {
 			isok = confirm(vMsg);
 		
 			if (isok) {
+				$$("component1_btFact").hide();
+				$$("component1_libFact").hide();
 				if (wPathname.indexOf("index") != -1) {
 					wExportURL = wURL.replace(wPathname, '');
 					wExportURL += "/FactMens";
