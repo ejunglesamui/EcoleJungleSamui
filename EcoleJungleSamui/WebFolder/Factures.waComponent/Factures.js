@@ -46,21 +46,44 @@ function constructor (id) {
 
 	btFact.click = function btFact_click (event)// @startlock
 	{// @endlock
-		var vUser;
+		var vUser, isok, vMsg;
 		
-		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
-		//Export Eleves
-		if (wPathname.indexOf("index") != -1) {
-			wExportURL = wURL.replace(wPathname, '');
-			wExportURL += "/FactMens";
-			wExportURL += ".html";
+		if ($$('component1_cbVoir').getValue()) {
+			
+			if (wPathname.indexOf("index") != -1) {
+				wExportURL = wURL.replace(wPathname, '');
+				wExportURL += "/FactMens";
+				wExportURL += ".html";
+			} else {
+				wExportURL = wURL;
+				wExportURL += "FactMens";
+				wExportURL += ".html";
+			}
+			$('#component1_frame1 iframe').attr('src',wExportURL);
+			
 		} else {
-			wExportURL = wURL;
-			wExportURL += "FactMens";
-			wExportURL += ".html";
-		}
+		
+			vMsg =  "\n\nAttention, vous demandez l'émission réelle des factures du mois."
+			vMsg += "\n\nIl est conseillé de prévisualiser les factures avant de les émettre pour vérifier les montants et les adresses. ";
+			vMsg += "En appuyant sur Ok, les factures seront définitivement enregistrées dans eJungle. ";
+			vMsg += "Vous ne pourrez plus émettre de factures pour ce mois-ci, uniquement des duplicatas. ";
+			vMsg += "\n\nVoulez-vous vraiment continuer ?\n\n";
+			isok = confirm(vMsg);
+		
+			if (isok) {
+				if (wPathname.indexOf("index") != -1) {
+					wExportURL = wURL.replace(wPathname, '');
+					wExportURL += "/FactMens";
+					wExportURL += ".html";
+				} else {
+					wExportURL = wURL;
+					wExportURL += "FactMens";
+					wExportURL += ".html";
+				}
+				$('#component1_frame1 iframe').attr('src',wExportURL);
+			}
 
-		$('#component1_frame1 iframe').attr('src',wExportURL);
+		}
 		 
 	};// @lock
 
