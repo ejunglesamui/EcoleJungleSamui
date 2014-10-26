@@ -36,21 +36,28 @@ function constructor (id) {
 
 	bSup.click = function bSup_click (event)// @startlock
 	{// @endlock
-		var isok, vnbl, vtraite;
+		var isok, vnbl, vtraite, vAnScol, vFam;
 		
 		isok = confirm( "Voulez-vous vraiment supprimer ce complément de facturation ?");
 		
 		if (isok) {
 			sources.component1_evtFact.removeCurrent();
 			vnbl = sources.component1_evtFact.length;
-			vtraite = sources.component1_evtFact.Traite;
-			if (vtraite || vnbl === 1) {
-				$$('component1_bUpdate').hide();
-				$$('component1_bSup').hide();
-			} else {
-				$$('component1_bUpdate').show();
-				$$('component1_bSup').show();
-			}
+			vAnScol = $$("component1_cbAnScol").getValue();
+			vFam = sources.component1_familles.ID;
+			sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 and Eleve.MaFamille.ID = :2 order by Eleve.Nom_Complet", vAnScol, vFam);
+			sources.component1_evtFact.query("Annee_Scolaire.ID = :1 and Famille.ID = :2 order by Eleve.Nom_Complet", { onSuccess: function(event) {  
+				var vnbl, vtraite;
+				vnbl = sources.component1_evtFact.length;
+				vtraite = sources.component1_evtFact.Traite;
+				if (vtraite || vnbl === 0) {
+					$$('component1_bUpdate').hide();
+					$$('component1_bSup').hide();
+				} else {
+					$$('component1_bUpdate').show();
+					$$('component1_bSup').show();
+				}
+			},params:[vAnScol, vFam] });	
 		}
 		
 	};// @lock
