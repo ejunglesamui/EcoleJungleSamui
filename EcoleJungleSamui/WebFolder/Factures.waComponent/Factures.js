@@ -32,11 +32,11 @@ function constructor (id) {
 		//Export Eleves
 		if (wPathname.indexOf("index") != -1) {
 			wExportURL = wURL.replace(wPathname, '');
-			wExportURL += "/SuiviEleves";
+			wExportURL += "/FactDupli";
 			wExportURL += ".html";
 		} else {
 			wExportURL = wURL;
-			wExportURL += "SuiviEleves";
+			wExportURL += "FactDupli";
 			wExportURL += ".html";
 		}
 
