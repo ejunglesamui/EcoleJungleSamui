@@ -15,6 +15,7 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var btExport = {};	// @buttonImage
 	var btDupli = {};	// @buttonImage
 	var btFact = {};	// @buttonImage
 	var cbVoir = {};	// @checkbox
@@ -23,6 +24,26 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	btExport.click = function btExport_click (event)// @startlock
+	{// @endlock
+		var vUser;
+		
+		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
+		//Export Eleves
+		if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/FactExp";
+			wExportURL += ".xls";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "FactExp";
+			wExportURL += ".xls";
+		}
+
+		$('#component1_frame1 iframe').attr('src',wExportURL);
+		 
+	};// @lock
 
 	btDupli.click = function btDupli_click (event)// @startlock
 	{// @endlock
@@ -209,6 +230,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_btExport", "click", btExport.click, "WAF");
 	WAF.addListener(this.id + "_btDupli", "click", btDupli.click, "WAF");
 	WAF.addListener(this.id + "_btFact", "click", btFact.click, "WAF");
 	WAF.addListener(this.id + "_cbVoir", "click", cbVoir.click, "WAF");
