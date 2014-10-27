@@ -14,11 +14,18 @@ function constructor (id) {
 	this.load = function (data) {// @lock
 
 	// @region namespaceDeclaration// @startlock
+	var cSeuil = {};	// @textField
 	var cbAnScol = {};	// @combobox
 	var btAna = {};	// @buttonImage
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	cSeuil.change = function cSeuil_change (event)// @startlock
+	{// @endlock
+		sources.component1_userParam.Mois = $$("component1_cSeuil").getValue();
+		sources.component1_userParam.save();
+	};// @lock
 
 	cbAnScol.change = function cbAnScol_change (event)// @startlock
 	{// @endlock
@@ -87,6 +94,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_cSeuil", "change", cSeuil.change, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
 	WAF.addListener(this.id + "_btAna", "click", btAna.click, "WAF");
 	// @endregion// @endlock
