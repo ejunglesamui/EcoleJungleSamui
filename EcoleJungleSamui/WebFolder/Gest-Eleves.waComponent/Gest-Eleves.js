@@ -69,6 +69,8 @@ function constructor (id) {
 		$$('component1_btUndo').hide();
 		
 		$$('component1_cDatNaiss').setReadOnly(true);
+		$$('component1_cLieuNaiss').setReadOnly(true);
+		$$('component1_cPaysNaiss').setReadOnly(true);
 		$$('component1_cCaution').setReadOnly(true);
 		$$('component1_cDatRec').setReadOnly(true);
 		$$('component1_cDatRest').setReadOnly(true);
@@ -103,6 +105,8 @@ function constructor (id) {
 		$$('component1_btUndo').hide();
 		
 		$$('component1_cDatNaiss').setReadOnly(true);
+		$$('component1_cLieuNaiss').setReadOnly(true);
+		$$('component1_cPaysNaiss').setReadOnly(true);
 		$$('component1_cCaution').setReadOnly(true);
 		$$('component1_cDatRec').setReadOnly(true);
 		$$('component1_cDatRest').setReadOnly(true);
@@ -145,6 +149,8 @@ function constructor (id) {
 		$$('component1_cCaution').setReadOnly(false);
 		$$('component1_cDatRec').setReadOnly(false);
 		$$('component1_cDatRest').setReadOnly(false);
+		$$('component1_cLieuNaiss').setReadOnly(false);
+		$$('component1_cPaysNaiss').setReadOnly(false);
 		
 		$$('component1_ListEleves').disable();
 		$$('component1_cbPres').disable();
