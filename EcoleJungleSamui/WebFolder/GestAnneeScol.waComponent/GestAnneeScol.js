@@ -32,6 +32,7 @@ function constructor (id) {
 		
 
 	// @region namespaceDeclaration// @startlock
+	var cGenre = {};	// @radioGroup
 	var ListAsco = {};	// @dataGrid
 	var sPerJ = {};	// @slider
 	var cDDeb = {};	// @textField
@@ -55,6 +56,11 @@ function constructor (id) {
 
 	// eventHandlers// @lock
 
+	cGenre.change = function cGenre_change (event)// @startlock
+	{// @endlock
+		$$('component1_vGenre').setValue($$('component1_cGenre').getValue());
+	};// @lock
+
 	ListAsco.onRowDraw = function ListAsco_onRowDraw (event)// @startlock
 	{// @endlock
 		if (sources.component1_annees_Scolaires.ID !== null ) {
@@ -71,7 +77,6 @@ function constructor (id) {
 	$$('component1_cVen').disable();
 	$$('component1_cSam').disable();
 	$$('component1_cDim').disable();
-	$$('component1_cGenre').disable();
 	$$('component1_sPerJ').addHandle(34);
 	$$('component1_sPerJ').disable();
 
@@ -227,7 +232,9 @@ function constructor (id) {
 		$$('component1_cDDeb').setReadOnly(true);
 		$$('component1_cDFin').setReadOnly(true);
 		$$('component1_cDirNom').setReadOnly(true);
-		$$('component1_cGenre').disable();
+		$$('component1_vGenre').setValue($$('component1_cGenre').getValue());
+		$$('component1_cGenre').hide();
+		$$('component1_vGenre').show();
 		$$('component1_cFMat').setReadOnly(true);
 		$$('component1_cFEle').setReadOnly(true);
 		$$('component1_cFCol').setReadOnly(true);
@@ -270,7 +277,9 @@ function constructor (id) {
 		$$('component1_cDDeb').setReadOnly(false);
 		$$('component1_cDFin').setReadOnly(false);
 		$$('component1_cDirNom').setReadOnly(false);
-		$$('component1_cGenre').enable();
+		$$('component1_cGenre').show();
+		$$('component1_cGenre').setValue($$('component1_vGenre').getValue());
+		$$('component1_vGenre').hide();
 		$$('component1_cFMat').setReadOnly(false);
 		$$('component1_cFEle').setReadOnly(false);
 		$$('component1_cFCol').setReadOnly(false);
@@ -345,6 +354,7 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_cGenre", "change", cGenre.change, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slide", sPerJ.slide, "WAF");
 	WAF.addListener(this.id + "_ListAsco", "onRowDraw", ListAsco.onRowDraw, "WAF");
 	WAF.addListener(this.id + "_sPerJ", "slidechange", sPerJ.slidechange, "WAF");
