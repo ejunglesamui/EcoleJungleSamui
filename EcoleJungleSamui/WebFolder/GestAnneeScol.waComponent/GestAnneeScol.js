@@ -71,6 +71,7 @@ function constructor (id) {
 	$$('component1_cVen').disable();
 	$$('component1_cSam').disable();
 	$$('component1_cDim').disable();
+	$$('component1_cGenre').disable();
 	$$('component1_sPerJ').addHandle(34);
 	$$('component1_sPerJ').disable();
 
@@ -225,6 +226,8 @@ function constructor (id) {
 		
 		$$('component1_cDDeb').setReadOnly(true);
 		$$('component1_cDFin').setReadOnly(true);
+		$$('component1_cDirNom').setReadOnly(true);
+		$$('component1_cGenre').disable();
 		$$('component1_cFMat').setReadOnly(true);
 		$$('component1_cFEle').setReadOnly(true);
 		$$('component1_cFCol').setReadOnly(true);
@@ -266,6 +269,8 @@ function constructor (id) {
 		
 		$$('component1_cDDeb').setReadOnly(false);
 		$$('component1_cDFin').setReadOnly(false);
+		$$('component1_cDirNom').setReadOnly(false);
+		$$('component1_cGenre').enable();
 		$$('component1_cFMat').setReadOnly(false);
 		$$('component1_cFEle').setReadOnly(false);
 		$$('component1_cFCol').setReadOnly(false);

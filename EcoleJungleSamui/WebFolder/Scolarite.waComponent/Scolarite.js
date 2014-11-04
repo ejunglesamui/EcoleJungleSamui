@@ -263,7 +263,7 @@ function constructor (id) {
 		var vAnScol, now, vAnDeb, vAnFin, vConv;
 		vAnScol = $$("component1_cbAnScol").getValue();
 		$$("component1_cFullA").disable();
-		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_complet", { onSuccess: function(event) { 
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", { onSuccess: function(event) { 
 		
 			now = new Date();
 			sources.component1_eleves.query("Utilisateur.Date_Entree < :1 AND (Utilisateur.Date_Sortie = null OR Utilisateur.Date_Sortie > :1) order by Nom_Complet", now, vAnScol);

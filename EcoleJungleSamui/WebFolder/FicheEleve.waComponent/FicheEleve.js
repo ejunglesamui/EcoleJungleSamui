@@ -23,6 +23,9 @@ function constructor (id) {
 
 
 	// @region namespaceDeclaration// @startlock
+	var ListIns = {};	// @dataGrid
+	var btRad = {};	// @buttonImage
+	var btScol = {};	// @buttonImage
 	var btEdT = {};	// @buttonImage
 	var btPrgm = {};	// @buttonImage
 	var cbAnScol = {};	// @combobox
@@ -33,6 +36,52 @@ function constructor (id) {
 	// @endregion// @endlock
 
 	// eventHandlers// @lock
+
+	ListIns.onRowClick = function ListIns_onRowClick (event)// @startlock
+	{// @endlock
+		sources.component1_userParam.Eleve.set(sources.component1_parcours_Scolaire);
+		sources.component1_userParam.save();
+	};// @lock
+
+	btRad.click = function btRad_click (event)// @startlock
+	{// @endlock
+		var vUser;
+		
+		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
+		//Export Eleves
+		if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/CertRad";
+			wExportURL += ".html";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "CertRad";
+			wExportURL += ".html";
+		}
+
+		$('#component1_frame1 iframe').attr('src',wExportURL);
+		 
+	};// @lock
+
+	btScol.click = function btScol_click (event)// @startlock
+	{// @endlock
+		var vUser;
+		
+		//sessionStorage.setItem ("AnScol", $$("component1_cbAnScol").getValue()) ;
+		//Export Eleves
+		if (wPathname.indexOf("index") != -1) {
+			wExportURL = wURL.replace(wPathname, '');
+			wExportURL += "/CertScol";
+			wExportURL += ".html";
+		} else {
+			wExportURL = wURL;
+			wExportURL += "CertScol";
+			wExportURL += ".html";
+		}
+
+		$('#component1_frame1 iframe').attr('src',wExportURL);
+		 
+	};// @lock
 
 	btEdT.click = function btEdT_click (event)// @startlock
 	{// @endlock
@@ -85,6 +134,8 @@ function constructor (id) {
 					
 		vAnScol = $$("component1_cbAnScol").getValue();
 		vUser = WAF.directory.currentUser().userName;
+		$$("component1_ListIns").setRowHeight(20);
+		sources.component1_parcours_Scolaire.query("Annee_Scolaire.ID = :1 order by Eleve.Nom_Complet", vAnScol);
 		sources.component1_utilisateurs.query("Login = :1", { onSuccess: function(event) { 
 		
 			var vAnScol, vProf, elem, vUserID, vUser, vToday, vMois = 1;
@@ -191,6 +242,9 @@ function constructor (id) {
 	};// @lock
 
 	// @region eventManager// @startlock
+	WAF.addListener(this.id + "_ListIns", "onRowClick", ListIns.onRowClick, "WAF");
+	WAF.addListener(this.id + "_btRad", "click", btRad.click, "WAF");
+	WAF.addListener(this.id + "_btScol", "click", btScol.click, "WAF");
 	WAF.addListener(this.id + "_btEdT", "click", btEdT.click, "WAF");
 	WAF.addListener(this.id + "_btPrgm", "click", btPrgm.click, "WAF");
 	WAF.addListener(this.id + "_cbAnScol", "change", cbAnScol.change, "WAF");
